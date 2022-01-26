@@ -1,6 +1,7 @@
 package com.ssafy.a605.service;
 
 
+import com.ssafy.a605.model.dto.CertificateDto;
 import com.ssafy.a605.model.dto.ClientDto;
 import com.ssafy.a605.model.dto.CounselorDto;
 import com.ssafy.a605.model.dto.UserDto;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -98,11 +100,8 @@ public class CounselorServiceImpl implements CounselorService {
         return true;
     }
 
-
-
-
-
-
-
-
+    @Override
+    public List<CertificateDto> getCertificates(String userEmail) throws Exception {
+        return null;
+    }
 }
