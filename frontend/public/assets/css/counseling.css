@@ -1,15 +1,15 @@
 .sty-font {
   color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
 }
 
 .sty-header {
-  height: 80px;
+  height: 10vh;
   background: #7DABCF;
 }
 
 .sty-footer {
-  height: 80px;
+  height: 10vh;
   background: #EDE1C9;
 }
 
@@ -22,6 +22,66 @@
   background: #CFE7EB;
   border-radius: 90px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.sty-btn-end {
+  background: #ED9C9C;
+  border-radius: 90px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.sty-btn-func {
+  background: #95D0F1;
+  border-radius: 90px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sty-btn-memo {
+  font-size: 18px;
+  background: #CFE7EB;
+  border-radius: 90px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sty-side {
+  overflow: hidden;
+  height: 80vh;
+  background: #FBC1AD;
+}
+
+.sty-side-back {
+  height: 65vh;
+  background: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.sty-title {
+  width: 90%;
+  height: 6vh;
+  background: #D8D8D8;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sty-content {
+  width: 90%;
+  height: 45vh;
+  resize: none;
+  font-size: 18px;
+  background: #D8D8D8;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
 }
 
 /* .sty-router {
