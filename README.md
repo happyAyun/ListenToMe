@@ -99,7 +99,22 @@ To load a model, you have to provide the corresponding `manifest.json file` as w
 
 <br>
 
-#### 003.2. subtitle
+#### 003.2. 초기 디렉터리 구조
+
+<br>
+
+![image-20220126164032402](README.assets/image-20220126164032402.png)
+
+<br>
+
+* 상담 페이지 최상위 컴포넌트: `@/views/Counseling.vue`
+* 상담 페이지 내 하위 컴포넌트들: `@/components/counseling/.`
+
+
+
+<br>
+
+#### 003.3. title
 
 <br>
 
