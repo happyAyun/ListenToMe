@@ -34,11 +34,11 @@ branch: feature-face_recognition
 
 ### 002. 와이어 프레임
 
-> 서비스 흐름에 대한 소개
+> 서비스 흐름 ([자세히 보기👋](https://www.figma.com/file/g7tE8M7z7flv7QipCnSnwz/SSAFY-%EA%B3%B5%ED%86%B5-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8))
 
 <br>
 
+<img src="README.assets/image-20220126140209661.png" alt="image-20220126140209661" style="zoom: 80%;" />
 
-
-
+<br>
 
