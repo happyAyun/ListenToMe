@@ -1,21 +1,22 @@
 <template>
   <div id="counseling">
-    <div class="d-flex justify-content-center">
-      <button @click="moveToRoom" class="btn btn-lg btn-outline-success">상담 시작</button>
-    </div>
+    <room-header></room-header>
+
+    <p>from here</p>
+
+    <room-footer></room-footer>
   </div>
 </template>
 
 <script>
+import RoomHeader from '@/components/counseling/RoomHeader.vue'
+import RoomFooter from '@/components/counseling/RoomFooter.vue'
+
 export default {
   name: 'Counseling',
   components: {
-
+    RoomHeader,
+    RoomFooter,
   },
-  methods: {
-    moveToRoom: function () {
-      this.$router.push({name: 'Room'})
-    }
-  }
 }
 </script>

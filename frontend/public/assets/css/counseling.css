@@ -1,5 +1,29 @@
-.sty-router {
+.sty-font {
   color: #000000;
-  text-decoration-line: none;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.sty-header {
+  height: 80px;
+  background: #7DABCF;
+}
+
+.sty-footer {
+  height: 80px;
+  background: #EDE1C9;
+}
+
+.sty-user {
+  font-size: 20px;
+  line-height: 50px;
+
+  width: 180px;
+  height: 50px;
+  background: #CFE7EB;
+  border-radius: 90px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* .sty-router {
+  text-decoration-line: none;
+} */
