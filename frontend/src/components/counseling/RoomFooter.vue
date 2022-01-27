@@ -7,8 +7,8 @@
     </div>
     
     <div class="col-4 d-flex justify-content-end">
-      <button class="me-3 btn btn-lg sty-btn-func fs-5 sty-font">History</button>
-      <button class="me-3 btn btn-lg sty-btn-func fs-5 sty-font">Memo</button>
+      <button @click="openOthers" class="me-3 btn btn-lg sty-btn-func fs-5 sty-font">Records</button>
+      <button @click="openMemo" class="me-3 btn btn-lg sty-btn-func fs-5 sty-font">Memo</button>
     </div>
   </div>
 </template>
@@ -19,10 +19,21 @@ export default {
   components: {
 
   },
+  data: function () {
+    return {
+      
+    }
+  },
   methods: {
     moveToHome: function () {
       this.$router.push({name: 'Home'})
-    }
+    },
+    openMemo: function () {
+      this.$store.dispatch('openMemo')
+    },
+    openOthers: function () {
+      this.$store.dispatch('openOthers')
+    },
   },
 }
 </script>
