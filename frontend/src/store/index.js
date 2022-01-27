@@ -8,16 +8,26 @@ export default new Vuex.Store({
     // side bar 영역 바꾸기
     isMemo: true,
     isMsg: false,
+    isDetails: false,
   },
   mutations: {
     OPEN_MEMO: function (state) {
       state.isMemo = true
+      if (state.isDetails === true) {
+        state.isDetails = false
+      }
     },
     OPEN_OTHERS: function (state) {
       state.isMemo = false
+      if (state.isDetails === true) {
+        state.isDetails = false
+      }
     },
     SEND_MESSAGE: function (state) {
       state.isMsg = !state.isMsg
+    },
+    SHOW_DETAILS: function (state) {
+      state.isDetails = !state.isDetails
     },
   },
   actions: {
@@ -29,6 +39,9 @@ export default new Vuex.Store({
     },
     sendMessage: function ({ commit }) {
       commit('SEND_MESSAGE')
+    },
+    showDetails: function ({ commit }) {
+      commit('SHOW_DETAILS')
     },
   },
 })

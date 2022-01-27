@@ -34,11 +34,15 @@ export default {
     }
   },
   methods: {
+    changeStatus: function () {
+      this.isStored = !this.isStored
+    },
     sendMessage: function () {
       this.$store.dispatch('sendMessage')
     },
     showMessage: function () {
-      this.isStored = true
+      this.changeStatus()
+      setTimeout(this.changeStatus, 1500)
     },
   }
 }
