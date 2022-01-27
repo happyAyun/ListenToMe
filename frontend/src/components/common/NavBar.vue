@@ -2,7 +2,10 @@
   <div class="main-header">
     <div class="hide-on-small">
       <div class="logo-wrapper" @click="goToHome">Listen to Me</div>
-      <div class="tool-wrapper">
+      <div v-if="isLoggedIn" class="tool-wrapper">
+        <button class="nav-btn" @click="Logout">Logout</button>
+      </div>
+      <div v-else class="tool-wrapper">
         <button class="nav-btn" @click="goToSignupPage">Sign up</button>
         <button class="nav-btn" @click="goToLoginPage">Login</button>
       </div>
@@ -11,11 +14,16 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'NavBar',
   components: {
   },
   methods: {
+    ...mapActions([
+      'Logout',
+    ]),
     goToHome: function () {
       this.$router.push({
         name: 'Home'
@@ -23,7 +31,7 @@ export default {
     },
     goToSignupPage: function () {
       this.$router.push({
-        name: 'SignupPage'
+        name: 'SignupForClient'
       })
     },
     goToLoginPage: function () {
@@ -31,6 +39,11 @@ export default {
         name: 'LoginPage'
       })
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isLoggedIn',
+    ]),
   }
 }
 </script>

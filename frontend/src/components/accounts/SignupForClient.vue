@@ -17,21 +17,21 @@
           class="input-custom"
           type="email"
           placeholder="이메일"
-          v-model.trim="signup.email" required />
+          v-model.trim="credentials_signup.email" required />
       </div>
       <div class="content-custom">
         <input
           class="input-custom"
           type="password"
           placeholder="비밀번호"
-          v-model.trim="signup.password" required />
+          v-model.trim="credentials_signup.password" required />
       </div>
       <div class="content-custom">
         <input
           class="input-custom"
           type="text"
           placeholder="이름"
-          v-model.trim="signup.name" required />
+          v-model.trim="credentials_signup.name" required />
       </div>
       <div class="content-custom">
         <input 
@@ -39,7 +39,7 @@
           type="text"
           placeholder="핸드폰 번호"
           maxlength="13"
-          v-model.trim="signup.phoneNumber" 
+          v-model.trim="credentials_signup.phoneNumber" 
           @input="acceptNumber"
           required />
       </div>
@@ -48,10 +48,10 @@
           class="input-custom"
           type="text"
           placeholder="닉네임"
-          v-model.trim="signup.nickname" required />
+          v-model.trim="credentials_signup.nickname" required />
       </div>
       <div class="content-custom">
-        <select class="i-custom" v-model="signup.gender">
+        <select class="i-custom" v-model="credentials_signup.gender">
           <option value="">성별</option> 
           <option 
             v-for="(item, index) in genderList" 
@@ -69,23 +69,25 @@
             class="i-custom" 
             type="date" 
             id="date" 
-            v-model="signup.birth"
-            required /> 
+            v-model="credentials_signup.birth"
+            required/> 
         </span>
       </div>
-      <button class="signup-btn">가입</button>
+      <button class="signup-btn" @click="Signup(credentials_signup)">가입</button>
     </form>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'SignupPage',
+  name: 'SignupForClient',
   data: function() {
     return {
-      isClicked: true,
-      isClickedPro: false,
-      signup : {
+      // isClicked: true,
+      // isClickedPro: false,
+      credentials_signup : {
         email: '',
         password: '',
         name: '',
@@ -93,37 +95,42 @@ export default {
         nickname: '',
         gender: '',
         birth: '',
+        point: '1000',
       },
       genderList: [
         { 
-          value: "M", 
+          value: "m", 
           text: "남성", 
         }, 
         { 
-          value: "F", 
+          value: "f", 
           text: "여성", 
         }, 
       ],
     }
   },
   methods: {
+    ...mapActions([
+      'Signup',
+    ]),
     loadDataPro() {
       this.$router.push({
-        name: 'SignupPageForPro'
+        name: 'SignupForCounselor'
       })
     },
     acceptNumber() {
-      var x = this.signup.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
-      this.signup.phoneNumber = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+      var x = this.credentials_signup.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
+      this.credentials_signup.phoneNumber = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
     },
     submitForm: function () { 
-      console.log("email = " + this.signup.email); 
-      console.log("password = " + this.signup.password);
-      console.log("name = " + this.signup.name);
-      console.log("phoneNumber = " + this.signup.phoneNumber);
-      console.log("nickname = " + this.signup.nickname); 
-      console.log("gender = " + this.signup.gender); 
-      console.log("birth = " + this.signup.birth);
+      console.log("email = " + this.credentials_signup.email); 
+      console.log("password = " + this.credentials_signup.password);
+      console.log("name = " + this.credentials_signup.name);
+      console.log("phoneNumber = " + this.credentials_signup.phoneNumber);
+      console.log("nickname = " + this.credentials_signup.nickname); 
+      console.log("gender = " + this.credentials_signup.gender); 
+      console.log("birth = " + this.credentials_signup.birth);
+      console.log("point = " + this.credentials_signup.point);
     }
   }
 }

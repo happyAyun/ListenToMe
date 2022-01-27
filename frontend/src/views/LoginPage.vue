@@ -4,8 +4,8 @@
       <img class="custom-login-logo" :src="loginlogo" alt="loginlogo">
       <h1>USER LOGIN</h1>
       <div class="custom-checkbox">
-        <input type="checkbox" v-model="login.type" value="user" @click="clickCheck" /> 개인
-        <input type="checkbox" v-model="login.type" value="counselor" @click="clickCheck" /> 전문가
+        <input type="checkbox" v-model="type" value="user" @click="clickCheck" /> 개인
+        <input type="checkbox" v-model="type" value="counselor" @click="clickCheck" /> 전문가
       </div>
       <div class="custom-login-content">
         <input 
@@ -22,8 +22,14 @@
           v-model.trim="login.password">
       </div>
       <div class="custom-login-btn">
-        <button class="login-btn">LOGIN</button>
-        <button style="background: #ED9C9C;" class="login-btn">JOIN</button>
+        <div v-if="isClient">
+          <button class="login-btn" @click.prevent="Login(login)">LOGIN</button>
+          <button style="background: #ED9C9C;" class="login-btn" @click="goToSignup">JOIN</button>
+        </div>
+        <div v-else>
+          <button class="login-btn" @click.prevent="LoginForCounselor(login)">LOGIN</button>
+          <button style="background: #ED9C9C;" class="login-btn" @click="goToSignup">JOIN</button>
+        </div>
       </div>
     </form>
   </div>
@@ -31,32 +37,44 @@
 
 <script>
 import loginlogo from '@/assets/login-logo.png'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'LoginPage',
   data: function () {
     return {
+      isClient: true,
       loginlogo,
+      type: [],
       login: {
-        type: [],
         email: '',
         password: ''
       },
     }
   },
   methods: {
+    ...mapActions([
+      'Login',
+      'LoginForCounselor',
+    ]),
     clickCheck(event) {
-      for(let i=0; i<this.login.type.length; i++){
-        if(this.login.type[i] !== event.target.value){
-        console.log(this.login.type[i])
-        this.login.type.splice(i,1);
+      for(let i=0; i<this.type.length; i++){
+        if(this.type[i] !== event.target.value){
+        console.log(this.type[i])
+        this.type.splice(i,1);
         }
+      this.isClient = !this.isClient
+      console.log(this.isClient)
       }
     },
-    submitlogin: function () {
-      console.log("type = " + this.login.type); 
+    submitlogin() { 
       console.log("email = " + this.login.email); 
       console.log("pass = " + this.login.password);
+    },
+    goToSignup() {
+      this.$router.push({
+        name: 'SignupForClient'
+      })
     }
   },
   created: function () {
