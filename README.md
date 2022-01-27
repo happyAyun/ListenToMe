@@ -46,7 +46,7 @@ branch: feature-face_recognition
 
 <br>
 
-<img src="README.assets/image-20220126140209661.png" alt="image-20220126140209661" style="zoom: 80%;" />
+![image-20220127194400746](README.assets/image-20220127194400746.png)
 
 
 
