@@ -1,41 +1,26 @@
 <template>
-  <div class="container">
-    <h1>회원가입</h1>
-    <ul class="select-list">
-      <li>
-        <span>개인</span>
-      </li>
-      <li @click="loadDataPro">
-        <span>전문가</span>
-      </li>
-    </ul>
-    <div class="divider"></div>
-    <div class="divider-off"></div>
+  <div id="clientsignupform" class="d-flex justify-content-center mt-5">
     <form class="SignupForm" @submit.prevent="submitForm">
-      <div class="content-custom">
+      <div>
         <input
-          class="input-custom"
           type="email"
           placeholder="이메일"
           v-model.trim="credentials_signup.email" required />
       </div>
-      <div class="content-custom">
+      <div>
         <input
-          class="input-custom"
           type="password"
           placeholder="비밀번호"
           v-model.trim="credentials_signup.password" required />
       </div>
-      <div class="content-custom">
+      <div>
         <input
-          class="input-custom"
           type="text"
           placeholder="이름"
           v-model.trim="credentials_signup.name" required />
       </div>
-      <div class="content-custom">
+      <div>
         <input 
-          class="input-custom"
           type="text"
           placeholder="핸드폰 번호"
           maxlength="13"
@@ -43,14 +28,13 @@
           @input="acceptNumber"
           required />
       </div>
-      <div class="content-custom">
+      <div>
         <input
-          class="input-custom"
           type="text"
           placeholder="닉네임"
           v-model.trim="credentials_signup.nickname" required />
       </div>
-      <div class="content-custom">
+      <div>
         <select class="i-custom" v-model="credentials_signup.gender">
           <option value="">성별</option> 
           <option 
@@ -62,7 +46,7 @@
             </option> 
         </select>
       </div>
-      <div class="content-custom">
+      <div>
         <label class="label-custom" for="date">생년월일</label> 
         <span> 
           <input 
@@ -85,8 +69,6 @@ export default {
   name: 'SignupForClient',
   data: function() {
     return {
-      // isClicked: true,
-      // isClickedPro: false,
       credentials_signup : {
         email: '',
         password: '',
@@ -113,11 +95,6 @@ export default {
     ...mapActions([
       'Signup',
     ]),
-    loadDataPro() {
-      this.$router.push({
-        name: 'SignupForCounselor'
-      })
-    },
     acceptNumber() {
       var x = this.credentials_signup.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
       this.credentials_signup.phoneNumber = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
@@ -150,14 +127,6 @@ h1 {
 
 .select-list {
   list-style: none;
-  padding: 0px;
-  text-align: center;
-}
-
-.select-list li {
-  display: inline-block;
-  padding: 0px 170px;
-  font-size: 20px;
 }
 
 .divider {
@@ -178,16 +147,12 @@ h1 {
 .SignupForm {
   position: absolute;
   width: 60%;
-  padding: auto 20px;
   background-color:#FFEDDA;
   text-align: center;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   border-radius: 15px;
 }
 
-.content-custom {
+#clientsignupform div {
   width: 70%;
   background-color:#FFFCF8;
   text-align: center;
@@ -196,7 +161,7 @@ h1 {
   border-radius: 10px;
 }
 
-.input-custom {
+#clientsignupform input {
   width: 100%;
   border: none;
   outline: none;
@@ -223,7 +188,6 @@ h1 {
 
 .signup-btn {
   width: 20%;
-  line-height: 10px;
   background-color: #ED9C9C;
   border: none;
   padding: 10px 15px;

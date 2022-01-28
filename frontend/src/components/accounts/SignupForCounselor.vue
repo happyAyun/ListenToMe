@@ -1,18 +1,7 @@
 <template>
-  <div class="container">
-    <h1>회원가입</h1>
-    <ul class="select-list">
-      <li @click="loadData">
-        <span>개인</span>
-      </li>
-      <li>
-        <span>전문가</span>
-      </li>
-    </ul>
-    <div class="divider-off"></div>
-    <div class="divider"></div>
+  <div id="counselorsignupform" class="d-flex justify-content-center mt-5">
     <form class="SignupFormForPro" @submit.prevent="submitForm">
-      <!-- <input type="file" id="uploadFile" ref="profileImage" @change="onInputImage"> -->
+    <!-- <input type="file" id="uploadFile" ref="profileImage" @change="onInputImage"> -->
       <div class="custom-profile">
         <div v-if="credentials_signup.photo" class="box">
           <img id="preview" v-if="credentials_signup.photo" :src="profile" alt="profile">
@@ -27,28 +16,24 @@
       <div class="content-side">
         <div class="content-custom-counselor">
           <input
-            class="input-custom"
             type="email"
             placeholder="이메일"
             v-model.trim="credentials_signup.email" required />
         </div>
         <div class="content-custom-counselor">
           <input
-            class="input-custom"
             type="password"
             placeholder="비밀번호"
             v-model.trim="credentials_signup.password" required />
         </div>
         <div class="content-custom-counselor">
           <input
-            class="input-custom"
             type="text"
             placeholder="이름"
             v-model.trim="credentials_signup.name" required />
         </div>
         <div class="content-custom-counselor">
           <input
-            class="input-custom"
             type="text"
             placeholder="닉네임"
             v-model.trim="credentials_signup.nickname" required />
@@ -57,7 +42,6 @@
       <div class="content-footer">
         <div class="content-custom-counselor">
           <input 
-            class="input-custom"
             type="text"
             placeholder="핸드폰 번호"
             maxlength="13"
@@ -91,14 +75,12 @@
         </div>
         <div class="content-custom-counselor">
           <input
-            class="input-custom"
             type="text"
             placeholder="학위"
             v-model.trim="credentials_signup.degree" required />
         </div>
         <div class="content-custom-counselor">
           <input
-            class="input-custom"
             type="text"
             placeholder="인사말"
             v-model.trim="credentials_signup.greeting" required />
@@ -147,18 +129,10 @@ export default {
     ...mapActions([
       'SignupForCounselor',
     ]),
-    // onInputImage () {
-    //   this.signup.image = this.$refs.profileImage.files
-    // },
     onFileChange(e) {
       const file = e.target.files[0];
       this.profile = URL.createObjectURL(file);
       this.credentials_signup.photo = file.name;
-    },
-    loadData() {
-      this.$router.push({
-        name: 'SignupForClient'
-      })
     },
     acceptNumber() {
       var x = this.credentials_signup.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
@@ -192,14 +166,6 @@ h1 {
 
 .select-list {
   list-style: none;
-  padding: 0px;
-  text-align: center;
-}
-
-.select-list li {
-  display: inline-block;
-  padding: 0px 170px;
-  font-size: 20px;
 }
 
 .custom-profile {
@@ -250,9 +216,6 @@ h1 {
   padding: auto 20px;
   background-color:#FFEDDA;
   text-align: center;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   border-radius: 15px;
 }
 
@@ -274,7 +237,7 @@ h1 {
   border-radius: 10px;
 }
 
-.input-custom {
+#counselorsignupform input {
   width: 100%;
   border: none;
   outline: none;
@@ -301,7 +264,6 @@ h1 {
 
 .signup-btn {
   width: 20%;
-  line-height: 10px;
   background-color: #ED9C9C;
   border: none;
   padding: 10px 15px;

@@ -1,15 +1,31 @@
 <template>
-  <div class="main-header">
-    <div class="hide-on-small">
-      <div class="logo-wrapper" @click="goToHome">Listen to Me</div>
-      <div v-if="isLoggedIn" class="tool-wrapper">
-        <button class="nav-btn" @click="Logout">Logout</button>
+  <div id="navbar">
+    <nav class="navbar navbar-expand-lg nav-bg">
+      <div class="container-fluid">
+        <p class="mb-0 fs-3" @click="goToHome">Listen to Me</p>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+          <ul class="navbar-nav mb-2 mb-lg-0 me-4">
+            <div v-if="isLoggedIn">
+              <li class="nav-item">
+                <a @click="LogOut" class="btn" href="" role="button">Logout</a>
+              </li>
+            </div>
+            <div v-else class="d-flex">
+              <li class="nav-item me-4">
+                <button type="button" class="btn nav-btn" @click="goToSignupPage">
+                  Sign Up
+                </button>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn nav-btn" @click="goToLoginPage">
+                  Log In
+                </button>
+              </li>
+            </div>
+          </ul>
+        </div>
       </div>
-      <div v-else class="tool-wrapper">
-        <button class="nav-btn" @click="goToSignupPage">Sign up</button>
-        <button class="nav-btn" @click="goToLoginPage">Login</button>
-      </div>
-    </div>
+    </nav>
   </div>
 </template>
 
@@ -49,27 +65,14 @@ export default {
 </script>
 
 <style>
-.main-header {
-  width: 100%;
-  padding: 10px 20px;
+.nav-bg{
   background-color: #DBEAF8;
 }
 
-.main-header .hide-on-small .logo-wrapper {
-  cursor: pointer;
-  display: inline-block;
-}
-
-.main-header .hide-on-small .tool-wrapper {
-  float: right;
-  margin-right: 3%;
-}
-
-.main-header .hide-on-small .tool-wrapper .nav-btn {
+.nav-btn {
   background: #94BCF0;
   border-radius: 90px;
   border: 0;
-  margin-left: 10px;
   cursor: pointer;
 }
 </style>
