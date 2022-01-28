@@ -7,7 +7,7 @@
           <ul class="navbar-nav mb-2 mb-lg-0 me-4">
             <div v-if="isLoggedIn">
               <li class="nav-item">
-                <a @click="LogOut" class="btn" href="" role="button">Logout</a>
+                <a @click="Logout" class="btn nav-btn" href="" role="button">Logout</a>
               </li>
             </div>
             <div v-else class="d-flex">
@@ -18,7 +18,7 @@
               </li>
               <li class="nav-item">
                 <button type="button" class="btn nav-btn" @click="goToLoginPage">
-                  Log In
+                  Login
                 </button>
               </li>
             </div>

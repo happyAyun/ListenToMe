@@ -23,11 +23,11 @@
       </div>
       <div class="custom-login-btn">
         <div v-if="isClient">
-          <button class="login-btn" @click.prevent="Login(login)">LOGIN</button>
+          <button class="login-btn" @click.prevent="LoginForCounselor(login)">LOGIN</button>
           <button style="background: #ED9C9C;" class="login-btn" @click="goToSignup">JOIN</button>
         </div>
         <div v-else>
-          <button class="login-btn" @click.prevent="LoginForCounselor(login)">LOGIN</button>
+          <button class="login-btn" @click.prevent="Login(login)">LOGIN</button>
           <button style="background: #ED9C9C;" class="login-btn" @click="goToSignup">JOIN</button>
         </div>
       </div>

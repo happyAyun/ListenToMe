@@ -77,8 +77,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('SET_TOKEN', res.data.access)
-        this.$store.state.isLoggedIn = true
-        router.push('/')
+        router.push('/counselor')
       })
       .catch((err) => {
         console.log(err)
@@ -86,6 +85,7 @@ export default new Vuex.Store({
     },
     Logout: function ({ commit }) {
       commit('REMOVE_TOKEN')
+      router.push('/')
     },
   },
   modules: {

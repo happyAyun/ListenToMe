@@ -2,45 +2,43 @@
   <div id="counselorsignupform" class="d-flex justify-content-center mt-5">
     <form class="SignupFormForPro" @submit.prevent="submitForm">
     <!-- <input type="file" id="uploadFile" ref="profileImage" @change="onInputImage"> -->
-      <div class="custom-profile">
+      <div class="custom-profile mt-5 mx-auto">
         <div v-if="credentials_signup.photo" class="box">
           <img id="preview" v-if="credentials_signup.photo" :src="profile" alt="profile">
         </div>
         <div v-else>
           <img :src="anonymous" alt="anonymous">
         </div>
-        <div class="custom-profile-input">
+        <div class="mt-5">
           <input type="file" id="myFile" @change="onFileChange">
         </div>
       </div>
-      <div class="content-side">
-        <div class="content-custom-counselor">
+      <div id="counselor-signup-content" class="mt-5">
+        <div>
           <input
             type="email"
             placeholder="이메일"
             v-model.trim="credentials_signup.email" required />
         </div>
-        <div class="content-custom-counselor">
+        <div>
           <input
             type="password"
             placeholder="비밀번호"
             v-model.trim="credentials_signup.password" required />
         </div>
-        <div class="content-custom-counselor">
+        <div>
           <input
             type="text"
             placeholder="이름"
             v-model.trim="credentials_signup.name" required />
         </div>
-        <div class="content-custom-counselor">
+        <div>
           <input
             type="text"
             placeholder="닉네임"
             v-model.trim="credentials_signup.nickname" required />
         </div>
-      </div>
-      <div class="content-footer">
-        <div class="content-custom-counselor">
+        <div>
           <input 
             type="text"
             placeholder="핸드폰 번호"
@@ -49,7 +47,7 @@
             @input="acceptNumber"
             required />
         </div>
-        <div class="content-custom-counselor">
+        <div>
           <select class="i-custom" v-model="credentials_signup.gender">
             <option value="">성별</option> 
             <option 
@@ -61,8 +59,8 @@
               </option> 
           </select>
         </div>
-        <div class="content-custom-counselor">
-          <label class="label-custom" for="date">생년월일</label> 
+        <div>
+          <label for="date">생년월일</label> 
           <span> 
             <input 
               class="i-custom" 
@@ -73,20 +71,20 @@
               /> 
           </span>
         </div>
-        <div class="content-custom-counselor">
+        <div>
           <input
             type="text"
             placeholder="학위"
             v-model.trim="credentials_signup.degree" required />
         </div>
-        <div class="content-custom-counselor">
+        <div>
           <input
             type="text"
             placeholder="인사말"
             v-model.trim="credentials_signup.greeting" required />
         </div>
       </div>
-      <button class="signup-btn" @click="SignupForCounselor(credentials_signup)">가입</button>
+      <button @click="SignupForCounselor(credentials_signup)">가입</button>
     </form>
   </div>
 </template>
@@ -169,13 +167,8 @@ h1 {
 }
 
 .custom-profile {
-  display: inline-block;
-  width: 30%;
-  margin: 20px;
-}
-
-.custom-profile-input {
-  margin-top: 50px;
+  /* display: inline-block; */
+  width: 40%;
 }
 
 .box {
@@ -188,9 +181,8 @@ h1 {
 
 #preview { 
   display: block;
-  margin: 0px auto;
+  text-align: center;
   width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
@@ -219,16 +211,7 @@ h1 {
   border-radius: 15px;
 }
 
-.content-side {
-  width: 60%;
-  display: inline-block;
-}
-
-.content-footer {
-  clear: both;
-}
-
-.content-custom-counselor {
+#counselor-signup-content div {
   width: 70%;
   background-color:#FFFCF8;
   text-align: center;
@@ -247,7 +230,7 @@ h1 {
   background: none;
 }
 
-.label-custom {
+#counselorsignupform label {
   color: #787878;
   font-size: 20px;
 }
@@ -262,7 +245,7 @@ h1 {
   background: none;
 }
 
-.signup-btn {
+#counselorsignupform button {
   width: 20%;
   background-color: #ED9C9C;
   border: none;
