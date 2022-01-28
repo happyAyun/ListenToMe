@@ -1,14 +1,17 @@
 <template>
-  <div id="room-footer" class="fixed-bottom d-flex align-items-center sty-footer">
+  <div id="room-footer" class="d-flex align-items-center area-footer">
     <div class="col-4"></div>
 
+    <!-- 버튼: 종료 -->
     <div class="col-4 d-flex justify-content-center">
-      <button @click="moveToHome" class="btn btn-lg sty-btn-end fs-5 sty-font">End</button>
+      <button @click="moveToHome" class="btn btn-lg font-btn btn-end">End</button>
     </div>
     
     <div class="col-4 d-flex justify-content-end">
-      <button @click="openOthers" class="me-3 btn btn-lg sty-btn-func fs-5 sty-font">Records</button>
-      <button @click="openMemo" class="me-3 btn btn-lg sty-btn-func fs-5 sty-font">Memo</button>
+      <!-- 버튼: 기록(records) -->
+      <button @click="openRecords" class="me-4 btn btn-lg font-btn btn-mov">Records</button>
+      <!-- 버튼: 메모 -->
+      <button @click="openMemo" class="me-4 btn btn-lg font-btn btn-mov">Memo</button>
     </div>
   </div>
 </template>
@@ -31,8 +34,8 @@ export default {
     openMemo: function () {
       this.$store.dispatch('openMemo')
     },
-    openOthers: function () {
-      this.$store.dispatch('openOthers')
+    openRecords: function () {
+      this.$store.dispatch('openRecords')
     },
   },
 }

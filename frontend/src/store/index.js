@@ -5,43 +5,55 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // side bar 영역 바꾸기
+    // dummy data: 상담 메모 (UI 확인용)
+    memos: [
+      {
+        title: 'memo 1',
+        content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+      },
+      {
+        title: 'memo 2',
+        content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+      },
+      {
+        title: 'memo 3',
+        content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+      },
+      {
+        title: 'memo 4',
+        content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+      },
+      {
+        title: 'memo 5',
+        content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+      },
+    ],
+
+    // 오른쪽 사이드 영역 토글링: 메모(memo) < > 기록(records)
     isMemo: true,
-    isMsg: false,
-    isDetails: false,
+    // 감정 분석 데이터 토클링: hidden < > represented
+    isInfo: false,
   },
   mutations: {
     OPEN_MEMO: function (state) {
       state.isMemo = true
-      if (state.isDetails === true) {
-        state.isDetails = false
-      }
     },
-    OPEN_OTHERS: function (state) {
+    OPEN_RECORDS: function (state) {
       state.isMemo = false
-      if (state.isDetails === true) {
-        state.isDetails = false
-      }
     },
-    SEND_MESSAGE: function (state) {
-      state.isMsg = !state.isMsg
-    },
-    SHOW_DETAILS: function (state) {
-      state.isDetails = !state.isDetails
+    TOGGLE_INFO: function (state) {
+      state.isInfo = !state.isInfo
     },
   },
   actions: {
     openMemo: function ({ commit }) {
       commit('OPEN_MEMO')
     },
-    openOthers: function ({ commit }) {
-      commit('OPEN_OTHERS')
+    openRecords: function ({ commit }) {
+      commit('OPEN_RECORDS')
     },
-    sendMessage: function ({ commit }) {
-      commit('SEND_MESSAGE')
-    },
-    showDetails: function ({ commit }) {
-      commit('SHOW_DETAILS')
+    toggleInfo: function ({ commit }) {
+      commit('TOGGLE_INFO')
     },
   },
 })

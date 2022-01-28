@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
-// routes related to Counseling Service
+// related to Counseling
 import Counseling from '@/views/Counseling.vue'
 
 
@@ -13,7 +13,7 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  // routes related to Counseling Service
+  // related to Counseling
   {
     path: '/counseling',
     name: 'Counseling',

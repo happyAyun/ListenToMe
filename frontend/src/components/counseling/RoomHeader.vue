@@ -1,8 +1,10 @@
 <template>
-  <div id="room-header" class="d-flex justify-content-between align-items-center px-4 sty-header">
-    <p class="mb-0 fs-3 sty-font">Listen to ME</p>
+  <div id="room-header" class="d-flex justify-content-between align-items-center px-4 area-header">
+    <!-- 텍스트: 로고 -->
+    <p class="mb-0 font-logo">Listen to ME</p>
     
-    <p class="mb-0 text-center sty-user sty-font">00님 환영합니다</p>
+    <!-- 텍스트: 프로필 -->
+    <p class="mb-0 font-profile area-profile">00님 환영합니다</p>
   </div>
 </template>
 

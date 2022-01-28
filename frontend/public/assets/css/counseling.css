@@ -1,105 +1,157 @@
-.sty-font {
+/* FONT: 정렬, 크기, 색, 그림자 */
+
+/* (폰트) 로고 */
+.font-logo {
+  font-size: 1.5vw;
   color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
 }
 
-.sty-header {
+/* (폰트) 프로필 */
+.font-profile {
+  text-align: center;
+  font-size: 1.1vw;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* (폰트) 타이틀 */
+.font-title {
+  font-size: 1.5vw;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* (폰트) 일반 */
+.font-normal {
+  text-align: center;
+  font-size: 1vw;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* (폰트) 버튼 */
+.font-btn {
+  font-size: 1.1vw;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* AREA: 라인 높이, 너비, 높이, 배경색, 모서리, 그림자 */
+
+/* (영역) 헤더 */
+.area-header {
   height: 10vh;
   background: #7DABCF;
 }
 
-.sty-footer {
-  height: 10vh;
-  background: #EDE1C9;
-}
-
-.sty-user {
-  font-size: 20px;
-  line-height: 50px;
-
-  width: 180px;
-  height: 50px;
+/* (영역) 프로필 */
+.area-profile {
+  line-height: 6vh;
+  width: 10vw;
+  height: 6vh;
   background: #CFE7EB;
   border-radius: 90px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
 }
 
-.sty-btn-end {
-  background: #ED9C9C;
-  border-radius: 90px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.sty-btn-func {
-  background: #95D0F1;
-  border-radius: 90px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.sty-btn-memo {
-  font-size: 18px;
-  background: #CFE7EB;
-  border-radius: 90px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.sty-side {
-  overflow: hidden;
+/* (영역) 사이드바 */
+.area-side {
   height: 80vh;
   background: #FBC1AD;
 }
 
-.sty-side-others {
-  overflow: hidden;
-  height: 80vh;
-  background: #FFDF70;
+/* (영역) 사이드바 바디 */
+.area-side-body {
+  background: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.sty-side-back {
-  height: 65vh;
+/* (영역) 푸터 */
+.area-footer {
+  height: 10vh;
+  background: #EDE1C9;
+}
+
+/* (영역) 기록(records) */
+.area-record {
   background: #FFFFFF;
   border-radius: 30px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.sty-title {
-  width: 90%;
-  height: 6vh;
-  font-size: 18px;
-  background: #D8D8D8;
-  border: none;
+/* (영역) 기록(records) 바디 */
+.area-record-body {
+  background: #c3c2c2;
   border-radius: 30px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.sty-content {
-  width: 90%;
-  height: 45vh;
-  resize: none;
-  font-size: 18px;
-  background: #D8D8D8;
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
 
-.sty-records {
-  height: 6vh;
-  background: #FFFFFF;
-  border-radius: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-}
+/* MODAL: 라인 높이, 너비, 높이, 배경색, 그림자 */
 
-.sty-message {
-  font-size: 20px;
-  text-align: center;
-  line-height: 20vh;
+/* (모달) 감정 분석 */
+.modal-info {
+  line-height: 25vh;
 
-  width: 20%;
-  height: 20vh;
+  width: 15vw;
+  height: 25vh;
   background: rgba(254, 242, 201, 0.94);
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
 }
+
+
+/* FORM: 텍스트 정렬, 너비, 높이, 크기 조정, 배경색, 테두리, 모서리, 그림자 */
+
+/* (폼) 제목 */
+.form-title {
+  text-align: start;
+  width: 20vw;
+  height: 6vh;
+  background: #D8D8D8;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* (폼) 내용 */
+.form-content {
+  text-align: start;
+  width: 20vw;
+  height: 46vh;
+  resize: none;
+  background: #D8D8D8;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+/* BUTTON: 배경, 모서리, 그림자 */
+
+/* (버튼) 기능 */
+.btn-func {
+  background: #CFE7EB;
+  border-radius: 90px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* (버튼) 이동 */
+.btn-mov {
+  background: #95D0F1;
+  border-radius: 90px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* (버튼) 종료 */
+.btn-end {
+  background: #ED9C9C;
+  border-radius: 90px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
+}
+
 
 input:focus {
   outline: none;
@@ -108,7 +160,3 @@ input:focus {
 textarea:focus {
   outline: none;
 }
-
-/* .sty-router {
-  text-decoration-line: none;
-} */
