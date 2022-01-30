@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/common/NavBar.vue'
+import NavBar from '@/components/Client/NavBar.vue'
 import CounselorNavBar from '@/components/Counselor/CounselorNavBar.vue'
 
 export default {

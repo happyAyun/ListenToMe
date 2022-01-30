@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import SignupForClient from '@/components/accounts/SignupForClient.vue'
-import SignupForCounselor from '@/components/accounts/SignupForCounselor.vue'
+import SignupForClient from '@/components/Client/SignupForClient.vue'
+import SignupForCounselor from '@/components/Counselor/SignupForCounselor.vue'
 
 export default {
   name: 'SignupPage',
