@@ -77,7 +77,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'NavBar',
+  name: 'CounselorNaVBar',
   components: {
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
     ]),
     goToHome: function () {
       this.$router.push({
-        name: 'Home'
+        name: 'CounselorMain'
       }).catch(()=>{});
     },
     goToSignupPage: function () {

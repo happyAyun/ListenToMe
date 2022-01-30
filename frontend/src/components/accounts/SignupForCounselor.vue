@@ -145,6 +145,9 @@ export default {
       console.log("nickname = " + this.credentials_signup.nickname); 
       console.log("gender = " + this.credentials_signup.gender); 
       console.log("birth = " + this.credentials_signup.birth);
+    },
+    OpenModal() {
+      this.show = !this.show
     }
   }
 }

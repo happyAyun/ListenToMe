@@ -3,12 +3,11 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import SERVER from '@/api/index.js'
 import router from '@/router/index.js'
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // plugins: [createPersistedState()],
   state: {
     authToken: localStorage.getItem('jwt'),
   },
@@ -89,5 +88,6 @@ export default new Vuex.Store({
     },
   },
   modules: {
-  }
+  },
+  plugins: [createPersistedState()],
 })

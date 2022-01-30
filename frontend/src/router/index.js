@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import SingupPage from '../views/SignupPage.vue'
 import CounselorMain from '../views/Counselor/CounselorMain.vue'
 import LoginPage from '../views/LoginPage.vue'
+import CounselorLoginPage from '../views/Counselor/CounselorLoginPage.vue'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage
+  },
+  {
+    path: '/login/counselor',
+    name: 'CounselorLoginPage',
+    component: CounselorLoginPage
   }
 ]
 

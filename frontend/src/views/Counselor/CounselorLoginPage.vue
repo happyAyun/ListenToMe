@@ -2,7 +2,7 @@
   <div id="LoginPage">
     <form @submit.prevent="submitlogin">
       <img class="custom-login-logo" :src="loginlogo" alt="loginlogo">
-      <h1>USER LOGIN</h1>
+      <h1>COUNSELOR LOGIN</h1>
       <div class="custom-login-content">
         <input 
           class="custom-login-input"
@@ -18,7 +18,7 @@
           v-model.trim="login.password">
       </div>
       <div class="custom-login-btn">
-        <button class="login-btn" @click.prevent="Login(login)">LOGIN</button>
+        <button class="login-btn" @click.prevent="LoginForCounselor(login)">LOGIN</button>
         <button style="background: #ED9C9C;" class="login-btn" @click="goToSignup">JOIN</button>
       </div>
     </form>
@@ -30,7 +30,7 @@ import loginlogo from '@/assets/login-logo.png'
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'LoginPage',
+  name: 'CounselorLoginPage',
   data: function () {
     return {
       loginlogo,
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'Login',
+      'LoginForCounselor',
     ]),
     submitlogin() { 
       console.log("email = " + this.login.email); 
@@ -54,8 +54,11 @@ export default {
       })
     }
   },
-  mounted: function () {
+  created: function () {
     document.body.style.backgroundColor = "#FFF7EC";
+  },
+  destroyed: function () {
+    document.body.style.backgroundColor = null;
   },
 }
 </script>
