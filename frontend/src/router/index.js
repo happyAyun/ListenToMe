@@ -3,8 +3,10 @@ import VueRouter from 'vue-router'
 
 // main 화면
 import Home from '@/views/Home.vue'
-// profile(마이 페이지) 화면
-import Profile from '@/views/Profile.vue'
+// 마이 페이지 화면
+import Bookmark from '@/views/profile/Bookmark.vue'
+import Profile from '@/views/profile/Profile.vue'
+import Records from '@/views/profile/Records.vue'
 
 import SingupPage from '../views/SignupPage.vue'
 import CounselorMain from '../views/Counselor/CounselorMain.vue'
@@ -20,12 +22,23 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  // profile 화면
+  // 마이 페이지 화면
   {
     path: '/profile',
     name: 'Profile',
     component: Profile
   },
+  {
+    path: '/profile/bookmark',
+    name: 'Bookmark',
+    component: Bookmark
+  },
+  {
+    path: '/profile/records',
+    name: 'Records',
+    component: Records
+  },
+
   {
     path: '/counselor',
     name: 'CounselorMain',
