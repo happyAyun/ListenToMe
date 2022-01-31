@@ -13,4 +13,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     Page<ScheduleDto> findAllByCounselor_EmailAndStateIn(String userEmail, int[] states, Pageable pageRequest);
     boolean existsScheduleByDateTimeEquals(LocalDateTime dateTime);
     List<ScheduleDto> findAllByCounselor_EmailAndDateTimeBetween(String userEmail, LocalDateTime start, LocalDateTime end);
+    Schedule findById(int id);
 }

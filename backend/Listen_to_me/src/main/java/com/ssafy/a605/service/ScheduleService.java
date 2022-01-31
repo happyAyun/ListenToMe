@@ -13,4 +13,5 @@ public interface ScheduleService {
     public boolean setScheduleTime(ScheduleDto scheduleDto) throws Exception;
     public boolean checkScheduleTime(LocalDateTime dateTime) throws Exception;
     public List<ScheduleDto> getCounselorSchedule(String userEmail) throws Exception;
+    public boolean requestCounseling(String userEmail, int scheduleId) throws Exception;
 }

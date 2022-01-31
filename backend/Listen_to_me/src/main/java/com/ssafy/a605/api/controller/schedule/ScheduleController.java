@@ -62,7 +62,7 @@ public class ScheduleController {
         if(scheduleService.setScheduleTime(scheduleDto)){
             return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
-        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
     }
 
     //2. 상담사 상세페이지에서 상담사의 일정 확인
@@ -76,5 +76,17 @@ public class ScheduleController {
             status = HttpStatus.ACCEPTED;
         }
         return new ResponseEntity<List<ScheduleDto>>(HttpStatus.BAD_REQUEST);
+    }
+
+    //3. 내담자 -> 상담 신청
+    @GetMapping("/request/{scheduleId}")
+    public ResponseEntity<String> requestCounseling(@PathVariable("scheduleId") int scheduleId, HttpServletRequest request) throws Exception {
+        HttpStatus status = HttpStatus.ACCEPTED;
+        if (jwtService.isUsable(request.getHeader("access-token"))) {
+            if(scheduleService.requestCounseling(jwtService.getUserId(), scheduleId)){
+                return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
     }
 }

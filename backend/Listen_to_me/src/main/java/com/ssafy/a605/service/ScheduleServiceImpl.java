@@ -1,8 +1,10 @@
 package com.ssafy.a605.service;
 
 import com.ssafy.a605.model.dto.ScheduleDto;
+import com.ssafy.a605.model.entity.Client;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.entity.Schedule;
+import com.ssafy.a605.repository.ClientRepository;
 import com.ssafy.a605.repository.CounselorRepository;
 import com.ssafy.a605.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ScheduleServiceImpl implements ScheduleService {
     final private CounselorRepository counselorRepository;
     final private ScheduleRepository scheduleRepository;
+    final private ClientRepository clientRepository;
 
     @Override
     public Page<ScheduleDto> getCounselorHistorySchedule(String userEmail, Pageable pageRequest) throws Exception {
@@ -57,5 +60,19 @@ public class ScheduleServiceImpl implements ScheduleService {
         System.out.println(start + " " + end);
         List<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndDateTimeBetween(userEmail, start, end);
         return schedule;
+    }
+
+    @Override
+    public boolean requestCounseling(String userEmail, int scheduleId) throws Exception {
+        Client client = clientRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        Schedule schedule = scheduleRepository.findById(scheduleId);
+        if(schedule.getState()==0){
+            schedule.setClient(client);
+            schedule.setState(1);
+        }
+        Schedule ret = scheduleRepository.save(schedule);
+        return ret.equals(schedule);
     }
 }
