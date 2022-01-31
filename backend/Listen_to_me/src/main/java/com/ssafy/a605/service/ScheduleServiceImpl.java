@@ -1,0 +1,49 @@
+package com.ssafy.a605.service;
+
+import com.ssafy.a605.model.dto.ScheduleDto;
+import com.ssafy.a605.model.entity.Counselor;
+import com.ssafy.a605.model.entity.Schedule;
+import com.ssafy.a605.repository.CounselorRepository;
+import com.ssafy.a605.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+public class ScheduleServiceImpl implements ScheduleService {
+    final private CounselorRepository counselorRepository;
+    final private ScheduleRepository scheduleRepository;
+
+    @Override
+    public Page<ScheduleDto> getCounselorSchedule(String userEmail, Pageable pageRequest) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        int []states = {2,3};
+        Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateIn(userEmail, states, pageRequest);
+        Page<ScheduleDto> pagingList = schedule.map(
+                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
+                ));
+        return pagingList;
+    }
+
+    @Override
+    @Transactional
+    public boolean setScheduleTime(ScheduleDto scheduleDto) throws Exception {
+        Schedule schedule = new Schedule();
+        schedule.setTime(scheduleDto);
+        Schedule ret = scheduleRepository.save(schedule);
+        return ret.equals(schedule);
+    }
+
+    @Override
+    public boolean checkScheduleTime(LocalDateTime dateTime) throws Exception {
+        return scheduleRepository.existsScheduleByDateTimeEquals(dateTime);
+    }
+}

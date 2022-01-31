@@ -4,6 +4,7 @@ import com.ssafy.a605.model.dto.CertificateDto;
 import com.ssafy.a605.model.dto.ClientDto;
 import com.ssafy.a605.model.dto.CounselorDto;
 import com.ssafy.a605.model.dto.UserDto;
+import com.ssafy.a605.model.entity.Counselor;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ public interface CounselorService {
     public Map<String,String> login(Map<String,String> map) throws Exception;
 
     public CounselorDto counselorInfo(String userEmail) throws Exception;
+
+    public Counselor getCounselorInfo(String userEmail) throws Exception;
 
     public boolean joinCounselor(CounselorDto counselorDto) throws Exception;
 
