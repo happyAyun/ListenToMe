@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+// main 화면
+import Home from '@/views/Home.vue'
+
 import SingupPage from '../views/SignupPage.vue'
 import CounselorMain from '../views/Counselor/CounselorMain.vue'
 import LoginPage from '../views/LoginPage.vue'

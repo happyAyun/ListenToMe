@@ -10,7 +10,7 @@
         <nav-bar/>
       </header>
     </div>
-    <div> 
+    <div>
       <router-view/>
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
   name: 'App',
   components: {
     NavBar,
-    CounselorNavBar
+    CounselorNavBar,
   }
 }
 </script>
