@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ScheduleService {
-    public Page<ScheduleDto> getCounselorSchedule(String userEmail, Pageable pageRequest) throws Exception;
+    public Page<ScheduleDto> getCounselorHistorySchedule(String userEmail, Pageable pageRequest) throws Exception;
     public boolean setScheduleTime(ScheduleDto scheduleDto) throws Exception;
     public boolean checkScheduleTime(LocalDateTime dateTime) throws Exception;
+    public List<ScheduleDto> getCounselorSchedule(String userEmail) throws Exception;
 }

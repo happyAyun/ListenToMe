@@ -22,7 +22,7 @@ public class Schedule {
     @JoinColumn(name = "client_email")
     private Client client;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "counselor_email")
     @JsonIgnore
     private Counselor counselor;

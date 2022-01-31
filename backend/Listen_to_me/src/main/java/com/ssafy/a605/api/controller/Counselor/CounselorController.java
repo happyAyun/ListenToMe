@@ -150,8 +150,4 @@ public class CounselorController {
 
         return new ResponseEntity<List<CertificateDto>>(results, HttpStatus.OK);
     }
-
-
-
-
 }

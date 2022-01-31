@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     final private ScheduleRepository scheduleRepository;
 
     @Override
-    public Page<ScheduleDto> getCounselorSchedule(String userEmail, Pageable pageRequest) throws Exception {
+    public Page<ScheduleDto> getCounselorHistorySchedule(String userEmail, Pageable pageRequest) throws Exception {
         Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
@@ -45,5 +47,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public boolean checkScheduleTime(LocalDateTime dateTime) throws Exception {
         return scheduleRepository.existsScheduleByDateTimeEquals(dateTime);
+    }
+
+    @Override
+    public List<ScheduleDto> getCounselorSchedule(String userEmail) throws Exception {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)).withHour(0);
+        LocalDateTime end = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)).withHour(23);
+        System.out.println(start + " " + end);
+        List<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndDateTimeBetween(userEmail, start, end);
+        return schedule;
     }
 }
