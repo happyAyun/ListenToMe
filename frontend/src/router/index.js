@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 // main 화면
 import Home from '@/views/Home.vue'
+// profile(마이 페이지) 화면
+import Profile from '@/views/Profile.vue'
 
 import SingupPage from '../views/SignupPage.vue'
 import CounselorMain from '../views/Counselor/CounselorMain.vue'
@@ -12,10 +14,17 @@ import CounselorLoginPage from '../views/Counselor/CounselorLoginPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  // main 화면
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  // profile 화면
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/counselor',
