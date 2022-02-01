@@ -40,19 +40,6 @@ public class ScheduleController {
     @Autowired
     private CounselorService userService;
 
-    //상담자 -> 자신의 상담 내역 불러오기
-    @GetMapping("/counselor")
-    public ResponseEntity<Page<ScheduleDto>> getCounselorHistorySchedule(@PageableDefault(size = 10, sort = "dateTime") Pageable pageRequest, HttpServletRequest request) throws Exception {
-        HttpStatus status = HttpStatus.ACCEPTED;
-        if (jwtService.isUsable(request.getHeader("access-token"))) {
-            return new ResponseEntity<Page<ScheduleDto>>(scheduleService.getCounselorHistorySchedule(jwtService.getUserId(), pageRequest), HttpStatus.OK);
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            status = HttpStatus.ACCEPTED;
-        }
-        return new ResponseEntity<Page<ScheduleDto>>(HttpStatus.BAD_REQUEST);
-    }
-
     //1. 상담자 -> 되는 상담 시간 지정
     @PostMapping("/time")
     public ResponseEntity<String> setScheduleTime(@RequestBody ScheduleDto scheduleDto, HttpServletRequest request) throws Exception {
@@ -89,4 +76,51 @@ public class ScheduleController {
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
     }
+
+    //상담자 -> 자신의 승인된 상담 내역 불러오기
+    @GetMapping("/counselor/approved")
+    public ResponseEntity<Page<ScheduleDto>> getCounselorApprovedSchedule(@PageableDefault(size = 5, sort = "dateTime") Pageable pageRequest, HttpServletRequest request) throws Exception {
+        HttpStatus status = HttpStatus.ACCEPTED;
+        if (jwtService.isUsable(request.getHeader("access-token"))) {
+            return new ResponseEntity<Page<ScheduleDto>>(scheduleService.getCounselorApprovedSchedule(jwtService.getUserId(), pageRequest), HttpStatus.OK);
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+            status = HttpStatus.ACCEPTED;
+        }
+        return new ResponseEntity<Page<ScheduleDto>>(HttpStatus.BAD_REQUEST);
+    }
+
+    //상담자 -> 자신의 종료된 상담 내역 불러오기
+    @GetMapping("/counselor/ended")
+    public ResponseEntity<Page<ScheduleDto>> getCounselorEndedSchedule(@PageableDefault(size = 5, sort = "dateTime") Pageable pageRequest, HttpServletRequest request) throws Exception {
+        if (jwtService.isUsable(request.getHeader("access-token"))) {
+            return new ResponseEntity<Page<ScheduleDto>>(scheduleService.getCounselorEndedSchedule(jwtService.getUserId(), pageRequest), HttpStatus.OK);
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+        }
+        return new ResponseEntity<Page<ScheduleDto>>(HttpStatus.BAD_REQUEST);
+    }
+
+    //내담자 -> 자신의 승인된 상담 내역 불러오기
+    @GetMapping("/client/approved")
+    public ResponseEntity<Page<ScheduleDto>> getClientApprovedSchedule(@PageableDefault(size = 5, sort = "dateTime") Pageable pageRequest, HttpServletRequest request) throws Exception {
+        if (jwtService.isUsable(request.getHeader("access-token"))) {
+            return new ResponseEntity<Page<ScheduleDto>>(scheduleService.getClientApprovedSchedule(jwtService.getUserId(), pageRequest), HttpStatus.OK);
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+        }
+        return new ResponseEntity<Page<ScheduleDto>>(HttpStatus.BAD_REQUEST);
+    }
+
+    //내담자 -> 자신의 종료된 상담 내역 불러오기
+    @GetMapping("/client/ended")
+    public ResponseEntity<Page<ScheduleDto>> getClientEndedSchedule(@PageableDefault(size = 5, sort = "dateTime") Pageable pageRequest, HttpServletRequest request) throws Exception {
+        if (jwtService.isUsable(request.getHeader("access-token"))) {
+            return new ResponseEntity<Page<ScheduleDto>>(scheduleService.getClientEndedSchedule(jwtService.getUserId(), pageRequest), HttpStatus.OK);
+        } else {
+            logger.error("사용 불가능 토큰!!!");
+        }
+        return new ResponseEntity<Page<ScheduleDto>>(HttpStatus.BAD_REQUEST);
+    }
+
 }

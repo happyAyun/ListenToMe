@@ -26,19 +26,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     final private ClientRepository clientRepository;
 
     @Override
-    public Page<ScheduleDto> getCounselorHistorySchedule(String userEmail, Pageable pageRequest) throws Exception {
-        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
-                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
-        );
-        int []states = {2,3};
-        Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateIn(userEmail, states, pageRequest);
-        Page<ScheduleDto> pagingList = schedule.map(
-                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
-                ));
-        return pagingList;
-    }
-
-    @Override
     @Transactional
     public boolean setScheduleTime(ScheduleDto scheduleDto) throws Exception {
         Schedule schedule = new Schedule();
@@ -74,5 +61,47 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
         Schedule ret = scheduleRepository.save(schedule);
         return ret.equals(schedule);
+    }
+
+    @Override
+    public Page<ScheduleDto> getCounselorApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        int []states = {2,3};
+        Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateEquals(userEmail, 2, pageRequest);
+        Page<ScheduleDto> pagingList = schedule.map(
+                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
+                ));
+        return pagingList;
+    }
+    @Override
+    public Page<ScheduleDto> getCounselorEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateEquals(userEmail, 3, pageRequest);
+        Page<ScheduleDto> pagingList = schedule.map(
+                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
+                ));
+        return pagingList;
+    }
+
+    @Override
+    public Page<ScheduleDto> getClientApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+        Page<ScheduleDto> schedule = scheduleRepository.findAllByClient_EmailAndStateEquals(userEmail, 2, pageRequest);
+        Page<ScheduleDto> pagingList = schedule.map(
+                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
+                ));
+        return pagingList;
+    }
+
+    @Override
+    public Page<ScheduleDto> getClientEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+        Page<ScheduleDto> schedule = scheduleRepository.findAllByClient_EmailAndStateEquals(userEmail, 3, pageRequest);
+        Page<ScheduleDto> pagingList = schedule.map(
+                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
+                ));
+        return pagingList;
     }
 }

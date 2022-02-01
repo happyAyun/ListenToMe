@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
-    Page<ScheduleDto> findAllByCounselor_EmailAndStateIn(String userEmail, int[] states, Pageable pageRequest);
+    Page<ScheduleDto> findAllByCounselor_EmailAndStateEquals(String userEmail, int state, Pageable pageRequest);
+    Page<ScheduleDto> findAllByClient_EmailAndStateEquals(String userEmail, int state, Pageable pageRequest);
     boolean existsScheduleByDateTimeEquals(LocalDateTime dateTime);
     List<ScheduleDto> findAllByCounselor_EmailAndDateTimeBetween(String userEmail, LocalDateTime start, LocalDateTime end);
     Schedule findById(int id);
