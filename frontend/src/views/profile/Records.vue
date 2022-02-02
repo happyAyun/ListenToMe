@@ -4,7 +4,8 @@
     <div class="mx-5 mb-5 pt-5">
       <!-- title -->
       <div class="mb-4 d-flex">
-        <p class="font-title">진행 예정 상담</p>
+        <p class="me-4 font-title">진행 예정 상담</p>
+        <p class="text-center font-subtitle main-side-small-menu">300 points</p>
       </div>
 
       <!-- content -->
