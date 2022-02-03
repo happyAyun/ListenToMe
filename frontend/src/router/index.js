@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// main 화면
+// 홈 화면
 import Home from '@/views/Home.vue'
+import Counselors from '@/components/Counselors.vue'
 // 마이 페이지 화면
-import Bookmark from '@/views/profile/Bookmark.vue'
 import Profile from '@/views/profile/Profile.vue'
+import Bookmark from '@/views/profile/Bookmark.vue'
 import Records from '@/views/profile/Records.vue'
 
 import SingupPage from '../views/SignupPage.vue'
@@ -16,11 +17,16 @@ import CounselorLoginPage from '../views/Counselor/CounselorLoginPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // main 화면
+  // 홈 화면
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/counselors',
+    name: 'Counselors',
+    component: Counselors
   },
   // 마이 페이지 화면
   {
