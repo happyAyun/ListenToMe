@@ -1,7 +1,7 @@
 <template>
   <div id="side-bar" class="p-5 text-center">
     <!-- 메뉴: 상담 시작 -->
-    <div class="mx-auto mb-4 main-side-menu font-subtitle" style="background: #ED9C9C;">상담 시작하기</div>
+    <div @click="moveToCounseling" class="mx-auto mb-4 main-side-menu font-subtitle" style="background: #ED9C9C;">상담 시작하기</div>
 
     <!-- 메뉴: 홈 -->
     <div @click="moveToHome" class="mx-auto mb-4 main-side-menu font-subtitle">홈</div>
@@ -39,6 +39,10 @@ export default {
     }
   },
   methods: {
+    moveToCounseling: function () {
+      this.active = false;
+      this.$router.push({name: 'CounselingMain'});
+    },
     moveToHome: function () {
       this.active = false
       this.$router.push({name: 'Home'})

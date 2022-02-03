@@ -7,9 +7,12 @@ import Home from '@/views/Home.vue'
 import Bookmark from '@/views/profile/Bookmark.vue'
 import Profile from '@/views/profile/Profile.vue'
 import Records from '@/views/profile/Records.vue'
+// 상담 시작화면
+import Counseling from '@/views/Counseling/Counseling.vue'
+import CounselingMain from '@/views/Counseling/CounselingMain.vue'
+import CounselorMain from '../views/Counselor/CounselorMain.vue'
 
 import SingupPage from '../views/SignupPage.vue'
-import CounselorMain from '../views/Counselor/CounselorMain.vue'
 import LoginPage from '../views/LoginPage.vue'
 import CounselorLoginPage from '../views/Counselor/CounselorLoginPage.vue'
 
@@ -63,6 +66,16 @@ const routes = [
     path: '/login/counselor',
     name: 'CounselorLoginPage',
     component: CounselorLoginPage
+  },
+  {
+    path: '/counseling',
+    name: 'Counseling',
+    component: Counseling
+  },
+  {
+    path: '/counselingmain',
+    name: 'CounselingMain',
+    component: CounselingMain
   }
 ]
 
