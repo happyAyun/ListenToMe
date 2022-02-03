@@ -7,6 +7,7 @@ import Counselors from '@/components/Counselors.vue'
 // 마이 페이지 화면
 import Profile from '@/views/profile/Profile.vue'
 import Bookmark from '@/views/profile/Bookmark.vue'
+import MarkedCounselors from '@/components/MarkedCounselors.vue'
 import Records from '@/views/profile/Records.vue'
 
 import SingupPage from '../views/SignupPage.vue'
@@ -38,6 +39,11 @@ const routes = [
     path: '/profile/bookmark',
     name: 'Bookmark',
     component: Bookmark
+  },
+  {
+    path: '/profile/bookmark/counselors',
+    name: 'MarkedCounselors',
+    component: MarkedCounselors
   },
   {
     path: '/profile/records',

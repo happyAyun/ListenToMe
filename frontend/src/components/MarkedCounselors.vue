@@ -2,13 +2,13 @@
   <div id="counselors" class="px-5">
     <!-- title -->
     <div class="mb-5 pt-5 d-flex">
-      <p class="me-3 f-title">전체 상담사</p>
-      <p @click="moveToHome" class="f-normal">back</p>
+      <p class="me-3 f-title">북마크된 상담사</p>
+      <p @click="moveToBookmark" class="f-normal">back</p>
     </div>
 
     <!-- content -->
     <div class="row row-cols-5 g-5 mb-5">
-      <div v-for="n in 20" :key="n">
+      <div v-for="n in 8" :key="n">
         <div @click="moveToProfile" class="col">
           <div class="card part-counselor">
             <!-- image -->
@@ -50,8 +50,8 @@ export default {
     }
   },
   methods: {
-    moveToHome: function () {
-      this.$router.push({name: 'Home'})
+    moveToBookmark: function () {
+      this.$router.push({name: 'Bookmark'})
     }
   }
 }

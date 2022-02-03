@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="col-10">
     <!-- 게시판 -->
-    <div class="mb-5 pt-5 px-5">
+    <div class="mb-5 pt-5 pb-2 px-5">
       <!-- title -->
       <div class="mb-4 d-flex">
         <p class="me-3 f-title">오늘의 이야기</p>
@@ -29,8 +29,8 @@
           <!-- content -->
           <div class="card part-counselor">
             <!-- image -->
-            <div class="py-3 text-center">
-              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 10vw;">
+            <div class="py-2 text-center">
+              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
             </div>
 
             <div class="px-4 card-body d-flex justify-content-between">
