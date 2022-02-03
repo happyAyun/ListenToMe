@@ -30,7 +30,7 @@
 
 <br>
 
-![image-20220202184923127](README.assets/image-second.png)
+![image-20220202184923127](README.assets/image-second.PNG)
 
 <br>
 
@@ -47,7 +47,7 @@
 
 <br>
 
-![image-20220202185530769](README.assets/image-third.png)
+![image-20220202185530769](README.assets/image-third.PNG)
 
 <br>
 
