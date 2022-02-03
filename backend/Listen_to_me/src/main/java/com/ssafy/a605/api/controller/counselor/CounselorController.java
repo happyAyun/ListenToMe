@@ -1,14 +1,10 @@
-package com.ssafy.a605.api.controller.Counselor;
+package com.ssafy.a605.api.controller.counselor;
 
 
-import com.ssafy.a605.api.controller.client.ClientController;
 import com.ssafy.a605.model.dto.CertificateDto;
-import com.ssafy.a605.model.dto.ClientDto;
 import com.ssafy.a605.model.dto.CounselorDto;
-import com.ssafy.a605.model.entity.Certificate;
 import com.ssafy.a605.service.CounselorService;
 import com.ssafy.a605.service.JwtServiceImpl;
-import com.ssafy.a605.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -70,29 +66,14 @@ public class CounselorController {
     @ApiOperation(value = "회원인증", notes = "회원 정보를 담은 Token을 반환한다.", response = Map.class)
     @GetMapping("/user/{userEmail}")
     public ResponseEntity<Map<String, Object>> getInfo(
-            @PathVariable("userEmail") @ApiParam(value = "인증할 회원의 아이디.", required = true) String userEmail,
-            HttpServletRequest request) {
+            @PathVariable("userEmail") @ApiParam(value = "인증할 회원의 아이디.", required = true) String userEmail) throws Exception {
 //		logger.debug("userid : {} ", userid);
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
-        if (jwtService.isUsable(request.getHeader("access-token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-//				로그인 사용자 정보.
-                CounselorDto counselorDto = userService.counselorInfo(userEmail);
-                resultMap.put("userInfo",counselorDto);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
-            status = HttpStatus.ACCEPTED;
-        }
+        CounselorDto counselorDto = userService.counselorInfo(userEmail);
+        resultMap.put("userInfo",counselorDto);
+        resultMap.put("message", SUCCESS);
+        status = HttpStatus.ACCEPTED;
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 

@@ -1,12 +1,11 @@
-package com.ssafy.a605.api.controller.schedule;
+package com.ssafy.a605.api.controller.counselor;
 
-import com.ssafy.a605.api.controller.Counselor.CounselorController;
+import com.ssafy.a605.api.controller.counselor.CounselorController;
 import com.ssafy.a605.model.dto.ScheduleDto;
 import com.ssafy.a605.model.entity.Schedule;
 import com.ssafy.a605.service.CounselorService;
 import com.ssafy.a605.service.JwtServiceImpl;
 import com.ssafy.a605.service.ScheduleService;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @CrossOrigin

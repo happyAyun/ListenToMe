@@ -2,10 +2,7 @@ package com.ssafy.a605.model.entity;
 
 
 import com.ssafy.a605.model.dto.CareerDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
