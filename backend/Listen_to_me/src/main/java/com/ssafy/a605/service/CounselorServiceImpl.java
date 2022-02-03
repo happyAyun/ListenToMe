@@ -56,6 +56,14 @@ public class CounselorServiceImpl implements CounselorService {
     }
 
     @Override
+    public Counselor getCounselorInfo(String userEmail) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        return counselor;
+    }
+
+    @Override
     @Transactional
     public boolean joinCounselor(CounselorDto counselorDto) throws Exception {
 
