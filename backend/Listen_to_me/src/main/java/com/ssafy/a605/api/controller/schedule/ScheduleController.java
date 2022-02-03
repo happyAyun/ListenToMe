@@ -43,26 +43,18 @@ public class ScheduleController {
     //1. 상담자 -> 되는 상담 시간 지정
     @PostMapping("/time")
     public ResponseEntity<String> setScheduleTime(@RequestBody ScheduleDto scheduleDto, HttpServletRequest request) throws Exception {
-        if(scheduleService.checkScheduleTime(scheduleDto.getDateTime())) return new ResponseEntity<String>("already exists", HttpStatus.OK);
-        scheduleDto.setCounselor(userService.getCounselorInfo(jwtService.getUserId()));
-        System.out.println(scheduleDto.toString());
-        if(scheduleService.setScheduleTime(scheduleDto)){
+        if(scheduleService.checkScheduleTime(scheduleDto.getDateTime(), jwtService.getUserId())) return new ResponseEntity<String>("already exists", HttpStatus.OK);
+        //scheduleDto.setCounselor(userService.getCounselorInfo(jwtService.getUserId()));
+        if(scheduleService.setScheduleTime(scheduleDto, jwtService.getUserId())){
             return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
     }
 
     //2. 상담사 상세페이지에서 상담사의 일정 확인
-    @GetMapping("/schedule")
-    public ResponseEntity<List<ScheduleDto>> getCounselorSchedule(HttpServletRequest request) throws Exception {
-        HttpStatus status = HttpStatus.ACCEPTED;
-        if (jwtService.isUsable(request.getHeader("access-token"))) {
-            return new ResponseEntity<List<ScheduleDto>>(scheduleService.getCounselorSchedule(jwtService.getUserId()), HttpStatus.OK);
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            status = HttpStatus.ACCEPTED;
-        }
-        return new ResponseEntity<List<ScheduleDto>>(HttpStatus.BAD_REQUEST);
+    @GetMapping("/schedule/{counselor}")
+    public ResponseEntity<List<ScheduleDto>> getCounselorSchedule(@PathVariable("counselor") String counselor) throws Exception {
+        return new ResponseEntity<List<ScheduleDto>>(scheduleService.getCounselorSchedule(counselor), HttpStatus.OK);
     }
 
     //3. 내담자 -> 상담 신청
@@ -75,6 +67,30 @@ public class ScheduleController {
             }
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+    }
+
+    //4. 상담자 -> 상담 수락
+    @GetMapping("/accept/{scheduleId}")
+    public ResponseEntity<String> acceptCounseling(@PathVariable("scheduleId") int scheduleId) throws Exception {
+        if(scheduleService.acceptCounseling(jwtService.getUserId(), scheduleId)){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+    }
+
+    // 5. 상담 종료
+    @GetMapping("/end/{scheduleId}")
+    public ResponseEntity<String> endCounseling(@PathVariable("scheduleId") int scheduleId) throws Exception {
+        if(scheduleService.endCounseling(jwtService.getUserId(), scheduleId)){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+    }
+
+    //id -> 상담 내역 하나 불러오기 (상담 자세히보기)
+    @GetMapping("/{scheduleId}")
+    public ResponseEntity<Schedule> getCounseling(@PathVariable("scheduleId") int scheduleId, HttpServletRequest request) throws Exception {
+        return new ResponseEntity<Schedule>(scheduleService.getCounseling(scheduleId),HttpStatus.OK);
     }
 
     //상담자 -> 자신의 승인된 상담 내역 불러오기
@@ -122,5 +138,4 @@ public class ScheduleController {
         }
         return new ResponseEntity<Page<ScheduleDto>>(HttpStatus.BAD_REQUEST);
     }
-
 }

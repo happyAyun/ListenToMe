@@ -27,16 +27,20 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public boolean setScheduleTime(ScheduleDto scheduleDto) throws Exception {
+    public boolean setScheduleTime(ScheduleDto scheduleDto, String userEmail) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
         Schedule schedule = new Schedule();
         schedule.setTime(scheduleDto);
+        schedule.setCounselor(counselor);
         Schedule ret = scheduleRepository.save(schedule);
         return ret.equals(schedule);
     }
 
     @Override
-    public boolean checkScheduleTime(LocalDateTime dateTime) throws Exception {
-        return scheduleRepository.existsScheduleByDateTimeEquals(dateTime);
+    public boolean checkScheduleTime(LocalDateTime dateTime, String userEmail) throws Exception {
+        return scheduleRepository.existsScheduleByDateTimeEqualsAndCounselor_Email(dateTime, userEmail);
     }
 
     @Override
@@ -55,12 +59,48 @@ public class ScheduleServiceImpl implements ScheduleService {
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
         Schedule schedule = scheduleRepository.findById(scheduleId);
-        if(schedule.getState()==0){
-            schedule.setClient(client);
-            schedule.setState(1);
-        }
+        if(schedule.getState()!=0) return false;
+        schedule.setClient(client);
+        schedule.setState(1);
+        int point = client.getPoint()-1000;
+        if(point<0) return false;
+        client.setPoint(point);
+        Client client1 = clientRepository.save(client);
+        Schedule ret = scheduleRepository.save(schedule);
+        return (ret.equals(schedule) && client1.equals(client));
+    }
+
+    @Override
+    public boolean acceptCounseling(String userEmail, int scheduleId) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        Schedule schedule = scheduleRepository.findById(scheduleId);
+        if(schedule.getState()!=1 || schedule.getCounselor() != counselor) return false;
+        schedule.setState(2);
         Schedule ret = scheduleRepository.save(schedule);
         return ret.equals(schedule);
+    }
+
+    @Override
+    public boolean endCounseling(String userEmail, int scheduleId) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+
+        Schedule schedule = scheduleRepository.findById(scheduleId);
+        if(schedule.getState()!=2 || schedule.getCounselor()!=counselor) return false;
+        schedule.setState(3);
+        int point = counselor.getPoint()+1000;
+        counselor.setPoint(point);
+        Counselor counselor1 = counselorRepository.save(counselor);
+        Schedule ret = scheduleRepository.save(schedule);
+        return (ret.equals(schedule) && counselor1.equals(counselor));
+    }
+
+    @Override
+    public Schedule getCounseling(int scheduleId) throws Exception {
+        return scheduleRepository.findById(scheduleId);
     }
 
     @Override

@@ -24,7 +24,6 @@ public class Schedule {
 
     @ManyToOne
     @JoinColumn(name = "counselor_email")
-    @JsonIgnore
     private Counselor counselor;
 
     private LocalDateTime dateTime;
