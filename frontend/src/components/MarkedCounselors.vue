@@ -1,5 +1,5 @@
 <template>
-  <div id="counselors" class="px-5">
+  <div id="marked-counselors" class="px-5">
     <!-- title -->
     <div class="mb-5 pt-5 d-flex">
       <p class="me-3 f-title">북마크된 상담사</p>
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'Counselors',
+  name: 'MarkedCounselors',
   components: {
 
   },

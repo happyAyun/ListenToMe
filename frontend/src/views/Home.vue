@@ -19,7 +19,7 @@
     <!-- 상담사 -->
     <div class="px-5">
       <!-- title -->
-      <div class="mb-3 d-flex">
+      <div class="mb-4 d-flex">
         <p class="me-3 f-title">오늘의 상담사</p>
         <p @click="moveToCounselors" class="f-normal">more</p>
       </div>
