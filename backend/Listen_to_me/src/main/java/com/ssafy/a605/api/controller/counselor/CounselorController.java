@@ -3,6 +3,10 @@ package com.ssafy.a605.api.controller.counselor;
 
 import com.ssafy.a605.model.dto.CertificateDto;
 import com.ssafy.a605.model.dto.CounselorDto;
+import com.ssafy.a605.model.entity.Certificate;
+import com.ssafy.a605.model.entity.CounselorCategory;
+import com.ssafy.a605.service.CategoryService;
+import com.ssafy.a605.service.CertificateService;
 import com.ssafy.a605.service.CounselorService;
 import com.ssafy.a605.service.JwtServiceImpl;
 import io.swagger.annotations.Api;
@@ -36,6 +40,11 @@ public class CounselorController {
     @Autowired
     private CounselorService userService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private CertificateService certificateService;
 
     @ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
     @PostMapping("/login")
@@ -71,7 +80,11 @@ public class CounselorController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         CounselorDto counselorDto = userService.counselorInfo(userEmail);
+        List<CounselorCategory> category = categoryService.getCounselorCategory(userEmail);
+        List<CertificateDto> certificate = certificateService.getCounselorCertificate(userEmail);
         resultMap.put("userInfo",counselorDto);
+        resultMap.put("category", category);
+        resultMap.put("certificate", certificate);
         resultMap.put("message", SUCCESS);
         status = HttpStatus.ACCEPTED;
         return new ResponseEntity<Map<String, Object>>(resultMap, status);

@@ -1,7 +1,5 @@
-package com.ssafy.a605.api.controller.category;
+package com.ssafy.a605.api.controller.counselor;
 
-import com.ssafy.a605.model.dto.CategoryDto;
-import com.ssafy.a605.model.dto.CounselorCategoryDto;
 import com.ssafy.a605.model.entity.Category;
 import com.ssafy.a605.model.entity.CounselorCategory;
 import com.ssafy.a605.service.CategoryService;

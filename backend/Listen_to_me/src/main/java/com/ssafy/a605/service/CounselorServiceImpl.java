@@ -49,7 +49,7 @@ public class CounselorServiceImpl implements CounselorService {
         );
 
         CounselorDto counselorDto = new CounselorDto(
-                counselor.getEmail(), counselor.getPassword(), counselor.getName(), counselor.getGender(), counselor.getBirth(),counselor.getPoint(),counselor.getPhoneNumber(),counselor.getPhoto(), counselor.getGreeting(), counselor.getDegree()
+                counselor.getEmail(), counselor.getPassword(), counselor.getName(), counselor.getGender(), counselor.getBirth(),counselor.getPoint(),counselor.getPhoneNumber(),counselor.getPhoto(), counselor.getShortGreeting(), counselor.getGreeting(), counselor.getDegree()
         );
         return counselorDto;
 

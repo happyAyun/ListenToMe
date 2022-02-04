@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Certificate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) //auto increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
@@ -29,17 +29,12 @@ public class Certificate {
     Certificate(Counselor counselor, String name){
         this.counselor = counselor;
         this.name = name;
-
     }
 
     public void update(CertificateDto certificateDto){
-
         this.id = certificateDto.getId();
         this.counselor = certificateDto.getCounselor();
         this.name = certificateDto.getName();
 
     }
-
-
-
 }
