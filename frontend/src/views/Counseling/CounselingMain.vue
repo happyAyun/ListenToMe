@@ -1,36 +1,31 @@
 <template>
-  <div id="profile" class="col-10 p-5">
-    <div class="mx-auto my-5 p-4 profile-content">
+  <div id="counseling-main" class="col-10 d-flex justify-content-center align-items-center">
+    <div class="p-5 part-room-setting">
       <!-- header -->
-      <div class="d-flex">
-        <!-- name -->
-        <p class="col-3 ps-2 font-title">상담 시작하기</p>
-
-
-      </div>
+      <p class="f-subtitle-bold">Listen to ME</p>
       
-      <hr class="mb-5">
+      <hr class="mb-4">
 
-        <div >
-          <div id="join">
-			<div id="join-dialog" class="jumbotron vertical-center">
-				<h1>상담사와 설정한 세션에 입장하기</h1>
-				<div class="form-group">
-					<p>
-						<label>Participant</label>
-						<input v-model="myUserName" class="form-control" type="text" required>
-					</p>
-					<p>
-						<label>Session</label>
-						<input v-model="mySessionId" class="form-control" type="text" required >
-					</p>
-					<p class="text-center">
-						<button class="btn btn-lg btn-success" @click="joinSession()">Join!</button>
-					</p>
-				</div>
-			</div>
-		</div>
+      <!-- body -->
+      <div id="join" class="pt-2 px-4">
+        <div id="join-dialog">
+          <p class="mb-5 text-center f-title-bold">상담실에 입장하기</p>
+
+          <div class="d-flex mb-4">
+            <label class="col-2 form-label f-subtitle">Participant</label>
+            <input v-model="myUserName" class="form-control" type="text" required>
+          </div>
+
+          <div class="d-flex mb-5">
+            <label class="col-2 form-label f-subtitle">Session</label>
+            <input v-model="mySessionId" class="form-control" type="text" required>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <button @click="joinSession()" class="btn-ok f-normal">입장</button>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
@@ -71,6 +66,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>

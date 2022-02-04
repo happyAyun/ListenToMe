@@ -12,7 +12,7 @@ import Records from '@/views/profile/Records.vue'
 // 상담 시작화면
 import Counseling from '@/views/Counseling/Counseling.vue'
 import CounselingMain from '@/views/Counseling/CounselingMain.vue'
-import CounselorMain from '../views/Counselor/CounselorMain.vue'
+import CounselorMain from '@/views/Counselor/CounselorMain.vue'
 
 import SingupPage from '../views/SignupPage.vue'
 import LoginPage from '../views/LoginPage.vue'

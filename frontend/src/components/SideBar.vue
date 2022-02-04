@@ -1,7 +1,7 @@
 <template>
   <div id="side-bar" class="py-5 text-center">
     <!-- 메뉴: 상담 시작 버튼 -->
-    <div class="mx-auto mb-4 part-side-menu f-subtitle" style="background: #ED9C9C;">상담 시작하기</div>
+    <div @click="moveToCounseling" class="mx-auto mb-4 part-side-menu f-subtitle" style="background: #ED9C9C;">상담 시작하기</div>
 
     <!-- 메뉴: 홈 -->
     <div @click="moveToHome" class="mx-auto mb-4 part-side-menu f-subtitle">홈</div>
