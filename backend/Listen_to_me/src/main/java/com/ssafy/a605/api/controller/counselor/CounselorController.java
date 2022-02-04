@@ -18,8 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +99,26 @@ public class CounselorController {
             @RequestBody @ApiParam(value = "회원 가입 정보", required = true) CounselorDto counselorDto) throws Exception {
         logger.info("joinUser - 호출");
         if (userService.joinCounselor(counselorDto)) {
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/shortgreeting")
+    public ResponseEntity<String> setShortGreeting(@RequestBody Map<String,String> param) throws Exception {
+        logger.info("shortGreeting 수정");
+        String shortGreeting = param.get("shortgreeting");
+        if (userService.updateShortGreeting(shortGreeting, jwtService.getUserId())) {
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/greeting")
+    public ResponseEntity<String> setGreeting(@RequestBody Map<String,String> param) throws Exception {
+        logger.info("greeting 수정");
+        String greeting = param.get("greeting");
+        if (userService.updateGreeting(greeting, jwtService.getUserId())) {
             return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
