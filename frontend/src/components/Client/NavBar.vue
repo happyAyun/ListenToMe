@@ -1,7 +1,7 @@
 <template>
   <div id="navbar">
     <div v-if="isLoggedIn">
-      <nav class="navbar navbar-expand-lg nav-bg">
+      <nav class="navbar navbar-expand-lg area-nav">
         <div class="container-fluid">
           <p class="mb-0 fs-3" @click="goToHome">Listen to Me</p>
           <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
@@ -17,7 +17,7 @@
       </nav>
     </div>
     <div v-else>
-      <nav class="navbar navbar-expand-lg nav-bg">
+      <nav class="navbar navbar-expand-lg area-nav">
         <div class="container-fluid">
           <p class="mb-0 fs-3" @click="goToHome">Listen to Me</p>
           <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
@@ -114,10 +114,6 @@ export default {
 </script>
 
 <style>
-.nav-bg{
-  background-color: #DBEAF8;
-}
-
 .nav-btn {
   background: #94BCF0;
   border-radius: 90px;

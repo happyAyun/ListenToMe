@@ -53,15 +53,23 @@ export default new Vuex.Store({
     GE_USERSESSION: (state) => {
       return state.usersession;
     },
+    isLoggedIn: !! localStorage.getItem('jwt')
+  },
+  getters: {
+    isLoggedIn: function (state) {
+      return state.isLoggedIn
+    }
   },
   mutations: {
     SET_TOKEN: function (state, token) { 
       state.authToken = token
+      state.isLoggedIn = true
       localStorage.setItem('jwt', token)
     },
     REMOVE_TOKEN: function (state) {
       localStorage.removeItem('jwt')
       state.authToken = ''
+      state.isLoggedIn = false
     },
     OPEN_MEMO: function (state) {
       state.isMemo = true
@@ -123,32 +131,42 @@ export default new Vuex.Store({
       })
     },
     Login: function ({ commit }, credentials) {
-      axios({
-        url: SERVER.URL + SERVER.ROUTES.login,
-        method: 'post',
-        data: credentials,
-      })
-      .then((res) => {
-        commit('SET_TOKEN', res.data.access)
+      if (this.getters.isLoggedIn) {
         router.push('/')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      }
+      else {
+        axios({
+          url: SERVER.URL + SERVER.ROUTES.login,
+          method: 'post',
+          data: credentials,
+        })
+        .then((res) => {
+          commit('SET_TOKEN', res.data.access)
+          router.push('/')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
     },
     LoginForCounselor: function ({ commit }, credentials) {
-      axios({
-        url: SERVER.URL + SERVER.ROUTES.co_login,
-        method: 'post',
-        data: credentials,
-      })
-      .then((res) => {
-        commit('SET_TOKEN', res.data.access)
+      if (this.getters.isLoggedIn) {
         router.push('/counselor')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      }
+      else {
+        axios({
+          url: SERVER.URL + SERVER.ROUTES.co_login,
+          method: 'post',
+          data: credentials,
+        })
+        .then((res) => {
+          commit('SET_TOKEN', res.data.access)
+          router.push('/counselor')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
     },
     Logout: function ({ commit }) {
       commit('REMOVE_TOKEN')

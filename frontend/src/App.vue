@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <!-- nav bar -->
     <div v-if="$route.path.includes('/counselor')">
       <header>
         <counselor-nav-bar/>
       </header>
     </div>
+
     <div v-else>
       <header>
         <nav-bar/>
@@ -13,7 +15,7 @@
 
     <div class="d-flex">
       <!-- left side bar -->
-      <side-bar class="col-2 main-side"></side-bar>
+      <side-bar class="col-2 area-side"></side-bar>
 
       <!-- routing area -->
       <router-view/>
