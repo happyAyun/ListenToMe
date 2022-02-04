@@ -49,7 +49,7 @@ public class CounselorServiceImpl implements CounselorService {
         );
 
         CounselorDto counselorDto = new CounselorDto(
-                counselor.getEmail(), counselor.getPassword(), counselor.getName(), counselor.getGender(), counselor.getBirth(),counselor.getPoint(),counselor.getPhoneNumber(),counselor.getPhoto(), counselor.getGreeting(), counselor.getDegree()
+                counselor.getEmail(), counselor.getPassword(), counselor.getName(), counselor.getGender(), counselor.getBirth(),counselor.getPoint(),counselor.getPhoneNumber(),counselor.getPhoto(), counselor.getShortGreeting(), counselor.getGreeting(), counselor.getDegree()
         );
         return counselorDto;
 
@@ -82,6 +82,26 @@ public class CounselorServiceImpl implements CounselorService {
         );
         client.update(counselorDto);
         return true;
+    }
+
+    @Override
+    public boolean updateShortGreeting(String shortGreeting, String userEmail) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        counselor.setShortGreeting(shortGreeting);
+        Counselor c = counselorRepository.save(counselor);
+        return c.equals(counselor);
+    }
+
+    @Override
+    public boolean updateGreeting(String greeting, String userEmail) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        counselor.setGreeting(greeting);
+        Counselor c = counselorRepository.save(counselor);
+        return c.equals(counselor);
     }
 
     @Override

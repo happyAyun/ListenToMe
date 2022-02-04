@@ -1,14 +1,14 @@
-package com.ssafy.a605.api.controller.Counselor;
+package com.ssafy.a605.api.controller.counselor;
 
 
-import com.ssafy.a605.api.controller.client.ClientController;
 import com.ssafy.a605.model.dto.CertificateDto;
-import com.ssafy.a605.model.dto.ClientDto;
 import com.ssafy.a605.model.dto.CounselorDto;
 import com.ssafy.a605.model.entity.Certificate;
+import com.ssafy.a605.model.entity.CounselorCategory;
+import com.ssafy.a605.service.CategoryService;
+import com.ssafy.a605.service.CertificateService;
 import com.ssafy.a605.service.CounselorService;
 import com.ssafy.a605.service.JwtServiceImpl;
-import com.ssafy.a605.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,8 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +44,11 @@ public class CounselorController {
     @Autowired
     private CounselorService userService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private CertificateService certificateService;
 
     @ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
     @PostMapping("/login")
@@ -70,29 +79,18 @@ public class CounselorController {
     @ApiOperation(value = "회원인증", notes = "회원 정보를 담은 Token을 반환한다.", response = Map.class)
     @GetMapping("/user/{userEmail}")
     public ResponseEntity<Map<String, Object>> getInfo(
-            @PathVariable("userEmail") @ApiParam(value = "인증할 회원의 아이디.", required = true) String userEmail,
-            HttpServletRequest request) {
+            @PathVariable("userEmail") @ApiParam(value = "인증할 회원의 아이디.", required = true) String userEmail) throws Exception {
 //		logger.debug("userid : {} ", userid);
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
-        if (jwtService.isUsable(request.getHeader("access-token"))) {
-            logger.info("사용 가능한 토큰!!!");
-            try {
-//				로그인 사용자 정보.
-                CounselorDto counselorDto = userService.counselorInfo(userEmail);
-                resultMap.put("userInfo",counselorDto);
-                resultMap.put("message", SUCCESS);
-                status = HttpStatus.ACCEPTED;
-            } catch (Exception e) {
-                logger.error("정보조회 실패 : {}", e);
-                resultMap.put("message", e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-            }
-        } else {
-            logger.error("사용 불가능 토큰!!!");
-            resultMap.put("message", FAIL);
-            status = HttpStatus.ACCEPTED;
-        }
+        CounselorDto counselorDto = userService.counselorInfo(userEmail);
+        List<CounselorCategory> category = categoryService.getCounselorCategory(userEmail);
+        List<CertificateDto> certificate = certificateService.getCounselorCertificate(userEmail);
+        resultMap.put("userInfo",counselorDto);
+        resultMap.put("category", category);
+        resultMap.put("certificate", certificate);
+        resultMap.put("message", SUCCESS);
+        status = HttpStatus.ACCEPTED;
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
@@ -101,6 +99,26 @@ public class CounselorController {
             @RequestBody @ApiParam(value = "회원 가입 정보", required = true) CounselorDto counselorDto) throws Exception {
         logger.info("joinUser - 호출");
         if (userService.joinCounselor(counselorDto)) {
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/shortgreeting")
+    public ResponseEntity<String> setShortGreeting(@RequestBody Map<String,String> param) throws Exception {
+        logger.info("shortGreeting 수정");
+        String shortGreeting = param.get("shortgreeting");
+        if (userService.updateShortGreeting(shortGreeting, jwtService.getUserId())) {
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/greeting")
+    public ResponseEntity<String> setGreeting(@RequestBody Map<String,String> param) throws Exception {
+        logger.info("greeting 수정");
+        String greeting = param.get("greeting");
+        if (userService.updateGreeting(greeting, jwtService.getUserId())) {
             return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);

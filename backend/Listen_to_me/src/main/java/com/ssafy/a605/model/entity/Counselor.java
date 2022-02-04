@@ -17,18 +17,19 @@ import javax.persistence.Entity;
 public class Counselor extends User{
 
     private String photo;
+    private String shortGreeting;
     private String greeting;
     private String degree;
 
-    public Counselor(String email, String password, String name, String phoneNumber, char gender, String birth, int point, String photo, String greeting, String degree) {
-        super(email, password, name, phoneNumber, gender, birth, point);;
+    public Counselor(String email, String password, String name, String phoneNumber, char gender, String birth, int point, String photo, String shortGreeting, String greeting, String degree) {
+        super(email, password, name, phoneNumber, gender, birth, point);
         this.photo = photo;
+        this.shortGreeting = shortGreeting;
         this.greeting = greeting;
         this.degree = degree;
     }
 
     public void update(CounselorDto counselorDto){
-
         this.setEmail(counselorDto.getEmail());
         this.setPassword(counselorDto.getPassword());
         this.setName(counselorDto.getName());
@@ -36,10 +37,10 @@ public class Counselor extends User{
         this.setBirth(counselorDto.getBirth());
         this.setPoint(counselorDto.getPoint());
         this.setPhoneNumber(counselorDto.getPhoneNumber());
+        this.shortGreeting = counselorDto.getShortGreeting();
         this.photo = counselorDto.getPhoto();
         this.greeting = counselorDto.getGreeting();
         this.degree = counselorDto.getDegree();
-
     }
 
 
