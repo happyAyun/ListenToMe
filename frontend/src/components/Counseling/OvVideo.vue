@@ -1,5 +1,5 @@
 <template>
-	<video style="width: 32vw" autoplay/>
+	<video id="ov-video" style="width: 32vw" autoplay/>
 </template>
 
 <script>
@@ -13,5 +13,5 @@ export default {
 	mounted () {
 		this.streamManager.addVideoElement(this.$el);
 	},
-};
+}
 </script>

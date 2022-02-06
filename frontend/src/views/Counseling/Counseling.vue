@@ -102,6 +102,7 @@ export default {
       this.$store.dispatch('toggleMemo')
     },
     toggleRecords: function () {
+			this.$store.dispatch('closeData')
       this.$store.dispatch('toggleRecords')
     },
 

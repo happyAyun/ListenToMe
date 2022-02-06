@@ -61,7 +61,7 @@
 
 ![image-20220206135612908](README.assets/image-20220206135612908.png)
 
-> footer 영역 높이 밑 버튼 조정
+> footer 영역 높이 및 버튼 조정
 
 
 
@@ -77,7 +77,15 @@
 
 #### 001.4. 상담실 감정 분석
 
-![image-20220206222151671](README.assets/image-20220206222151671.png)
+![image-20220206233144588](README.assets/image-20220206233144588.png)
+
+
+
+<br>
+
+#### 001.5. 상담실 기록
+
+![image-20220206233220881](README.assets/image-20220206233220881.png)
 
 
 
@@ -166,6 +174,9 @@
 
 /* 기록 영역 */
 #records
+
+/* 상세 기록 영역 */
+.part-record
 
 /* footer */
 .area-footer

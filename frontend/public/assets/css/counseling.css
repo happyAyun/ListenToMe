@@ -37,13 +37,20 @@
 /* 감정분석 데이터 메시지 */
 .area-msg {
   height: 83vh;
-  background: #FFDF70;
+  background: #CFE7EB;
 }
 
 /* 기록 영역 */
 #records {
   height: 83vh;
   background: #FFDF70;
+}
+
+/* 상세 기록 영역 */
+.part-record {
+  background: white;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
 /* footer */
@@ -55,19 +62,3 @@
 
 
 /* 3. 상담 종료: 피드백(후기 및 평점) 기록 */
-
-
-
-/* (영역) 기록(records) */
-.area-record {
-  background: #FFFFFF;
-  border-radius: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* (영역) 기록(records) 바디 */
-.area-record-body {
-  background: #CFE7EB;
-  border-radius: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-}

@@ -19,7 +19,7 @@ export default new Vuex.Store({
     usersession: "",
 
     // dummy data
-    memos: [
+    records: [
       {
         title: 'memo 1',
         content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
@@ -69,6 +69,9 @@ export default new Vuex.Store({
     TOGGLE_DATA: function (state) {
       state.isData = !state.isData
     },
+    CLOSE_DATA: function (state) {
+      state.isData = false
+    },
 
     SET_TOKEN: function (state, token) { 
       state.authToken = token
@@ -102,6 +105,9 @@ export default new Vuex.Store({
     },
     toggleData: function ({ commit }) {
       commit('TOGGLE_DATA')
+    },
+    closeData: function ({ commit }) {
+      commit('CLOSE_DATA')
     },
 
     SE_USERID: (context, payload) => {
@@ -137,7 +143,7 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    
+
     Login: function ({ commit }, credentials) {
       if (this.getters.isLoggedIn) {
         router.push('/')

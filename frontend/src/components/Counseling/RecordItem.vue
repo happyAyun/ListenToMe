@@ -1,33 +1,23 @@
 <template>
-  <div id="record-item" class="mb-3">
-    <!-- 영역: 바디 -->
-    <div class="p-3 area-record-body">
-      <!-- 폼: 제목 -->
-      <div class="d-flex justify-content-center mb-3">
-        <p type="text" placeholder="제목" class="px-3 font-normal area-record">{{ record.title }}</p>
-      </div>
+  <div id="record-item" class="mb-3 p-3 part-record">
+    <!-- header: 제목 -->
+    <p class="mb-0 text-center f-subtitle">{{ record.title }}</p>
 
-      <!-- 폼: 내용 -->
-      <div class="d-flex justify-content-center">
-        <p placeholder="내용" class="p-3 font-normal area-record">{{ record.content }}</p>
-      </div>
-    </div>
+    <hr class="my-2">
+
+    <!-- body: 내용 -->
+    <p class="mb-0 py-2 f-normal">{{ record.content }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'RecordItem',
-  components: {
 
-  },
   props: {
     record: {
       type: Object,
     }
   },
-  methods: {
-
-  }
 }
 </script>
