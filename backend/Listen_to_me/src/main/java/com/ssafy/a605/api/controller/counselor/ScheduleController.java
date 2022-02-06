@@ -4,6 +4,7 @@ import com.ssafy.a605.api.controller.counselor.CounselorController;
 import com.ssafy.a605.model.dto.ScheduleDto;
 import com.ssafy.a605.model.entity.Schedule;
 import com.ssafy.a605.model.response.schedule.ScheduleInfoRes;
+import com.ssafy.a605.model.response.schedule.ScheduleStateRes;
 import com.ssafy.a605.service.CounselorService;
 import com.ssafy.a605.service.JwtServiceImpl;
 import com.ssafy.a605.service.ScheduleService;
@@ -52,8 +53,8 @@ public class ScheduleController {
 
     //2. 상담사 상세페이지에서 상담사의 일정 확인
     @GetMapping("/schedule/{counselor}")
-    public ResponseEntity<List<ScheduleDto>> getCounselorSchedule(@PathVariable("counselor") String counselor) throws Exception {
-        return new ResponseEntity<List<ScheduleDto>>(scheduleService.getCounselorSchedule(counselor), HttpStatus.OK);
+    public ResponseEntity<List<ScheduleStateRes>> getCounselorSchedule(@PathVariable("counselor") String counselor) throws Exception {
+        return new ResponseEntity<List<ScheduleStateRes>>(scheduleService.getCounselorSchedule(counselor), HttpStatus.OK);
     }
 
     //3. 내담자 -> 상담 신청

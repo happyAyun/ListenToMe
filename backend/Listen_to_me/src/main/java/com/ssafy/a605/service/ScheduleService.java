@@ -3,6 +3,7 @@ package com.ssafy.a605.service;
 import com.ssafy.a605.model.dto.ScheduleDto;
 import com.ssafy.a605.model.entity.Schedule;
 import com.ssafy.a605.model.response.schedule.ScheduleInfoRes;
+import com.ssafy.a605.model.response.schedule.ScheduleStateRes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,7 +17,7 @@ public interface ScheduleService {
     public Page<ScheduleInfoRes> getClientEndedSchedule(String userEmail, Pageable pageRequest) throws Exception;
     public boolean setScheduleTime(ScheduleDto scheduleDto, String userEmail) throws Exception;
     public boolean checkScheduleTime(LocalDateTime dateTime, String userEmail) throws Exception;
-    public List<ScheduleDto> getCounselorSchedule(String userEmail) throws Exception;
+    public List<ScheduleStateRes> getCounselorSchedule(String userEmail) throws Exception;
     public boolean checkPoint(String userEmail) throws Exception;
     public boolean requestCounseling(String userEmail, int scheduleId) throws Exception;
     public boolean acceptCounseling(String userEmail, int scheduleId) throws Exception;

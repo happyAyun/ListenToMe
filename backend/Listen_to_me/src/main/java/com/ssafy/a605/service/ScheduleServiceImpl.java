@@ -5,6 +5,7 @@ import com.ssafy.a605.model.entity.Client;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.entity.Schedule;
 import com.ssafy.a605.model.response.schedule.ScheduleInfoRes;
+import com.ssafy.a605.model.response.schedule.ScheduleStateRes;
 import com.ssafy.a605.repository.ClientRepository;
 import com.ssafy.a605.repository.CounselorRepository;
 import com.ssafy.a605.repository.ScheduleRepository;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -45,15 +47,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleDto> getCounselorSchedule(String userEmail) throws Exception {
+    public List<ScheduleStateRes> getCounselorSchedule(String userEmail) throws Exception {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime start = now.withHour(0);
         LocalDateTime end = now.plusDays(7).withHour(23);
         //LocalDateTime start = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)).withHour(0); 이번주
         //LocalDateTime end = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)).withHour(23);
-        System.out.println(start + " " + end);
         List<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndDateTimeBetween(userEmail, start, end);
-        return schedule;
+
+        List<ScheduleStateRes> list = new ArrayList<>();
+        for(ScheduleDto s: schedule){
+            list.add(new ScheduleStateRes(s.getId(), s.getDateTime(), s.getState()));
+        }
+        return list;
     }
 
     @Override
