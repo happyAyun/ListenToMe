@@ -1,48 +1,48 @@
 <template>
-  <div id="counseling" style="margin-left:auto; margin-right:auto;">
-    <!-- 영역: 헤더 -->
-
-    <!-- 영역: 바디 -->
+  <div id="counseling">
+    <!-- body -->
     <div class="d-flex">
-      <!-- 영역: 스트리밍 -->
-      <div class="col-8">
-        <!-- 모달(토클링): 감정 분석 -->
-        <div @click="toggleInfo" v-if="$store.state.isInfo" class="float-end font-normal modal-info">emotion recognition data</div>
+      <div class="col-9 d-flex justify-content-center align-items-center">
+        <!-- window: emotion recognition -->
+        <!-- <div @click="toggleInfo" v-if="$store.state.isInfo" class="float-end font-normal modal-info">emotion recognition data</div> -->
 
-        <!-- 영역: 영상 -->
-          <div id="video-container" class="col-md-6" style="margin-left:auto; margin-right:auto;">
-              <user-video :stream-manager="publisher" @click.native="updateMainVideoStreamManager(publisher)"/>
-      
-              <user-video v-for="sub in subscribers" :key="sub.stream.connection.connectionId" :stream-manager="sub" @click.native="updateMainVideoStreamManager(sub)"/>
-          </div>
+        <!-- streaming -->
+				<div id="video-container" class="d-flex">
+					<div>
+						<user-video :stream-manager="publisher" @click.native="updateMainVideoStreamManager(publisher)"/>
+					</div>
+					<div>
+						<user-video v-for="sub in subscribers" :key="sub.stream.connection.connectionId" :stream-manager="sub" @click.native="updateMainVideoStreamManager(sub)"/>
+					</div>
+				</div>
       </div>
 
-      <!-- 영역: 사이드바 -->
+      <!-- tool -->
       <div class="col-3">
-        <!-- 영역: 메모 -->
+        <!-- memo -->
         <memo v-if="$store.state.isMemo"></memo>
 
-        <!-- 영역: 기록 -->
-        <records v-else class="overflow-auto"></records>
+        <!-- records -->
+        <records v-else></records>
       </div>
     </div>
 
-    <!-- 영역: 푸터 -->
-      <div id="room-footer" class="d-flex align-items-center area-footer">
-    <div class="col-4"></div>
+		<!-- footer -->
+		<div class="d-flex align-items-center area-footer">
+			<div class="col-4"></div>
 
-    <!-- 버튼: 종료 -->
-    <div class="col-4 d-flex justify-content-center">
-      <button @click="moveToHome" class="btn btn-lg font-btn btn-end">End</button>
-    </div>
-    
-    <div class="col-4 d-flex justify-content-end">
-      <!-- 버튼: 기록(records) -->
-      <button @click="openRecords" class="me-4 btn btn-lg font-btn btn-mov">Records</button>
-      <!-- 버튼: 메모 -->
-      <button @click="openMemo" class="me-4 btn btn-lg font-btn btn-mov">Memo</button>
-    </div>
-  </div>
+			<!-- 버튼: 종료 -->
+			<div class="col-4 d-flex justify-content-center">
+				<button @click="moveToHome" class="btn btn-lg font-btn btn-end">End</button>
+			</div>
+			
+			<div class="col-4 d-flex justify-content-end">
+				<!-- 버튼: 메모 -->
+				<button @click="toggleMemo" class="me-4 btn btn-lg font-btn btn-mov">Memo</button>
+				<!-- 버튼: 기록(records) -->
+				<button @click="toggleRecords" class="me-4 btn btn-lg font-btn btn-mov">Records</button>
+			</div>
+		</div>
   </div>
 </template>
 
@@ -92,6 +92,12 @@ export default {
 		}
 	},
   methods: {
+    toggleMemo: function () {
+      this.$store.dispatch('toggleMemo')
+    },
+    toggleRecords: function () {
+      this.$store.dispatch('toggleRecords')
+    },
     toggleInfo: function () {
       this.$store.dispatch('toggleInfo')
     },
@@ -105,13 +111,8 @@ export default {
 			this.OV = undefined;
 
 			window.removeEventListener('beforeunload', this.leaveSession);
+			this.$store.dispatch('toggleSideBar')  // side bar 토글링
       this.$router.push({name: 'CounselingMain'})
-    },
-    openMemo: function () {
-      this.$store.dispatch('openMemo')
-    },
-    openRecords: function () {
-      this.$store.dispatch('openRecords')
     },
     joinSession () {
 			// --- Get an OpenVidu object ---
@@ -154,7 +155,7 @@ export default {
 							videoSource: undefined, // The source of video. If undefined default webcam
 							publishAudio: true,  	// Whether you want to start publishing with your audio unmuted or not
 							publishVideo: true,  	// Whether you want to start publishing with your video enabled or not
-							resolution: '320x240',  // The resolution of your video
+							resolution: '1280x720',  // The resolution of your video
 							frameRate: 30,			// The frame rate of your video
 							insertMode: 'APPEND',	// How the video is inserted in the target element 'video-container'
 							mirror: false       	// Whether to mirror your local video or not

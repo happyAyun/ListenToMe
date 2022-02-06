@@ -1,5 +1,5 @@
 <template>
-<div v-if="streamManager" style="float: left; width: 320px;">
+<div v-if="streamManager" style="width: 35vw">
 	<ov-video :stream-manager="streamManager"/>
 	<div><p>{{ clientData }}</p></div>
 </div>

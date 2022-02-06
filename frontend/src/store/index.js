@@ -9,6 +9,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // for toggling
+    isSideBar: true,  // 상담실에 입장하면 사이드바 감추기
+    isMemo: true,  // 상담실 메모와 기록 영역 왔다리갔다리
+
+
     authToken: localStorage.getItem('jwt'),
     userid: "",
     usersession: "",
@@ -35,14 +40,11 @@ export default new Vuex.Store({
       },
     ],
 
-    // 오른쪽 사이드 영역 토글링: 메모(memo) < > 기록(records)
-    isMemo: true,
+
     // 감정 분석 데이터 토클링: hidden < > represented
     isInfo: false,
-
-
-
   },
+
   getters: {
     isLoggedIn: function (state) {
       return state.authToken ? true : false
@@ -53,14 +55,21 @@ export default new Vuex.Store({
     GE_USERSESSION: (state) => {
       return state.usersession;
     },
-    isLoggedIn: !! localStorage.getItem('jwt')
   },
-  getters: {
-    isLoggedIn: function (state) {
-      return state.isLoggedIn
-    }
-  },
+
   mutations: {
+    // for toggling
+    TOGGLE_SIDEBAR: function (state) {
+      state.isSideBar = !state.isSideBar
+    },
+    TOGGLE_MEMO: function (state) {
+      state.isMemo = true
+    },
+    TOGGLE_RECORDS: function (state) {
+      state.isMemo = false
+    },
+
+
     SET_TOKEN: function (state, token) { 
       state.authToken = token
       state.isLoggedIn = true
@@ -71,12 +80,7 @@ export default new Vuex.Store({
       state.authToken = ''
       state.isLoggedIn = false
     },
-    OPEN_MEMO: function (state) {
-      state.isMemo = true
-    },
-    OPEN_RECORDS: function (state) {
-      state.isMemo = false
-    },
+
     TOGGLE_INFO: function (state) {
       state.isInfo = !state.isInfo
     },
@@ -86,24 +90,30 @@ export default new Vuex.Store({
     SE_USERSESSION: function (state,payload) {
       state.usersession = payload
     },
-
   },
+
   actions: {
+    // for toggling
+    toggleSideBar: function ({ commit }) {
+      commit('TOGGLE_SIDEBAR')
+    },
+    toggleMemo: function ({ commit }) {
+      commit('TOGGLE_MEMO')
+    },
+    toggleRecords: function ({ commit }) {
+      commit('TOGGLE_RECORDS')
+    },
+    toggleInfo: function ({ commit }) {
+      commit('TOGGLE_INFO')
+    },
+
     SE_USERID: (context, payload) => {
       return context.commit('SE_USERID', payload);
     },
     SE_USERSESSION: (context, payload) => {
       return context.commit('SE_USERSESSION', payload);
     },
-    openMemo: function ({ commit }) {
-      commit('OPEN_MEMO')
-    },
-    openRecords: function ({ commit }) {
-      commit('OPEN_RECORDS')
-    },
-    toggleInfo: function ({ commit }) {
-      commit('TOGGLE_INFO')
-    },
+
     Signup: function (context, credentials) {
       axios({
         url: SERVER.URL + SERVER.ROUTES.signup,
@@ -173,7 +183,6 @@ export default new Vuex.Store({
       router.push('/')
     },
   },
-  modules: {
-  },
+
   plugins: [createPersistedState()],
 })

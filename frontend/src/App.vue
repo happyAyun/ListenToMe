@@ -13,9 +13,9 @@
       </header>
     </div>
 
-    <div class="d-flex">
+    <div :class="{ 'd-flex': $store.state.isSideBar }">
       <!-- left side bar -->
-      <side-bar class="col-2 area-side"></side-bar>
+      <side-bar v-if="$store.state.isSideBar" class="col-2 area-side"></side-bar>
 
       <!-- routing area -->
       <router-view/>
@@ -34,7 +34,7 @@ export default {
     NavBar,
     CounselorNavBar,
     SideBar,
-  }
+  },
 }
 </script>
 

@@ -1,21 +1,11 @@
-/* 상담 화면 */
+/* HOME */
 
-/* 입장 화면 */
-
-/* 방 설정 영역 */
-.part-room-setting {
-  width: 70vw;
-
-  background: white;
-  border-radius: 20px;
-  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
-}
+/* 0. temporary */
 
 
+/* 1. FONT */
 
-/* FONT */
-
-/* title */
+/* 굵은 제목 */
 .f-title-bold {
   font-size: 2vw;
   font-weight: 600;
@@ -23,44 +13,78 @@
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* subtitle */
+/* 굵은 부제 */
 .f-subtitle-bold {
-  font-size: 1.2vw;
+  font-size: 1.3vw;
   font-weight: 600;
   color: #000000;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* 부제 */
 .f-subtitle {
+  font-size: 1.3vw;
+  color: #000000;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 본문 */
+.f-normal {
+  font-size: 1vw;
+  color: #000000;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 버튼 */
+.f-btn {
   font-size: 1.2vw;
   color: #000000;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* 일반 */
-.f-normal {
-  font-size: 1.1vw;
+
+/* 2. BUTTON */
+
+/* 확인 */
+.btn-ok {
+  width: 8vw;
+  height: 6vh;
+
+  border: none;
+  outline: none;
+
+  background: #7DABD0;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.f-title-smaller {
+  font-size: 1.5vw;
   color: #000000;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 
 
-/* BUTTON */
 
-/* 확인 버튼 */
-.btn-ok {
-  width: 10vw;
-  height: 6vh;
-  line-height: 6vh;
 
-  border: none;
-  outline: none;
 
-  background: #7DABD0;
-  border-radius: 30px;
-  filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.3));
-}
+
+
 
 
 
@@ -149,15 +173,6 @@
   overflow: auto;
 }
 
-
-/* FONT */
-
-/* 타이틀 */
-.f-title {
-  font-size: 1.7vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-}
 
 
 

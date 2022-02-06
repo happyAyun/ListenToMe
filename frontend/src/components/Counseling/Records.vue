@@ -1,5 +1,5 @@
 <template>
-  <div id="records" class="px-4 area-side" style="background: #FFDF70;">
+  <div id="records" class="px-4 area-side overflow-auto" style="background: #FFDF70;">
     <!-- 텍스트: 타이틀 -->
     <p class="ms-1 mb-4 pt-4 font-title">Records</p>
 

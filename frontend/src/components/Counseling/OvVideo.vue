@@ -1,5 +1,5 @@
 <template>
-	<video autoplay/>
+	<video style="width: 35vw" autoplay/>
 </template>
 
 <script>

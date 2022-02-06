@@ -1,0 +1,166 @@
+/* COUNSELING */
+
+/* 0. temporary */
+
+
+/* 1. 상담실 입장: 상담실 세션 설정 */
+
+/* 상담실 세션 설정 영역 */
+.part-room-setting {
+  width: 48vw;
+
+  background: white;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+
+/* 2. 상담: 상담 도구 */
+
+
+/* 3. 상담 종료: 피드백(후기 및 평점) 기록 */
+
+
+
+/* (상담실) 툴 전역 */
+#memo {
+  height: 82vh;
+}
+
+#records {
+  height: 82vh;
+}
+
+/* (입장 화면) 방 설정 영역 */
+
+
+/* (상담실) 메모 영역 */
+.area-tool {
+  background: #FBC1AD;
+}
+
+/* (상담실) 메모 폼 영역 */
+.part-tool {
+  background: white;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* (상담실) 메모 폼 제목 영역 */
+.form-title {
+  width: 20vw;
+  height: 6vh;
+
+  border: none;
+  outline: none;
+
+  background: #D2D2D2;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* (상담실) 메모 폼 제목 영역 */
+.form-content {
+  width: 20vw;
+  height: 50vh;
+
+  border: none;
+  outline: none;
+
+  background: #D2D2D2;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* (상담실) 푸터 */
+.area-footer {
+  height: 9vh;
+  background: #EDE1C9;
+}
+
+
+
+
+
+
+
+
+/* AREA: 라인 높이, 너비, 높이, 배경색, 모서리, 그림자 */
+
+/* (영역) 헤더 */
+.area-header {
+  height: 10vh;
+  background: #7DABCF;
+}
+
+/* (영역) 프로필 */
+.area-profile {
+  line-height: 6vh;
+  width: 10vw;
+  height: 6vh;
+  background: #CFE7EB;
+  border-radius: 90px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+
+
+/* (영역) 기록(records) */
+.area-record {
+  background: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* (영역) 기록(records) 바디 */
+.area-record-body {
+  background: #CFE7EB;
+  border-radius: 30px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+/* MODAL: 라인 높이, 너비, 높이, 배경색, 그림자 */
+
+/* (모달) 감정 분석 */
+.modal-info {
+  line-height: 25vh;
+
+  width: 15vw;
+  height: 25vh;
+  background: rgba(254, 242, 201, 0.94);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+/* BUTTON: 배경, 모서리, 그림자 */
+
+/* (버튼) 기능 */
+.btn-func {
+  background: #CFE7EB;
+  border-radius: 90px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* (버튼) 이동 */
+.btn-mov {
+  background: #95D0F1;
+  border-radius: 90px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* (버튼) 종료 */
+.btn-end {
+  background: #ED9C9C;
+  border-radius: 90px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
