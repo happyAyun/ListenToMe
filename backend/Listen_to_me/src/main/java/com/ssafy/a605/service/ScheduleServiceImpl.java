@@ -4,6 +4,7 @@ import com.ssafy.a605.model.dto.ScheduleDto;
 import com.ssafy.a605.model.entity.Client;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.entity.Schedule;
+import com.ssafy.a605.model.response.schedule.ScheduleInfoRes;
 import com.ssafy.a605.repository.ClientRepository;
 import com.ssafy.a605.repository.CounselorRepository;
 import com.ssafy.a605.repository.ScheduleRepository;
@@ -54,17 +55,26 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public boolean checkPoint(String userEmail) throws Exception {
+        Client client = clientRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        int point = client.getPoint()-1000;
+        if(point<0) return false;
+        return true;
+    }
+
+    @Override
     public boolean requestCounseling(String userEmail, int scheduleId) throws Exception {
         Client client = clientRepository.findByEmail(userEmail).orElseThrow(
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
         Schedule schedule = scheduleRepository.findById(scheduleId);
         if(schedule.getState()!=0) return false;
-        schedule.setClient(client);
         schedule.setState(1);
         int point = client.getPoint()-1000;
-        if(point<0) return false;
         client.setPoint(point);
+        schedule.setClient(client);
         Client client1 = clientRepository.save(client);
         Schedule ret = scheduleRepository.save(schedule);
         return (ret.equals(schedule) && client1.equals(client));
@@ -99,49 +109,46 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule getCounseling(int scheduleId) throws Exception {
-        return scheduleRepository.findById(scheduleId);
+    public ScheduleInfoRes getCounseling(int scheduleId) throws Exception {
+        Schedule schedule = scheduleRepository.findById(scheduleId);
+        ScheduleInfoRes scheduleInfoRes = new ScheduleInfoRes(schedule.getId(), schedule.getClient().getEmail(), schedule.getClient().getName(), schedule.getCounselor().getEmail(), schedule.getCounselor().getName(), schedule.getDateTime(), schedule.getPoint(), schedule.getState());
+        return scheduleInfoRes;
     }
 
     @Override
-    public Page<ScheduleDto> getCounselorApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+    public Page<ScheduleInfoRes> getCounselorApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
         Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
-        int []states = {2,3};
         Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateEquals(userEmail, 2, pageRequest);
-        Page<ScheduleDto> pagingList = schedule.map(
-                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
-                ));
+        Page<ScheduleInfoRes> pagingList = schedule.map(
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
         return pagingList;
     }
     @Override
-    public Page<ScheduleDto> getCounselorEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+    public Page<ScheduleInfoRes> getCounselorEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
         Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
         Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateEquals(userEmail, 3, pageRequest);
-        Page<ScheduleDto> pagingList = schedule.map(
-                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
-                ));
+        Page<ScheduleInfoRes> pagingList = schedule.map(
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
         return pagingList;
     }
 
     @Override
-    public Page<ScheduleDto> getClientApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+    public Page<ScheduleInfoRes> getClientApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
         Page<ScheduleDto> schedule = scheduleRepository.findAllByClient_EmailAndStateEquals(userEmail, 2, pageRequest);
-        Page<ScheduleDto> pagingList = schedule.map(
-                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
-                ));
+        Page<ScheduleInfoRes> pagingList = schedule.map(
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
         return pagingList;
     }
 
     @Override
-    public Page<ScheduleDto> getClientEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
+    public Page<ScheduleInfoRes> getClientEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
         Page<ScheduleDto> schedule = scheduleRepository.findAllByClient_EmailAndStateEquals(userEmail, 3, pageRequest);
-        Page<ScheduleDto> pagingList = schedule.map(
-                post -> new ScheduleDto(post.getId(), post.getClient(), post.getCounselor(), post.getDateTime(), post.getTopic(), post.getPoint(), post.getState()
-                ));
+        Page<ScheduleInfoRes> pagingList = schedule.map(
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
         return pagingList;
     }
 }
