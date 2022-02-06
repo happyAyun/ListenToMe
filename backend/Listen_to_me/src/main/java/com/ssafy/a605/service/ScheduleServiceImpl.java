@@ -47,8 +47,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<ScheduleDto> getCounselorSchedule(String userEmail) throws Exception {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime start = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)).withHour(0);
-        LocalDateTime end = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)).withHour(23);
+        LocalDateTime start = now.withHour(0);
+        LocalDateTime end = now.plusDays(7).withHour(23);
+        //LocalDateTime start = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY)).withHour(0); 이번주
+        //LocalDateTime end = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)).withHour(23);
         System.out.println(start + " " + end);
         List<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndDateTimeBetween(userEmail, start, end);
         return schedule;
