@@ -28,21 +28,22 @@
     </div>
 
 		<!-- footer -->
-		<div class="d-flex align-items-center area-footer">
+		<footer class="d-flex align-items-center area-footer">
 			<div class="col-4"></div>
 
-			<!-- 버튼: 종료 -->
 			<div class="col-4 d-flex justify-content-center">
-				<button @click="moveToHome" class="btn btn-lg font-btn btn-end">End</button>
+				<!-- button: 종료 -->
+				<button	@click="moveToHome" class="btn-cancel f-btn">종료</button>
 			</div>
-			
+
 			<div class="col-4 d-flex justify-content-end">
-				<!-- 버튼: 메모 -->
-				<button @click="toggleMemo" class="me-4 btn btn-lg font-btn btn-mov">Memo</button>
-				<!-- 버튼: 기록(records) -->
-				<button @click="toggleRecords" class="me-4 btn btn-lg font-btn btn-mov">Records</button>
+				<!-- button: 메모 -->
+				<button @click="toggleMemo" class="me-3 btn-tool f-btn">메모</button>
+
+				<!-- button: 기록 -->
+				<button @click="toggleRecords" class="me-3 btn-tool f-btn">기록</button>
 			</div>
-		</div>
+		</footer>
   </div>
 </template>
 

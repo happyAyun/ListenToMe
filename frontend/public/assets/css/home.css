@@ -58,6 +58,45 @@
   filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
+/* 취소 */
+.btn-cancel {
+  width: 6vw;
+  height: 5vh;
+
+  border: none;
+  outline: none;
+
+  background: #ED9C9C;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* 도구 */
+.btn-tool {
+  width: 6vw;
+  height: 5vh;
+
+  border: none;
+  outline: none;
+
+  background: #95D0F1;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* 기능 */
+.btn-func {
+  width: 6vw;
+  height: 5vh;
+
+  border: none;
+  outline: none;
+
+  background: #CFE7EB;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
 
 
 

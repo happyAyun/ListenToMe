@@ -17,21 +17,29 @@
 
 /* 2. 상담: 상담 도구 */
 
+/* 도구 영역 높이 */
+#memo {
+  height: 83vh;
+}
+
+#records {
+  height: 83vh;
+}
+
+/* footer */
+.area-footer {
+  height: 8vh;
+  background: #EDE1C9;
+}
+
 
 /* 3. 상담 종료: 피드백(후기 및 평점) 기록 */
 
 
 
-/* (상담실) 툴 전역 */
-#memo {
-  height: 82vh;
-}
 
-#records {
-  height: 82vh;
-}
 
-/* (입장 화면) 방 설정 영역 */
+
 
 
 /* (상담실) 메모 영역 */
@@ -72,11 +80,7 @@
   filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
-/* (상담실) 푸터 */
-.area-footer {
-  height: 9vh;
-  background: #EDE1C9;
-}
+
 
 
 
@@ -130,37 +134,4 @@
   height: 25vh;
   background: rgba(254, 242, 201, 0.94);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-
-/* BUTTON: 배경, 모서리, 그림자 */
-
-/* (버튼) 기능 */
-.btn-func {
-  background: #CFE7EB;
-  border-radius: 90px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* (버튼) 이동 */
-.btn-mov {
-  background: #95D0F1;
-  border-radius: 90px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* (버튼) 종료 */
-.btn-end {
-  background: #ED9C9C;
-  border-radius: 90px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
-}
-
-
-input:focus {
-  outline: none;
-}
-
-textarea:focus {
-  outline: none;
 }
