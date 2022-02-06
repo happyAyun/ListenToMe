@@ -155,7 +155,7 @@ export default new Vuex.Store({
           data: credentials,
         })
         .then((res) => {
-          commit('SET_TOKEN', res.data.access)
+          commit('SET_TOKEN', res.data['access-token'])
           router.push('/')
         })
         .catch((err) => {
@@ -174,7 +174,7 @@ export default new Vuex.Store({
           data: credentials,
         })
         .then((res) => {
-          commit('SET_TOKEN', res.data.access)
+          commit('SET_TOKEN', res.data['access-token'])
           router.push('/counselor')
         })
         .catch((err) => {
