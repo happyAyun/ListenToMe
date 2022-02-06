@@ -10,13 +10,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     // for toggling
-    isSideBar: true,  // 상담실에 입장하면 사이드바 감추기
-    isMemo: true,  // 상담실 메모와 기록 영역 왔다리갔다리
-
+    isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
+    isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
+    isData: false,  // 감정분석 데이터 토글링 
 
     authToken: localStorage.getItem('jwt'),
     userid: "",
     usersession: "",
+
+    // dummy data
     memos: [
       {
         title: 'memo 1',
@@ -39,10 +41,6 @@ export default new Vuex.Store({
         content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
       },
     ],
-
-
-    // 감정 분석 데이터 토클링: hidden < > represented
-    isInfo: false,
   },
 
   getters: {
@@ -68,7 +66,9 @@ export default new Vuex.Store({
     TOGGLE_RECORDS: function (state) {
       state.isMemo = false
     },
-
+    TOGGLE_DATA: function (state) {
+      state.isData = !state.isData
+    },
 
     SET_TOKEN: function (state, token) { 
       state.authToken = token
@@ -81,13 +81,10 @@ export default new Vuex.Store({
       state.isLoggedIn = false
     },
 
-    TOGGLE_INFO: function (state) {
-      state.isInfo = !state.isInfo
+    SE_USERID: function (state, payload) {
+      state.userid = payload
     },
-    SE_USERID: function (state,payload) {
-      state.userid = payload;
-    },
-    SE_USERSESSION: function (state,payload) {
+    SE_USERSESSION: function (state, payload) {
       state.usersession = payload
     },
   },
@@ -103,15 +100,15 @@ export default new Vuex.Store({
     toggleRecords: function ({ commit }) {
       commit('TOGGLE_RECORDS')
     },
-    toggleInfo: function ({ commit }) {
-      commit('TOGGLE_INFO')
+    toggleData: function ({ commit }) {
+      commit('TOGGLE_DATA')
     },
 
     SE_USERID: (context, payload) => {
-      return context.commit('SE_USERID', payload);
+      return context.commit('SE_USERID', payload)
     },
     SE_USERSESSION: (context, payload) => {
-      return context.commit('SE_USERSESSION', payload);
+      return context.commit('SE_USERSESSION', payload)
     },
 
     Signup: function (context, credentials) {
@@ -140,6 +137,7 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    
     Login: function ({ commit }, credentials) {
       if (this.getters.isLoggedIn) {
         router.push('/')

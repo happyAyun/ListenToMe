@@ -1,8 +1,5 @@
 /* HOME */
 
-/* 0. temporary */
-
-
 /* 1. FONT */
 
 /* 굵은 제목 */
@@ -41,6 +38,7 @@
   color: #000000;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
+
 
 
 /* 2. BUTTON */
@@ -94,36 +92,8 @@
 
   background: #CFE7EB;
   border-radius: 20px;
-  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.2));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.f-title-smaller {
-  font-size: 1.5vw;
-  color: #000000;
-  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -211,13 +181,6 @@
   height: 91vh;
   overflow: auto;
 }
-
-
-
-
-
-
-
 
 
 

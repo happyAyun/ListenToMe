@@ -1,51 +1,50 @@
 <template>
-  <div id="memo" class="px-4 area-tool">
+  <div id="memo" class="px-3">
     <!-- header -->
-    <div class="d-flex justify-content-between mb-3">
-      <p class="mb-0 ps-1 pt-3 f-title-smaller">Memo</p>
+    <div class="d-flex justify-content-between align-items-center py-3" style="height: 10vh;">
+      <!-- title -->
+      <p class="mb-0 f-subtitle">메모</p>
 
-      <!-- 모달: 저장 메시지 -->
-      <p v-show="active" class="mb-0 pt-3 pe-1 f-normal">저장 완료</p>
+      <!-- message: 저장 여부 -->
+      <p v-show="active" class="mb-0 pe-3 f-normal">저장 완료</p>
     </div>
 
-    <!-- body -->
-    <div class="d-flex flex-column justify-content-between px-3 py-4 part-tool">
-      <div class="mx-auto mb-2">
-        <input type="text" placeholder="제목" class="form-control form-title f-normal">
-      </div>
+    <!-- body: form -->
+    <section class="d-flex flex-column justify-content-evenly align-items-center p-3 part-tool" style="height: 70vh;">
+      <!-- form: 제목 -->
+      <input type="text" placeholder="제목" class="form-control border-2 f-normal" required>
 
-      <!-- 폼: 내용 -->
-      <div class="mx-auto mb-2">
-        <textarea placeholder="내용" class="form-control form-content f-normal"></textarea>
-      </div>
+      <!-- form: 내용 -->
+      <textarea placeholder="내용" class="form-control border-2 mb-2 form-content f-normal" required></textarea>
 
-      <div class="d-flex justify-content-between mx-auto" style="width: 20vw;">
-        <!-- 버튼: 감정 분석 -->
-        <button @click="toggleInfo" class="btn btn-lg font-normal btn-func">감정 분석</button>
-        <!-- 버튼: 저장 -->
-        <button @click="showMessage" class="btn btn-lg font-normal btn-func">저장</button>
-      </div>
-    </div>
+      <!-- footer: 기능 버튼 -->
+      <footer class="d-flex justify-content-between" style="width: 20vw;">
+        <!-- button: 감정 분석 -->
+        <button @click="toggleData" class="btn-func f-btn" style="width: 8vw;">감정 분석</button>
+
+        <!-- button: 저장 -->
+        <button @click="showMessage" class="btn-func f-btn">저장</button>
+      </footer>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Memo',
-  components: {
 
-  },
   data: function () {
     return {
       active: false,
     }
   },
+
   methods: {
     changeStatus: function () {
       this.active = !this.active
     },
-    toggleInfo: function () {
-      this.$store.dispatch('toggleInfo')
+    toggleData: function () {
+      this.$store.dispatch('toggleData')
     },
     showMessage: function () {
       this.changeStatus()
