@@ -1,5 +1,6 @@
 package com.ssafy.a605.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,6 @@ public class Review {
     @JoinColumn(name = "client_email")
     private Client client;
 
-    private int start_score;
+    private int startScore;
     private String content;
 }

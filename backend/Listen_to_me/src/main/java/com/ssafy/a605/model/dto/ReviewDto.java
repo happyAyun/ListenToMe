@@ -14,6 +14,6 @@ public class ReviewDto {
     private Client client;
     private Counselor counselor;
 
-    private int start_score;
+    private int startScore;
     private String content;
 }

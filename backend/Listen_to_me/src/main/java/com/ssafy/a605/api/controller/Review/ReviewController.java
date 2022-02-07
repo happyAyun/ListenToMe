@@ -17,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/review-api")
 public class ReviewController {
     public static final Logger logger= LoggerFactory.getLogger(ReviewController.class);
     private static final String SUCCESS= "success";
@@ -36,9 +36,12 @@ public class ReviewController {
     }
 
     // 리뷰 작성
-    @PostMapping("/save")
-    public ResponseEntity<String> setReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception{
+    @PostMapping("/save/{scheduleId}")
+    public ResponseEntity<String> setReview(@PathVariable("scheduleId") int scheduleId, @RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception{
+        String counselor_Email = "";
         if(jwtService.isUsable(request.getHeader("access-token"))){
+            if(!reviewService.checkClient(jwtService.getUserId(), scheduleId)) return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+            if(reviewService.writeReview(scheduleId, reviewDto)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
             // if() - 스케줄 확인되면 작성진행
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
