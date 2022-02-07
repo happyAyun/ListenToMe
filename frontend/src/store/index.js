@@ -13,7 +13,7 @@ export default new Vuex.Store({
     isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
     isData: false,  // 감정분석 데이터 토글링 
-
+    loginState:0,
     authToken: localStorage.getItem('jwt'),
     userid: "",
     usersession: "",
@@ -90,6 +90,9 @@ export default new Vuex.Store({
     SE_USERSESSION: function (state, payload) {
       state.usersession = payload
     },
+    SE_LOGINSTATE: function (state, payload) {
+      state.loginState = payload
+    }
   },
 
   actions: {
@@ -156,6 +159,7 @@ export default new Vuex.Store({
         })
         .then((res) => {
           commit('SET_TOKEN', res.data['access-token'])
+          commit('SE_LOGINSTATE',1)
           router.push('/')
         })
         .catch((err) => {
@@ -175,6 +179,7 @@ export default new Vuex.Store({
         })
         .then((res) => {
           commit('SET_TOKEN', res.data['access-token'])
+          commit('SE_LOGINSTATE',2)
           router.push('/counselor')
         })
         .catch((err) => {
