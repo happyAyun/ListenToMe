@@ -1,0 +1,71 @@
+package com.ssafy.a605.api.controller.Review;
+
+import com.ssafy.a605.api.controller.Bookmark.BookmarkController;
+import com.ssafy.a605.model.dto.ReviewDto;
+import com.ssafy.a605.model.entity.Review;
+import com.ssafy.a605.service.JwtServiceImpl;
+import com.ssafy.a605.service.ReviewService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+@CrossOrigin
+@RestController
+@RequestMapping("/review")
+public class ReviewController {
+    public static final Logger logger= LoggerFactory.getLogger(ReviewController.class);
+    private static final String SUCCESS= "success";
+    private static final String FAIL= "fail";
+
+    @Autowired
+    private JwtServiceImpl jwtService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    // 리뷰 리스트 - 비로그인시 가능
+    @GetMapping("/list")
+    public ResponseEntity<List<Review>> getListReview(@PathVariable("counselor") String counselor) throws Exception{
+        return new ResponseEntity<List<Review>>(reviewService.getListReview(counselor), HttpStatus.OK);
+    }
+
+    // 리뷰 작성
+    @PostMapping("/save")
+    public ResponseEntity<String> setReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception{
+        if(jwtService.isUsable(request.getHeader("access-token"))){
+            // if() - 스케줄 확인되면 작성진행
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+    }
+
+    // 리뷰 수정을 위해 리뷰 불러오기
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Review> getReview(@PathVariable("id") int reviewId) throws Exception{
+        return new ResponseEntity<Review>(reviewService.getReview(reviewId), HttpStatus.OK);
+    }
+
+    // 리뷰 수정
+    @PatchMapping("/update")
+    public ResponseEntity<String> updateReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception {
+        if(reviewService.updateReview(reviewDto)){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+    }
+
+    // 리뷰 삭제
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteReview(@PathVariable("id") int reviewId) throws Exception{
+        if(reviewService.deleteReview(reviewId)){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+    }
+
+}
