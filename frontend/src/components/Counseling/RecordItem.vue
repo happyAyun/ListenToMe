@@ -3,7 +3,7 @@
     <!-- header: 제목 -->
     <p class="mb-0 text-center f-subtitle">{{ record.title }}</p>
 
-    <hr class="my-2">
+    <hr class="my-3">
 
     <!-- body: 내용 -->
     <p class="mb-0 py-2 f-normal">{{ record.content }}</p>

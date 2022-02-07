@@ -81,6 +81,8 @@
 
 ![image-20220207150433318](README.assets/image-20220207150433318.png)
 
+> `@/components/Counseling/Memo.vue`의 56번째 코드라인 `return document.querySelector('#user-video:nth-of-type(2) > video')`에서 `nth-of-type`의 대상을 첫 번째 즉, `2`를 `1`로 수정하면 상대방 대신 본인의 비디오 영역을 바탕으로 감정 분석 수행 가능
+
 
 
 <br>
@@ -88,6 +90,16 @@
 #### 001.5. 상담실 기록
 
 ![image-20220206233220881](README.assets/image-20220206233220881.png)
+
+
+
+<br>
+
+#### 001.6. 상담 종료 및 피드백
+
+![image-20220207204233916](README.assets/image-20220207204233916.png)
+
+
 
 
 
@@ -160,12 +172,16 @@
 .part-room-setting
 
 
+
 /* 2. 상담: 상담 도구 및 기능 */
 
 /* 비디오 영역 */
 .part-video-hor
 
-.part-video-ver 
+.part-video-ver
+
+/* 상담사 비디오 영역 */
+#user-video:nth-of-type(1) > p
 
 /* 내담자 비디오 영역 */
 #user-video:nth-of-type(2) > p
@@ -190,6 +206,19 @@
 
 /* footer */
 .area-footer
+
+
+
+/* 3. 상담 종료: 피드백(후기 및 평점) 기록 */
+
+/* 상담실 피드백 영역 */
+.part-feedback
+
+/* 피드백 폼 내용 */
+.form-content-fb
+
+/* 피드백 평점 */
+.img-star
 ```
 
 

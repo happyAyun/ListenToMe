@@ -12,6 +12,7 @@ import Records from '@/views/profile/Records.vue'
 // 상담 시작화면
 import Counseling from '@/views/Counseling/Counseling.vue'
 import CounselingMain from '@/views/Counseling/CounselingMain.vue'
+import CounselingFeedback from '@/views/Counseling/CounselingFeedback.vue'
 import CounselorMain from '@/views/Counselor/CounselorMain.vue'
 
 import SingupPage from '../views/SignupPage.vue'
@@ -32,6 +33,7 @@ const routes = [
     name: 'Counselors',
     component: Counselors
   },
+
   // 마이 페이지 화면
   {
     path: '/profile',
@@ -79,6 +81,8 @@ const routes = [
     name: 'CounselorLoginPage',
     component: CounselorLoginPage
   },
+
+  // 상담 화면
   {
     path: '/counseling',
     name: 'Counseling',
@@ -88,7 +92,12 @@ const routes = [
     path: '/counselingmain',
     name: 'CounselingMain',
     component: CounselingMain
-  }
+  },
+  {
+    path: '/counseling-feedback',
+    name: 'CounselingFeedback',
+    component: CounselingFeedback
+  },
 ]
 
 const router = new VueRouter({

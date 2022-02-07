@@ -3,7 +3,11 @@
     <!-- body -->
     <section class="d-flex">
 			<!-- body: streaming -->
-      <div :class="{'col-7': $store.state.isData, 'col-9': !$store.state.isData}" class="d-flex justify-content-center align-items-center">
+      <div
+				:class="{'col-7': $store.state.isData, 'col-9': !$store.state.isData}"
+				class="d-flex justify-content-center align-items-center"
+				style="background: black;"
+			>
 				<div id="video-container" :class="{'d-flex': !$store.state.isData}">
 					<user-video :stream-manager="publisher" @click.native="updateMainVideoStreamManager(publisher)"/>
 					<user-video v-for="sub in subscribers" :key="sub.stream.connection.connectionId" :stream-manager="sub" @click.native="updateMainVideoStreamManager(sub)"/>
@@ -73,7 +77,7 @@
 
 			<div class="col-4 d-flex justify-content-center">
 				<!-- button: 종료 -->
-				<button	@click="moveToHome" class="btn-cancel f-btn">종료</button>
+				<button	@click="closeCounseling" class="btn-cancel f-btn">종료</button>
 			</div>
 
 			<div class="col-4 d-flex justify-content-end">
@@ -147,7 +151,7 @@ export default {
 			this.$store.dispatch('closeData')
 		},
 
-    moveToHome: function () {
+    closeCounseling: function () {
     if (this.session) this.session.disconnect()
 
 		this.session = undefined
@@ -158,7 +162,7 @@ export default {
 
 		window.removeEventListener('beforeunload', this.leaveSession)
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
-		this.$router.push({name: 'CounselingMain'})
+		this.$router.push({name: 'CounselingFeedback'})
     },
 
     joinSession () {
@@ -232,6 +236,7 @@ export default {
 			this.OV = undefined
 
 			window.removeEventListener('beforeunload', this.leaveSession)
+			this.$store.dispatch('toggleSideBar')
 		},
 
 		updateMainVideoStreamManager (stream) {
