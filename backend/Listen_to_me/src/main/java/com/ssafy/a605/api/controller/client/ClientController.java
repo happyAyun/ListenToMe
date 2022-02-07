@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ssafy.a605.model.dto.ClientDto;
+import com.ssafy.a605.model.response.client.ClientInfoRes;
 import com.ssafy.a605.service.JwtServiceImpl;
 import com.ssafy.a605.service.ClientService;
 import org.slf4j.Logger;
@@ -62,19 +63,16 @@ public class ClientController {
     }
 
     @ApiOperation(value = "회원인증", notes = "회원 정보를 담은 Token을 반환한다.", response = Map.class)
-    @GetMapping("/user/{userEmail}")
-    public ResponseEntity<Map<String, Object>> getInfo(
-            @PathVariable("userEmail") @ApiParam(value = "인증할 회원의 아이디.", required = true) String userEmail,
-            HttpServletRequest request) {
-//		logger.debug("userid : {} ", userid);
+    @GetMapping("/user")
+    public ResponseEntity<Map<String, Object>> getInfo(HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.ACCEPTED;
         if (jwtService.isUsable(request.getHeader("access-token"))) {
             logger.info("사용 가능한 토큰!!!");
             try {
 //				로그인 사용자 정보.
-                ClientDto clientDto = userService.clientInfo(userEmail);
-                resultMap.put("userInfo", clientDto);
+                ClientInfoRes clientInfoRes = userService.clientInfo(jwtService.getUserId());
+                resultMap.put("userInfo", clientInfoRes);
                 resultMap.put("message", SUCCESS);
                 status = HttpStatus.ACCEPTED;
             } catch (Exception e) {

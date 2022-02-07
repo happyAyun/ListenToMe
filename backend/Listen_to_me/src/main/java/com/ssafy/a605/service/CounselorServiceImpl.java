@@ -8,6 +8,7 @@ import com.ssafy.a605.model.dto.UserDto;
 import com.ssafy.a605.model.entity.Client;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.entity.User;
+import com.ssafy.a605.model.response.counselor.CounselorInfoRes;
 import com.ssafy.a605.repository.CareerRepository;
 import com.ssafy.a605.repository.CertificateRepository;
 import com.ssafy.a605.repository.CounselorRepository;
@@ -23,7 +24,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class CounselorServiceImpl implements CounselorService {
-
     final private CounselorRepository counselorRepository;
     final private CareerRepository CareerRepository;
     final private CertificateRepository certificateRepository;
@@ -36,23 +36,16 @@ public class CounselorServiceImpl implements CounselorService {
         );;
         if (!map.get("password").equals(user.getPassword()))
             return null;
-
         return map;
     }
 
-
     @Override
-    public CounselorDto counselorInfo(String userEmail) throws Exception {
-
+    public CounselorInfoRes counselorInfo(String userEmail) throws Exception {
         Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
-
-        CounselorDto counselorDto = new CounselorDto(
-                counselor.getEmail(), counselor.getPassword(), counselor.getName(), counselor.getGender(), counselor.getBirth(),counselor.getPoint(),counselor.getPhoneNumber(),counselor.getPhoto(), counselor.getShortGreeting(), counselor.getGreeting(), counselor.getDegree()
-        );
-        return counselorDto;
-
+        CounselorInfoRes counselorInfoRes = new CounselorInfoRes(counselor.getEmail(), counselor.getName(), counselor.getPhoneNumber(), counselor.getGender(), counselor.getBirth(), counselor.getPoint(), counselor.getPhoto(), counselor.getShortGreeting(), counselor.getGreeting(), counselor.getDegree());
+        return counselorInfoRes;
     }
 
     @Override
@@ -106,7 +99,6 @@ public class CounselorServiceImpl implements CounselorService {
 
     @Override
     public boolean checkId(String userEmail) throws Exception {
-
         System.out.println(userEmail);
         Optional<User> user = userRepository.findByEmail(userEmail);
 
@@ -124,7 +116,6 @@ public class CounselorServiceImpl implements CounselorService {
                         () -> new NullPointerException("회원정보가 존재 하지 않습니다")
                 ).getEmail()
         );
-
         return true;
     }
 
