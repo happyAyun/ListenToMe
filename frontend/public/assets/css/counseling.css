@@ -15,6 +15,20 @@
 
 /* 2. 상담: 상담 도구 및 기능 */
 
+/* 비디오 영역 */
+.part-video-hor {
+  width: 37vw;
+}
+
+.part-video-ver {
+  width: 35vw;
+}
+
+/* 내담자 비디오 영역 */
+#user-video:nth-of-type(2) > p {
+  color: #7DABD0;
+}
+
 /* 메모 영역 */
 #memo {
   height: 83vh;

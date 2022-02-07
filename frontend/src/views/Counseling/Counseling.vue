@@ -18,8 +18,42 @@
 				</div>
 
 				<!-- body: data -->
-				<section class="d-flex flex-column justify-content-evenly align-items-center p-3 part-tool" style="height: 70vh;">
-					emotional recognition data
+				<section class="d-flex flex-column justify-content-between px-4 py-3 part-tool" style="height: 70vh;">
+					<div class="py-3">
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Angry:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.angry }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Disgusted:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.disgusted }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Fearful:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.fearful }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Happy:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.happy }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Neutral:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.neutral }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Sad:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.sad }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">Surprised:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.surprised }}</p>
+						</div>
+					</div>
+
+					<footer class="d-flex justify-content-center">
+						<!-- button: again -->
+						<button @click="closeData" class="btn-cancel f-btn" style="width: 4vw">닫기</button>
+					</footer>
 				</section>
 			</div>
 
@@ -94,7 +128,11 @@ export default {
 			'GE_USERSESSION',
 			'GE_USERID',
 			// { myName: 'getFirstItem' }, <-- getFirstItem 를 myName 으로 매핑
-    ]) 
+    ]),
+
+		emotionData: function () {
+			return this.$store.state.emotionData
+		}
   },
 
   methods: {
@@ -105,6 +143,9 @@ export default {
 			this.$store.dispatch('closeData')
       this.$store.dispatch('toggleRecords')
     },
+		closeData: function () {
+			this.$store.dispatch('closeData')
+		},
 
     moveToHome: function () {
     if (this.session) this.session.disconnect()

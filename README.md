@@ -79,7 +79,7 @@
 
 #### 001.4. 상담실 감정 분석
 
-![image-20220206233144588](README.assets/image-20220206233144588.png)
+![image-20220207150433318](README.assets/image-20220207150433318.png)
 
 
 
@@ -161,6 +161,14 @@
 
 
 /* 2. 상담: 상담 도구 및 기능 */
+
+/* 비디오 영역 */
+.part-video-hor
+
+.part-video-ver 
+
+/* 내담자 비디오 영역 */
+#user-video:nth-of-type(2) > p
 
 /* 메모 영역 */
 #memo

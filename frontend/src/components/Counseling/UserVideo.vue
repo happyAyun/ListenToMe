@@ -1,7 +1,7 @@
 <template>
-	<div v-if="streamManager" style="width: 32vw">
+	<div v-if="streamManager" id="user-video" :class="{'part-video-hor': !$store.state.isData, 'part-video-ver': $store.state.isData}">
 		<ov-video :stream-manager="streamManager"/>
-		<p class="mb-0">{{ clientData }}</p>
+		<p v-if="!$store.state.isData" class="mb-0 f-normal">{{ clientData }}</p>
 	</div>
 </template>
 

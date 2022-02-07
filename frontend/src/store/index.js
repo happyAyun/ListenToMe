@@ -12,8 +12,14 @@ export default new Vuex.Store({
     // for toggling
     isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
-    isData: false,  // 감정분석 데이터 토글링 
-    loginState:0,
+    isData: false,  // 감정분석 데이터 영역 토글링
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // 감정분석 데이터
+    emotionData: '',
+    ////////////////////////////////////////////////////////////////////////////////
+
+    loginState: 0,  // 로그인 상태: {비로그인: 0, 내담자: 1, 상담사: 2}
     authToken: localStorage.getItem('jwt'),
     userid: "",
     usersession: "",
@@ -72,6 +78,13 @@ export default new Vuex.Store({
     CLOSE_DATA: function (state) {
       state.isData = false
     },
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // 감정분석 데이터
+    SAVE_DATA: function (state, emotionData) {
+      state.emotionData = emotionData
+    },
+    ////////////////////////////////////////////////////////////////////////////////
 
     SET_TOKEN: function (state, token) { 
       state.authToken = token
@@ -112,6 +125,13 @@ export default new Vuex.Store({
     closeData: function ({ commit }) {
       commit('CLOSE_DATA')
     },
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // 감정분석 데이터
+    saveEmotionData: function ({ commit }, emotionData) {
+      commit('SAVE_DATA', emotionData)
+    },
+    ////////////////////////////////////////////////////////////////////////////////
 
     SE_USERID: (context, payload) => {
       return context.commit('SE_USERID', payload)
