@@ -2,6 +2,7 @@ package com.ssafy.a605.service;
 
 import com.ssafy.a605.model.dto.ReviewDto;
 import com.ssafy.a605.model.entity.Review;
+import com.ssafy.a605.model.response.review.ReviewRes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,7 +15,7 @@ public interface ReviewService {
 
     boolean deleteReview(int reviewId);
 
-    Page <Review> getListReview(String counselor, Pageable pageRequest)throws Exception;
+    Page <ReviewRes> getListReview(String counselor, Pageable pageRequest)throws Exception;
 
     Review getReview(int reviewId);
 

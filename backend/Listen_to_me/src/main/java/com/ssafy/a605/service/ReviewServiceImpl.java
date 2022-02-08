@@ -5,6 +5,7 @@ import com.ssafy.a605.model.entity.Client;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.entity.Review;
 import com.ssafy.a605.model.entity.Schedule;
+import com.ssafy.a605.model.response.review.ReviewRes;
 import com.ssafy.a605.repository.ReviewRepository;
 import com.ssafy.a605.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,12 @@ public class ReviewServiceImpl implements ReviewService{
         return ret.equals(review);
     }
     @Override
-    public Page<Review> getListReview(String counselor, Pageable pageRequest) throws Exception{
+    public Page<ReviewRes> getListReview(String counselor, Pageable pageRequest) throws Exception{
         Page<Review> reviews = reviewRepository.findReviewsByCounselor_Email(counselor, pageRequest);
-        return reviews;
+        Page<ReviewRes> reviewList = reviews.map(
+                post -> new ReviewRes(post.getId(), post.getClient().getNickname(), post.getStartScore(), post.getContent())
+        );
+        return reviewList;
     }
 
     @Override
