@@ -1,5 +1,6 @@
 package com.ssafy.a605.api.controller.Bookmark;
 
+//import com.ssafy.a605.api.controller.Counselor.CounselorController;
 import com.ssafy.a605.model.dto.BookmarkDto;
 import com.ssafy.a605.model.dto.ScheduleDto;
 import com.ssafy.a605.model.entity.Bookmark;
