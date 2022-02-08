@@ -18,4 +18,5 @@ public class ScheduleInfoRes {
     private LocalDateTime dateTime;
     private int point;
     private int state;
+    private boolean isSticker;
 }
