@@ -3,13 +3,10 @@ package com.ssafy.a605.api.controller.counselor;
 
 import com.ssafy.a605.model.dto.CertificateDto;
 import com.ssafy.a605.model.dto.CounselorDto;
-import com.ssafy.a605.model.entity.Certificate;
 import com.ssafy.a605.model.entity.CounselorCategory;
 import com.ssafy.a605.model.response.counselor.CounselorInfoRes;
-import com.ssafy.a605.service.CategoryService;
-import com.ssafy.a605.service.CertificateService;
-import com.ssafy.a605.service.CounselorService;
-import com.ssafy.a605.service.JwtServiceImpl;
+import com.ssafy.a605.model.response.counselor.CounselorListRes;
+import com.ssafy.a605.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -19,12 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +42,9 @@ public class CounselorController {
 
     @Autowired
     private CertificateService certificateService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
     @PostMapping("/login")
@@ -145,7 +140,22 @@ public class CounselorController {
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.OK);
     }
-    //
+
+    @GetMapping("list/{page}")
+    public ResponseEntity<Map<String, Object>> getCounselorList(@PathVariable("page") int page) throws Exception {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<CounselorListRes> list = reviewService.getCounselorList();
+        int listSize = list.size();
+        int size = listSize/10 -1;
+        if(listSize%10 != 0) size++;
+        System.out.println(listSize);
+
+        List<CounselorListRes> result = reviewService.getPartialCounselorList(list, page);
+        resultMap.put("counselor", result);
+        resultMap.put("size", size);
+        return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+    }
+
     @DeleteMapping("/user/{userEmail}")
     public ResponseEntity<String> deleteUser(
             @PathVariable("userEmail") @ApiParam(value = "회원탈퇴", required = true) String userEmail) throws Exception {
@@ -163,10 +173,7 @@ public class CounselorController {
       logger.info("certificate - 호출");
       List<CertificateDto>results =  userService.getCertificates(userEmail);
       if(results == null){
-
-          //return new ResponseEntity<List<CertificateDto>>(FAIL, HttpStatus.OK);
       }
-
         return new ResponseEntity<List<CertificateDto>>(results, HttpStatus.OK);
     }
 }
