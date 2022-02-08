@@ -30,6 +30,7 @@ public class Schedule {
     private String topic;
     private int point;
     private int state;
+    private boolean isSticker;
 
     public void setTime(ScheduleDto scheduleDto){
         this.setDateTime(scheduleDto.getDateTime());
