@@ -94,30 +94,6 @@ export default {
         }
         this.$store.dispatch('saveEmotionData', this.emotionData)
       }, 100)
-
-
-        // const resizedDetections = faceapi.resizeResults(detections, displaySize)
-        // canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-
-        // faceapi.draw.drawDetections(canvas, resizedDetections)
-        // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
-        // faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
-        
-        
-        // const width = detections[0].landmarks.imageWidth
-        // const height = detections[0].landmarks.imageHeight
-        // const pointX = detections[0].detection.box.x - width
-        // const pointY = detections[0].detection.box.y - height / 1.5
-
-        // const sticker = new Image()
-        // sticker.src = '/assets/mask_cat.png'
-        // faceapi.getContext2dOrThrow(canvas).drawImage(sticker, pointX, pointY, width, height)
-
-          // this.cnt++
-
-          // if (this.cnt === 10) {
-          //   clearInterval(interval)
-          // }
     },
 
     // for toggling

@@ -1,8 +1,11 @@
 <template>
 	<video
 		id="ov-video"
-		:class="{'part-video-hor': !$store.state.isData, 'part-video-ver': $store.state.isData}"
-		class="position-absolute"
+		:class="{
+			'part-video-hor': !$store.state.isData,
+			'part-video-ver': $store.state.isData,
+			'position-absolute': $store.state.isSticker
+		}"
 		autoplay muted
 	/>
 </template>
