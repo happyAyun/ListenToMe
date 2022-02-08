@@ -20,6 +20,7 @@
 }
 
 
+
 /* Sign Up */
 
 /* 회원 가입 부분 */
@@ -32,6 +33,7 @@
   filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
+/* 회원 가입 유형 선택 */
 .form-list {
   list-style: none;
 }
@@ -51,10 +53,28 @@
   opacity: 0.3;
 }
 
+/* 상담사 회원 가입 프로필 이미지 */
 .form-profile-img {
   width: 10vw;
 }
 
+
+
+/* Log In */
+
+/* 로그인 부분 */
+.part-login {
+  width: 30vw;
+
+  background: white;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+.img-logo-login {
+  width: 6vw;
+  height: 6vw;
+}
 
 
 

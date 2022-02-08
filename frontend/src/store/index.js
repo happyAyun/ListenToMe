@@ -157,6 +157,7 @@ export default new Vuex.Store({
       return context.commit('SE_USERSESSION', payload)
     },
 
+    // accounts //////////////////////////////////////////////////////////////////////
     Signup: function (context, credentials) {
       axios({
         url: SERVER.URL + SERVER.ROUTES.signup,
@@ -164,12 +165,13 @@ export default new Vuex.Store({
         data: credentials,
       })
       .then(() => {
-        router.push('/login')
+        router.push({name: 'LoginForClient'})
       })
       .catch((err) => {
         console.log(err)
       })
     },
+
     SignupForCounselor: function (context, credentials) {
       axios({
         url: SERVER.URL + SERVER.ROUTES.co_signup,
@@ -177,7 +179,7 @@ export default new Vuex.Store({
         data: credentials,
       })
       .then(() => {
-        router.push('/login')
+        router.push({name: 'LoginForCounselor'})
       })
       .catch((err) => {
         console.log(err)
@@ -229,6 +231,7 @@ export default new Vuex.Store({
       router.push('/')
     },
   },
+  ////////////////////////////////////////////////////////////////////////////////////////////
 
   // plugins: [createPersistedState()],
 })

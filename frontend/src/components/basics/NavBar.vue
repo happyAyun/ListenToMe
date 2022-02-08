@@ -26,9 +26,9 @@
 
       <div class="d-flex">
         <!-- section: buttons -->
-        <button @click="moveToSignupPage" class="me-3 btn-tool f-btn">회원가입</button>
-        <button @click="goToLoginPage" class="me-3 btn-tool f-btn">로그인</button>
-        <button @click="goToCounselorLoginPage" class="btn-tool f-btn" style="width: 9vw">상담사 로그인</button>
+        <button @click="moveToSignup" class="me-3 btn-tool f-btn">회원가입</button>
+        <button @click="moveToLogin" class="me-3 btn-tool f-btn">로그인</button>
+        <button @click="moveToLoginCounselor" class="btn-tool f-btn" style="width: 9vw">상담사 로그인</button>
       </div>
     </div>
   </div>
@@ -49,20 +49,16 @@ export default {
       this.$router.push({name: 'Home'})
     },
 
-    moveToSignupPage: function () {
+    moveToSignup: function () {
       this.$router.push({name: 'SignupForClient'})
     },
 
-    goToLoginPage: function () {
-      this.$router.push({
-        name: 'LoginPage'
-      })
+    moveToLogin: function () {
+      this.$router.push({name: 'LoginForClient'})
     },
 
-    goToCounselorLoginPage: function () {
-      this.$router.push({
-        name: 'CounselorLoginPage'
-      })
+    moveToLoginCounselor: function () {
+      this.$router.push({name: 'LoginForCounselor'})
     }
   },
 }

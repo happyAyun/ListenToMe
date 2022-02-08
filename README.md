@@ -22,3 +22,23 @@ branch: `feature-webRTC-FE`
 
 ![image-20220208231902452](README.assets/image-20220208231902452.png)
 
+
+
+
+
+<br>
+
+### 002. 로그인
+
+> 일반 유저와 상담사 유저를 분리하여 로그인 처리
+
+<br>
+
+![image-20220209000525072](README.assets/image-20220209000525072.png)
+
+<br>
+
+![image-20220209000539810](README.assets/image-20220209000539810.png)
+
+<br>
+

@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 // accounts
 import Signup from '@/views/accounts/Signup.vue'
-import LoginPage from '@/views/accounts/LoginPage.vue'
-import CounselorLoginPage from '@/views/accounts/CounselorLoginPage.vue'
+import LoginForClient from '@/views/accounts/LoginForClient.vue'
+import LoginForCounselor from '@/views/accounts/LoginForCounselor.vue'
 
 // Home
 import Home from '@/views/Home.vue'
@@ -34,6 +34,16 @@ const routes = [
     path: '/signup-counselor',
     name: 'SignupForCounselor',
     component: Signup,
+  },
+  {
+    path: '/login',
+    name: 'LoginForClient',
+    component: LoginForClient
+  },
+  {
+    path: '/login-counselor',
+    name: 'LoginForCounselor',
+    component: LoginForCounselor
   },
 
   // Home
@@ -78,16 +88,7 @@ const routes = [
   },
 
 
-  {
-    path: '/login',
-    name: 'LoginPage',
-    component: LoginPage
-  },
-  {
-    path: '/login/counselor',
-    name: 'CounselorLoginPage',
-    component: CounselorLoginPage
-  },
+
 
   // 상담 화면
   {
