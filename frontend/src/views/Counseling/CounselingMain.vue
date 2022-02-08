@@ -21,8 +21,8 @@
         </div>
 
         <!-- form: sticker -->
-        <div class="d-flex justify-content-center">
-          <input class="me-2 form-check-input" type="checkbox" value="1" id="sticker">
+        <div class="d-flex justify-content-center align-items-center">
+          <input @click="toggleSticker" class="me-2 form-check-input" type="checkbox" id="sticker">
           <label class="form-check-label f-normal" for="sticker">얼굴에 스티커를 씌우시겠습니까?</label>
         </div>
       </section>
@@ -67,6 +67,12 @@ export default {
       this.$store.dispatch('SE_USERSESSION', this.mySessionId)
       this.$store.dispatch('toggleSideBar')  // side bar 토글링
       this.$router.push({name: 'Counseling'})
+    },
+
+    // for toggling
+    toggleSticker: function () {
+      this.$store.dispatch('toggleSticker')
+      console.log(this.$store.state.isSticker)
     },
   },
 

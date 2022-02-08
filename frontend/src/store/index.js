@@ -13,6 +13,7 @@ export default new Vuex.Store({
     isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
     isData: false,  // 감정분석 데이터 영역 토글링
+    isSticker: false,  // 감정분석 데이터 영역 토글링
     ////////////////////////////////////////////////////////////////////////////////
 
     // 감정분석 데이터
@@ -78,6 +79,12 @@ export default new Vuex.Store({
     CLOSE_DATA: function (state) {
       state.isData = false
     },
+    TOGGLE_STICKER: function (state) {
+      state.isSticker = !state.isSticker
+    },
+    CLOSE_STICKER: function (state) {
+      state.isSticker = false
+    },
     ////////////////////////////////////////////////////////////////////////////////
 
     // 감정분석 데이터
@@ -124,6 +131,12 @@ export default new Vuex.Store({
     },
     closeData: function ({ commit }) {
       commit('CLOSE_DATA')
+    },
+    toggleSticker: function ({ commit }) {
+      commit('TOGGLE_STICKER')
+    },
+    closeSticker: function ({ commit }) {
+      commit('CLOSE_STICKER')
     },
     ////////////////////////////////////////////////////////////////////////////////
 

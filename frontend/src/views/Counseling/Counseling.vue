@@ -162,6 +162,7 @@ export default {
 
 		window.removeEventListener('beforeunload', this.leaveSession)
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
+		this.$store.dispatch('closeSticker')  // side bar 토글링
 		this.$router.push({name: 'CounselingFeedback'})
     },
 
