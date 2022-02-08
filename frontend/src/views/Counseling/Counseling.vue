@@ -94,11 +94,11 @@
 <script>
 import axios from 'axios'
 import { OpenVidu } from 'openvidu-browser'
-import UserVideo from '@/components/Counseling/UserVideo.vue'
-import { mapGetters } from 'vuex'  // mapGetters 헬퍼
+import UserVideo from '@/components/counseling/UserVideo.vue'
+import { mapGetters } from 'vuex'
 
-import Memo from '@/components/Counseling/Memo.vue'
-import Records from '@/components/Counseling/Records.vue'
+import Memo from '@/components/counseling/Memo.vue'
+import Records from '@/components/counseling/Records.vue'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
@@ -140,6 +140,7 @@ export default {
   },
 
   methods: {
+		// for toggling
     toggleMemo: function () {
       this.$store.dispatch('toggleMemo')
     },
@@ -162,7 +163,7 @@ export default {
 
 		window.removeEventListener('beforeunload', this.leaveSession)
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
-		this.$store.dispatch('closeSticker')  // side bar 토글링
+		this.$store.dispatch('toggleData')  // 감정분석 영역 닫기
 		this.$router.push({name: 'CounselingFeedback'})
     },
 
@@ -313,7 +314,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import RecordItem from '@/components/Counseling/RecordItem.vue'
+import RecordItem from '@/components/counseling/RecordItem.vue'
 
 export default {
   name: 'Records',

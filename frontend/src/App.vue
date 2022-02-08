@@ -1,17 +1,9 @@
 <template>
   <div id="app">
     <!-- nav bar -->
-    <div v-if="$route.path.includes('/counselor')">
-      <header>
-        <counselor-nav-bar/>
-      </header>
-    </div>
-
-    <div v-else>
-      <header>
-        <nav-bar/>
-      </header>
-    </div>
+    <header>
+      <nav-bar/>
+    </header>
 
     <div :class="{ 'd-flex': $store.state.isSideBar }">
       <!-- left side bar -->
@@ -24,20 +16,14 @@
 </template>
 
 <script>
-import NavBar from '@/components/Client/NavBar.vue'
-import CounselorNavBar from '@/components/Counselor/CounselorNavBar.vue'
-import SideBar from '@/components/SideBar.vue'
+import NavBar from '@/components/basics/NavBar.vue'
+import SideBar from '@/components/basics/SideBar.vue'
 
 export default {
   name: 'App',
   components: {
     NavBar,
-    CounselorNavBar,
     SideBar,
   },
 }
 </script>
-
-<style>
-
-</style>

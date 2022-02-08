@@ -47,7 +47,7 @@ export default {
         sad: 0,
         surprised: 0,
       },
-      active: 0,
+      active: 0,  // 플래그: 메시지 출력
     }
   },
 
@@ -58,6 +58,7 @@ export default {
   },
 
   methods: {
+    // emotion recognition
 		getData: function () {
       Promise.all([
         faceapi.nets.tinyFaceDetector.loadFromUri('/assets/faceapi/models'),
@@ -72,13 +73,6 @@ export default {
           console.log(errors)  // 모델을 로딩하는 과정에서 문제가 발생하면 에러 출력
         })
 
-      const canvas = faceapi.createCanvasFromMedia(this.video)
-      const canvasArea = document.querySelector('#user-video')
-      canvasArea.append(canvas)
-
-      const displaySize = { width: this.video.width, height: this.video.height }
-      faceapi.matchDimensions(canvas, displaySize)
-
       setTimeout(async () => {
         const detections = await faceapi.detectAllFaces(
           this.video,
@@ -86,12 +80,12 @@ export default {
         )
           .withFaceLandmarks().withFaceExpressions()
 
-        // console.log(detections[0].expressions)
         this.emotionData = detections[0].expressions
         for (let key in this.emotionData) {
           const value = this.emotionData[key]
           this.emotionData[key] = Math.round(value * 100000000) / 1000000
         }
+
         this.$store.dispatch('saveEmotionData', this.emotionData)
       }, 100)
     },
@@ -112,12 +106,12 @@ export default {
     },
     showMessageOfSaving: function () {
       this.changeStatusToSave()
-      setTimeout(this.changeStatusToHide, 1000)
+      setTimeout(this.changeStatusToHide, 500)
     },
     toggleData: function () {
-      // 감정분석 영역을 활성화 되어 있으면 재분석 수행
       this.getData()
       this.showMessageOfAnal()
+      // 감정분석 영역이 활성화 되어 있지 않은 경우
       if (!this.$store.state.isData) {
         this.$store.dispatch('toggleData')
       }

@@ -1,4 +1,64 @@
-/* AREA */
+/* NavBar */
+
+/* 네비게이션바 전역 */
+.area-nav {
+  height: 9vh;
+  background: #7DABD0;
+}
+
+/* 네비게이션바 로고 이미지 */
+.img-logo {
+  width: 7vh;
+  height: 7vh;
+
+  cursor: pointer;
+}
+
+/* 네비게이션바 로고 */
+#logo:hover {
+  cursor: pointer;
+}
+
+
+/* Sign Up */
+
+/* 회원 가입 부분 */
+.part-signup {
+  width: 50vw;
+  height: 85vh;
+
+  background: white;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+.form-list {
+  list-style: none;
+}
+
+.form-list-on {
+  width: 15vw;
+  height: 4px;
+
+  background: #7DABD0;
+}
+
+.form-list-off {
+  width: 15vw;
+  height: 4px;
+
+  background: black;
+  opacity: 0.3;
+}
+
+.form-profile-img {
+  width: 10vw;
+}
+
+
+
+
+
 
 /* 메인 영역 왼쪽 사이드바 */
 .main-side {

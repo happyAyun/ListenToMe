@@ -10,6 +10,13 @@
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* 굵은 제목 */
+.f-title {
+  font-size: 2vw;
+  color: #000000;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
 /* 굵은 부제 */
 .f-subtitle-bold {
   font-size: 1.3vw;

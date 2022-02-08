@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import SERVER from '@/api/index.js'
 import router from '@/router/index.js'
-import createPersistedState from "vuex-persistedstate";
+// import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export default new Vuex.Store({  
   state: {
+    // 로그인 상태: { 0: 비로그인 상태, 1: 내담자, 2: 상담사 }
+    loginState: 0,
+    ////////////////////////////////////////////////////////////////////////////////
+
     // for toggling
     isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
@@ -20,7 +24,7 @@ export default new Vuex.Store({
     emotionData: '',
     ////////////////////////////////////////////////////////////////////////////////
 
-    loginState: 0,  // 로그인 상태: {비로그인: 0, 내담자: 1, 상담사: 2}
+    
     authToken: localStorage.getItem('jwt'),
     userid: "",
     usersession: "",
@@ -226,5 +230,5 @@ export default new Vuex.Store({
     },
   },
 
-  plugins: [createPersistedState()],
+  // plugins: [createPersistedState()],
 })

@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// 홈 화면
+// accounts
+import Signup from '@/views/accounts/Signup.vue'
+import LoginPage from '@/views/accounts/LoginPage.vue'
+import CounselorLoginPage from '@/views/accounts/CounselorLoginPage.vue'
+
+// Home
 import Home from '@/views/Home.vue'
 import Counselors from '@/components/Counselors.vue'
 // 마이 페이지 화면
@@ -15,19 +20,29 @@ import CounselingMain from '@/views/Counseling/CounselingMain.vue'
 import CounselingFeedback from '@/views/Counseling/CounselingFeedback.vue'
 import CounselorMain from '@/views/Counselor/CounselorMain.vue'
 
-import SingupPage from '../views/SignupPage.vue'
-import LoginPage from '../views/LoginPage.vue'
-import CounselorLoginPage from '../views/Counselor/CounselorLoginPage.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  // 홈 화면
+  // accounts
+  {
+    path: '/signup',
+    name: 'SignupForClient',
+    component: Signup,
+  },
+  {
+    path: '/signup-counselor',
+    name: 'SignupForCounselor',
+    component: Signup,
+  },
+
+  // Home
   {
     path: '/',
     name: 'Home',
     component: Home
   },
+
   {
     path: '/counselors',
     name: 'Counselors',
@@ -61,16 +76,8 @@ const routes = [
     name: 'CounselorMain',
     component: CounselorMain
   },
-  {
-    path: '/signup',
-    name: 'SignupForClient',
-    component: SingupPage,
-  },
-  {
-    path: '/signup/counselor',
-    name: 'SignupForCounselor',
-    component: SingupPage,
-  },
+
+
   {
     path: '/login',
     name: 'LoginPage',
