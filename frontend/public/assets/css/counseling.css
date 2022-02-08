@@ -84,7 +84,7 @@
 
 /* 상담실 피드백 영역 */
 .part-feedback {
-  width: 35vw;
+  width: 30vw;
 
   background: white;
   border-radius: 20px;
@@ -93,11 +93,11 @@
 
 /* 피드백 폼 내용 */
 .form-content-fb {
-  height: 35vh;
+  height: 25vh;
   resize: none;
 }
 
 /* 피드백 평점 */
 .img-star {
-  width: 2.7vw;
+  width: 2.3vw;
 }

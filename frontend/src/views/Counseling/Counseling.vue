@@ -236,7 +236,6 @@ export default {
 			this.OV = undefined
 
 			window.removeEventListener('beforeunload', this.leaveSession)
-			this.$store.dispatch('toggleSideBar')
 		},
 
 		updateMainVideoStreamManager (stream) {
