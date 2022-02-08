@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import SERVER from '@/api/index.js'
 import router from '@/router/index.js'
-// import createPersistedState from "vuex-persistedstate"
+import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
@@ -58,15 +58,34 @@ export default new Vuex.Store({
     isLoggedIn: function (state) {
       return state.authToken ? true : false
     },
+
     GE_USERID: (state) => {
-      return state.userid;
+      return state.userid
     },
     GE_USERSESSION: (state) => {
-      return state.usersession;
+      return state.usersession
     },
   },
 
   mutations: {
+    // accounts //////////////////////////////////////////////////////////////////////
+    SET_TOKEN: function (state, token) { 
+      state.authToken = token
+      state.isLoggedIn = true
+      localStorage.setItem('jwt', token)
+    },
+
+    REMOVE_TOKEN: function (state) {
+      localStorage.removeItem('jwt')
+      state.authToken = ''
+      state.isLoggedIn = false
+    },
+
+    SE_LOGINSTATE: function (state, payload) {
+      state.loginState = payload
+    },
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
     // for toggling
     TOGGLE_SIDEBAR: function (state) {
       state.isSideBar = !state.isSideBar
@@ -97,16 +116,7 @@ export default new Vuex.Store({
     },
     ////////////////////////////////////////////////////////////////////////////////
 
-    SET_TOKEN: function (state, token) { 
-      state.authToken = token
-      state.isLoggedIn = true
-      localStorage.setItem('jwt', token)
-    },
-    REMOVE_TOKEN: function (state) {
-      localStorage.removeItem('jwt')
-      state.authToken = ''
-      state.isLoggedIn = false
-    },
+
 
     SE_USERID: function (state, payload) {
       state.userid = payload
@@ -114,49 +124,9 @@ export default new Vuex.Store({
     SE_USERSESSION: function (state, payload) {
       state.usersession = payload
     },
-    SE_LOGINSTATE: function (state, payload) {
-      state.loginState = payload
-    }
   },
 
   actions: {
-    // for toggling
-    toggleSideBar: function ({ commit }) {
-      commit('TOGGLE_SIDEBAR')
-    },
-    toggleMemo: function ({ commit }) {
-      commit('TOGGLE_MEMO')
-    },
-    toggleRecords: function ({ commit }) {
-      commit('TOGGLE_RECORDS')
-    },
-    toggleData: function ({ commit }) {
-      commit('TOGGLE_DATA')
-    },
-    closeData: function ({ commit }) {
-      commit('CLOSE_DATA')
-    },
-    toggleSticker: function ({ commit }) {
-      commit('TOGGLE_STICKER')
-    },
-    closeSticker: function ({ commit }) {
-      commit('CLOSE_STICKER')
-    },
-    ////////////////////////////////////////////////////////////////////////////////
-
-    // 감정분석 데이터
-    saveEmotionData: function ({ commit }, emotionData) {
-      commit('SAVE_DATA', emotionData)
-    },
-    ////////////////////////////////////////////////////////////////////////////////
-
-    SE_USERID: (context, payload) => {
-      return context.commit('SE_USERID', payload)
-    },
-    SE_USERSESSION: (context, payload) => {
-      return context.commit('SE_USERSESSION', payload)
-    },
-
     // accounts //////////////////////////////////////////////////////////////////////
     Signup: function (context, credentials) {
       axios({
@@ -198,7 +168,7 @@ export default new Vuex.Store({
         })
         .then((res) => {
           commit('SET_TOKEN', res.data['access-token'])
-          commit('SE_LOGINSTATE',1)
+          commit('SE_LOGINSTATE', 1)
           router.push('/')
         })
         .catch((err) => {
@@ -206,9 +176,10 @@ export default new Vuex.Store({
         })
       }
     },
+
     LoginForCounselor: function ({ commit }, credentials) {
       if (this.getters.isLoggedIn) {
-        router.push('/counselor')
+        router.push('/')
       }
       else {
         axios({
@@ -218,20 +189,61 @@ export default new Vuex.Store({
         })
         .then((res) => {
           commit('SET_TOKEN', res.data['access-token'])
-          commit('SE_LOGINSTATE',2)
-          router.push('/counselor')
+          commit('SE_LOGINSTATE', 2)
+          router.push('/')
         })
         .catch((err) => {
           console.log(err)
         })
       }
     },
+
     Logout: function ({ commit }) {
       commit('REMOVE_TOKEN')
+      commit('SE_LOGINSTATE', 0)
       router.push('/')
     },
-  },
-  ////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
-  // plugins: [createPersistedState()],
+
+
+    // for toggling
+    toggleSideBar: function ({ commit }) {
+      commit('TOGGLE_SIDEBAR')
+    },
+    toggleMemo: function ({ commit }) {
+      commit('TOGGLE_MEMO')
+    },
+    toggleRecords: function ({ commit }) {
+      commit('TOGGLE_RECORDS')
+    },
+    toggleData: function ({ commit }) {
+      commit('TOGGLE_DATA')
+    },
+    closeData: function ({ commit }) {
+      commit('CLOSE_DATA')
+    },
+    toggleSticker: function ({ commit }) {
+      commit('TOGGLE_STICKER')
+    },
+    closeSticker: function ({ commit }) {
+      commit('CLOSE_STICKER')
+    },
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // 감정분석 데이터
+    saveEmotionData: function ({ commit }, emotionData) {
+      commit('SAVE_DATA', emotionData)
+    },
+    ////////////////////////////////////////////////////////////////////////////////
+
+    SE_USERID: (context, payload) => {
+      return context.commit('SE_USERID', payload)
+    },
+    SE_USERSESSION: (context, payload) => {
+      return context.commit('SE_USERSESSION', payload)
+    },
+  },
+   
+  plugins: [createPersistedState()],
 })
