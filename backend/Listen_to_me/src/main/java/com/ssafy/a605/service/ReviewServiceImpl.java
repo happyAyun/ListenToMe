@@ -8,6 +8,10 @@ import com.ssafy.a605.model.entity.Schedule;
 import com.ssafy.a605.repository.ReviewRepository;
 import com.ssafy.a605.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +23,7 @@ public class ReviewServiceImpl implements ReviewService{
     final private ReviewRepository reviewRepository;
 
     @Override
-    public boolean writeReview(int scheduleId, ReviewDto reviewDto) {
+    public boolean writeReview(int scheduleId, ReviewDto reviewDto)throws Exception {
         Schedule schedule = scheduleRepository.findById(scheduleId);
         Review review = new Review();
         review.setClient(schedule.getClient());
@@ -28,6 +32,11 @@ public class ReviewServiceImpl implements ReviewService{
         review.setContent(reviewDto.getContent());
         Review ret = reviewRepository.save(review);
         return ret.equals(review);
+    }
+    @Override
+    public Page<Review> getListReview(String counselor, Pageable pageRequest) throws Exception{
+        Page<Review> reviews = reviewRepository.findReviewsByCounselor_Email(counselor, pageRequest);
+        return reviews;
     }
 
     @Override
@@ -38,11 +47,6 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public boolean deleteReview(int reviewId) {
         return false;
-    }
-
-    @Override
-    public List<Review> getListReview(String counselor) {
-        return null;
     }
 
     @Override

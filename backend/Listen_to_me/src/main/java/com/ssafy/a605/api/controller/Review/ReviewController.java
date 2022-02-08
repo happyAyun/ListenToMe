@@ -8,6 +8,9 @@ import com.ssafy.a605.service.ReviewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,19 +33,19 @@ public class ReviewController {
     private ReviewService reviewService;
 
     // 리뷰 리스트 - 비로그인시 가능
-    @GetMapping("/list")
-    public ResponseEntity<List<Review>> getListReview(@PathVariable("counselor") String counselor) throws Exception{
-        return new ResponseEntity<List<Review>>(reviewService.getListReview(counselor), HttpStatus.OK);
+    @GetMapping("/list/{counselor}")
+    public ResponseEntity<Page<Review>> getListReview(@PathVariable("counselor") String counselor, @PageableDefault(size=5, sort = "id") Pageable pageRequest) throws Exception{
+        return new ResponseEntity<Page<Review>>(reviewService.getListReview(counselor, pageRequest), HttpStatus.OK);
     }
 
     // 리뷰 작성
     @PostMapping("/save/{scheduleId}")
     public ResponseEntity<String> setReview(@PathVariable("scheduleId") int scheduleId, @RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception{
-        String counselor_Email = "";
         if(jwtService.isUsable(request.getHeader("access-token"))){
-            if(!reviewService.checkClient(jwtService.getUserId(), scheduleId)) return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
-            if(reviewService.writeReview(scheduleId, reviewDto)) return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-            // if() - 스케줄 확인되면 작성진행
+            if(!reviewService.checkClient(jwtService.getUserId(), scheduleId))
+                return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+            if(reviewService.writeReview(scheduleId, reviewDto))
+                return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
     }
