@@ -13,6 +13,7 @@ import Counselors from '@/components/Counselors.vue'
 import Profile from '@/views/profile/Profile.vue'
 import Bookmark from '@/views/profile/Bookmark.vue'
 import MarkedCounselors from '@/components/MarkedCounselors.vue'
+import MySchedule from '@/views/profile/MySchedule.vue'
 import Records from '@/views/profile/Records.vue'
 // 상담 시작화면
 import Counseling from '@/views/Counseling/Counseling.vue'
@@ -74,6 +75,11 @@ const routes = [
     path: '/profile/bookmark/counselors',
     name: 'MarkedCounselors',
     component: MarkedCounselors
+  },
+  {
+    path: '/profile/schedule',
+    name: 'MySchedule',
+    component: MySchedule
   },
   {
     path: '/profile/records',

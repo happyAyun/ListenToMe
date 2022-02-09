@@ -29,6 +29,9 @@ export default new Vuex.Store({
     userid: "",
     usersession: "",
 
+    counselorEmail: '',
+    userEmail: '',
+
     // dummy data
     records: [
       {
@@ -124,6 +127,14 @@ export default new Vuex.Store({
     SE_USERSESSION: function (state, payload) {
       state.usersession = payload
     },
+
+    GET_USER_EMAIL: function (state, results) {
+      state.userEmail = results
+    },
+    GET_COUNSELOR_EMAIL: function (state, results) {
+      state.counselorEmail = results
+    },
+
   },
 
   actions: {
@@ -157,6 +168,7 @@ export default new Vuex.Store({
     },
 
     Login: function ({ commit }, credentials) {
+      commit('GET_USER_EMAIL', credentials.email)
       if (this.getters.isLoggedIn) {
         router.push('/')
       }
@@ -178,6 +190,7 @@ export default new Vuex.Store({
     },
 
     LoginForCounselor: function ({ commit }, credentials) {
+      commit('GET_COUNSELOR_EMAIL', credentials.email)
       if (this.getters.isLoggedIn) {
         router.push('/')
       }
