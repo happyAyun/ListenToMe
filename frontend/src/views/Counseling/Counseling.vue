@@ -94,16 +94,16 @@
 <script>
 import axios from 'axios'
 import { OpenVidu } from 'openvidu-browser'
-import UserVideo from '@/components/counseling/UserVideo.vue'
+import UserVideo from '@/components/Counseling/UserVideo.vue'
 import { mapGetters } from 'vuex'
 
-import Memo from '@/components/counseling/Memo.vue'
-import Records from '@/components/counseling/Records.vue'
+import Memo from '@/components/Counseling/Memo.vue'
+import Records from '@/components/Counseling/Records.vue'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-const OPENVIDU_SERVER_URL = "https://localhost:4443"
-const OPENVIDU_SERVER_SECRET = "MY_SECRET"
+const OPENVIDU_SERVER_URL = "https://i6a605.p.ssafy.io:443";
+const OPENVIDU_SERVER_SECRET = "ssafy605"
 
 export default {
   name: 'Counseling',
