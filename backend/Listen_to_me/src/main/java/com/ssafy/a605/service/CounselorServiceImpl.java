@@ -8,6 +8,7 @@ import com.ssafy.a605.model.dto.UserDto;
 import com.ssafy.a605.model.entity.Client;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.entity.User;
+import com.ssafy.a605.model.request.counselor.CounselorInfoReq;
 import com.ssafy.a605.model.response.counselor.CounselorInfoRes;
 import com.ssafy.a605.repository.CareerRepository;
 import com.ssafy.a605.repository.CertificateRepository;
@@ -16,6 +17,8 @@ import com.ssafy.a605.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,6 +78,16 @@ public class CounselorServiceImpl implements CounselorService {
         Counselor counselor = new Counselor();
         counselor.update(counselorDto);
         Counselor ret = userRepository.save(counselor);
+        return ret.equals(counselor);
+    }
+
+    @Override
+    public boolean joinUser(CounselorInfoReq counselorInfoReq) throws Exception {
+        Counselor counselor = new Counselor();
+        CounselorDto counselorDto = new CounselorDto(counselorInfoReq.getEmail(), counselorInfoReq.getPassword(), counselorInfoReq.getName(), counselorInfoReq.getGender(), counselorInfoReq.getBirth(), 0, counselorInfoReq.getPhoneNumber(), "", counselorInfoReq.getShortGreeting(),  counselorInfoReq.getGreeting(), counselorInfoReq.getDegree());
+        counselor.update(counselorDto);
+        Counselor ret = userRepository.save(counselor);
+        updateImage(counselorInfoReq.getPhoto(), counselorInfoReq.getEmail());
         return ret.equals(counselor);
     }
 
@@ -141,13 +154,6 @@ public class CounselorServiceImpl implements CounselorService {
         }
         Counselor c = counselorRepository.save(counselor);
         return c.equals(counselor);
-    }
-
-    @Override
-    public byte[] getImage(String imageName) throws Exception {
-        InputStream imageStream = new FileInputStream(uploadFolder + imageName);
-        //byte[] imageByteArray = IOUtils.t
-        return new byte[0];
     }
 
     @Override

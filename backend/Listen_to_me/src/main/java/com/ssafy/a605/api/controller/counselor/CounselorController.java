@@ -4,6 +4,7 @@ package com.ssafy.a605.api.controller.counselor;
 import com.ssafy.a605.model.dto.CertificateDto;
 import com.ssafy.a605.model.dto.CounselorDto;
 import com.ssafy.a605.model.entity.CounselorCategory;
+import com.ssafy.a605.model.request.counselor.CounselorInfoReq;
 import com.ssafy.a605.model.response.counselor.CounselorInfoRes;
 import com.ssafy.a605.model.response.counselor.CounselorListRes;
 import com.ssafy.a605.service.*;
@@ -13,11 +14,19 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +40,8 @@ public class CounselorController {
     public static final Logger logger = LoggerFactory.getLogger(CounselorController.class);
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
+    @Value("${profileImg.path}")
+    private String uploadFolder;
 
     @Autowired
     private JwtServiceImpl jwtService;
@@ -92,10 +103,19 @@ public class CounselorController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<String> joinUser(
+    public ResponseEntity<String> joinCounselor(
             @RequestBody @ApiParam(value = "회원 가입 정보", required = true) CounselorDto counselorDto) throws Exception {
         logger.info("joinUser - 호출");
         if (userService.joinCounselor(counselorDto)) {
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/user/join")
+    public ResponseEntity<String> joinUser(@RequestBody CounselorInfoReq counselorInfoReq) throws Exception {
+        logger.info("joinUser - 호출");
+        if (userService.joinUser(counselorInfoReq)) {
             return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
@@ -183,9 +203,19 @@ public class CounselorController {
     }
 
     @GetMapping("/user/image/{imageName}")
-    public ResponseEntity<byte []> getImage(@PathVariable("imageName") String imageName) throws Exception {
-        byte []image = userService.getImage(imageName);
-        return new ResponseEntity<byte[]>(image, HttpStatus.OK);
+    public ResponseEntity<Resource> getImage(@PathVariable("imageName") String imageName) throws Exception {
+        Path imagePath = Paths.get(uploadFolder + imageName);
+        System.out.println(imagePath);
+        Resource resource = new FileSystemResource(imagePath);
+        if(!resource.exists()) return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+        HttpHeaders header = new HttpHeaders();
+
+        try {
+            header.add("Content-Type", Files.probeContentType(imagePath));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
     }
 
     @GetMapping("/certificate/{userEmail}")
