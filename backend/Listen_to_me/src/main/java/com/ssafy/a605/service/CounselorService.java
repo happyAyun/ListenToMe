@@ -6,6 +6,7 @@ import com.ssafy.a605.model.dto.CounselorDto;
 import com.ssafy.a605.model.dto.UserDto;
 import com.ssafy.a605.model.entity.Counselor;
 import com.ssafy.a605.model.response.counselor.CounselorInfoRes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ public interface CounselorService {
     public boolean updateShortGreeting(String shortGreeting, String userEmail) throws Exception;
     public boolean updateGreeting(String greeting, String userEmail) throws Exception;
     public boolean checkId(String userid) throws Exception;
+    boolean updateImage(MultipartFile multipartFile, String userEmail) throws Exception;
+    byte[] getImage(String imageName) throws Exception;
     boolean deleteCounselor(String userEmail) throws Exception;
     List<CertificateDto> getCertificates (String userEmail) throws Exception;
 }

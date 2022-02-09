@@ -14,9 +14,18 @@ import com.ssafy.a605.repository.CertificateRepository;
 import com.ssafy.a605.repository.CounselorRepository;
 import com.ssafy.a605.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +37,9 @@ public class CounselorServiceImpl implements CounselorService {
     final private CareerRepository CareerRepository;
     final private CertificateRepository certificateRepository;
     final private UserRepository userRepository;
+
+    @Value("${profileImg.path}")
+    private String uploadFolder;
 
     @Override
     public Map<String,String> login(Map<String,String> map) throws Exception {
@@ -106,6 +118,36 @@ public class CounselorServiceImpl implements CounselorService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean updateImage(MultipartFile multipartFile, String userEmail) throws Exception {
+        Counselor counselor = counselorRepository.findByEmail(userEmail).orElseThrow(
+                ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
+        );
+        String imageName = userEmail + "_" + multipartFile.getOriginalFilename();
+        Path imagePath = Paths.get(uploadFolder + imageName);
+        if(multipartFile.getSize()!=0){
+            try {
+                if(counselor.getPhoto() != null) {
+                    File file = new File(uploadFolder + counselor.getPhoto());
+                    file.delete();
+                }
+                Files.write(imagePath, multipartFile.getBytes());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            counselor.setPhoto(imageName);
+        }
+        Counselor c = counselorRepository.save(counselor);
+        return c.equals(counselor);
+    }
+
+    @Override
+    public byte[] getImage(String imageName) throws Exception {
+        InputStream imageStream = new FileInputStream(uploadFolder + imageName);
+        //byte[] imageByteArray = IOUtils.t
+        return new byte[0];
     }
 
     @Override

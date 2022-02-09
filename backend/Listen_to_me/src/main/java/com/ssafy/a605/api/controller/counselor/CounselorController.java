@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -100,6 +101,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //짧은 인삿말 수정
     @PostMapping("/shortgreeting")
     public ResponseEntity<String> setShortGreeting(@RequestBody Map<String,String> param) throws Exception {
         logger.info("shortGreeting 수정");
@@ -110,6 +112,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //인삿말 수정
     @PostMapping("/greeting")
     public ResponseEntity<String> setGreeting(@RequestBody Map<String,String> param) throws Exception {
         logger.info("greeting 수정");
@@ -120,6 +123,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //중복 아이디 체크
     @GetMapping("/{userEmail}")
     public ResponseEntity<String> checkId(
             @PathVariable("userEmail") @ApiParam(value = "중복 아이디 체크", required = true) String userEmail) throws Exception {
@@ -130,6 +134,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //회원 정보 수정
     @PutMapping("/user")
     public ResponseEntity<String> modifyUser(
             @RequestBody @ApiParam(value = "수정할 회원정보.", required = true) CounselorDto counselorDto) throws Exception {
@@ -141,6 +146,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.OK);
     }
 
+    //상담사 리스트 (별점 순)
     @GetMapping("list/{page}")
     public ResponseEntity<Map<String, Object>> getCounselorList(@PathVariable("page") int page) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -156,6 +162,7 @@ public class CounselorController {
         return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
     }
 
+    //탈퇴
     @DeleteMapping("/user/{userEmail}")
     public ResponseEntity<String> deleteUser(
             @PathVariable("userEmail") @ApiParam(value = "회원탈퇴", required = true) String userEmail) throws Exception {
@@ -164,6 +171,21 @@ public class CounselorController {
             return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    //사진 등록
+    @PostMapping("/user/image")
+    public ResponseEntity<String> setImage(@RequestParam MultipartFile multipartFile) throws Exception {
+        if(userService.updateImage(multipartFile, jwtService.getUserId())){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/user/image/{imageName}")
+    public ResponseEntity<byte []> getImage(@PathVariable("imageName") String imageName) throws Exception {
+        byte []image = userService.getImage(imageName);
+        return new ResponseEntity<byte[]>(image, HttpStatus.OK);
     }
 
     @GetMapping("/certificate/{userEmail}")
