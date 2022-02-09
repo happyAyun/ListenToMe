@@ -1,67 +1,123 @@
 <template>
-  <div id="side-bar" class="py-5 text-center">
-    <!-- 메뉴: 상담 시작 버튼 -->
-    <div @click="moveToCounseling" class="mx-auto mb-4 part-side-menu f-subtitle" style="background: #ED9C9C;">상담 시작하기</div>
+  <div id="side-bar" class="py-5">
 
-    <!-- 메뉴: 홈 -->
-    <div @click="moveToHome" class="mx-auto mb-4 part-side-menu f-subtitle">홈</div>
-
-    <!-- 메뉴: 마이 페이지 -->
-    <div @click="moveToProfile" class="mx-auto mb-4 part-side-menu f-subtitle">마이 페이지</div>
-
-    <div v-if="active">
-      <!-- 작은 메뉴: 즐겨 찾기 -->
-      <div @click="moveToBookmark" class="mx-auto mb-4 part-side-menu-small f-subtitle">북마크</div>
-      <!-- 작은 메뉴: 스케줄링 -->
-      <div class="mx-auto mb-4 part-side-menu-small f-subtitle">일정 관리</div>
-      <!-- 작은 메뉴: 상담 내역 확인 -->
-      <div @click="moveToRecords" class="mx-auto mb-4 part-side-menu-small f-subtitle">상담 내역</div>
-      <!-- 작은 메뉴: 회원 정보 수정 -->
-      <div class="mx-auto mb-4 part-side-menu-small f-subtitle">정보 수정</div>
+    <!-- button: 상담실, loginState: 0 -->
+    <div v-if="$store.state.loginState" class="d-flex justify-content-center mb-3">
+      <button @click="moveToCounseling" class="menu f-subtitle" style="background: #ED9C9C">상담실</button>
     </div>
 
-    <!-- 메뉴: 게시판 -->
-    <div class="mx-auto mb-4 part-side-menu f-subtitle">이야기</div>
+    <!-- button: 홈, loginState: ALL -->
+    <div class="d-flex justify-content-center mb-3">
+      <button @click="moveToHome" class="menu f-subtitle">홈</button>
+    </div>
 
-    <!-- 메뉴: 상담사 -->
-    <div class="mx-auto mb-4 part-side-menu f-subtitle">상담사</div>
+    <!-- button: 마이페이지, loginState: 1 -->
+    <div v-if="$store.state.loginState === 1">
+      <div class="d-flex justify-content-center mb-3">
+        <button @click="toggleMypageBM" class="menu f-subtitle">마이 페이지</button>
+      </div>
+
+      <!-- button: 마이페이지 작은 메뉴 -->
+      <div v-if="active">
+        <!-- button: 북마크 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button @click="moveToBookmark" class="menu-small f-normal-bold">북마크</button>
+        </div>
+
+        <!-- button: 상담 내역 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button @click="moveToRecords" class="menu-small f-normal-bold">상담 내역</button>
+        </div>
+
+        <!-- button: 정보 수정 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button class="menu-small f-normal-bold">정보 수정</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- button: 마이페이지, loginState: 2 -->
+    <div v-else-if="$store.state.loginState === 2">
+      <div class="d-flex justify-content-center mb-3">
+        <button @click="toggleMypagePF" class="menu f-subtitle">마이 페이지</button>
+      </div>
+
+      <!-- button: 마이페이지 작은 메뉴 -->
+      <div v-if="active">
+        <!-- button: 일정 관리 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button @click="moveToProfile" class="menu-small f-normal-bold">프로필</button>
+        </div>
+
+        <!-- button: 일정 관리 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button class="menu-small f-normal-bold">일정 관리</button>
+        </div>
+
+        <!-- button: 상담 내역 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button @click="moveToRecords" class="menu-small f-normal-bold">상담 내역</button>
+        </div>
+
+        <!-- button: 정보 수정 -->
+        <div class="d-flex justify-content-center mb-3">
+          <button class="menu-small f-normal-bold">정보 수정</button>
+        </div>
+      </div>
+    </div>
+      
+    <!-- button: 상담실, loginState: 0 -->
+    <div class="d-flex justify-content-center mb-3">
+      <button class="menu f-subtitle">이야기</button>
+    </div>
+
+    <!-- button: 상담실, loginState: 0 -->
+    <div class="d-flex justify-content-center mb-3">
+      <button class="menu f-subtitle">리스너</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SideBar',
-  components: {
 
-  },
   data: function () {
     return {
       active: false,
     }
   },
+  
   methods: {
     moveToCounseling: function () {
-      this.active = false;
-      this.$router.push({name: 'CounselingMain'});
+      this.active = false
+      this.$router.push({name: 'CounselingMain'})
     },
+
     moveToHome: function () {
       this.active = false
       this.$router.push({name: 'Home'})
     },
-    moveToProfile: function () {
-      this.active = true
-      this.$router.push({name: 'Profile'})
-    },
+
     moveToBookmark: function () {
       this.$router.push({name: 'Bookmark'})
     },
+    moveToProfile: function () {
+      this.$router.push({name: 'Profile'})
+    },
+
+    toggleMypageBM: function () {
+      this.active = !this.active
+      this.moveToBookmark()
+    },
+    toggleMypagePF: function () {
+      this.active = !this.active
+      this.moveToProfile()
+    },
+
     moveToRecords: function () {
       this.$router.push({name: 'Records'})
     },
   }
 }
 </script>
-
-<style>
-
-</style>
