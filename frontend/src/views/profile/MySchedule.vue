@@ -118,6 +118,7 @@
                   <p>상담 일자 : {{ modalContent[1] }}</p>
                   <p>시작 시간 : {{ modalContent[2] }}</p>
                   <p>예약자 : {{ clientName }}</p>
+                  <p>상담자 : {{ name }}</p>
                   <div v-if="sticker">
                     <p>스티커 사용 O</p>
                   </div>
@@ -192,9 +193,9 @@ export default {
       thirdtime: [],
       fourthtime: [],
 
-      // test 용
+      // counselor 정보 가져오기
       name: '',
-      email: '',
+      // email: '',
 
       // modal
       modalViewed: 0,
@@ -203,7 +204,7 @@ export default {
       // 상담 승인 시 전달 내용
       scheduleId: 0,
 
-      // 예약자 성명
+      // 예약자 정보
       clientName: '',
       sticker: '',
       
