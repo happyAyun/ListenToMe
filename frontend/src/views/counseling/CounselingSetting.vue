@@ -3,7 +3,12 @@
     <div class="p-5 part-room-setting">
       <!-- header: title -->
       <header class="mb-5 text-center">
-        <p class="f-title-bold">상담실에 입장하기</p>
+        <div v-if="$store.state.loginState === 1">
+          <p class="f-title-bold">상담실에 입장하기</p>
+        </div>
+        <div v-else-if="$store.state.loginState === 2">
+          <p class="f-title-bold">상담실 준비하기</p>
+        </div>
       </header>
 
       <!-- body: form -->

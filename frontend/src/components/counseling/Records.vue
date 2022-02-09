@@ -6,6 +6,10 @@
     </header>
 
     <!-- body: 전체 기록 -->
+    <div v-if="active" id="record-item" class="d-flex justify-content-center align-items-center mb-3 p-3 part-record">
+      <p class="mb-0 py-2 f-normal">기록이 없습니다.</p>
+    </div>
+
     <section v-for="(memo, index) in memos" :key=index>
       <record-item :memo="memo"></record-item>
     </section>
@@ -28,6 +32,7 @@ export default {
   data: function () {
     return {
       memos: '',
+      active: false,
     }
   },
 
@@ -42,7 +47,12 @@ export default {
         },
       })
         .then(res => {
-          this.memos = res.data
+          if (res.data.length == 0) {
+            this.active = true
+          } else {
+            this.active = false
+            this.memos = res.data
+          }
           console.log(this.memos)
         })
         .catch(err => {

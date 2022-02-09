@@ -29,7 +29,9 @@
       <!-- footer: 기능 버튼 -->
       <footer class="d-flex justify-content-between" style="width: 20vw;">
         <!-- button: 감정 분석 -->
-        <button @click="toggleData" class="btn-func f-btn" style="width: 8vw;">감정 분석</button>
+        <div v-if="$store.state.loginState === 2">
+          <button @click="toggleData" class="btn-func f-btn" style="width: 8vw;">감정 분석</button>
+        </div>
 
         <!-- button: 저장 -->
         <button @click="postMemo" class="btn-func f-btn">저장</button>
@@ -152,33 +154,13 @@ export default {
         })
           .then(res => {
             console.log(res)
+            this.memoSaved = this.memo
             this.showMessageOfSaving()
           })
       } else {
         this.showMessageOfError()
       }
     },
-
-    getMemo: function () {
-      axios({
-        method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.memoSelection + `${2}/`,
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': `${this.$store.state.authToken}`
-        },
-      })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
   },
-
-  created () {
-    this.getMemo()
-  }
 }
 </script>

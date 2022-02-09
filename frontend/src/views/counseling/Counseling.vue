@@ -162,6 +162,7 @@ export default {
 		this.OV = undefined
 
 		window.removeEventListener('beforeunload', this.leaveSession)
+		this.$store.dispatch('closeSticker')  // 스티커 기능 끄기
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
 		this.$store.dispatch('closeData')  // 감정분석 영역 닫기
 		this.$store.dispatch('toggleMemo')  // 메모 영역 토글링
@@ -309,9 +310,9 @@ export default {
   },
 
   created(){
-      this.mySessionId = this.GE_USERSESSION
-      this.myUserName =  this.GE_USERID
-      this.joinSession()
+		this.mySessionId = this.GE_USERSESSION
+		this.myUserName =  this.GE_USERID
+		this.joinSession()
   },
 }
 </script>
