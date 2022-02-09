@@ -19,13 +19,6 @@
           <label for="session" class="col-2 form-label f-subtitle">Room</label>
           <input v-model="mySessionId" type="text" id="session" class="form-control f-normal" required>
         </div>
-
-        <!-- "상담 신청 시", 내담자 입장에서 스티커 기능을 사용할지 말지 결정 -->
-        <!-- form: sticker -->
-        <!-- <div class="d-flex justify-content-center align-items-center">
-          <input @click="toggleSticker" class="me-2 form-check-input" type="checkbox" id="sticker">
-          <label class="form-check-label f-normal" for="sticker">얼굴에 스티커를 씌우시겠습니까?</label>
-        </div> -->
       </section>
 
       <!-- footer: OK button -->

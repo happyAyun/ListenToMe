@@ -10,12 +10,10 @@
 .img-logo {
   width: 7vh;
   height: 7vh;
-
-  cursor: pointer;
 }
 
-/* 네비게이션바 로고 */
-#logo:hover {
+/* 네비게이션바 로고 마우스 포인터 */
+.pointer {
   cursor: pointer;
 }
 

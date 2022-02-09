@@ -91,7 +91,7 @@ export default {
   methods: {
     moveToCounseling: function () {
       this.active = false
-      this.$router.push({name: 'CounselingMain'})
+      this.$router.push({name: 'CounselingSetting'})
     },
 
     moveToHome: function () {
