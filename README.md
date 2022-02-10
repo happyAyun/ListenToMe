@@ -25,10 +25,11 @@ typora-copy-images-to: ./
 
 ### 2022-02-08
 
-    1. 임의로 한 상담사 프로필 만들어 상담사 클릭 시 프로필로 이동하여 상담사의 이력 및 일정 확인 가능하도록 구성(기존 store에서 LoadSchedule를 불러와서 썼던 거 와는 달리 테스트용으로 기존 페이지에서 axios로 호출하도록 구현해놓은 상태 -> 상담사 리스트 구성 후 수정 예정...)
-    2. 처음 목업 디자인으로 디자인 변경
-    3. 로그인 상태별 토글링 예정이라 기존 components>client>Navbar.vue를 components>Navbar.vue로 변경하여 상담사나 내담자나 동일한 navbar사용하도록 설정
-   4. 3.에 따라 components>counselor>counselorNavbar.vue 삭제하고 store에서 LoginForCounselor 파트에 router.push('/') 로 수정
+1. 임의로 한 상담사 프로필 만들어 상담사 클릭 시 프로필로 이동하여 상담사의 이력 및 일정 확인 가능하도록 구성(기존 store에서 LoadSchedule를 불러와서 썼던 거 와는 달리 테스트용으로 기존 페이지에서 axios로 호출하도록 구현해놓은 상태 -> 상담사 리스트 구성 후 수정 예정...)
+2. 처음 목업 디자인으로 디자인 변경
+3. 로그인 상태별 토글링 예정이라 기존 components>client>Navbar.vue를 components>Navbar.vue로 변경하여 상담사나 내담자나 동일한 navbar사용하도록 설정
+
+​	4. 3.에 따라 components>counselor>counselorNavbar.vue 삭제하고 store에서 LoginForCounselor 파트에 router.push('/') 로 수정
 
 
 
