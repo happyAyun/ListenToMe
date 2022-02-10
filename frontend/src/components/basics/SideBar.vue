@@ -2,7 +2,7 @@
   <div id="side-bar" class="d-flex flex-column justify-content-between py-5">
     <div>
       <!-- button: 상담실, loginState: 0 -->
-      <div v-if="$store.state.loginState" class="d-flex justify-content-center mb-3">
+      <div class="d-flex justify-content-center mb-3">
         <button @click="moveToCounseling" class="menu f-subtitle" style="background: #ED9C9C">상담실</button>
       </div>
 

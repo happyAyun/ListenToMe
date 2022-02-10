@@ -37,7 +37,7 @@ export default {
       let innerLocation = window.innerHeight
       let bottomLocation = document.documentElement.scrollHeight
 
-      if (location <= 300) {
+      if (location <= 400) {
         this.$store.dispatch('offNavbar')
       } else if (location < bottomLocation - innerLocation) {
         this.$store.dispatch('onNavbar')
