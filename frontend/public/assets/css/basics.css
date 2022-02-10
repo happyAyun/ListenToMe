@@ -81,7 +81,7 @@
 /* 왼쪽 사이드바 */
 .area-side {
   height: 91vh;
-  background-color: #EDE1C9;
+  background-color: #fff4e8;
 }
 
 /* 왼쪽 사이드바 메뉴 */
@@ -98,8 +98,8 @@
 }
 
 .menu-small {
-  width: 7vw;
-  height: 6vh;
+  width: 10vw;
+  height: 5vh;
 
   border: none;
   outline: none;
