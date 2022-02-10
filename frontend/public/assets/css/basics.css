@@ -6,6 +6,11 @@
   background: #7DABD0;
 }
 
+.area-nav-top {
+  height: 9vh;
+  background: transparent;
+}
+
 /* 네비게이션바 로고 이미지 */
 .img-logo {
   width: 7vh;

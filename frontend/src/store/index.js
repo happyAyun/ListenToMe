@@ -15,6 +15,7 @@ export default new Vuex.Store({
 
 
     // for toggling
+    isNavbar: false,
     isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
     isData: false,  // 감정분석 영역 토글링
@@ -90,6 +91,12 @@ export default new Vuex.Store({
 
 
     // for toggling
+    ON_NAVBAR: function (state) {
+      state.isNavbar = true
+    },
+    OFF_NAVBAR: function (state) {
+      state.isNavbar = false
+    },
     TOGGLE_SIDEBAR: function (state) {
       state.isSideBar = !state.isSideBar
     },
@@ -211,6 +218,12 @@ export default new Vuex.Store({
 
 
     // for toggling
+    onNavbar: function ({ commit }) {
+      commit('ON_NAVBAR')
+    },
+    offNavbar: function ({ commit }) {
+      commit('OFF_NAVBAR')
+    },
     toggleSideBar: function ({ commit }) {
       commit('TOGGLE_SIDEBAR')
     },
@@ -247,6 +260,18 @@ export default new Vuex.Store({
     SE_USERSESSION: (context, payload) => {
       return context.commit('SE_USERSESSION', payload)
     },
+
+    // move up and down
+    moveUp: () => {
+      window.scrollTo(0,0)
+      document.body.classList.remove('overflow-hidden')
+    },
+
+    moveDown: () => {
+      let bottomLocation = document.documentElement.scrollHeight
+      document.body.classList.add('overflow-hidden')
+      window.scrollTo(0, bottomLocation)
+    }
   },
    
   plugins: [createPersistedState()],

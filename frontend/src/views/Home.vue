@@ -1,5 +1,5 @@
 <template>
-  <div id="home" class="col-10 p-5">
+  <div id="home" class="col-10 p-5 over-flow-auto">
     <!-- title -->
     <div class="mb-5 d-flex">
       <p class="mb-0 me-4 f-title">오늘의 리스너</p>
@@ -71,8 +71,12 @@ export default {
       this.$router.push({name: 'Counselors'})
     },
     moveToProfile: function () {
-      this.$router.push({name: 'Profile'})
-    }
+      if (this.$store.state.loginState === 0) {
+        this.$router.push({name: 'LoginForClient'})
+      } else {
+        this.$router.push({name: 'Profile'})
+      }
+    },
   }
 }
 </script>

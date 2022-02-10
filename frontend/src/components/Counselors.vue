@@ -55,7 +55,11 @@ export default {
       this.$router.push({name: 'Home'})
     },
     moveToProfile: function () {
-      this.$router.push({name: 'Profile'})
+      if (this.$store.state.loginState === 0) {
+        this.$router.push({name: 'LoginForClient'})
+      } else {
+        this.$router.push({name: 'Profile'})
+      }
     }
   }
 }

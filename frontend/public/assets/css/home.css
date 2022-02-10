@@ -127,6 +127,12 @@
 
 /* 홈 화면 */
 
+/* 이미지 */
+.part-home-image {
+  border: none;
+  outline: none;
+}
+
 /* 상담사 */
 .part-counselor {
   width: 14vw;

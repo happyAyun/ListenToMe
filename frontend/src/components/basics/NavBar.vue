@@ -1,6 +1,10 @@
 <template>
-  <div id="navbar">
-    <div v-if="$store.state.loginState" class="d-flex justify-content-between align-items-center px-3 py-2 area-nav">
+  <div id="navbar" class="fixed-top">
+    <div
+      v-if="$store.state.loginState"
+      class="d-flex justify-content-between align-items-center px-4 py-2"
+      :class="{'area-nav': $store.state.isNavbar, 'area-nav-top': !$store.state.isNavbar}"
+    >
       <div class="d-flex align-items-center">
         <!-- image: logo -->
         <img
@@ -18,7 +22,11 @@
       </div>
     </div>
 
-    <div v-else class="d-flex justify-content-between align-items-center px-3 py-2 area-nav">
+    <div
+      v-else
+      class="d-flex justify-content-between align-items-center px-4"
+      :class="{'area-nav': $store.state.isNavbar, 'area-nav-top': !$store.state.isNavbar}"
+    >
       <div class="d-flex align-items-center">
         <!-- image: logo -->
         <img @click="moveToHome" :src="require('@/assets/images/logo_white.png')" alt="logo-image" class="me-2 img-logo">
@@ -55,14 +63,17 @@ export default {
     },
 
     moveToSignup: function () {
+      this.$store.dispatch('moveDown')
       this.$router.push({name: 'SignupForClient'})
     },
 
     moveToLogin: function () {
+      this.$store.dispatch('moveDown')
       this.$router.push({name: 'LoginForClient'})
     },
 
     moveToLoginCounselor: function () {
+      this.$store.dispatch('moveDown')
       this.$router.push({name: 'LoginForCounselor'})
     }
   },
