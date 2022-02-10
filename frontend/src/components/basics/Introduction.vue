@@ -6,7 +6,11 @@
     >
 
     <div class="card-img-overlay mx-auto my-auto" style="width: 50vw; height: 50vh;">
-      <p class="text-center text-white f-title"> Listen to Me, 나의 이야기를 들어줄래?</p>
+      <p class="mb-5 text-center text-white f-title"> Listen to Me, 나의 이야기를 들어줄래?</p>
+
+      <div class="d-flex justify-content-center">
+        <button @click="moveDown" class="menu f-subtitle">내려가기</button>
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +20,9 @@ export default {
   name: 'Introductoin',
 
   methods: {
-
+    moveDown: function () {
+      this.$store.dispatch('moveDown')
+    }
   },
 }
 </script>
