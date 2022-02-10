@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ./
+---
+
 **BRANCH: feature-schedule-FE**
 
 ### 2022-02-07
@@ -91,13 +95,13 @@
 
 ✔ 상담사 마이페이지의 일정 관리
 
-![상담사 일정관리](C:\Users\SSAFY\Desktop\상담사 일정관리.PNG)
+![상담사 일정관리](C:\Users\SSAFY\Desktop\S06P12A605\README.assets\상담사 일정관리.PNG)
 
 
 
 ✔ 내담자가 보는 상담사 프로필 페이지의 일정
 
-![상담사 프로필 내 스케줄](C:\Users\SSAFY\Desktop\상담사 프로필 내 스케줄.PNG)
+![상담사 프로필 내 스케줄](C:\Users\SSAFY\Desktop\S06P12A605\README.assets\상담사 프로필 내 스케줄.PNG)
 
 
 
