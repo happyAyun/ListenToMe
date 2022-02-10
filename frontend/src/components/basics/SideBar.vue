@@ -73,7 +73,7 @@
 
     <!-- button: 상담실, loginState: 0 -->
     <div class="d-flex justify-content-center mb-3">
-      <button class="menu f-subtitle">리스너</button>
+      <button @click="moveToCounselors" class="menu f-subtitle">리스너</button>
     </div>
   </div>
 </template>
@@ -121,7 +121,9 @@ export default {
     moveToRecords: function () {
       this.$router.push({name: 'Records'})
     },
-    
+    moveToCounselors: function () {
+      this.$router.push({name: 'CounselorMain'})
+    }
   }
 }
 </script>

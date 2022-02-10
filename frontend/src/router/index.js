@@ -19,7 +19,10 @@ import Records from '@/views/profile/Records.vue'
 import Counseling from '@/views/Counseling/Counseling.vue'
 import CounselingMain from '@/views/Counseling/CounselingMain.vue'
 import CounselingFeedback from '@/views/Counseling/CounselingFeedback.vue'
+
+// 리스너 화면
 import CounselorMain from '@/views/Counselor/CounselorMain.vue'
+import CounselorProfile from '@/views/Counselor/CounselorProfile.vue'
 
 
 Vue.use(VueRouter)
@@ -87,14 +90,17 @@ const routes = [
     component: Records
   },
 
+  // 리스너
   {
     path: '/counselor',
     name: 'CounselorMain',
     component: CounselorMain
   },
-
-
-
+  {
+    path: '/counselor/:coEmail',
+    name: 'CounselorProfile',
+    component: CounselorProfile
+  },
 
   // 상담 화면
   {

@@ -29,8 +29,11 @@ export default new Vuex.Store({
     userid: "",
     usersession: "",
 
-    counselorEmail: '',
+    // 로그인한 유저의 이메일
     userEmail: '',
+
+    // 카운슬러 디테일 페이지
+    counselorDetail: [],
 
     // dummy data
     records: [
@@ -112,6 +115,11 @@ export default new Vuex.Store({
       state.isSticker = false
     },
     ////////////////////////////////////////////////////////////////////////////////
+    
+    // 리스너에서 클릭한 상담사 정보 관련
+    LOAD_COUNSELOR_PROFILE: function (state, results) {
+      state.counselorDetail = results
+    },
 
     // 감정분석 데이터
     SAVE_DATA: function (state, emotionData) {
@@ -131,10 +139,6 @@ export default new Vuex.Store({
     GET_USER_EMAIL: function (state, results) {
       state.userEmail = results
     },
-    GET_COUNSELOR_EMAIL: function (state, results) {
-      state.counselorEmail = results
-    },
-
   },
 
   actions: {
@@ -190,7 +194,7 @@ export default new Vuex.Store({
     },
 
     LoginForCounselor: function ({ commit }, credentials) {
-      commit('GET_COUNSELOR_EMAIL', credentials.email)
+      commit('GET_USER_EMAIL', credentials.email)
       if (this.getters.isLoggedIn) {
         router.push('/')
       }
@@ -218,7 +222,20 @@ export default new Vuex.Store({
     },
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    // 카운슬러 페이지로 이동
+    LoadCounselorProfile: function ({ commit }, request) {
+      axios({
+        method: 'get',
+        url: SERVER.URL + `/counselor-api/user/${request.email}`, 
+      })
+      .then((res) => {
+        commit('LOAD_COUNSELOR_PROFILE', res.data)
+        router.push({name: 'CounselorProfile', params: {coEmail : request.email}})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
 
     // for toggling
     toggleSideBar: function ({ commit }) {

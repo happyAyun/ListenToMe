@@ -1,192 +1,173 @@
 <template>
   <div id="myschedule" class="d-flex flex-column align-items-center pt-5 mx-5">
-    <div>
-      <h1 class="px-4 py-1 fw-bold">스케줄 관리</h1>
-    </div>
-    <hr>
-    <div>
-      <table border="1" align="center" class="table border-0 ">
-        <thead>
-          <tr>
-            <th></th>
-            <th v-for="date in dateList" :key="date">
-              {{ date }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>09:00</th>
-            <td v-for="(time, i) in firsttime" :key="i">
-              <div v-if="time[3] === 1">
-                <button class="schedule-btn2" disabled>미신청</button>
-              </div>
-              <div v-else-if="time[3] === 2">
-                <button 
-                  @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= firsttime, index= i, getClientInfo()"
-                  class="schedule-btn1">승인대기</button>
-              </div>
-              <div v-else-if="time[3] === 3">
-                <button class="schedule-btn3" disabled>예약완료</button>
-              </div>
-              <div v-else>
-                <button 
-                  @click="modalViewed= 2, position= firsttime, index= i, getFormatDate()"
-                  class="schedule-btn4">상담열기</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>11:00</th>
-            <td v-for="(time, j) in secondtime" :key="j">
-              <div v-if="time[3] === 1">
-                <button class="schedule-btn2" disabled>미신청</button>
-              </div>
-              <div v-else-if="time[3] === 2">
-                <button 
-                  @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= secondtime, index= j, getClientInfo()"
-                  class="schedule-btn1">승인대기</button>
-              </div>
-              <div v-else-if="time[3] === 3">
-                <button class="schedule-btn3" disabled>예약완료</button>
-              </div>
-              <div v-else>
-                <button
-                  @click="modalViewed= 2, position= secondtime, index= j, getFormatDate()"
-                  class="schedule-btn4">상담열기</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>15:00</th>
-            <td v-for="(time, s) in thirdtime" :key="s">
-              <div v-if="time[3] === 1">
-                <button class="schedule-btn2" disabled>미신청</button>
-              </div>
-              <div v-else-if="time[3] === 2">
-                <button 
-                  @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= thirdtime, index= s, getClientInfo()"
-                  class="schedule-btn1">승인대기</button>
-              </div>
-              <div v-else-if="time[3] === 3">
-                <button class="schedule-btn3" disabled>예약완료</button>
-              </div>
-              <div v-else>
-                <button 
-                  @click="modalViewed= 2, position= thirdtime, index= s, getFormatDate()"
-                  class="schedule-btn4">상담열기</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>17:00</th>
-            <td v-for="(time, k) in fourthtime" :key="k">
-              <!-- <button class="schedule-btn mt-2">{{ showWorkStatus(time) }}</button> -->
-              <div v-if="time[3] === 1">
-                <button class="schedule-btn2" disabled>미신청</button>
-              </div>
-              <div v-else-if="time[3] === 2">
-                <button 
-                  @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= fourthtime, index= k, getClientInfo()"
-                  class="schedule-btn1">승인대기</button>
-              </div>
-              <div v-else-if="time[3] === 3">
-                <button class="schedule-btn3" disabled>예약완료</button>
-              </div>
-              <div v-else>
-                <button 
-                  @click="modalViewed= 2, position= fourthtime, index= k, getFormatDate()"
-                  class="schedule-btn4">상담열기</button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="black-bg" v-if="modalViewed === 1">
-      <transition id="modalmyschedule">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
+    <div class="mb-4 p-4 part-profile">
+      <div>
+        <h1 class="px-4 py-1 fw-bold">스케줄 관리</h1>
+      </div>
+      <hr>
+      <div>
+        <table border="1" align="center" class="table wrap">
+          <thead>
+            <tr>
+              <th></th>
+              <th v-for="date in dateList" :key="date">
+                {{ date }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>09:00</th>
+              <td v-for="(time, i) in firsttime" :key="i">
+                <div v-if="time[3] === 1">
+                  <button class="schedule-btn2 fw-bold" disabled>미신청</button>
+                </div>
+                <div v-else-if="time[3] === 2">
+                  <button 
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= firsttime, index= i, getClientInfo()"
+                    class="schedule-btn1 fw-bold">승인대기</button>
+                </div>
+                <div v-else-if="time[3] === 3">
+                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                </div>
+                <div v-else>
+                  <button 
+                    @click="modalViewed= 2, position= firsttime, index= i, getFormatDate()"
+                    class="schedule-btn4 fw-bold">상담열기</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>11:00</th>
+              <td v-for="(time, j) in secondtime" :key="j">
+                <div v-if="time[3] === 1">
+                  <button class="schedule-btn2 fw-bold" disabled>미신청</button>
+                </div>
+                <div v-else-if="time[3] === 2">
+                  <button 
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= secondtime, index= j, getClientInfo()"
+                    class="schedule-btn1 fw-bold">승인대기</button>
+                </div>
+                <div v-else-if="time[3] === 3">
+                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                </div>
+                <div v-else>
+                  <button
+                    @click="modalViewed= 2, position= secondtime, index= j, getFormatDate()"
+                    class="schedule-btn4 fw-bold">상담열기</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>15:00</th>
+              <td v-for="(time, s) in thirdtime" :key="s">
+                <div v-if="time[3] === 1">
+                  <button class="schedule-btn2 fw-bold" disabled>미신청</button>
+                </div>
+                <div v-else-if="time[3] === 2">
+                  <button 
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= thirdtime, index= s, getClientInfo()"
+                    class="schedule-btn1 fw-bold">승인대기</button>
+                </div>
+                <div v-else-if="time[3] === 3">
+                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                </div>
+                <div v-else>
+                  <button 
+                    @click="modalViewed= 2, position= thirdtime, index= s, getFormatDate()"
+                    class="schedule-btn4 fw-bold">상담열기</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>17:00</th>
+              <td v-for="(time, k) in fourthtime" :key="k">
+                <div v-if="time[3] === 1">
+                  <button class="schedule-btn2 fw-bold" disabled>미신청</button>
+                </div>
+                <div v-else-if="time[3] === 2">
+                  <button 
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= fourthtime, index= k, getClientInfo()"
+                    class="schedule-btn1 fw-bold">승인대기</button>
+                </div>
+                <div v-else-if="time[3] === 3">
+                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                </div>
+                <div v-else>
+                  <button 
+                    @click="modalViewed= 2, position= fourthtime, index= k, getFormatDate()"
+                    class="schedule-btn4 fw-bold">상담열기</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-if="modalViewed === 1">
+        <div class="background">
+          <div class="window">
+            <div class="popup">
               <div class="modal-header">
-                <slot name="header">
-                접수확인
-                </slot>
+                <p>접수 확인</p>
               </div>
-              <div class="modal-body">
-                <slot name="body">
-                  <p>상담 일자 : {{ modalContent[1] }}</p>
-                  <p>시작 시간 : {{ modalContent[2] }}</p>
-                  <p>예약자 : {{ clientName }}</p>
-                  <p>상담자 : {{ name }}</p>
-                  <div v-if="sticker">
-                    <p>스티커 사용 O</p>
-                  </div>
-                  <div v-else>
-                    <p>스티커 사용 X</p>
-                  </div>
-                </slot>
+              <div class="modal-body px-5 mx-3">
+                <p>상담 일자 : {{ modalContent[1] }}</p>
+                <p>시작 시간 : {{ modalContent[2] }}</p>
+                <p>예약자 : {{ clientName }}</p>
+                <p>상담사 : {{ name }}</p>
+                <div v-if="sticker">
+                  <p>스티커 사용 O</p>
+                </div>
+                <div v-else>
+                  <p>스티커 사용 X</p>
+                </div>
               </div>
               <div class="modal-footer">
-                <slot name="footer">
-                  <button class="modal-default-button" style="background: rgba(86, 160, 255, 0.93);" @click="acceptConsultation">승인</button>
-                  <button class="modal-default-button" style="background: rgba(255, 94, 94, 0.92);" @click="modalViewed= 0">닫기</button>
-                </slot>
+                <button class="modal-button px-3 py-1" style="background: rgba(86, 160, 255, 0.93);" @click="acceptConsultation">승인</button>
+                <button class="modal-button px-3 py-1" style="background: rgba(255, 94, 94, 0.92);" @click="modalViewed= 0">닫기</button>
               </div>
             </div>
           </div>
         </div>
-      </transition>
-    </div>
-    <div class="black-bg" v-if="modalViewed === 2">
-      <transition id="modalmyschedule">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
+      </div>
+      <div v-if="modalViewed === 2">
+        <div class="background">
+          <div class="window">
+            <div class="popup">
               <div class="modal-header">
-                <slot name="header">
-                상담 개설
-                </slot>
+                <p>상담 개설</p>
               </div>
-              <div class="modal-body">
-                <slot name="body">
-                  <p>상담 일자 : {{ reserveDate }}</p>
-                  <p>시작 시간 : {{ reserveTime }}</p>
-                </slot>
+              <div class="modal-body p-4 my-5">
+                <p>상담 일자 : {{ reserveDate }}</p>
+                <p>시작 시간 : {{ reserveTime }}</p>
               </div>
               <div class="modal-footer">
-                <slot name="footer">
-                  <button class="modal-default-button" style="background: rgba(86, 160, 255, 0.93);" @click="openConsultation">확인</button>
-                  <button class="modal-default-button" style="background: rgba(255, 94, 94, 0.92);" @click="modalViewed= 0">닫기</button>
-                </slot>
+                <button class="modal-button px-3 py-1" style="background: rgba(86, 160, 255, 0.93);" @click="openConsultation">확인</button>
+                <button class="modal-button px-3 py-1" style="background: rgba(255, 94, 94, 0.92);" @click="modalViewed= 0">닫기</button>
               </div>
             </div>
           </div>
         </div>
-      </transition>
-    </div>
+      </div>
+    </div>  
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import SERVER from "@/api/index.js";
-// import { mapState } from 'vuex'
 import moment from 'moment'
 moment.locale('ko');
 
 export default {
   name: 'MySchedule',
-  components: {
-    // ModalForReservation
-  },
   data: function(){
     return {
       dateList: [],
       formatDateList: [],
       weekNumber: 7,
       hourlyWorkList: [],
-      // scheduleDict: {},
+
       scheduleList: [],
       firsttime: [],
       secondtime: [],
@@ -195,7 +176,6 @@ export default {
 
       // counselor 정보 가져오기
       name: '',
-      // email: '',
 
       // modal
       modalViewed: 0,
@@ -218,10 +198,6 @@ export default {
     }
   },
   methods: {
-    // ...mapActions([
-    //   'LoadSchedule'
-    // ])
-
     // 상담 등록 시 필요한 날짜, 시간 포맷
     getFormatDate() {
       var month = this.dateList[this.index].substring(0, 2);
@@ -269,15 +245,14 @@ export default {
       .catch((err) => console.log(err));
       this.modalViewed = 0;
       window.location.reload();
-      alert("등록이 완료되었습니다.")
+      // alert("등록이 완료되었습니다.")
     },
 
-    // 각자 정보 조회
+    // 상담사 정보 조회
     getCounselorData() {
       axios({
         method: 'get',
-        // url: SERVER.URL + '/USER/' + this.state.counselorEmail,
-        url: SERVER.URL + `/counselor-api/user/${this.$store.state.counselorEmail}`,
+        url: SERVER.URL + `/counselor-api/user/${this.$store.state.userEmail}`,
       })
       .then((res) => {
         // console.log(res)
@@ -286,11 +261,11 @@ export default {
       .catch((err) => console.log(err));
     },
 
-    // 각자 상담 스케줄 조회
+    // 상담 스케줄 조회
     getCounselorSchedule() {
       axios({
         method: 'get',
-        url: SERVER.URL + `/schedule-api/schedule/${this.$store.state.counselorEmail}`
+        url: SERVER.URL + `/schedule-api/schedule/${this.$store.state.userEmail}`
       })
       .then((res) => {
         this.scheduleList = res.data;
@@ -476,7 +451,7 @@ export default {
       this.modalViewed = 0;
       console.log(this.position)
       window.location.reload();
-      alert("승인이 완료되었습니다.")
+      // alert("승인이 완료되었습니다.")
     }
   },
   computed: {
@@ -490,9 +465,7 @@ export default {
     },
   },
   mounted() {
-    this.setDateList(this.startDate)
-    // this.LoadSchedule(this.openTimetable)
-    
+    this.setDateList(this.startDate)    
     this.getCounselorData()
     this.getCounselorSchedule()
   },
@@ -509,9 +482,8 @@ export default {
 
 #myschedule h1{
   font-size: 36px;
-  margin-bottom: 50px;
+  margin: 20px 0px;
   color: #695D5D;
-  background: #FFEDDA;
 }
 
 #myschedule .schedule-btn1 {
@@ -545,69 +517,25 @@ export default {
   width: 100%;
   font-size: 20px;
   padding: 5px;
-  background: #FFEDDA;
+  background: #ffdab3;
   opacity: 0.6;
   border-radius: 30px;
   border: none;
 }
 
-table {
+#myschedule table {
   width: 100%;
+  display: table;
+  table-layout: fixed;
   font-size: 20px;
-  border: 1px solid #807D7D;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.8;
   border-collapse: collapse;
   text-align: center;
 }
 
-th, td {
-  border: 1px solid #807D7D;
-  vertical-align: middle;
+#myschedule th, td {
+  border: 1px solid #e0e0e0;
   font-weight: bold;
-}
-
-.modal-mask {
-  position: fixed;
-  /* z-index: 9998; */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.modal-container {
-  margin: 0px auto;
-  background-color: #F9ECEA;
-  border-radius: 2px;
-  transition: all .3s ease;
-}
-
-.modal-header {
-  font-size: 32px;
-  font-weight: bold;
-  background-color: rgba(240, 174, 174, 0.7);
-}
-
-.modal-body {
-  margin: 20px 10px;
-  text-align: center;
-  font-size: 24px;
-}
-
-.modal-default-button {
-  border-radius: 30px;
-  border: none;
-  color: #ffffff;
-  font-size: 24px;
-  padding: 10px;
-  width: 15%;
-  margin: 0 10px;
 }
 </style>
