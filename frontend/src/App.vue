@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <!-- nav bar -->
     <header>
       <nav-bar/>
+
+      <!-- barkground -->
+      <introduction/>
     </header>
 
     <div :class="{ 'd-flex': $store.state.isSideBar }">
@@ -18,12 +20,38 @@
 <script>
 import NavBar from '@/components/basics/NavBar.vue'
 import SideBar from '@/components/basics/SideBar.vue'
+import Introduction from '@/components/basics/Introduction.vue'
 
 export default {
   name: 'App',
+  
   components: {
     NavBar,
     SideBar,
+    Introduction
   },
+
+  methods: {
+    checkScroll: function () {
+      let location = document.documentElement.scrollTop
+      let innerLocation = window.innerHeight
+      let bottomLocation = document.documentElement.scrollHeight
+
+      if (location <= 400) {
+        this.$store.dispatch('offNavbar')
+      } else if (location < bottomLocation - innerLocation) {
+        this.$store.dispatch('onNavbar')
+      } 
+      else if (location >= bottomLocation - innerLocation) {
+        document.body.classList.add('overflow-hidden')
+        console.log('touch down')
+      }
+      // console.log(location, innerLocation, bottomLocation)
+    },
+  },
+
+  created () {
+    window.addEventListener('scroll', this.checkScroll)
+  }
 }
 </script>

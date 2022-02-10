@@ -40,8 +40,8 @@
 
     <!-- 생년월일 -->
     <div class="mb-5 px-4">
-      <label for="date">생년월일</label> 
-      <input v-model="credentials_signup.birth" type="date" id="date" class="form-control" required/>
+      <label for="date" class="f-normal">생년월일</label> 
+      <input v-model="credentials_signup.birth" type="date" id="date" class="form-control f-normal" required/>
     </div>
 
     <!-- 버튼: ok -->

@@ -6,16 +6,19 @@
   background: #7DABD0;
 }
 
+.area-nav-top {
+  height: 9vh;
+  background: transparent;
+}
+
 /* 네비게이션바 로고 이미지 */
 .img-logo {
   width: 7vh;
   height: 7vh;
-
-  cursor: pointer;
 }
 
-/* 네비게이션바 로고 */
-#logo:hover {
+/* 네비게이션바 로고 마우스 포인터 */
+.pointer {
   cursor: pointer;
 }
 
@@ -78,35 +81,42 @@
 
 
 
+/* 사이드바 */
 
-
-/* 메인 영역 왼쪽 사이드바 */
-.main-side {
-  height: 100vh;
-  background-color: #ede1c9;
+/* 왼쪽 사이드바 */
+.area-side {
+  height: 91vh;
+  background-color: #fff4e8;
 }
 
-/* 메인 영역 왼쪽 사이드바 메뉴 */
-.main-side-menu {
+/* 왼쪽 사이드바 메뉴 */
+.menu {
   width: 10vw;
-  height: 7vh;
-  line-height: 7vh;
-
-  background: #95d0f1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 90px;
-}
-
-/* 메인 영역 왼쪽 사이드바 작은 메뉴 */
-.main-side-small-menu {
-  width: 8vw;
   height: 6vh;
-  line-height: 6vh;
 
-  background: #cfe7eb;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 90px;
+  border: none;
+  outline: none;
+
+  background: #7DABD0;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
+
+.menu-small {
+  width: 10vw;
+  height: 5vh;
+
+  border: none;
+  outline: none;
+
+  background: #95D0F1;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+
+
+
 
 /* 메인 영역 콘텐츠 */
 .main-content {
@@ -127,87 +137,7 @@
   border-radius: 30px;
 }
 
-/* 버튼 */
-.profile-btn {
-  background: #cfe7eb;
-  border-radius: 90px;
-  background: #ed9c9c;
-}
 
-.profile-area {
-  background: white;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-}
-
-/* FONT */
-
-/* subtitle */
-.font-subtitle {
-  font-size: 1.2vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* subtitle */
-.font-title {
-  font-size: 1.8vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* normal */
-.font-normal {
-  font-size: 1vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-}
-/* FONT: 정렬, 크기, 색, 그림자 */
-
-/* (폰트) 로고 */
-.font-logo {
-  font-size: 1.5vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
-}
-
-/* (폰트) 프로필 */
-.font-profile {
-  text-align: center;
-  font-size: 1.1vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
-}
-
-/* (폰트) 타이틀 */
-.font-title {
-  font-size: 1.5vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* (폰트) 일반 */
-.font-normal {
-  text-align: center;
-  font-size: 1vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* (폰트) 버튼 */
-.font-btn {
-  font-size: 1.1vw;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* AREA: 라인 높이, 너비, 높이, 배경색, 모서리, 그림자 */
-
-/* (영역) 헤더 */
-.area-header {
-  height: 10vh;
-  background: #7dabcf;
-}
 
 /* (영역) 프로필 */
 .area-profile {
@@ -217,105 +147,4 @@
   background: #cfe7eb;
   border-radius: 90px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
-}
-
-/* (영역) 사이드바 */
-.area-side {
-  height: 80vh;
-  background: #fbc1ad;
-}
-
-/* (영역) 사이드바 바디 */
-.area-side-body {
-  background: #ffffff;
-  border-radius: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* (영역) 푸터 */
-.area-footer {
-  height: 10vh;
-  background: #ede1c9;
-}
-
-/* (영역) 기록(records) */
-.area-record {
-  background: #ffffff;
-  border-radius: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* (영역) 기록(records) 바디 */
-.area-record-body {
-  background: #cfe7eb;
-  border-radius: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* MODAL: 라인 높이, 너비, 높이, 배경색, 그림자 */
-
-/* (모달) 감정 분석 */
-.modal-info {
-  line-height: 25vh;
-
-  width: 15vw;
-  height: 25vh;
-  background: rgba(254, 242, 201, 0.94);
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* FORM: 텍스트 정렬, 너비, 높이, 크기 조정, 배경색, 테두리, 모서리, 그림자 */
-
-/* (폼) 제목 */
-.form-title {
-  text-align: start;
-  width: 20vw;
-  height: 6vh;
-  background: #d8d8d8;
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* (폼) 내용 */
-.form-content {
-  text-align: start;
-  width: 20vw;
-  height: 46vh;
-  resize: none;
-  background: #d8d8d8;
-  border: none;
-  border-radius: 30px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* BUTTON: 배경, 모서리, 그림자 */
-
-/* (버튼) 기능 */
-.btn-func {
-  background: #cfe7eb;
-  border-radius: 90px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* (버튼) 이동 */
-.btn-mov {
-  background: #95d0f1;
-  border-radius: 90px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* (버튼) 종료 */
-.btn-end {
-  background: #ed9c9c;
-  border-radius: 90px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.4));
-}
-
-input:focus {
-  outline: none;
-}
-
-textarea:focus {
-  outline: none;
 }

@@ -13,12 +13,15 @@ export default new Vuex.Store({
     loginState: 0,
     ////////////////////////////////////////////////////////////////////////////////
 
+
     // for toggling
+    isNavbar: false,
     isSideBar: true,  // 상담실 입장 여부에 따른 왼쪽 사이드바 영역 토클링
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
-    isData: false,  // 감정분석 데이터 영역 토글링
-    isSticker: false,  // 감정분석 데이터 영역 토글링
+    isData: false,  // 감정분석 영역 토글링
+    isSticker: false,  // 스티커 기능 온오프
     ////////////////////////////////////////////////////////////////////////////////
+
 
     // 감정분석 데이터
     emotionData: '',
@@ -68,7 +71,7 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    // accounts //////////////////////////////////////////////////////////////////////
+    // accounts
     SET_TOKEN: function (state, token) { 
       state.authToken = token
       state.isLoggedIn = true
@@ -84,9 +87,16 @@ export default new Vuex.Store({
     SE_LOGINSTATE: function (state, payload) {
       state.loginState = payload
     },
-    ////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
 
     // for toggling
+    ON_NAVBAR: function (state) {
+      state.isNavbar = true
+    },
+    OFF_NAVBAR: function (state) {
+      state.isNavbar = false
+    },
     TOGGLE_SIDEBAR: function (state) {
       state.isSideBar = !state.isSideBar
     },
@@ -110,6 +120,7 @@ export default new Vuex.Store({
     },
     ////////////////////////////////////////////////////////////////////////////////
 
+
     // 감정분석 데이터
     SAVE_DATA: function (state, emotionData) {
       state.emotionData = emotionData
@@ -127,7 +138,7 @@ export default new Vuex.Store({
   },
 
   actions: {
-    // accounts //////////////////////////////////////////////////////////////////////
+    // accounts
     Signup: function (context, credentials) {
       axios({
         url: SERVER.URL + SERVER.ROUTES.signup,
@@ -206,8 +217,13 @@ export default new Vuex.Store({
     ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
     // for toggling
+    onNavbar: function ({ commit }) {
+      commit('ON_NAVBAR')
+    },
+    offNavbar: function ({ commit }) {
+      commit('OFF_NAVBAR')
+    },
     toggleSideBar: function ({ commit }) {
       commit('TOGGLE_SIDEBAR')
     },
@@ -231,6 +247,7 @@ export default new Vuex.Store({
     },
     ////////////////////////////////////////////////////////////////////////////////
 
+
     // 감정분석 데이터
     saveEmotionData: function ({ commit }, emotionData) {
       commit('SAVE_DATA', emotionData)
@@ -243,6 +260,18 @@ export default new Vuex.Store({
     SE_USERSESSION: (context, payload) => {
       return context.commit('SE_USERSESSION', payload)
     },
+
+    // move up and down
+    moveUp: () => {
+      window.scrollTo(0,0)
+      document.body.classList.remove('overflow-hidden')
+    },
+
+    moveDown: () => {
+      let bottomLocation = document.documentElement.scrollHeight
+      document.body.classList.add('overflow-hidden')
+      window.scrollTo(0, bottomLocation)
+    }
   },
    
   plugins: [createPersistedState()],

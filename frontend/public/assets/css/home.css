@@ -39,6 +39,14 @@
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* 굵은 본문 */
+.f-normal-bold {
+  font-size: 1vw;
+  font-weight: 600;
+  color: #000000;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
 /* 버튼 */
 .f-btn {
   font-size: 1.2vw;
@@ -102,49 +110,45 @@
   filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.2));
 }
 
+/* 더보기 */
+.btn-more {
+  width: 4vw;
+  height: 4vh;
 
-
-/* AREA */
-
-/* 왼쪽 사이드바 */
-.area-side {
-  height: 91vh;
-  background-color: #EDE1C9;
-}
-
-/* 왼쪽 사이드바 메뉴 */
-.part-side-menu {
-  width: 10vw;
-  height: 7vh;
-  line-height: 7vh;
+  border: none;
+  outline: none;
 
   background: #95D0F1;
-  border-radius: 90px;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.25));
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
-/* 왼쪽 사이드바 작은 메뉴 */
-.part-side-menu-small {
-  width: 8vw;
-  height: 5vh;
-  line-height: 5vh;
 
-  background: #CFE7EB;
-  border-radius: 90px;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.25));
+
+/* 홈 화면 */
+
+/* 이미지 */
+.part-home-image {
+  border: none;
+  outline: none;
 }
 
 /* 상담사 */
 .part-counselor {
   width: 14vw;
 
-  background: #FFF4E8;
   border: none;
-  border-radius: 30px;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.25));
+
+  background: #fff4e8;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
-/* 전체 상담사 */
+
+
+/* 상담사 화면 */
+
+/* 전역 설정 */
 #counselors {
   height: 91vh;
   overflow: auto;
@@ -152,9 +156,17 @@
 
 /* 카테고리 */
 .part-cat {
+  width: 3.8vw;
+  height: 3.6vh;
+  line-height: 4vh;
+
   background: #ED9C9C;
-  border-radius: 90px;
+  border-radius: 20px;
 }
+
+
+
+
 
 /* 북마크된 전체 상담사 */
 #marked-counselors {

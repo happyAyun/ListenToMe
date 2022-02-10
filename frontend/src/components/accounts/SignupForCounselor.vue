@@ -16,7 +16,7 @@
 
           <!-- 프로필 사진 폼 -->
           <div class="mb-3">
-            <input @change="onFileChange" type="file" id="myFile" class="form-control">
+            <input @change="onFileChange" type="file" id="myFile" class="form-control f-normal">
           </div>
         </div>
 
@@ -74,8 +74,8 @@
 
         <!-- 생년월일 -->
         <div class="">
-          <label for="date">생년월일</label> 
-          <input v-model="credentials_signup.birth" type="date" id="date" class="form-control" required/>
+          <label for="date" class="f-normal">생년월일</label> 
+          <input v-model="credentials_signup.birth" type="date" id="date" class="form-control f-normal" required/>
         </div>
       </div>
     </div>
