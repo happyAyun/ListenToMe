@@ -25,7 +25,7 @@
         <div class="col-5 d-flex flex-column justify-content-between">
           <!-- profile image -->
           <div class="mb-4 me-3 text-center">
-            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 18vw;">
+            <img :src="getImgUrl(this.counselorDetail.userInfo)" class="card-img-top" alt="counselor" style="width: 18vw;">
           </div>
 
           <!-- history -->
@@ -115,21 +115,32 @@
 <script>
 import { mapState } from 'vuex'
 import CounselorSchedule from '@/components/listener/CounselorSchedule.vue'
+import SERVER from "@/api/index.js"
 
 export default {
   name: 'CounselorDetail',
   components: {
     CounselorSchedule
   },
+  props: {
+    coEmail: {
+      type: String,
+    }
+  },
   data: function () {
     return {
       active: false,
-      coEmail: '',
+      conEmail: '',
     }
   },
   methods: {
     changeStatus: function () {
       this.active = !this.active
+    },
+
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
+      return images
     }
   },
   computed: {
@@ -137,12 +148,6 @@ export default {
       'counselorDetail',
     ]),
   },
-  created() {
-     const coEmail = this.$route.params.coEmail; 
-     this.coEmail = coEmail
-     console.log(this.coEmail)
-     console.log(this.counselorDetail)
-  }
 }
 </script>
 

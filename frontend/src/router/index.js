@@ -131,7 +131,8 @@ const routes = [
   {
     path: '/counselors/:coEmail',
     name: 'CounselorDetail',
-    component: CounselorDetail
+    component: CounselorDetail,
+    props: true
   },
 
 ]

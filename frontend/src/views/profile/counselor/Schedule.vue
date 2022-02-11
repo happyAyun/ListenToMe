@@ -244,7 +244,7 @@ export default {
       })
       .catch((err) => console.log(err));
       this.modalViewed = 0;
-      window.location.reload();
+      // window.location.reload();
       // alert("등록이 완료되었습니다.")
     },
 
@@ -450,7 +450,7 @@ export default {
       .catch((err) => console.log(err));
       this.modalViewed = 0;
       console.log(this.position)
-      window.location.reload();
+      // window.location.reload();
       // alert("승인이 완료되었습니다.")
     }
   },

@@ -17,7 +17,7 @@
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 10vw;">
+              <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;">  
             </div>
 
             <div class="card-body px-4">
@@ -78,7 +78,7 @@ export default {
       counselorEmail: '',
 
       // 클릭한 상담사 기록
-      counselorInfo: []
+      counselorInfo: [],
     }
   },
   methods: {
@@ -96,31 +96,17 @@ export default {
         url: SERVER.URL + '/counselor-api/list/0' 
       })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         this.counselorList = res.data.counselor;
-
-        for (var i=0; i < this.counselorList.lenghth; i++) {
-          var cemail = this.counselorList[i].email
-          var cimg = this.counselorList[i]
-          var photo = cemail.concat('_' + cimg)
-
-          axios({
-            methods: 'get',
-            url: SERVER.URL + `/counselor-api/user/image/${photo}`
-          })
-          .then((res) => {
-            console.log(res)
-            // this.counselorList[i].photo = res
-          })
-        }
+        // this.imgName = res.data.counselor.photo
       })
+      .catch((err) => console.log(err));
     },
-    // getCounselorImage() {
-    //   axios({
-    //     methods: 'get',
-    //     url: SERVER.URL + '/counselor-api/user/image'
-    //   })
-    // }
+
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
+      return images
+    }
   },
   created() {
     this.getCounselorList()

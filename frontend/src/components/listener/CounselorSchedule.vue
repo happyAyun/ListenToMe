@@ -162,7 +162,7 @@ export default {
         url: SERVER.URL + `/counselor-api/user/${this.coEmail}`,
       })
       .then((res) => {
-        // console.log(res)
+        console.log(res)
         this.name = res.data.userInfo.name
         this.email = res.data.userInfo.email
       })
@@ -338,7 +338,7 @@ export default {
       .catch((err) => console.log(err));
       this.modalViewed = 0;
       console.log(this.position)
-      window.location.reload();
+      // window.location.reload();
       // alert("상담이 신청되었습니다.")
     }
   },
@@ -359,7 +359,7 @@ export default {
     this.setDateList(this.startDate)    
     this.getCounselorData()
     this.getCounselorSchedule()
-  },
+  },  
 }
 
 </script>
