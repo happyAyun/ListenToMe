@@ -31,7 +31,7 @@
 
           <!-- button: 정보 수정 -->
           <div class="d-flex justify-content-center mb-3">
-            <button class="menu-small f-normal-bold">정보 수정</button>
+            <button @click="moveToUpdate" class="menu-small f-normal-bold">정보 수정</button>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
 
           <!-- button: 정보 수정 -->
           <div class="d-flex justify-content-center mb-3">
-            <button class="menu-small f-normal-bold">정보 수정</button>
+            <button @click="moveToUpdate" class="menu-small f-normal-bold">정보 수정</button>
           </div>
         </div>
       </div>
@@ -108,6 +108,13 @@ export default {
     moveToProfile: function () {
       this.$router.push({name: 'Profile'})
     },
+    moveToUpdate: function () {
+      if (this.$store.state.loginState === 1){
+        this.$router.push({name: 'UpdateForClient'})
+      } else {
+        this.$router.push({name: 'UpdateForCounselor'})
+      }
+    },
 
     toggleMypageBM: function () {
       this.active = !this.active
@@ -128,7 +135,7 @@ export default {
 
     moveUp: function () {
       this.$store.dispatch('moveUp')
-    }
+    },
   }
 }
 </script>

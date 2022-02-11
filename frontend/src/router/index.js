@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup.vue'
 import LoginForClient from '@/views/accounts/LoginForClient.vue'
 import LoginForCounselor from '@/views/accounts/LoginForCounselor.vue'
+import UpdateForClient from '@/views/accounts/UpdateForClient.vue'
+import UpdateForCounselor from '@/views/accounts/UpdateForCounselor.vue'
 
 // my pages
 import Bookmark from '@/views/profile/Bookmark.vue'
@@ -45,6 +47,16 @@ const routes = [
     path: '/login-counselor',
     name: 'LoginForCounselor',
     component: LoginForCounselor
+  },
+  {
+    path: '/update',
+    name: 'UpdateForClient',
+    component: UpdateForClient
+  },
+  {
+    path: '/update-counselor',
+    name: 'UpdateForCounselor',
+    component: UpdateForCounselor
   },
 
   // my pages
