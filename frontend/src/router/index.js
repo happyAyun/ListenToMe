@@ -8,20 +8,28 @@ import LoginForCounselor from '@/views/accounts/LoginForCounselor.vue'
 import UpdateForClient from '@/views/accounts/UpdateForClient.vue'
 import UpdateForCounselor from '@/views/accounts/UpdateForCounselor.vue'
 
-// my pages
-import Bookmark from '@/views/profile/Bookmark.vue'
-import MarkedCounselors from '@/components/MarkedCounselors.vue'
-import Profile from '@/views/profile/Profile.vue'
-import List from '@/views/profile/List.vue'
 
 // home
 import Home from '@/views/Home.vue'
-import Counselors from '@/components/Counselors.vue'
+
+// my page  
+  // client
+import Bookmark from '@/views/profile/client/Bookmark.vue'
+import MarkedCounselors from '@/components/MarkedCounselors.vue'
+import List from '@/views/profile/client/List.vue'
+
+  // counselor
+import Profile from '@/views/profile/counselor/Profile.vue'
+import Schedule from '@/views/profile/counselor/Schedule.vue'
 
 // counseling
 import Counseling from '@/views/counseling/Counseling.vue'
 import CounselingSetting from '@/views/counseling/CounselingSetting.vue'
 import CounselingFeedback from '@/views/counseling/CounselingFeedback.vue'
+
+// listener
+import Counselors from '@/views/listener/Counselors.vue'
+import CounselorDetail from '@/views/listener/CounselorDetail.vue'
 
 
 Vue.use(VueRouter)
@@ -59,7 +67,7 @@ const routes = [
     component: UpdateForCounselor
   },
 
-  // my pages
+  // my pages - client
   {
     path: '/my-page/bookmark',
     name: 'Bookmark',
@@ -71,26 +79,30 @@ const routes = [
     component: MarkedCounselors
   },
   {
+    path: '/my-page/list',
+    name: 'List',
+    component: List
+  },
+  
+  // my pages - counselor
+  {
     path: '/my-page/profile',
     name: 'Profile',
     component: Profile
   },
   {
-    path: '/my-page/list',
-    name: 'List',
-    component: List
+    path: '/my-page/schedule',
+    name: 'Schedule',
+    component: Schedule
   },
+  
+  
 
   // home
   {
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/counselors',
-    name: 'Counselors',
-    component: Counselors
   },
 
   // counseling
@@ -109,6 +121,19 @@ const routes = [
     name: 'CounselingFeedback',
     component: CounselingFeedback
   },
+
+  // listener
+  {
+    path: '/counselors',
+    name: 'Counselors',
+    component: Counselors
+  },
+  {
+    path: '/counselors/:coEmail',
+    name: 'CounselorDetail',
+    component: CounselorDetail
+  },
+
 ]
 
 

@@ -1,20 +1,20 @@
 <template>
-  <div id="profile" class="col-10 d-flex flex-column align-items-center pt-5">
+  <div id="counselorprofile" class="col-10 d-flex flex-column align-items-center pt-5">
     <div class="mb-4 p-4 part-profile">
       <!-- header -->
       <div class="d-flex align-items-center">
         <!-- name -->
-        <p class="mb-0 col-3 ps-2 f-title">James 상담사</p>
+        <p class="mb-0 col-3 ps-2 f-title">{{ this.counselorDetail.userInfo.name }} 상담사</p>
 
         <div class="col-9">
           <!-- introduction: one line -->
-          <p class="f-subtitle">"치유의 길을 함께 걸어가는 든든한 조력자가 되겠습니다."</p>
+          <p class="f-subtitle">{{ this.counselorDetail.userInfo.shortGreeting }}</p>
 
           <!-- category -->
           <div class="d-flex">
-            <p class="mb-0 me-2 px-2 py-1 f-normal part-cat">우울</p>
-            <p class="mb-0 me-2 px-2 py-1 f-normal part-cat">무기력</p>
-            <p class="mb-0 me-2 px-2 py-1 f-normal part-cat">자살</p>
+            <p class="mb-0 me-2 text-center part-cat f-normal">우울</p>
+            <p class="mb-0 me-2 text-center part-cat f-normal">무기력</p>
+            <p class="mb-0 me-2 text-center part-cat f-normal">자살</p>
           </div>
         </div>
       </div>
@@ -29,10 +29,11 @@
           </div>
 
           <!-- history -->
-          <div class="mb-3 me-3 p-3 part-content">
-            <p class="f-normal">중앙대학교 일반대학원 임상심리학 전공 석사 졸업</p>
+          <div class="me-3 p-3 part-content">
+            <p>{{ this.counselorDetail.userInfo.degree }}</p>
+            <!-- <p class="f-normal">중앙대학교 일반대학원 임상심리학 전공 석사 졸업</p>
             <p class="f-normal">전문상담사 2급 (한국상담학회)</p>
-            <p class="mb-0 f-normal">정신건강임상심리사 1급 (보건복지부)</p>
+            <p class="mb-0 f-normal">정신건강임상심리사 1급 (보건복지부)</p> -->
           </div>
         </div>
 
@@ -41,15 +42,16 @@
           <div class="ms-3 mb-4">
             <p class="f-subtitle">소개</p>
             <div class="p-3 part-content">
-              <p class="f-subtitle">"치유와 성장으로 가는 길 함께해요"</p>
+              <p>{{ this.counselorDetail.userInfo.greeting }}</p>
+              <!-- <p class="f-subtitle">"치유와 성장으로 가는 길 함께해요"</p>
               <p class="f-normal">누구나 아프고, 실수하고 상처받는 존재입니다.</p>
               <p class="f-normal">선생님의 치유, 회복, 성장의 과정에 함께 하겠습니다.</p>
-              <p class="mb-0 f-normal">얼어붙은 맘과 몸에 따뜻한 봄을 가져갈 그여정에 함께 걷고 싶습니다.</p>
+              <p class="mb-0 f-normal">얼어붙은 맘과 몸에 따뜻한 봄을 가져갈 그여정에 함께 걷고 싶습니다.</p> -->
             </div>
           </div>
 
           <!-- review -->
-          <div class="ms-3 mb-3">
+          <div class="ms-3">
             <div class="d-flex">
               <p class="me-3 f-subtitle">평점 5.0</p>
               <p @click="changeStatus" class="f-normal">more</p>
@@ -72,6 +74,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <counselor-schedule :coEmail="coEmail"/>
       </div>
     </div>
 
@@ -108,20 +113,35 @@
 </template>
 
 <script>
-export default {
-  name: 'Profile',
-  components: {
+import { mapState } from 'vuex'
+import CounselorSchedule from '@/components/listener/CounselorSchedule.vue'
 
+export default {
+  name: 'CounselorDetail',
+  components: {
+    CounselorSchedule
   },
   data: function () {
     return {
       active: false,
+      coEmail: '',
     }
   },
   methods: {
     changeStatus: function () {
       this.active = !this.active
     }
+  },
+  computed: {
+    ...mapState([
+      'counselorDetail',
+    ]),
+  },
+  created() {
+     const coEmail = this.$route.params.coEmail; 
+     this.coEmail = coEmail
+     console.log(this.coEmail)
+     console.log(this.counselorDetail)
   }
 }
 </script>
