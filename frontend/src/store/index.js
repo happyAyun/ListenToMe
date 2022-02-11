@@ -145,6 +145,10 @@ export default new Vuex.Store({
     SE_USERSESSION: function (state, payload) {
       state.usersession = payload
     },
+
+    GET_USER_EMAIL: function (state, results) {
+      state.userEmail = results
+    },
   },
 
   actions: {
