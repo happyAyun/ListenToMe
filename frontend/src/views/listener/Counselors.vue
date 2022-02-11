@@ -68,9 +68,7 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Counselors',
-  components: {
 
-  },
   data: function () {
     return {
       counselorList: [],
@@ -81,6 +79,7 @@ export default {
       counselorInfo: []
     }
   },
+  
   methods: {
     ...mapActions([
       'LoadCounselorProfile',

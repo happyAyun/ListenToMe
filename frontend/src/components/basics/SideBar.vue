@@ -95,24 +95,30 @@ export default {
     moveToCounseling: function () {
       this.active = false
       this.$router.push({name: 'CounselingSetting'})
+        .catch(() => {})
     },
 
     moveToHome: function () {
       this.active = false
       this.$router.push({name: 'Home'})
+        .catch(() => {})
     },
 
     moveToBookmark: function () {
       this.$router.push({name: 'Bookmark'})
+        .catch(() => {})
     },
     moveToProfile: function () {
       this.$router.push({name: 'Profile'})
+        .catch(() => {})
     },
     moveToUpdate: function () {
       if (this.$store.state.loginState === 1){
         this.$router.push({name: 'UpdateForClient'})
+          .catch(() => {})
       } else {
         this.$router.push({name: 'UpdateForCounselor'})
+          .catch(() => {})
       }
     },
 
@@ -127,14 +133,17 @@ export default {
 
     moveToList: function () {
       this.$router.push({name: 'List'})
+        .catch(() => {})
     },
 
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
+        .catch(() => {})
     },
 
     moveToSchedule: function () {
       this.$router.push({name: 'Schedule'})
+        .catch(() => {})
     },
 
     moveUp: function () {

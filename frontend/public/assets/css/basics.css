@@ -116,16 +116,18 @@
 
 
 
+/* margin */
 
-
-/* 메인 영역 콘텐츠 */
-.main-content {
-  width: 11vw;
-
-  background: #fff4e8;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
-  border-radius: 30px;
+/* mt-nav: 네브 높이만큼 margin top 주기 */
+.mt-nav {
+  margin-top: 18vh;
 }
+
+
+
+
+
+
 
 /* 프로필(상담 내역) 콘텐츠 */
 .profile-content {

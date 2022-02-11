@@ -154,6 +154,11 @@
   overflow: auto;
 }
 
+#counselor-detail {
+  height: 91vh;
+  overflow: auto;
+}
+
 /* 카테고리 */
 .part-cat {
   width: 3.8vw;

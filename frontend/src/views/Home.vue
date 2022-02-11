@@ -7,10 +7,10 @@
     </div>
 
     <!-- body -->
-    <div class="d-flex justify-content-around align-items-center">
+    <div class="d-flex justify-content-around ">
       <div v-for="(listener, index) in todayListners" :key=index>
         <!-- content -->
-        <div @click="moveToProfile" class="p-2 card part-counselor">
+        <div @click="LoadCounselorProfile(listener)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
             <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
@@ -31,6 +31,7 @@
 <script>
 import axios from 'axios'
 import SERVER from '@/api/index.js'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -42,6 +43,10 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'LoadCounselorProfile',
+    ]),
+
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
     },

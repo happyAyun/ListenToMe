@@ -1,11 +1,11 @@
 <template>
-  <div id="list" class="col-10 p-5">
+  <div id="list" class="col-10 p-5 overflow-auto">
     <!-- 진행 예정 상담 -->
     <div class="mb-5 pt-5 pb-2 px-5">
       <!-- title -->
       <div class="mb-4 d-flex justify-content-between align-items-center">
         <p class="mb-0 me-4 f-title">진행 예정 상담</p>
-        <button @click="moveToCounselors" class="mb-0 p-0 btn-tool f-btn" style="width: 7vw; background: #FFDF70">300 points</button>
+        <button class="mb-0 p-0 btn-tool f-btn" style="width: 7vw; background: #FFDF70">300 points</button>
       </div>
 
       <!-- content -->
@@ -64,6 +64,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+
 export default {
   name: 'Records',
   components: {
@@ -96,6 +99,29 @@ export default {
         },
       ]
     }
+  }, 
+
+  methods: {
+    getCounselingList: function () {
+      axios({
+        method: 'get',
+        url: SERVER.URL + SERVER.ROUTES.counselingList + `${0}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+
+  created () {
+    this.getCounselingList()
   }
 }
 </script>

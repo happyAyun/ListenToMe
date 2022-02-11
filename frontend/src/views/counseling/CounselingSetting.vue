@@ -38,7 +38,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'CounselingMain',
+  name: 'CounselingSetting',
 
   data () {
     return {

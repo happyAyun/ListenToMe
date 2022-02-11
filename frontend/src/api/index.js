@@ -16,6 +16,9 @@ export default {
     memosSelection: '/memo-api/list/',
 
     // home
-    todayListeners: '/counselor-api/today/'
+    todayListeners: '/counselor-api/today/',
+
+    // profile
+    counselingList: '/schedule-api/client/approved?page=',
   }
 }

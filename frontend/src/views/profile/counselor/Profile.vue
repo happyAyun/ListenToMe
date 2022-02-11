@@ -1,5 +1,5 @@
 <template>
-  <div id="profile" class="col-10 d-flex flex-column align-items-center pt-5">
+  <div id="profile" class="col-10 d-flex flex-column align-items-center pt-5 overflow-auto">
     <div class="mb-4 p-4 part-profile">
       <!-- header -->
       <div class="d-flex align-items-center">
