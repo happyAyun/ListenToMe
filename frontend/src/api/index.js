@@ -14,5 +14,8 @@ export default {
     memoCreation: '/memo-api/write/',
     memoSelection: '/memo-api/',
     memosSelection: '/memo-api/list/',
+
+    // home
+    todayListeners: '/counselor-api/today/'
   }
 }

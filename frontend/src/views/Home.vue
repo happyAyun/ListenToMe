@@ -29,6 +29,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+
 export default {
   name: 'Home',
   components: {
@@ -77,6 +80,23 @@ export default {
         this.$router.push({name: 'Profile'})
       }
     },
+    getTodayCounselors() {
+      axios({
+        methods: 'get',
+        url: SERVER.URL + SERVER.ROUTES.todayListeners,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+      .then((res) => {
+        console.log(res)
+      })
+    },
+  },
+
+  created () {
+    this.getTodayCounselors()
   }
 }
 </script>
