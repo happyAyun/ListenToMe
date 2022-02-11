@@ -169,6 +169,10 @@
   border-radius: 20px;
 }
 
+#list {
+  height: 91vh;
+  overflow: auto;
+}
 
 
 

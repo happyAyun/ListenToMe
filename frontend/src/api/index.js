@@ -20,5 +20,6 @@ export default {
 
     // profile
     counselingList: '/schedule-api/client/approved?page=',
+    doneList: '/schedule-api/client/ended?page=',
   }
 }

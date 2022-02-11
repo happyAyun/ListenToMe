@@ -1,15 +1,15 @@
 <template>
-  <div id="list" class="col-10 p-5 overflow-auto">
+  <div id="list" class="col-10 p-3 overflow-auto">
     <!-- 진행 예정 상담 -->
-    <div class="mb-5 pt-5 pb-2 px-5">
+    <div class="mb-4 pt-5 pb-2 px-5">
       <!-- title -->
       <div class="mb-4 d-flex justify-content-between align-items-center">
         <p class="mb-0 me-4 f-title">진행 예정 상담</p>
-        <button class="mb-0 p-0 btn-tool f-btn" style="width: 7vw; background: #FFDF70">300 points</button>
+        <button class="mb-0 p-0 btn-tool f-btn" style="width: 8vw; background: #FFDF70">{{ leftPoints }} points</button>
       </div>
 
       <!-- content -->
-      <ul class="d-flex list-group">
+      <ul class="d-flex list-group mb-4">
         <!-- header -->
         <li class="list-group-item d-flex" style="background: #95D0F1;">
           <p class="col-2 mb-0 text-center f-subtitle">번호</p>
@@ -20,25 +20,37 @@
         </li>
         
         <!-- body -->
-        <li v-for="(record, index) in records" :key=index class="list-group-item d-flex profile-records">
-          <p class="col-2 mb-0 text-center f-normal">{{ record.id }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ record.counselor }}</p>
-          <p class="col-3 mb-0 text-center f-normal">{{ record.date }}</p>
-          <p class="col-3 mb-0 text-center f-normal">{{ record.time }}</p>
-          <p class="col-2 mb-0 text-center f-normal">승인</p>
+        <li v-for="(item, index) in list" :key=index class="list-group-item d-flex profile-records">
+          <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
+          <p class="col-3 mb-0 text-center f-normal">{{ item.date }}</p>
+          <p class="col-3 mb-0 text-center f-normal">{{ item.time }}</p>
+          
+          <p v-if="item.state === 1" class="col-2 mb-0 text-center f-normal">대기</p>
+          <p v-else-if="item.state === 2" class="col-2 mb-0 text-center f-normal">승인</p>
         </li>
+      </ul>
+
+      <ul class="d-flex justify-content-center pagination">
+        <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+        <li
+          v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
+        >
+          <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+        </li>
+        <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
       </ul>
     </div>
 
     <!-- 종료된 상담 -->
-    <div class="mb-5 pt-5 pb-2 px-5">
+    <div class="mb-4 pb-2 px-5">
       <!-- title -->
       <div class="mb-4 d-flex justify-content-between align-items-center">
         <p class="mb-0 me-4 f-title">종료된 상담</p>
       </div>
 
       <!-- content -->
-      <ul class="d-flex list-group">
+      <ul class="d-flex list-group mb-4">
         <!-- header -->
         <li class="list-group-item d-flex" style="background: #7DABD0;">
           <p class="col-2 mb-0 text-center f-subtitle">번호</p>
@@ -50,14 +62,24 @@
         </li>
         
         <!-- body -->
-        <li v-for="(record, index) in records" :key=index class="list-group-item d-flex profile-records">
-          <p class="col-2 mb-0 text-center f-normal">{{ record.id }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ record.counselor }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ record.date }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ record.time }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ record.point }}</p>
+        <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex profile-records">
+          <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.date }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.time }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.point }}</p>
           <p class="col-2 mb-0 text-center f-normal">보기</p>
         </li>
+      </ul>
+
+      <ul class="d-flex justify-content-center pagination">
+        <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+        <li
+          v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
+        >
+          <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+        </li>
+        <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
       </ul>
     </div>
   </div>
@@ -74,45 +96,113 @@ export default {
   },
   data: function () {
     return {
-      // dummy data
-      records: [
-        {
-          id: 1,
-          counselor: 'James',
-          date: '2022-01-31',
-          time: '15:00 ~ 17:00',
-          point: 200,
-        },
-        {
-          id: 2,
-          counselor: 'Claire',
-          date: '2022-01-31',
-          time: '15:00 ~ 17:00',
-          point: 200,
-        },
-        {
-          id: 3,
-          counselor: 'Jake',
-          date: '2022-01-31',
-          time: '15:00 ~ 17:00',
-          point: 200,
-        },
-      ]
+      currentPage: 1,
+      totalPages: 0,
+      list: '',
+
+      currentPageDone: 1,
+      totalPagesDone: 0,
+      doneList: '',
+
+      leftPoints: 10000,
     }
   }, 
 
   methods: {
-    getCounselingList: function () {
+    setPage: function (page) {
+      this.currentPage = page
+      this.getCounselingList(this.currentPage)
+    },
+    setBack: function () {
+      if (this.currentPage !== 1) {
+        this.currentPage--
+      }
+      this.getCounselingList(this.currentPage)
+      console.log(this.currentPage)
+    },
+    setNext: function () {
+      if (this.currentPage !== this. totalPages) {
+        this.currentPage++
+      }
+      this.getCounselingList(this.currentPage)
+      console.log(this.currentPage)
+    },
+
+    setPageDone: function (page) {
+      this.currentPageDone = page
+      this.getDoneList(this.currentPageDone)
+    },
+    setBackDone: function () {
+      if (this.currentPageDone !== 1) {
+        this.currentPageDone--
+      }
+      this.getCounselingList(this.currentPageDone)
+      console.log(this.currentPageDone)
+    },
+    setNextDone: function () {
+      if (this.currentPageDone !== this. totalPagesDone) {
+        this.currentPageDone++
+      }
+      this.getCounselingList(this.currentPageDone)
+      console.log(this.currentPageDone)
+    },
+
+    getCounselingList: function (page) {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.counselingList + `${0}/`,
+        url: SERVER.URL + SERVER.ROUTES.counselingList + `${page}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
         },
       })
         .then(res => {
-          console.log(res)
+          this.list = res.data.content
+          this.totalPages = res.data.totalPages
+          const items = []
+          res.data.content.forEach((item) => {
+            let info = {
+              id: item.id,
+              counselor_name: item.counselor_name,
+              date: item.dateTime.slice(0, 10),
+              time: item.dateTime.slice(11, 16),
+              state: item.state,
+            }
+            items.push(info)
+          })
+          this.list = items
+          console.log(res.data.content)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getDoneList: function (page) {
+      axios({
+        method: 'get',
+        url: SERVER.URL + SERVER.ROUTES.doneList + `${page}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+        .then(res => {
+          this.doneList = res.data.content
+          this.totalPagesDone = res.data.totalPages
+          this.leftPoints = 10000 - 1000 * ((this.totalPagesDone - 1) * 5 + res.data.numberOfElements)
+          const items = []
+          res.data.content.forEach((item) => {
+            let info = {
+              id: item.id,
+              counselor_name: item.counselor_name,
+              date: item.dateTime.slice(0, 10),
+              time: item.dateTime.slice(11, 16),
+              point: item.point,
+            }
+            items.push(info)
+          })
+          this.doneList = items
+          console.log(res.data)
         })
         .catch(err => {
           console.log(err)
@@ -121,7 +211,8 @@ export default {
   },
 
   created () {
-    this.getCounselingList()
+    this.getCounselingList(0)
+    this.getDoneList(0)
   }
 }
 </script>
