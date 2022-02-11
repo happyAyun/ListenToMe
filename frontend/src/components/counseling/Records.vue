@@ -6,13 +6,20 @@
     </header>
 
     <!-- body: 전체 기록 -->
-    <section v-for="(record, index) in records" :key=index>
-      <record-item :record="record"></record-item>
+    <div v-if="active" id="record-item" class="d-flex justify-content-center align-items-center mb-3 p-3 part-record">
+      <p class="mb-0 py-2 f-normal">기록이 없습니다.</p>
+    </div>
+
+    <section v-for="(memo, index) in memos" :key=index>
+      <record-item :memo="memo"></record-item>
     </section>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+
 import RecordItem from '@/components/counseling/RecordItem.vue'
 
 export default {
@@ -22,10 +29,40 @@ export default {
     RecordItem
   },
 
-  computed: {
-    records: function () {
-      return this.$store.state.records
+  data: function () {
+    return {
+      memos: '',
+      active: false,
     }
+  },
+
+  methods: {
+    getMemos: function () {
+      axios({
+        method: 'get',
+        url: SERVER.URL + SERVER.ROUTES.memosSelection + `${2}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+        .then(res => {
+          if (res.data.length == 0) {
+            this.active = true
+          } else {
+            this.active = false
+            this.memos = res.data
+          }
+          console.log(this.memos)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }, 
+
+  created () {
+    this.getMemos()
   }
 }
 </script>

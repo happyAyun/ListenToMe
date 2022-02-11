@@ -8,23 +8,33 @@
       <!-- message: 저장 여부 -->
       <p v-show="active === 1" class="mb-0 pe-3 f-normal">분석 시작</p>
       <p v-show="active === 2" class="mb-0 pe-3 f-normal">저장 완료</p>
+      <p v-show="active === 3" class="mb-0 pe-3 f-normal">내용을 입력해주세요.</p>
     </div>
 
     <!-- body: form -->
     <section class="d-flex flex-column justify-content-evenly align-items-center p-3 part-tool" style="height: 70vh;">
       <!-- form: 제목 -->
-      <input type="text" placeholder="제목" class="form-control border-2 f-normal" required>
+      <input
+        v-model.trim="memo.title"
+        type="text" placeholder="제목" class="form-control border-2 f-normal" required
+      >
 
       <!-- form: 내용 -->
-      <textarea placeholder="내용" class="form-control border-2 mb-2 form-content f-normal" required></textarea>
+      <textarea
+        v-model.trim="memo.content"
+        placeholder="내용" class="form-control border-2 mb-2 form-content f-normal" required
+      >
+      </textarea>
 
       <!-- footer: 기능 버튼 -->
       <footer class="d-flex justify-content-between" style="width: 20vw;">
         <!-- button: 감정 분석 -->
-        <button @click="toggleData" class="btn-func f-btn" style="width: 8vw;">감정 분석</button>
+        <div v-if="$store.state.loginState === 2">
+          <button @click="toggleData" class="btn-func f-btn" style="width: 8vw;">감정 분석</button>
+        </div>
 
         <!-- button: 저장 -->
-        <button @click="showMessageOfSaving" class="btn-func f-btn">저장</button>
+        <button @click="postMemo" class="btn-func f-btn">저장</button>
       </footer>
     </section>
   </div>
@@ -32,6 +42,8 @@
 
 <script>
 import * as faceapi from 'face-api.js'
+import axios from 'axios'
+import SERVER from '@/api/index.js'
 
 export default {
   name: 'Memo',
@@ -47,7 +59,12 @@ export default {
         sad: 0,
         surprised: 0,
       },
-      active: 0,  // 플래그: 메시지 출력
+      memo: {
+        id: 2,  // should be calculated
+        title: '',
+        content: ''
+      },
+      active: 0,  // 메시지 출력 토글링
     }
   },
 
@@ -97,6 +114,9 @@ export default {
     changeStatusToSave: function () {
       this.active = 2
     },
+    changeStatusToError: function () {
+      this.active = 3
+    },
     changeStatusToHide: function () {
       this.active = 0
     },
@@ -108,12 +128,37 @@ export default {
       this.changeStatusToSave()
       setTimeout(this.changeStatusToHide, 500)
     },
+    showMessageOfError: function () {
+      this.changeStatusToError()
+      setTimeout(this.changeStatusToHide, 500)
+    },
     toggleData: function () {
       this.getData()
       this.showMessageOfAnal()
       // 감정분석 영역이 활성화 되어 있지 않은 경우
       if (!this.$store.state.isData) {
         this.$store.dispatch('toggleData')
+      }
+    },
+
+    postMemo: function () {
+      if (this.memo.title && this.memo.content) {
+        axios({
+          method: 'post',
+          url: SERVER.URL + SERVER.ROUTES.memoCreation,
+          headers: {
+            'Content-Type': 'application/json',
+            'access-token': `${this.$store.state.authToken}`
+          },
+          data: this.memo,
+        })
+          .then(res => {
+            console.log(res)
+            this.memoSaved = this.memo
+            this.showMessageOfSaving()
+          })
+      } else {
+        this.showMessageOfError()
       }
     },
   },

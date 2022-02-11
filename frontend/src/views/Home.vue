@@ -1,44 +1,26 @@
 <template>
-  <div id="home" class="col-10">
-    <!-- 게시판 -->
-    <div class="mb-5 pt-5 pb-2 px-5">
-      <!-- title -->
-      <div class="mb-4 d-flex">
-        <p class="me-3 f-title">오늘의 이야기</p>
-        <p class="f-normal">more</p>
-      </div>
-
-      <!-- content -->
-      <div class="d-flex justify-content-between">
-        <div v-for="(post, index) in posts" :key=index >
-          <p class="p-3 main-content f-normal">{{ post.content }}</p>
-        </div>
-      </div>
+  <div id="home" class="col-10 p-5 over-flow-auto">
+    <!-- title -->
+    <div class="mb-5 d-flex">
+      <p class="mb-0 me-4 f-title">오늘의 리스너</p>
+      <button @click="moveToCounselors" class="mb-0 p-0 btn-more f-normal">more</button>
     </div>
 
-    <!-- 상담사 -->
-    <div class="px-5">
-      <!-- title -->
-      <div class="mb-4 d-flex">
-        <p class="me-3 f-title">오늘의 상담사</p>
-        <p @click="moveToCounselors" class="f-normal">more</p>
-      </div>
+    <!-- body -->
+    <div class="d-flex justify-content-around align-items-center">
+      <div v-for="(post, index) in posts" :key=index>
+        <!-- content -->
+        <div @click="moveToProfile" class="p-2 card part-counselor">
+          <!-- image -->
+          <div class="py-3 text-center">
+            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
+          </div>
 
-      <div class="d-flex justify-content-between">
-        <div v-for="(post, index) in posts" :key=index>
-          <!-- content -->
-          <div class="card part-counselor">
-            <!-- image -->
-            <div class="py-2 text-center">
-              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
-            </div>
-
-            <div class="px-4 card-body d-flex justify-content-between">
-              <!-- 이름 -->
-              <p class="mb-0 f-subtitle">{{ post.name }}</p>
-              <!-- 평점 -->
-              <p class="mb-0 f-subtitle">{{ post.score }}</p>
-            </div>
+          <div class="px-4 card-body d-flex justify-content-between">
+            <!-- 이름 -->
+            <p class="mb-0 f-subtitle">{{ post.name }}</p>
+            <!-- 평점 -->
+            <p class="mb-0 f-subtitle">{{ post.score }}</p>
           </div>
         </div>
       </div>
@@ -87,7 +69,14 @@ export default {
   methods: {
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
-    }
+    },
+    moveToProfile: function () {
+      if (this.$store.state.loginState === 0) {
+        this.$router.push({name: 'LoginForClient'})
+      } else {
+        this.$router.push({name: 'Profile'})
+      }
+    },
   }
 }
 </script>

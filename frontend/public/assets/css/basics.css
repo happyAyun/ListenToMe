@@ -6,16 +6,19 @@
   background: #7DABD0;
 }
 
+.area-nav-top {
+  height: 9vh;
+  background: transparent;
+}
+
 /* 네비게이션바 로고 이미지 */
 .img-logo {
   width: 7vh;
   height: 7vh;
-
-  cursor: pointer;
 }
 
-/* 네비게이션바 로고 */
-#logo:hover {
+/* 네비게이션바 로고 마우스 포인터 */
+.pointer {
   cursor: pointer;
 }
 
@@ -83,7 +86,7 @@
 /* 왼쪽 사이드바 */
 .area-side {
   height: 91vh;
-  background-color: #EDE1C9;
+  background-color: #fff4e8;
 }
 
 /* 왼쪽 사이드바 메뉴 */
@@ -100,8 +103,8 @@
 }
 
 .menu-small {
-  width: 7vw;
-  height: 6vh;
+  width: 10vw;
+  height: 5vh;
 
   border: none;
   outline: none;

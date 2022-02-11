@@ -25,32 +25,32 @@
 				<section class="d-flex flex-column justify-content-between px-4 py-3 part-tool" style="height: 70vh;">
 					<div class="py-3">
 						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Angry:</p>
-							<p class="mb-0 f-noraml">{{ emotionData.angry }}</p>
-						</div>
-						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Disgusted:</p>
-							<p class="mb-0 f-noraml">{{ emotionData.disgusted }}</p>
-						</div>
-						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Fearful:</p>
+							<p class="mb-0 f-noraml">공포:</p>
 							<p class="mb-0 f-noraml">{{ emotionData.fearful }}</p>
 						</div>
 						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Happy:</p>
+							<p class="mb-0 f-noraml">기쁨:</p>
 							<p class="mb-0 f-noraml">{{ emotionData.happy }}</p>
 						</div>
 						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Neutral:</p>
-							<p class="mb-0 f-noraml">{{ emotionData.neutral }}</p>
+							<p class="mb-0 f-noraml">놀람:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.surprised }}</p>
 						</div>
 						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Sad:</p>
+							<p class="mb-0 f-noraml">분노:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.angry }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">슬픔:</p>
 							<p class="mb-0 f-noraml">{{ emotionData.sad }}</p>
 						</div>
 						<div class="d-flex justify-content-between mb-2">
-							<p class="mb-0 f-noraml">Surprised:</p>
-							<p class="mb-0 f-noraml">{{ emotionData.surprised }}</p>
+							<p class="mb-0 f-noraml">역겨움:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.disgusted }}</p>
+						</div>
+						<div class="d-flex justify-content-between mb-2">
+							<p class="mb-0 f-noraml">중립:</p>
+							<p class="mb-0 f-noraml">{{ emotionData.neutral }}</p>
 						</div>
 					</div>
 
@@ -102,8 +102,8 @@ import Records from '@/components/counseling/Records.vue'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-const OPENVIDU_SERVER_URL = "https://localhost:4443"
-const OPENVIDU_SERVER_SECRET = "MY_SECRET"
+const OPENVIDU_SERVER_URL = "https://i6a605.p.ssafy.io:443/"
+const OPENVIDU_SERVER_SECRET = "ssafy605"
 
 export default {
   name: 'Counseling',
@@ -162,8 +162,10 @@ export default {
 		this.OV = undefined
 
 		window.removeEventListener('beforeunload', this.leaveSession)
+		this.$store.dispatch('closeSticker')  // 스티커 기능 끄기
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
-		this.$store.dispatch('toggleData')  // 감정분석 영역 닫기
+		this.$store.dispatch('closeData')  // 감정분석 영역 닫기
+		this.$store.dispatch('toggleMemo')  // 메모 영역 토글링
 		this.$router.push({name: 'CounselingFeedback'})
     },
 
@@ -308,9 +310,9 @@ export default {
   },
 
   created(){
-      this.mySessionId = this.GE_USERSESSION
-      this.myUserName =  this.GE_USERID
-      this.joinSession()
+		this.mySessionId = this.GE_USERSESSION
+		this.myUserName =  this.GE_USERID
+		this.joinSession()
   },
 }
 </script>
