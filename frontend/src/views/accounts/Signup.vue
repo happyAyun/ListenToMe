@@ -56,10 +56,12 @@ export default {
     showForm() {
       this.active = true
       this.$router.push({name: 'SignupForClient'})
+        .catch(() => {})
     },
     showFormPro() {
       this.active = false
       this.$router.push({name: 'SignupForCounselor'})
+        .catch(() => {})
     },
   }
 }

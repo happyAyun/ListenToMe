@@ -1,6 +1,6 @@
 <template>
-  <div id="counselorprofile" class="col-10 d-flex flex-column align-items-center pt-5">
-    <div class="mb-4 p-4 part-profile">
+  <div id="counselor-detail" class="col-10 d-flex flex-column justify-content-center align-items-center p-5 overflow-auto">
+    <div class="mt-nav mb-4 p-5 part-profile">
       <!-- header -->
       <div class="d-flex align-items-center">
         <!-- name -->

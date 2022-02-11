@@ -1,5 +1,5 @@
 <template>
-  <div id="counselormain" class="col-10">
+  <div id="counselors" class="col-10 overflow-auto">
     <!-- title -->
     <div class="mb-5 pt-5 d-flex mx-5">
       <p class="me-3 f-title">전체 상담사</p>
@@ -30,7 +30,7 @@
 
               <div class="d-flex justify-content-between">
                 <!-- 이름 -->
-                <p class="mb-0 f-subtitle">{{ counselor.name }} 상담사</p>
+                <p class="mb-0 f-subtitle">{{ counselor.name }}</p>
                 <!-- 평점 -->
                 <p class="mb-0 f-subtitle">{{ counselor.startScore }}</p>
               </div>
@@ -68,9 +68,7 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Counselors',
-  components: {
 
-  },
   data: function () {
     return {
       counselorList: [],
@@ -81,6 +79,7 @@ export default {
       counselorInfo: [],
     }
   },
+  
   methods: {
     ...mapActions([
       'LoadCounselorProfile',

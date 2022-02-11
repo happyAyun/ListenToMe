@@ -25,31 +25,6 @@
         </div>
       </div>
     </div>
-
-    <!-- title -->
-    <div class="mb-4 d-flex">
-      <p class="mb-0 me-4 f-title">추천 리스너</p>
-    </div>
-
-    <!-- body -->
-    <div class="d-flex justify-content-around align-items-center">
-      <div v-for="(post, index) in posts" :key=index>
-        <!-- content -->
-        <div @click="moveToProfile" class="p-2 card part-counselor">
-          <!-- image -->
-          <div class="py-3 text-center">
-            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
-          </div>
-
-          <div class="px-4 card-body d-flex justify-content-between">
-            <!-- 이름 -->
-            <p class="mb-0 f-subtitle">{{ post.name }}</p>
-            <!-- 평점 -->
-            <p class="mb-0 f-subtitle">{{ post.score }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -94,7 +69,11 @@ export default {
   methods: {
     moveToMarkedCounselors: function () {
       this.$router.push({name: 'MarkedCounselors'})
-    }
+    },
+    
+    moveToProfile: function () {
+      this.$router.push({name: 'Profile'})
+    },
   }
 }
 </script>

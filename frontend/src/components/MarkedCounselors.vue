@@ -53,7 +53,11 @@ export default {
   methods: {
     moveToBookmark: function () {
       this.$router.push({name: 'Bookmark'})
-    }
+    },
+    moveToProfile: function () {
+      this.$router.push({name: 'Profile'})
+        .catch(() => {})
+    },
   }
 }
 </script>

@@ -14,5 +14,12 @@ export default {
     memoCreation: '/memo-api/write/',
     memoSelection: '/memo-api/',
     memosSelection: '/memo-api/list/',
+
+    // home
+    todayListeners: '/counselor-api/today/',
+
+    // profile
+    counselingList: '/schedule-api/client/approved?page=',
+    doneList: '/schedule-api/client/ended?page=',
   }
 }

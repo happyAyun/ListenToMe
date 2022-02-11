@@ -7,10 +7,10 @@
     </div>
 
     <!-- body -->
-    <div class="d-flex justify-content-around align-items-center">
-      <div v-for="(post, index) in posts" :key=index>
+    <div class="d-flex justify-content-around ">
+      <div v-for="(listener, index) in todayListners" :key=index>
         <!-- content -->
-        <div @click="moveToProfile" class="p-2 card part-counselor">
+        <div @click="LoadCounselorProfile(listener)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
             <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
@@ -18,9 +18,9 @@
 
           <div class="px-4 card-body d-flex justify-content-between">
             <!-- 이름 -->
-            <p class="mb-0 f-subtitle">{{ post.name }}</p>
+            <p class="mb-0 f-subtitle">{{ listener.name }}</p>
             <!-- 평점 -->
-            <p class="mb-0 f-subtitle">{{ post.score }}</p>
+            <p class="mb-0 f-subtitle">{{ listener.startScore }}</p>
           </div>
         </div>
       </div>
@@ -29,44 +29,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Home',
-  components: {
 
-  },
   data: function () {
     return {
-      // dummy data
-      posts: [
-        {
-          content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-      ]
+      todayListners: '',
     }
   },
+
   methods: {
+    ...mapActions([
+      'LoadCounselorProfile',
+    ]),
+
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
     },
@@ -77,6 +57,20 @@ export default {
         this.$router.push({name: 'Profile'})
       }
     },
+    getCounselorList() {
+      axios({
+        methods: 'get',
+        url: SERVER.URL + '/counselor-api/list/0' 
+      })
+      .then((res) => {
+        this.todayListners = res.data.counselor.slice(0, 5)
+        console.log(this.todayListners)
+      })
+    },
+  },
+
+  created () {
+    this.getCounselorList()
   }
 }
 </script>
