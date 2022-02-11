@@ -10,7 +10,7 @@ import LoginForCounselor from '@/views/accounts/LoginForCounselor.vue'
 import Bookmark from '@/views/profile/Bookmark.vue'
 import MarkedCounselors from '@/components/MarkedCounselors.vue'
 import Profile from '@/views/profile/Profile.vue'
-import Records from '@/views/profile/Records.vue'
+import List from '@/views/profile/List.vue'
 
 // home
 import Home from '@/views/Home.vue'
@@ -64,9 +64,9 @@ const routes = [
     component: Profile
   },
   {
-    path: '/my-page/records',
-    name: 'Records',
-    component: Records
+    path: '/my-page/list',
+    name: 'List',
+    component: List
   },
 
   // home

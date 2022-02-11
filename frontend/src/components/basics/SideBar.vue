@@ -26,7 +26,7 @@
 
           <!-- button: 상담 내역 -->
           <div class="d-flex justify-content-center mb-3">
-            <button @click="moveToRecords" class="menu-small f-normal-bold">상담 내역</button>
+            <button @click="moveToList" class="menu-small f-normal-bold">상담 내역</button>
           </div>
 
           <!-- button: 정보 수정 -->
@@ -56,7 +56,7 @@
 
           <!-- button: 상담 내역 -->
           <div class="d-flex justify-content-center mb-3">
-            <button @click="moveToRecords" class="menu-small f-normal-bold">상담 내역</button>
+            <button @click="moveToList" class="menu-small f-normal-bold">상담 내역</button>
           </div>
 
           <!-- button: 정보 수정 -->
@@ -118,8 +118,8 @@ export default {
       this.moveToProfile()
     },
 
-    moveToRecords: function () {
-      this.$router.push({name: 'Records'})
+    moveToList: function () {
+      this.$router.push({name: 'List'})
     },
 
     moveToCounselors: function () {

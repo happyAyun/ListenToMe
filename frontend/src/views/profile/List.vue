@@ -1,5 +1,5 @@
 <template>
-  <div id="records" class="col-10">
+  <div id="list" class="col-10 p-5">
     <!-- 진행 예정 상담 -->
     <div class="mb-5 pt-5 pb-2 px-5">
       <!-- title -->

@@ -1,5 +1,5 @@
 <template>
-  <div id="home" class="col-10 p-5 overflow-auto">
+  <div id="home" class="col-10 p-5">
     <!-- title -->
     <div class="mb-5 d-flex">
       <p class="mb-0 me-4 f-title">오늘의 리스너</p>
