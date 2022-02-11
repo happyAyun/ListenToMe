@@ -182,6 +182,12 @@ public class CounselorController {
         return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
     }
 
+    //오늘의 상담사
+    @GetMapping("/today")
+    public ResponseEntity<List<CounselorListRes>> getTodayCounselorList() throws Exception {
+        return new ResponseEntity<List<CounselorListRes>>(reviewService.getTodayCounselorList(), HttpStatus.OK);
+    }
+
     //탈퇴
     @DeleteMapping("/user/{userEmail}")
     public ResponseEntity<String> deleteUser(
