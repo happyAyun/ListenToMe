@@ -1,7 +1,7 @@
 <template>
   <div id="introduction" class="card part-home-image">
     <img
-      :src="require('@/assets/images/main-background.jpg')"
+      :src="require('@/assets/images/main-background2.jpg')"
       alt="background-image" class="img-fluid" style="width: 100vw; height: 100vh;"
     >
 
