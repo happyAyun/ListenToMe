@@ -8,7 +8,7 @@
 
     <!-- body -->
     <div class="d-flex justify-content-around align-items-center">
-      <div v-for="(post, index) in posts" :key=index>
+      <div v-for="(listener, index) in todayListners" :key=index>
         <!-- content -->
         <div @click="moveToProfile" class="p-2 card part-counselor">
           <!-- image -->
@@ -18,9 +18,9 @@
 
           <div class="px-4 card-body d-flex justify-content-between">
             <!-- 이름 -->
-            <p class="mb-0 f-subtitle">{{ post.name }}</p>
+            <p class="mb-0 f-subtitle">{{ listener.name }}</p>
             <!-- 평점 -->
-            <p class="mb-0 f-subtitle">{{ post.score }}</p>
+            <p class="mb-0 f-subtitle">{{ listener.startScore }}</p>
           </div>
         </div>
       </div>
@@ -34,41 +34,13 @@ import SERVER from '@/api/index.js'
 
 export default {
   name: 'Home',
-  components: {
 
-  },
   data: function () {
     return {
-      // dummy data
-      posts: [
-        {
-          content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-      ]
+      todayListners: '',
     }
   },
+
   methods: {
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
@@ -80,23 +52,20 @@ export default {
         this.$router.push({name: 'Profile'})
       }
     },
-    getTodayCounselors() {
+    getCounselorList() {
       axios({
         methods: 'get',
-        url: SERVER.URL + SERVER.ROUTES.todayListeners,
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': `${this.$store.state.authToken}`
-        },
+        url: SERVER.URL + '/counselor-api/list/0' 
       })
       .then((res) => {
-        console.log(res)
+        this.todayListners = res.data.counselor.slice(0, 5)
+        console.log(this.todayListners)
       })
     },
   },
 
   created () {
-    this.getTodayCounselors()
+    this.getCounselorList()
   }
 }
 </script>
