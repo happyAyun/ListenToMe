@@ -32,6 +32,12 @@ export default new Vuex.Store({
     userid: "",
     usersession: "",
 
+    // 로그인한 유저의 이메일
+    userEmail: '',
+
+    // 카운슬러 디테일 페이지
+    counselorDetail: [],
+
     // dummy data
     records: [
       {
@@ -127,6 +133,10 @@ export default new Vuex.Store({
     },
     ////////////////////////////////////////////////////////////////////////////////
 
+    // 리스너에서 클릭한 상담사 정보 관련
+    LOAD_COUNSELOR_PROFILE: function (state, results) {
+      state.counselorDetail = results
+    },
 
 
     SE_USERID: function (state, payload) {
@@ -168,6 +178,7 @@ export default new Vuex.Store({
     },
 
     Login: function ({ commit }, credentials) {
+      commit('GET_USER_EMAIL', credentials.email)
       if (this.getters.isLoggedIn) {
         router.push('/')
       }
@@ -189,6 +200,7 @@ export default new Vuex.Store({
     },
 
     LoginForCounselor: function ({ commit }, credentials) {
+      commit('GET_USER_EMAIL', credentials.email)
       if (this.getters.isLoggedIn) {
         router.push('/')
       }
@@ -271,6 +283,27 @@ export default new Vuex.Store({
       let bottomLocation = document.documentElement.scrollHeight
       document.body.classList.add('overflow-hidden')
       window.scrollTo(0, bottomLocation)
+    },
+
+
+    // 리스너 각 페이지로 이동
+    LoadCounselorProfile: function ({ commit }, request) {
+      if (this.state.loginState === 0) {
+        router.push({name: 'LoginForClient'})
+      }
+      else {
+        axios({
+          method: 'get',
+          url: SERVER.URL + `/counselor-api/user/${request.email}`, 
+        })
+        .then((res) => {
+          commit('LOAD_COUNSELOR_PROFILE', res.data)
+          router.push({name: 'CounselorDetail', params: {coEmail : request.email}})
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }
     }
   },
    

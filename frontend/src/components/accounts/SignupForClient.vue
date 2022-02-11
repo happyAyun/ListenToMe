@@ -67,7 +67,7 @@ export default {
         nickname: '',
         gender: '',
         birth: '',
-        point: '1000',
+        point: '10000',
       },
       genderList: [
         {

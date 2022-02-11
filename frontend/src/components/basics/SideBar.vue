@@ -51,7 +51,7 @@
 
           <!-- button: 일정 관리 -->
           <div class="d-flex justify-content-center mb-3">
-            <button class="menu-small f-normal-bold">일정 관리</button>
+            <button @click="moveToSchedule" class="menu-small f-normal-bold">일정 관리</button>
           </div>
 
           <!-- button: 상담 내역 -->
@@ -124,6 +124,10 @@ export default {
 
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
+    },
+
+    moveToSchedule: function () {
+      this.$router.push({name: 'Schedule'})
     },
 
     moveUp: function () {
