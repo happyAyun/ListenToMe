@@ -82,6 +82,32 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
+    public List<CounselorListRes> getTodayCounselorList() throws Exception {
+        Query query = em.createQuery("select R.counselor, avg(R.startScore) from Review R group by R.counselor order by avg(R.startScore) desc").setMaxResults(5);
+        List queryList = query.getResultList();
+        List<CounselorListRes> list = new ArrayList<>();
+        List<String> counselor = new ArrayList<>();
+
+        for(Object o : queryList){
+            Object[] objects = (Object[]) o;
+
+            Counselor c = (Counselor) objects[0];
+            CounselorListRes counselorListRes = new CounselorListRes(c.getEmail(), c.getName(), c.getPhoto(), (double)objects[1], getCategory(c.getEmail()));
+            list.add(counselorListRes);
+            counselor.add(c.getEmail());
+        }
+
+        List<Counselor> counselors = counselorRepository.findAll();
+        for(Counselor c: counselors){
+            if(list.size()==5) break;
+            if(!counselor.contains(c.getEmail())){
+                list.add(new CounselorListRes(c.getEmail(), c.getName(), c.getPhoto(), 0, getCategory(c.getEmail())));
+            }
+        }
+        return list;
+    }
+
+    @Override
     public boolean updateReview(ReviewDto reviewDto) {
         return false;
     }

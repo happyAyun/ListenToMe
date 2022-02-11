@@ -22,6 +22,8 @@ public interface ReviewService {
 
     List<CounselorListRes> getPartialCounselorList(List<CounselorListRes> list, int page) throws Exception;
 
+    List<CounselorListRes> getTodayCounselorList() throws Exception;
+
     Review getReview(int reviewId);
 
     boolean checkClient(String clientEmail, int scheduleId);
