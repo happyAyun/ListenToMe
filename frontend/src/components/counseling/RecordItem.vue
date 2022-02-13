@@ -31,7 +31,7 @@ export default {
 
   methods: {
     trimDateTime: function () {
-     this.dateTimeTrimmed = this.memo.dateTime.slice(0, 10) + ' ' + this.memo.dateTime.slice(11)
+      this.dateTimeTrimmed = this.memo.dateTime.slice(0, 10) + ' ' + this.memo.dateTime.slice(11)
     }
   },
 

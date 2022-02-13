@@ -188,7 +188,7 @@ export default {
     getCounselingList: function (page) {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.counselingList + `${page}/`,
+        url: SERVER.URL + SERVER.ROUTES.counselingListCounselor + `${page}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
@@ -219,7 +219,7 @@ export default {
     getDoneList: function (page) {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.doneList + `${page}/`,
+        url: SERVER.URL + SERVER.ROUTES.doneListCounselor + `${page}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
@@ -228,7 +228,7 @@ export default {
         .then(res => {
           this.doneList = res.data.content
           this.totalPagesDone = res.data.totalPages
-          this.leftPoints = 10000 - 1000 * ((this.totalPagesDone - 1) * 5 + res.data.numberOfElements)
+          this.leftPoints = 10000 + 1000 * ((this.totalPagesDone - 1) * 5 + res.data.numberOfElements)
           const items = []
           res.data.content.forEach((item) => {
             let info = {
@@ -298,6 +298,7 @@ export default {
       this.getMemo()
       console.log(this.currentDone)
     },
+
     selectAll: function () {
       console.log(this.doneList[0].id)
       this.active = true

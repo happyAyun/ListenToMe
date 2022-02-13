@@ -58,11 +58,6 @@
           <div class="d-flex justify-content-center mb-3">
             <button @click="moveToList" class="menu-small f-normal-bold">상담 내역</button>
           </div>
-
-          <!-- button: 정보 수정 -->
-          <div class="d-flex justify-content-center mb-3">
-            <button @click="moveToUpdate" class="menu-small f-normal-bold">정보 수정</button>
-          </div>
         </div>
       </div>
 
@@ -132,8 +127,15 @@ export default {
     },
 
     moveToList: function () {
-      this.$router.push({name: 'List'})
-        .catch(() => {})
+      if (this.$store.state.loginState === 1) {
+        console.log('show list of user')
+        this.$router.push({name: 'List'})
+          .catch(() => {})
+      } else if (this.$store.state.loginState === 2) {
+        console.log('show list of counselor')
+        this.$router.push({name: 'ListFromCounselor'})
+          .catch(() => {})
+      }
     },
 
     moveToCounselors: function () {
