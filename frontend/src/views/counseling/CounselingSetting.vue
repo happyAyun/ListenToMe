@@ -28,13 +28,15 @@
 
       <!-- footer: OK button -->
       <footer class="d-flex justify-content-center">
-        <button @click="joinSession()" class="btn-ok f-btn">입장</button>
+        <button @click="joinSession(), getCounselingInfo()" class="btn-ok f-btn">입장</button>
       </footer>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -62,6 +64,25 @@ export default {
       this.$store.dispatch('toggleSideBar')  // side bar 토글링
       this.$router.push({name: 'Counseling'})
     },
+
+    getCounselingInfo: function () {
+      axios({
+        method: 'get',
+        url: SERVER.URL + SERVER.ROUTES.counseling + `${this.mySessionId}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+        .then(res => {
+          console.log(res.data)
+          console.log(this.$store.state.usersession)
+          if (res.data.sticker === true) {
+            this.$store.dispatch('toggleSticker')
+            console.log(this.$store.state.isSticker)
+          }
+        })
+    }
   },
 
   created () {

@@ -20,7 +20,7 @@
       </section>
 
       <footer class="d-flex justify-content-center">
-        <button @click.prevent="Login(login)" class="btn-ok f-btn me-3">로그인</button>
+        <button @click.prevent="Login(login), saveCurrentUser" class="btn-ok f-btn me-3">로그인</button>
         <button @click="goToSignup" class="btn-ok f-btn" style="background: #ED9C9C">회원 가입</button>
       </footer>
     </div>
@@ -46,6 +46,10 @@ export default {
     ...mapActions([
       'Login',
     ]),
+    saveCurrentUser: function() {
+      this.$store.state.dispatch('saveCurrentUser', this.email)
+    },
+
     submitlogin() { 
       console.log("email = " + this.login.email); 
       console.log("pass = " + this.login.password);

@@ -20,7 +20,7 @@
         </li>
         
         <!-- body -->
-        <li v-for="(item, index) in list" :key=index class="list-group-item d-flex profile-records">
+        <li v-for="(item, index) in list" :key=index class="list-group-item d-flex">
           <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
           <p class="col-3 mb-0 text-center f-normal">{{ item.date }}</p>
@@ -62,13 +62,17 @@
         </li>
         
         <!-- body -->
-        <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex profile-records">
+        <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex align-items-center">
           <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.date }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.time }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.point }}</p>
-          <p class="col-2 mb-0 text-center f-normal">보기</p>
+
+          <!-- counseling details -->
+          <div class="col-2 d-flex justify-content-center">
+            <button @click="selectDetails(index)" class="btn-more f-btn">보기</button>
+          </div>
         </li>
       </ul>
 
@@ -81,6 +85,20 @@
         </li>
         <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
       </ul>
+
+      <!-- Modal -->
+      <div v-if="active" class="p-3 part-record">
+        <!-- header: 제목 -->
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="mb-0 text-center f-subtitle">0</p>
+          <p class="mb-0 text-center f-normal">0</p>
+        </div>
+
+        <hr class="my-3">
+
+        <!-- body: 내용 -->
+        <p class="mb-0 py-2 f-normal">0</p>
+      </div>
     </div>
   </div>
 </template>
@@ -90,12 +108,14 @@ import axios from 'axios'
 import SERVER from '@/api/index.js'
 
 export default {
-  name: 'Records',
+  name: 'List',
   components: {
 
   },
   data: function () {
     return {
+      active: 0,
+
       currentPage: 1,
       totalPages: 0,
       list: '',
@@ -103,6 +123,8 @@ export default {
       currentPageDone: 1,
       totalPagesDone: 0,
       doneList: '',
+
+      currentDone: '',
 
       leftPoints: 10000,
     }
@@ -177,6 +199,7 @@ export default {
           console.log(err)
         })
     },
+    
     getDoneList: function (page) {
       axios({
         method: 'get',
@@ -207,7 +230,31 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+
+    getMemo: function () {
+      axios({
+        method: 'get',
+        url: SERVER.URL + SERVER.ROUTES.memoSelection + `${this.currentDone.id}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+
+    selectDetails: function (index) {
+      this.currentDone = this.doneList[index]
+      this.active = true
+      this.getMemo()
+      console.log(this.currentDone)
+    },
   },
 
   created () {

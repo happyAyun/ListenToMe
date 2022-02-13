@@ -20,6 +20,7 @@ export default new Vuex.Store({
     isMemo: true,  // 상담실 내 메모와 기록 도구 영역 토글링
     isData: false,  // 감정분석 영역 토글링
     isSticker: false,  // 스티커 기능 온오프
+    navbarState: true,
     ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -196,6 +197,7 @@ export default new Vuex.Store({
           commit('SET_TOKEN', res.data['access-token'])
           commit('SE_LOGINSTATE', 1)
           router.push('/')
+          console.log(this.state.userEmail)
         })
         .catch((err) => {
           console.log(err)
@@ -218,6 +220,7 @@ export default new Vuex.Store({
           commit('SET_TOKEN', res.data['access-token'])
           commit('SE_LOGINSTATE', 2)
           router.push('/')
+          console.log(this.state.userEmail)
         })
         .catch((err) => {
           console.log(err)

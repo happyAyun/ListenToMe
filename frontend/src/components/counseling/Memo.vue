@@ -60,7 +60,7 @@ export default {
         surprised: 0,
       },
       memo: {
-        id: 2,  // should be calculated
+        id: '',
         title: '',
         content: ''
       },
@@ -143,6 +143,7 @@ export default {
 
     postMemo: function () {
       if (this.memo.title && this.memo.content) {
+        this.memo.id = this.$store.state.usersession
         axios({
           method: 'post',
           url: SERVER.URL + SERVER.ROUTES.memoCreation,
