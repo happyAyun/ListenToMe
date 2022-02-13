@@ -4,7 +4,7 @@
       <!-- header -->
       <div class="d-flex align-items-center">
         <!-- name -->
-        <p class="mb-0 col-3 ps-2 f-title">{{ this.counselorDetail.userInfo.name }} 상담사</p>
+        <p class="mb-0 col-3 ps-2 f-title p-5">{{ this.counselorDetail.userInfo.name }} 상담사</p>
 
         <div class="col-9">
           <!-- introduction: one line -->

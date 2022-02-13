@@ -13,7 +13,7 @@
         <div @click="LoadCounselorProfile(listener)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
-            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
+            <img :src="getImgUrl(listener)" class="card-img-top" alt="counselor" style="width: 9vw;">
           </div>
 
           <div class="px-4 card-body d-flex justify-content-between">
@@ -67,6 +67,10 @@ export default {
         console.log(this.todayListners)
       })
     },
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
+      return images
+    }
   },
 
   created () {
