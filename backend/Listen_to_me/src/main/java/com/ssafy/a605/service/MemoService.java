@@ -10,5 +10,6 @@ public interface MemoService {
     public boolean writeMemo(int id, String title, String content, String userEmail) throws Exception;
     public boolean checkUser(int id, String userEmail) throws Exception;
     public MemoRes getMemo(int id, String userEmail) throws Exception;
+    public MemoRes getMemoByCounseling(int id, String userEmail) throws Exception;
     public List<MemoRes> getMemoList(int id, String userEmail) throws Exception;
 }
