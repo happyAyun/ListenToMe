@@ -295,22 +295,17 @@ export default new Vuex.Store({
 
     // 리스너 각 페이지로 이동
     LoadCounselorProfile: function ({ commit }, request) {
-      if (this.state.loginState === 0) {
-        router.push({name: 'LoginForClient'})
-      }
-      else {
-        axios({
-          method: 'get',
-          url: SERVER.URL + `/counselor-api/user/${request.email}`, 
-        })
-        .then((res) => {
-          commit('LOAD_COUNSELOR_PROFILE', res.data)
-          router.push({name: 'CounselorDetail', params: {coEmail : request.email}})
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      }
+      axios({
+        method: 'get',
+        url: SERVER.URL + `/counselor-api/user/${request.email}`, 
+      })
+      .then((res) => {
+        commit('LOAD_COUNSELOR_PROFILE', res.data)
+        router.push({name: 'CounselorDetail', params: {coEmail : request.email}})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     }
   },
    

@@ -5,7 +5,7 @@
       <div class="d-flex align-items-center">
         <!-- name -->
         <div class="col-7 d-flex">
-          <p class="mb-0 me-5 f-title">{{ name }}</p>
+          <p class="mb-0 me-4 f-title">{{ name }}</p>
           <p class="mb-0 me-2 f-subtitle">{{ shortGreeting }}</p>
           <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB">수정</p>
         </div>

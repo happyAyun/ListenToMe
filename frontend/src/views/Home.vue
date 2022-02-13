@@ -50,13 +50,6 @@ export default {
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
     },
-    moveToProfile: function () {
-      if (this.$store.state.loginState === 0) {
-        this.$router.push({name: 'LoginForClient'})
-      } else {
-        this.$router.push({name: 'Profile'})
-      }
-    },
     getCounselorList() {
       axios({
         methods: 'get',

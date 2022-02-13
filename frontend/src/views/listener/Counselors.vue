@@ -17,7 +17,8 @@
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;">  
+              <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;">
+              <!-- <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
             </div>
 
             <div class="card-body px-4">

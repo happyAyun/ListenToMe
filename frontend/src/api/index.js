@@ -20,6 +20,10 @@ export default {
     // home
     todayListeners: '/counselor-api/today/',
 
+    // bookmark
+    bookmarkCreation: `/bookmark/setlike/`,
+    bookmarkSelection: `/bookmark/likecounselor/`,
+
     // profile
     counselingList: '/schedule-api/client/approved?page=',
     doneList: '/schedule-api/client/ended?page=',
