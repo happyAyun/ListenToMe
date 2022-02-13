@@ -15,7 +15,7 @@
             <p class="mb-0 me-2 text-center part-cat f-normal">무기력</p>
             <p class="mb-0 me-2 text-center part-cat f-normal">자살</p>
           </div>
-          <div>
+          <div v-if="$store.state.loginState">
             <button @click="setBookmark()" class="btn-func f-normal" style="background: #CFE7EB">북마크</button>
           </div>
         </div>

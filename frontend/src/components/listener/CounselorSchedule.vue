@@ -316,32 +316,36 @@ export default {
     }, 
     reserveConsultation() {
       console.log(this.reserveInfo)
-      axios({
-        method: 'post',
-        url: SERVER.URL + '/schedule-api/request',
-        headers: {
-          'Content-Type': 'application/json;',
-          'access-token': `${this.$store.state.authToken}`
-        },
-        data: this.reserveInfo
-      })
-      .then(() => {
-        console.log('예약 ok')
-        for (var i=0; i<this.scheduleList.length; i++ ) {
-          var idx = this.scheduleList[i].id
-          if (this.reserveInfo.scheduleId === idx) {
-            this.scheduleList[i].state = 1;
-          }
-        }
-        this.position[this.index][3] = 2;
-      })
-      .catch((err) => console.log(err));
-      this.modalViewed = 0;
-      console.log(this.position)
-      // this.$dispatch.route('Profile')
-      this.$router.push({name: 'Counselors'})
-      // window.location.reload(); // 새로 고침
-      // alert("상담이 신청되었습니다.")
+      if (this.$store.state.loginState) {
+        axios({
+          method: 'post',
+          url: SERVER.URL + '/schedule-api/request',
+          headers: {
+            'Content-Type': 'application/json;',
+            'access-token': `${this.$store.state.authToken}`
+          },
+          data: this.reserveInfo
+        })
+          .then(() => {
+            console.log('예약 ok')
+            for (var i=0; i<this.scheduleList.length; i++ ) {
+              var idx = this.scheduleList[i].id
+              if (this.reserveInfo.scheduleId === idx) {
+                this.scheduleList[i].state = 1;
+              }
+            }
+            this.position[this.index][3] = 2;
+          })
+          .catch((err) => console.log(err));
+        this.modalViewed = 0;
+        console.log(this.position)
+        // this.$dispatch.route('Profile')
+        this.$router.push({name: 'Counselors'})
+        // window.location.reload(); // 새로 고침
+        // alert("상담이 신청되었습니다.")
+      } else {
+        this.$router.push({name: 'LoginForClient'})
+      }
     }
   },
   computed: {
