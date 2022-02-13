@@ -11,9 +11,11 @@ export default {
 
 
     // counseling
+    counseling: '/schedule-api/',
     memoCreation: '/memo-api/write/',
     memoSelection: '/memo-api/',
     memosSelection: '/memo-api/list/',
+    reviewCreation: '/review-api/save/',
 
     // home
     todayListeners: '/counselor-api/today/',

@@ -40,13 +40,14 @@ export default {
     getMemos: function () {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.memosSelection + `${2}/`,
+        url: SERVER.URL + SERVER.ROUTES.memosSelection + `${this.$store.state.usersession}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
         },
       })
         .then(res => {
+          console.log(res.data)
           if (res.data.length == 0) {
             this.active = true
           } else {

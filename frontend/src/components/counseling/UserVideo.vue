@@ -79,11 +79,10 @@ export default {
 	},
 
 	created () {
-		const active = 1
-		if ( active ) {
-			console.log('sticker on')
+		if (this.$store.state.isSticker) {
 			setTimeout(async () => {
 				this.showSticker()
+				console.log('sticker on')
 			}, 3000)
 		}
 	},

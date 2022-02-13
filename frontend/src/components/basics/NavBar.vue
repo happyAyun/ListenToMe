@@ -66,16 +66,19 @@ export default {
     moveToSignup: function () {
       this.$store.dispatch('moveDown')
       this.$router.push({name: 'SignupForClient'})
+        .catch(() => {})
     },
 
     moveToLogin: function () {
       this.$store.dispatch('moveDown')
       this.$router.push({name: 'LoginForClient'})
+        .catch(() => {})
     },
 
     moveToLoginCounselor: function () {
       this.$store.dispatch('moveDown')
       this.$router.push({name: 'LoginForCounselor'})
+        .catch(() => {})
     }
   },
 }

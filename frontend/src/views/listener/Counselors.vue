@@ -32,7 +32,7 @@
                 <!-- 이름 -->
                 <p class="mb-0 f-subtitle">{{ counselor.name }}</p>
                 <!-- 평점 -->
-                <p class="mb-0 f-subtitle">{{ counselor.startScore }}</p>
+                <p class="mb-0 f-subtitle">5.0</p>
               </div>
             </div>
           </div>
