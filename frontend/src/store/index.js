@@ -232,6 +232,7 @@ export default new Vuex.Store({
       commit('REMOVE_TOKEN')
       commit('SE_LOGINSTATE', 0)
       router.push('/')
+        .catch(() => {})
     },
     ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -295,6 +296,7 @@ export default new Vuex.Store({
 
     // 리스너 각 페이지로 이동
     LoadCounselorProfile: function ({ commit }, request) {
+      console.log(request)
       axios({
         method: 'get',
         url: SERVER.URL + `/counselor-api/user/${request.email}`, 
