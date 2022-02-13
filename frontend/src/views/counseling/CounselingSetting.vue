@@ -81,6 +81,8 @@ export default {
             this.$store.dispatch('toggleSticker')
             console.log(this.$store.state.isSticker)
           }
+
+          this.$store.dispatch('checkCounselingState', res.data.state)
         })
     }
   },

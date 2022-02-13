@@ -56,24 +56,24 @@
         <li class="list-group-item d-flex" style="background: #7DABD0;">
           <p class="col-2 mb-0 text-center f-subtitle">번호</p>
           <p class="col-2 mb-0 text-center f-subtitle">상담사</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상담 날짜</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상담 일시</p>
+          <p class="col-3 mb-0 text-center f-subtitle">상담 날짜</p>
+          <p class="col-3 mb-0 text-center f-subtitle">상담 일시</p>
           <p class="col-2 mb-0 text-center f-subtitle">차감 포인트</p>
-          <p class="col-2 mb-0 text-center f-subtitle">기록</p>
+          <!-- <p class="col-2 mb-0 text-center f-subtitle">기록</p> -->
         </li>
         
         <!-- body -->
         <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex align-items-center">
           <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ item.date }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ item.time }}</p>
+          <p class="col-3 mb-0 text-center f-normal">{{ item.date }}</p>
+          <p class="col-3 mb-0 text-center f-normal">{{ item.time }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.point }}</p>
 
           <!-- counseling details -->
-          <div class="col-2 d-flex justify-content-center">
+          <!-- <div class="col-2 d-flex justify-content-center">
             <button @click="selectDetails(index)" class="btn-more f-btn">보기</button>
-          </div>
+          </div> -->
         </li>
       </ul>
 
@@ -87,8 +87,8 @@
         <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
       </ul>
 
-      <!-- Modal -->
-      <div v-if="active" class="p-3 part-record">
+      <!-- Modal ALL -->
+      <div v-if="active === 1" class="p-3 part-record">
         <div class="mb-5 d-flex justify-content-between align-items-center">
           <p class="mb-0 me-4 f-title">종료된 상담</p>
           <button @click="closeModal()" class="mb-0 p-0 btn-tool f-btn" style="background: #FFDF70">닫기</button>
@@ -107,6 +107,26 @@
             <!-- body: 내용 -->
             <p class="mb-0 py-2 f-normal">{{ memo.content }}</p>
           </div>
+        </div>
+      </div>
+
+      <!-- Modal ONE -->
+      <div v-if="active === 2" class="p-3 part-record">
+        <div class="mb-5 d-flex justify-content-between align-items-center">
+          <p class="mb-0 me-4 f-title">종료된 상담</p>
+          <button @click="closeModal()" class="mb-0 p-0 btn-tool f-btn" style="background: #FFDF70">닫기</button>
+        </div>
+        <!-- header: 제목 -->
+        <div class="mx-auto mb-3 p-3 part-record" style="width: 50vw;">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="mb-0 text-center f-subtitle">{{ memo.title }}</p>
+            <p class="mb-0 text-center f-normal">{{ memo.date }}</p>
+          </div>
+
+          <hr class="my-3">
+
+          <!-- body: 내용 -->
+          <p class="mb-0 py-2 f-normal">{{ memo.content }}</p>
         </div>
       </div>
     </div>
@@ -138,7 +158,8 @@ export default {
 
       leftPoints: 10000,
 
-      memos: ''
+      memos: '',
+      memo: ''
     }
   }, 
 
@@ -248,21 +269,19 @@ export default {
         })
     },
 
-    getMemo: function () {
+    getMemo: function (id) {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.memoSelection + `${5}/`,
+        url: SERVER.URL + '/memo-api/counseling/' + `${id}`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
         },
       })
         .then(res => {
-          console.log(this.currentDone.id)
-          console.log(res)
+          console.log(res.data)
         })
         .catch(err => {
-          console.log(this.currentDone.id)
           console.log(err)
         })
     },
@@ -286,6 +305,7 @@ export default {
             items.push(info)
           })
           this.memos = items
+          console.log(this.memos)
         })
         .catch(err => {
           console.log(err)
@@ -293,16 +313,16 @@ export default {
     },
 
     selectDetails: function (index) {
-      this.currentDone = this.doneList[index]
-      this.active = true
-      this.getMemo()
-      console.log(this.currentDone)
+      console.log(this.doneList[index].id)
+      this.getMemo(this.doneList[index].id)
+      this.active = 2
+      console.log('show details')
     },
     selectAll: function () {
       console.log(this.doneList[0].id)
-      this.active = true
       this.getMemos(this.doneList[0].id)
-      console.log(this.currentDone)
+      this.active = 1
+      console.log('show all')
     },
   },
 

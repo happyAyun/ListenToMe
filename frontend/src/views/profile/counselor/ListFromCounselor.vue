@@ -56,24 +56,24 @@
         <li class="list-group-item d-flex" style="background: #7DABD0;">
           <p class="col-2 mb-0 text-center f-subtitle">번호</p>
           <p class="col-2 mb-0 text-center f-subtitle">상담사</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상담 날짜</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상담 일시</p>
+          <p class="col-3 mb-0 text-center f-subtitle">상담 날짜</p>
+          <p class="col-3 mb-0 text-center f-subtitle">상담 일시</p>
           <p class="col-2 mb-0 text-center f-subtitle">차감 포인트</p>
-          <p class="col-2 mb-0 text-center f-subtitle">기록</p>
+          <!-- <p class="col-2 mb-0 text-center f-subtitle">기록</p> -->
         </li>
         
         <!-- body -->
         <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex align-items-center">
           <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ item.date }}</p>
-          <p class="col-2 mb-0 text-center f-normal">{{ item.time }}</p>
+          <p class="col-3 mb-0 text-center f-normal">{{ item.date }}</p>
+          <p class="col-3 mb-0 text-center f-normal">{{ item.time }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.point }}</p>
 
           <!-- counseling details -->
-          <div class="col-2 d-flex justify-content-center">
+          <!-- <div class="col-2 d-flex justify-content-center">
             <button @click="selectDetails(index)" class="btn-more f-btn">보기</button>
-          </div>
+          </div> -->
         </li>
       </ul>
 

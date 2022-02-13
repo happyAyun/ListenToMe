@@ -39,29 +39,7 @@ export default new Vuex.Store({
     // 카운슬러 디테일 페이지
     counselorDetail: [],
 
-    // dummy data
-    records: [
-      {
-        title: 'memo 1',
-        content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 2',
-        content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 3',
-        content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 4',
-        content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 5',
-        content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-    ],
+    counsState: '',
   },
 
   getters: {
@@ -150,6 +128,10 @@ export default new Vuex.Store({
 
     GET_USER_EMAIL: function (state, results) {
       state.userEmail = results
+    },
+
+    CHECK_COUNSELING_STATE: function (state, counselingState) {
+      state.counsState = counselingState
     },
   },
 
@@ -309,7 +291,11 @@ export default new Vuex.Store({
       .catch((err) => {
         console.log(err)
       })
-    }
+    },
+
+    checkCounselingState: function ({ commit }, counselingState) {
+      commit('CHECK_COUNSELING_STATE', counselingState)
+    },
   },
 
   plugins: [createPersistedState()],

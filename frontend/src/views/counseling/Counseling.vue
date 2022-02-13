@@ -93,6 +93,7 @@
 
 <script>
 import axios from 'axios'
+import SERVER from '@/api/index.js'
 import { OpenVidu } from 'openvidu-browser'
 import UserVideo from '@/components/counseling/UserVideo.vue'
 import { mapGetters } from 'vuex'
@@ -166,6 +167,20 @@ export default {
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
 		this.$store.dispatch('closeData')  // 감정분석 영역 닫기
 		this.$store.dispatch('toggleMemo')  // 메모 영역 토글링
+		
+		// 상담 종료 처리
+		axios({
+			method: 'get',
+			url: SERVER.URL + '/schedule-api/end/' + `${this.mySessionId}`,
+			headers: {
+				'Content-Type': 'application/json',
+				'access-token': `${this.$store.state.authToken}`
+			},
+		})
+			.then(res => {
+				console.log(res)
+			})
+
 		if (this.$store.state.loginState === 1) {
 			this.$router.push({name: 'CounselingFeedback'})
 		} else if (this.$store.state.loginState === 2) {
