@@ -137,6 +137,7 @@ export default new Vuex.Store({
     // 리스너에서 클릭한 상담사 정보 관련
     LOAD_COUNSELOR_PROFILE: function (state, results) {
       state.counselorDetail = results
+      console.log(results)
     },
 
 
@@ -296,13 +297,13 @@ export default new Vuex.Store({
 
     // 리스너 각 페이지로 이동
     LoadCounselorProfile: function ({ commit }, request) {
-      console.log(request)
       axios({
         method: 'get',
         url: SERVER.URL + `/counselor-api/user/${request.email}`, 
       })
       .then((res) => {
         commit('LOAD_COUNSELOR_PROFILE', res.data)
+        // console.log(res)
         router.push({name: 'CounselorDetail', params: {coEmail : request.email}})
       })
       .catch((err) => {
@@ -310,5 +311,6 @@ export default new Vuex.Store({
       })
     }
   },
+
   plugins: [createPersistedState()],
 })

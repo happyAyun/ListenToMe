@@ -29,5 +29,8 @@ export default {
     doneList: '/schedule-api/client/ended?page=',
     counselingListCounselor: '/schedule-api/counselor/approved?page=',
     doneListCounselor: '/schedule-api/counselor/ended?page=',
+
+    // reviews
+    reviewsSelection: '/review-api/list/'
   }
 }

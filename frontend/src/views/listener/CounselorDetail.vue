@@ -50,24 +50,19 @@
           <!-- review -->
           <div class="">
             <div class="d-flex">
-              <p class="me-2 f-subtitle">평점 5.0</p>
+              <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
               <p @click="changeStatus" class="mb-0 text-center part-cat f-normal">더보기</p>
             </div>
             <div class="p-3 sec-profile">
-              <div class="d-flex mb-2 f-normal">
-                <span class="me-2 p">월요일조아님(2022-01-03)</span>
-                <div v-for="n in 5" :key="n">
-                  <img :src="require('@/assets/images/star.png')" class="me-1 card-img-top" alt="counselor" style="width: 1.2vw;">
+              <div v-for="review in reviews" :key="review.id" class="d-flex flex-column">
+                <div class="d-flex mb-1">
+                  <p class="mb-0 me-2 f-normal">{{ review.nickname }}</p>
+                  <p class="mb-0 me-2 f-normal">{{ review.startScore }}점</p>
+                </div>
+                <div>
+                  <p class="mb-0 f-subtitle">{{ review.content }}</p>
                 </div>
               </div>
-              <p class="mb-3">상담 후에 월요일이 더 좋아졌어요. 잘 들어주셔서 너무너무 감사드려요!</p>
-              <div class="d-flex mb-2 f-normal">
-                <span class="me-2 p">월요일조아님(2022-01-03)</span>
-                <div v-for="n in 5" :key="n">
-                  <img :src="require('@/assets/images/star.png')" class="me-1 card-img-top" alt="counselor" style="width: 1.2vw;">
-                </div>
-              </div>
-              <p class="mb-0">상담 후에 월요일이 더 좋아졌어요. 잘 들어주셔서 너무너무 감사드려요!</p>
             </div>
           </div>
         </div>
@@ -80,30 +75,21 @@
 
     <div v-if="active" class="mb-5 p-4 part-profile">
       <!-- review -->
-      <div class="ms-3 mb-3">
-        <p class="me-3 f-subtitle">평점 5.0</p>
-        <div class="p-3 part-content">
-          <div class="d-flex mb-2 f-normal">
-            <span class="me-2 p">월요일조아님(2022-01-03)</span>
-            <div v-for="n in 5" :key="n">
-              <img :src="require('@/assets/images/star.png')" class="me-1 card-img-top" alt="counselor" style="width: 1.2vw;">
+      <div class="">
+        <div class="d-flex">
+          <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
+          <p @click="closeStatus" class="mb-0 text-center part-cat f-normal">닫기</p>
+        </div>
+        <div class="p-3 sec-profile">
+          <div v-for="review in reviews" :key="review.id" class="d-flex flex-column">
+            <div class="d-flex mb-1">
+              <p class="mb-0 me-2 f-normal">{{ review.nickname }}</p>
+              <p class="mb-0 me-2 f-normal">{{ review.startScore }}점</p>
+            </div>
+            <div>
+              <p class="mb-0 f-subtitle">{{ review.content }}</p>
             </div>
           </div>
-          <p class="mb-3">상담 후에 월요일이 더 좋아졌어요. 잘 들어주셔서 너무너무 감사드려요!</p>
-          <div class="d-flex mb-2 f-normal">
-            <span class="me-2 p">월요일조아님(2022-01-03)</span>
-            <div v-for="n in 5" :key="n">
-              <img :src="require('@/assets/images/star.png')" class="me-1 card-img-top" alt="counselor" style="width: 1.2vw;">
-            </div>
-          </div>
-          <p class="mb-3">상담 후에 월요일이 더 좋아졌어요. 잘 들어주셔서 너무너무 감사드려요!</p>
-          <div class="d-flex mb-2 f-normal">
-            <span class="me-2 p">월요일조아님(2022-01-03)</span>
-            <div v-for="n in 5" :key="n">
-              <img :src="require('@/assets/images/star.png')" class="me-1 card-img-top" alt="counselor" style="width: 1.2vw;">
-            </div>
-          </div>
-          <p class="mb-0">상담 후에 월요일이 더 좋아졌어요. 잘 들어주셔서 너무너무 감사드려요!</p>
         </div>
       </div>
     </div>
@@ -119,23 +105,34 @@ import SERVER from "@/api/index.js"
 
 export default {
   name: 'CounselorDetail',
+
   components: {
     CounselorSchedule
   },
+
   props: {
     coEmail: {
       type: String,
     }
   },
+
   data: function () {
     return {
       active: false,
       conEmail: '',
+
+      totalReviews: 1,
+      sumReviews: 0,
+      reviews: '',
     }
   },
+
   methods: {
     changeStatus: function () {
       this.active = !this.active
+    },
+    closeStatus: function () {
+      this.active = false
     },
 
     getImgUrl(con) {
@@ -158,6 +155,30 @@ export default {
         .then(res => {
           console.log(res)
         })
+    },
+    getReviews: function () {
+      axios({
+        method: 'get',
+        url: SERVER.URL + SERVER.ROUTES.reviewsSelection + `${this.coEmail}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+        .then(res => {
+          this.totalReviews = res.data.content.length
+          console.log(this.totalReviews)
+
+          this.reviews = res.data.content
+          console.log(this.reviews)
+          
+          this.reviews.forEach(review => {
+            this.sumReviews += review.startScore
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
 
@@ -166,5 +187,9 @@ export default {
       'counselorDetail',
     ]),
   },
+
+  created () {
+    this.getReviews()
+  }
 }
 </script>

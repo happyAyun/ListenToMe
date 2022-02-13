@@ -33,7 +33,7 @@
                 <!-- 이름 -->
                 <p class="mb-0 f-subtitle">{{ counselor.name }}</p>
                 <!-- 평점 -->
-                <p class="mb-0 f-subtitle">5.0</p>
+                <p class="mb-0 f-subtitle">{{ counselor.startScore }}</p>
               </div>
             </div>
           </div>
@@ -42,23 +42,15 @@
     </div>
     
     <!-- pagination -->
-    <!-- <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#" onc>3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav> -->
+    <ul class="d-flex justify-content-center pagination">
+      <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+      <li
+        v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
+      >
+        <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+      </li>
+      <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
+    </ul>
   </div>
 </template>
 
@@ -72,8 +64,10 @@ export default {
 
   data: function () {
     return {
+      currentPage: 1,
+      totalPages: 0,
+
       counselorList: [],
-      // page: 0
       counselorEmail: '',
 
       // 클릭한 상담사 기록
@@ -90,30 +84,53 @@ export default {
       this.$router.push({name: 'Home'})
     },
 
-    getCounselorList() {
+    getCounselorList(page) {
       axios({
         methods: 'get',
-        url: SERVER.URL + '/counselor-api/list/0' 
+        url: SERVER.URL + '/counselor-api/list/' + `${page}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
       })
-      .then((res) => {
-        // console.log(res)
-        this.counselorList = res.data.counselor;
-        // this.imgName = res.data.counselor.photo
-      })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res.data)
+          this.totalPages = res.data.size + 1
+          console.log(this.totalPages)
+          this.counselorList = res.data.counselor
+          // this.imgName = res.data.counselor.photo
+        })
+        .catch((err) => console.log(err))
     },
+
+    setPage: function (page) {
+      this.currentPage = page
+      this.getCounselorList(this.currentPage - 1)
+    },
+    setBack: function () {
+      if (this.currentPage !== 1) {
+        this.currentPage--
+      }
+      this.getCounselorList(this.currentPage - 1)
+      console.log(this.currentPage)
+    },
+    setNext: function () {
+      if (this.currentPage !== this. totalPages) {
+        this.currentPage++
+      }
+      this.getCounselorList(this.currentPage - 1)
+      console.log(this.currentPage)
+    },
+
 
     getImgUrl(con) {
       var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
       return images
     }
   },
+
   created() {
-    this.getCounselorList()
+    this.getCounselorList(0)
   }
 }
 </script>
-
-<style>
-
-</style>
