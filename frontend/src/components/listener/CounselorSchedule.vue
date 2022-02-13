@@ -338,7 +338,8 @@ export default {
       .catch((err) => console.log(err));
       this.modalViewed = 0;
       console.log(this.position)
-      this.$dispatch.route('Profile')
+      // this.$dispatch.route('Profile')
+      this.$router.push({name: 'Counselors'})
       // window.location.reload(); // 새로 고침
       // alert("상담이 신청되었습니다.")
     }
