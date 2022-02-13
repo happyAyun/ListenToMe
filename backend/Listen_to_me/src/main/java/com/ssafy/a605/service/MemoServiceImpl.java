@@ -58,6 +58,13 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
+    public MemoRes getMemoByCounseling(int id, String userEmail) throws Exception {
+        Memo memo = memoRepository.getByUserEmailEqualsAndSchedule_Id(userEmail, id);
+        MemoRes memoRes = new MemoRes(memo.getId(), memo.getSchedule().getDateTime(), memo.getTitle(), memo.getContent());
+        return memoRes;
+    }
+
+    @Override
     public List<MemoRes> getMemoList(int id, String userEmail) throws Exception {
         Schedule schedule = scheduleRepository.findById(id);
         List<Schedule> listSchedule = scheduleRepository.findAllByCounselor_EmailAndClient_Email(schedule.getCounselor().getEmail(), schedule.getClient().getEmail());

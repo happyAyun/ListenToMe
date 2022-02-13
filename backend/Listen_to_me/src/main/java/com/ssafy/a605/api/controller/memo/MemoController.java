@@ -45,9 +45,17 @@ public class MemoController {
     }
 
     @GetMapping("/{memoId}")
-    public ResponseEntity<MemoRes> getMemo(@PathVariable("memoId") int memoId, HttpServletRequest request) throws Exception {
+    public ResponseEntity<MemoRes> getMemoById(@PathVariable("memoId") int memoId, HttpServletRequest request) throws Exception {
         if (jwtService.isUsable(request.getHeader("access-token"))) {
             return new ResponseEntity<MemoRes>(memoService.getMemo(memoId, jwtService.getUserId()), HttpStatus.OK);
+        }
+        return new ResponseEntity<MemoRes>(new MemoRes(), HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/counseling/{scheduleId}")
+    public ResponseEntity<MemoRes> getMemoByCounseling(@PathVariable("scheduleId") int scheduleId, HttpServletRequest request) throws Exception {
+        if (jwtService.isUsable(request.getHeader("access-token"))) {
+            return new ResponseEntity<MemoRes>(memoService.getMemoByCounseling(scheduleId, jwtService.getUserId()), HttpStatus.OK);
         }
         return new ResponseEntity<MemoRes>(new MemoRes(), HttpStatus.BAD_REQUEST);
     }
