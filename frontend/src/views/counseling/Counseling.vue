@@ -166,7 +166,11 @@ export default {
 		this.$store.dispatch('toggleSideBar')  // side bar 토글링
 		this.$store.dispatch('closeData')  // 감정분석 영역 닫기
 		this.$store.dispatch('toggleMemo')  // 메모 영역 토글링
-		this.$router.push({name: 'CounselingFeedback'})
+		if (this.$store.state.loginState === 1) {
+			this.$router.push({name: 'CounselingFeedback'})
+		} else if (this.$store.state.loginState === 2) {
+			this.$router.push({name: 'Home'})
+		}
     },
 
     joinSession () {

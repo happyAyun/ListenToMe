@@ -97,23 +97,28 @@ export default {
     },
 
     postReview: function () {
-      axios({
-        method: 'post',
-        url: SERVER.URL + SERVER.ROUTES.reviewCreation + `${this.$store.state.usersession}/`,
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': `${this.$store.state.authToken}`
-        },
-        data: this.review,
-      })
-        .then(res => {
-          console.log(res)
-          console.log(this.review)
+      if (this.review.content && this.review.startScore) {
+        axios({
+          method: 'post',
+          url: SERVER.URL + SERVER.ROUTES.reviewCreation + `${this.$store.state.usersession}/`,
+          headers: {
+            'Content-Type': 'application/json',
+            'access-token': `${this.$store.state.authToken}`
+          },
+          data: this.review,
         })
-        .catch(err => {
-          console.log(err)
-          console.log(this.review)
-        })
+          .then(res => {
+            console.log(res)
+            console.log(this.review)
+          })
+          .catch(err => {
+            console.log(err)
+            console.log(this.review)
+            console.log(this.$store.state.usersession)
+          })
+      } else {
+        console.log('no review')
+      }
     },
   },
 }
