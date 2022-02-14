@@ -9,10 +9,9 @@
     <!-- content -->
     <div class="row row-cols-5 g-5 mb-5">
       <div 
-        v-for="counselor in counselorList" 
-        :key="counselor.id" 
+        v-for="counselor in counselorList" :key="counselor.id" 
         @click="LoadCounselorProfile(counselor)"
-        >
+      >
         <div class="col">
           <div class="card part-counselor">
             <!-- image -->

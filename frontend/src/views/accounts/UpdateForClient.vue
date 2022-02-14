@@ -1,6 +1,6 @@
 <template>
   <div id="update-for-client" class="col-10 d-flex justify-content-center align-items-center">
-    <div class="p-3 part-signup">
+    <div class="p-4 part-update">
       <!-- header: title -->
       <header class="mb-5 text-center">
         <p class="mb-3 f-title-bold">정보 수정</p>
@@ -47,7 +47,6 @@
 
         <!-- 생년월일 -->
         <div class="mb-5 px-4">
-          <label for="date" class="f-normal">생년월일</label> 
           <input v-model="credentials.birth" type="date" id="date" class="form-control f-normal" required/>
         </div>
 

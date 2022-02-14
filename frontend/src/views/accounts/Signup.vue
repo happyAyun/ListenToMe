@@ -3,7 +3,7 @@
     <div class="p-4 part-signup">
       <!-- header: title -->
       <header class="mb-5 text-center">
-        <p class="mb-3 f-title-bold">회원가입</p>
+        <p class="mb-3 f-title-bold">회원 가입</p>
 
         <div class="form-list d-flex justify-content-around">
           <p @click="showForm" class="mb-3 f-normal-bold pointer">일반</p>

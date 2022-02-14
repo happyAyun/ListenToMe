@@ -1,13 +1,13 @@
 <template>
-  <div id="marked-counselors" class="col-10 overflow-auto">
+  <div id="marked-counselors" class="col-10 p-routing overflow-auto">
     <!-- title -->
-    <div class="mb-5 pt-5 d-flex mx-5">
-      <p class="me-3 f-title">전체 북마크된 리스너</p>
+    <div class="mb-5 d-flex justify-content-between align-items-center">
+      <p class="mb-0 f-title">전체 북마크된 리스너</p>
       <button @click="moveToBookmark()" class="mb-0 p-0 btn-more f-normal">back</button>
     </div>
 
     <!-- body -->
-    <div class="row row-cols-5 g-5 mb-5 mx-4">
+    <div class="row row-cols-5 g-5 mb-5">
       <div 
         v-for="listener in bookmarkedCounselors" :key="listener.counselor.id" 
         @click="LoadCounselorProfile(listener.counselor)"
@@ -16,15 +16,19 @@
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;">
-              <!-- <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
+              <img
+                :src="require(`@/assets/images/follower1.png`)" alt="counselor"
+                class="card-img-top" style="width: 10vw;"
+              >
+              <!-- <img
+                :src="getImgUrl(listener)" alt="counselor"
+                class="card-img-top" style="width: 10vw;"
+              > -->
             </div>
 
-            <div class="card-body px-4">
-              <div class="d-flex justify-content-between">
-                <!-- 이름 -->
-                <p class="mb-0 f-subtitle">{{ listener.counselor.name }}</p>
-              </div>
+            <div class="card-body d-flex justify-content-center">
+              <!-- 이름 -->
+              <p class="mb-0 f-normal">{{ listener.counselor.name }}</p>
             </div>
           </div>
         </div>

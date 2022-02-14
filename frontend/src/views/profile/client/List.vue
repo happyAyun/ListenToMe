@@ -1,147 +1,114 @@
 <template>
-  <div id="list" class="col-10 p-3 overflow-auto">
+  <div id="list" class="col-10 p-routing overflow-auto">
     <!-- 진행 예정 상담 -->
-    <div class="mb-4 pt-5 pb-2 px-5">
+    <div class="mb-5">
       <!-- title -->
       <div class="mb-4 d-flex justify-content-between align-items-center">
-        <p class="mb-0 me-4 f-title">진행 예정 상담</p>
-        <button class="mb-0 p-0 btn-tool f-btn" style="width: 8vw; background: #FFDF70">{{ leftPoints }} points</button>
+        <p class="mb-0 f-title">진행 예정 상담</p>
+        <p class="mb-0 p-0 text-center btn-tool f-normal" style="width: 7vw; background: #FFDF70">{{ leftPoints }} points</p>
       </div>
 
       <!-- content -->
       <ul class="d-flex list-group mb-4">
         <!-- header -->
         <li class="list-group-item d-flex" style="background: #95D0F1;">
-          <p class="col-2 mb-0 text-center f-subtitle">번호</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상담사</p>
-          <p class="col-3 mb-0 text-center f-subtitle">상담 날짜</p>
-          <p class="col-3 mb-0 text-center f-subtitle">상담 일시</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상태</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">번호</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">상담사</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">상담 날짜</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">상담 일시</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">상태</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">상담</p>
         </li>
         
         <!-- body -->
-        <li v-for="(item, index) in list" :key=index class="list-group-item d-flex">
+        <li v-for="(item, index) in list" :key=index class="list-group-item d-flex align-items-center" style="background: #fff4e8">
           <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
-          <p class="col-3 mb-0 text-center f-normal">{{ item.date }}</p>
-          <p class="col-3 mb-0 text-center f-normal">{{ item.time }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.date }}</p>
+          <p class="col-2 mb-0 text-center f-normal">{{ item.time }}</p>
           
           <p v-if="item.state === 1" class="col-2 mb-0 text-center f-normal">대기</p>
           <p v-else-if="item.state === 2" class="col-2 mb-0 text-center f-normal">승인</p>
+
+          <div class="d-flex justify-content-center col-2">
+            <p @click="moveToCounseling" class="mb-0 text-center btn-counseling f-normal">상담실</p>
+          </div>
         </li>
       </ul>
 
       <ul class="d-flex justify-content-center pagination">
-        <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+        <li class="page-item" style="width: 4vw;"><p @click="setBack" class="mb-0 text-center page-link f-normal">Prev</p></li>
         <li
           v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
         >
-          <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+          <p @click="setPage(n)" class="mb-0 text-center page-link f-normal">{{ n }}</p>
         </li>
-        <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
+        <li class="page-item" style="width: 4vw;"><p @click="setNext" class="mb-0 text-center page-link f-normal">Next</p></li>
       </ul>
     </div>
 
     <!-- 종료된 상담 -->
-    <div class="mb-4 pb-2 px-5">
+    <div class="mb-5">
       <!-- title -->
       <div class="mb-4 d-flex justify-content-between align-items-center">
-        <p class="mb-0 me-4 f-title">종료된 상담</p>
-        <button @click="selectAll()" class="mb-0 p-0 btn-tool f-btn" style="width: 8vw; background: #FFDF70">전체 보기</button>
+        <p class="mb-0 f-title">종료된 상담</p>
+        <button
+          @click="selectAll()"
+          class="mb-0 p-0 text-center btn-tool f-normal" style="width: 7vw; background: #FFDF70"
+        >
+          전체 보기
+        </button>
       </div>
 
       <!-- content -->
       <ul class="d-flex list-group mb-4">
         <!-- header -->
         <li class="list-group-item d-flex" style="background: #7DABD0;">
-          <p class="col-2 mb-0 text-center f-subtitle">번호</p>
-          <p class="col-2 mb-0 text-center f-subtitle">상담사</p>
-          <p class="col-3 mb-0 text-center f-subtitle">상담 날짜</p>
-          <p class="col-3 mb-0 text-center f-subtitle">상담 일시</p>
-          <p class="col-2 mb-0 text-center f-subtitle">차감 포인트</p>
-          <!-- <p class="col-2 mb-0 text-center f-subtitle">기록</p> -->
+          <p class="col-2 mb-0 text-center f-normal-bold">번호</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">상담사</p>
+          <p class="col-3 mb-0 text-center f-normal-bold">상담 날짜</p>
+          <p class="col-3 mb-0 text-center f-normal-bold">상담 일시</p>
+          <p class="col-2 mb-0 text-center f-normal-bold">차감 포인트</p>
         </li>
         
         <!-- body -->
-        <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex align-items-center">
+        <li v-for="(item, index) in doneList" :key=index class="list-group-item d-flex align-items-center" style="background: #fff4e8">
           <p class="col-2 mb-0 text-center f-normal">{{ item.id }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.counselor_name }}</p>
           <p class="col-3 mb-0 text-center f-normal">{{ item.date }}</p>
           <p class="col-3 mb-0 text-center f-normal">{{ item.time }}</p>
           <p class="col-2 mb-0 text-center f-normal">{{ item.point }}</p>
-
-          <!-- counseling details -->
-          <!-- <div class="col-2 d-flex justify-content-center">
-            <button @click="selectDetails(index)" class="btn-more f-btn">보기</button>
-          </div> -->
         </li>
       </ul>
 
       <ul class="d-flex justify-content-center pagination">
-        <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+        <li class="page-item" style="width: 4vw;"><p @click="setBack" class="mb-0 text-center page-link f-normal">Prev</p></li>
         <li
           v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
         >
-          <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+          <p @click="setPage(n)" class="mb-0 text-center page-link f-normal">{{ n }}</p>
         </li>
-        <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
+        <li class="page-item" style="width: 4vw;"><p @click="setNext" class="mb-0 text-center page-link f-normal">Next</p></li>
       </ul>
-
-      <!-- Modal ALL -->
-      <div v-if="active === 1" class="p-3 part-record">
-        <div class="mb-5 d-flex justify-content-between align-items-center">
-          <p class="mb-0 me-4 f-title">종료된 상담</p>
-          <button @click="closeModal()" class="mb-0 p-0 btn-tool f-btn" style="background: #FFDF70">닫기</button>
-        </div>
-
-        <div v-for="(memo, index) in memos" :key=index>
-          <!-- header: 제목 -->
-          <div class="mx-auto mb-3 p-3 part-record" style="width: 50vw;">
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="mb-0 text-center f-subtitle">{{ memo.title }}</p>
-              <p class="mb-0 text-center f-normal">{{ memo.date }}</p>
-            </div>
-
-            <hr class="my-3">
-
-            <!-- body: 내용 -->
-            <p class="mb-0 py-2 f-normal">{{ memo.content }}</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal ONE -->
-      <div v-if="active === 2" class="p-3 part-record">
-        <div class="mb-5 d-flex justify-content-between align-items-center">
-          <p class="mb-0 me-4 f-title">종료된 상담</p>
-          <button @click="closeModal()" class="mb-0 p-0 btn-tool f-btn" style="background: #FFDF70">닫기</button>
-        </div>
-        <!-- header: 제목 -->
-        <div class="mx-auto mb-3 p-3 part-record" style="width: 50vw;">
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0 text-center f-subtitle">{{ memo.title }}</p>
-            <p class="mb-0 text-center f-normal">{{ memo.date }}</p>
-          </div>
-
-          <hr class="my-3">
-
-          <!-- body: 내용 -->
-          <p class="mb-0 py-2 f-normal">{{ memo.content }}</p>
-        </div>
-      </div>
     </div>
+
+    <!-- Modal ALL -->
+    <record-list v-if="active === 1" :memos=memos />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import SERVER from '@/api/index.js'
+import RecordList from '@/views/profile/RecordList.vue'
 
 export default {
   name: 'List',
-  components: {
 
+  components: {
+    RecordList,
   },
+
   data: function () {
     return {
       active: 0,
@@ -159,50 +126,55 @@ export default {
       leftPoints: 10000,
 
       memos: '',
-      memo: ''
     }
   }, 
 
   methods: {
+    moveToCounseling: function () {
+      this.active = false
+      this.$router.push({name: 'CounselingSetting'})
+        .catch(() => {})
+    },
+
     closeModal: function () {
       this.active = false
     },
 
     setPage: function (page) {
       this.currentPage = page
-      this.getCounselingList(this.currentPage)
+      this.getCounselingList(this.currentPage - 1)
     },
     setBack: function () {
       if (this.currentPage !== 1) {
         this.currentPage--
       }
-      this.getCounselingList(this.currentPage)
+      this.getCounselingList(this.currentPage - 1)
       console.log(this.currentPage)
     },
     setNext: function () {
       if (this.currentPage !== this. totalPages) {
         this.currentPage++
       }
-      this.getCounselingList(this.currentPage)
+      this.getCounselingList(this.currentPage - 1)
       console.log(this.currentPage)
     },
 
     setPageDone: function (page) {
       this.currentPageDone = page
-      this.getDoneList(this.currentPageDone)
+      this.getDoneList(this.currentPageDone - 1)
     },
     setBackDone: function () {
       if (this.currentPageDone !== 1) {
         this.currentPageDone--
       }
-      this.getCounselingList(this.currentPageDone)
+      this.getDoneList(this.currentPageDone - 1)
       console.log(this.currentPageDone)
     },
     setNextDone: function () {
       if (this.currentPageDone !== this. totalPagesDone) {
         this.currentPageDone++
       }
-      this.getCounselingList(this.currentPageDone)
+      this.getDoneList(this.currentPageDone - 1)
       console.log(this.currentPageDone)
     },
 
@@ -269,22 +241,6 @@ export default {
         })
     },
 
-    getMemo: function (id) {
-      axios({
-        method: 'get',
-        url: SERVER.URL + '/memo-api/counseling/' + `${id}`,
-        headers: {
-          'Content-Type': 'application/json',
-          'access-token': `${this.$store.state.authToken}`
-        },
-      })
-        .then(res => {
-          console.log(res.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
     getMemos: function (id) {
       axios({
         method: 'get',
@@ -312,17 +268,14 @@ export default {
         })
     },
 
-    selectDetails: function (index) {
-      console.log(this.doneList[index].id)
-      this.getMemo(this.doneList[index].id)
-      this.active = 2
-      console.log('show details')
-    },
     selectAll: function () {
-      console.log(this.doneList[0].id)
-      this.getMemos(this.doneList[0].id)
-      this.active = 1
-      console.log('show all')
+      if (this.active) {
+        this.active = 0
+      } else {
+        this.getMemos(this.doneList[0].id)
+        console.log(this.doneList[0].id)
+        this.active = 1
+      }
     },
   },
 

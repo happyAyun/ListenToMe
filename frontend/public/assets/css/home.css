@@ -88,6 +88,7 @@
 .btn-tool {
   width: 6vw;
   height: 5vh;
+  line-height: 5vh;
 
   border: none;
   outline: none;
@@ -120,6 +121,20 @@
   outline: none;
 
   background: #95D0F1;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* 상담실 */
+.btn-counseling {
+  width: 5vw;
+  height: 4vh;
+  line-height: 4vh;
+
+  border: none;
+  outline: none;
+
+  background: #ED9C9C;
   border-radius: 20px;
   filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }

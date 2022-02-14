@@ -1,11 +1,6 @@
 <template>
   <div id="side-bar" class="d-flex flex-column justify-content-between py-5">
     <div>
-      <!-- button: 상담실, loginState: 1 or 2 -->
-      <!-- <div v-if="$store.state.loginState" class="d-flex justify-content-center mb-3">
-        <button @click="moveToCounseling" class="menu f-subtitle" style="background: #ED9C9C">상담실</button>
-      </div> -->
-
       <!-- button: 홈, loginState: ALL -->
       <div class="d-flex justify-content-center mb-4">
         <button @click="moveToHome" class="menu f-subtitle">홈</button>

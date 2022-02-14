@@ -22,6 +22,10 @@
   cursor: pointer;
 }
 
+.pointer-none {
+  cursor: none;
+}
+
 
 
 /* Sign Up */
@@ -29,6 +33,15 @@
 /* 회원 가입 부분 */
 .part-signup {
   width: 40vw;
+
+  background: #fff4e8;
+  border-radius: 20px;
+  filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* 회원 가입 부분 */
+.part-update {
+  width: 30vw;
 
   background: #fff4e8;
   border-radius: 20px;

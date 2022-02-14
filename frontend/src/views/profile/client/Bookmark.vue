@@ -1,25 +1,31 @@
 <template>
-  <div id="bookmark" class="col-10 p-5">
+  <div id="bookmark" class="col-10 p-routing">
     <!-- title -->
-    <div class="mb-5 d-flex">
-      <p class="mb-0 me-4 f-title">북마크된 리스너</p>
+    <div class="mb-5 d-flex justify-content-between align-items-center">
+      <p class="mb-0 f-title">북마크된 리스너</p>
       <button @click="moveToMarkedCounselors()" class="mb-0 p-0 btn-more f-normal">more</button>
     </div>
 
     <!-- body -->
-    <div class="d-flex justify-content-around ">
-      <div v-for="(listener, index) in bookmarkedCounselors" :key=index>
+    <div class="d-flex justify-content-around">
+      <div v-for="listener in bookmarkedCounselors" :key=listener.counselor.id>
         <!-- content -->
         <div @click="LoadCounselorProfile(listener.counselor)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
-            <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;">
-            <!-- <img :src="getImgUrl(listener)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
+            <img
+              :src="require(`@/assets/images/follower1.png`)" alt="counselor"
+              class="card-img-top" style="width: 10vw;"
+            >
+            <!-- <img
+              :src="getImgUrl(listener)" alt="counselor"
+              class="card-img-top" style="width: 10vw;"
+            > -->
           </div>
 
-          <div class="px-4 card-body d-flex justify-content-between">
+          <div class="card-body d-flex justify-content-center">
             <!-- 이름 -->
-            <p class="mb-0 f-subtitle">{{ listener.counselor.name }}</p>
+            <p class="mb-0 f-normal">{{ listener.counselor.name }}</p>
           </div>
         </div>
       </div>
