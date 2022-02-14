@@ -1,27 +1,33 @@
 <template>
-  <div id="home" class="col-10 p-5">
+  <div id="home" class="col-10 p-routing">
     <!-- title -->
-    <div class="mb-5 d-flex">
-      <p class="mb-0 me-4 f-title">오늘의 리스너</p>
+    <div class="mb-5 d-flex justify-content-between align-items-center">
+      <p class="mb-0 f-title">오늘의 리스너</p>
       <button @click="moveToCounselors" class="mb-0 p-0 btn-more f-normal">more</button>
     </div>
 
     <!-- body -->
-    <div class="d-flex justify-content-around ">
-      <div v-for="(listener, index) in todayListners" :key=index>
+    <div class="d-flex justify-content-around">
+      <div v-for="listener in todayListners" :key=listener.id>
         <!-- content -->
         <div @click="LoadCounselorProfile(listener)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
-            <!-- <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
-            <img :src="getImgUrl(listener)" class="card-img-top" alt="counselor" style="width: 9vw;">
+            <img
+              :src="require(`@/assets/images/follower1.png`)" alt="counselor"
+              class="card-img-top" style="width: 10vw;"
+            >
+            <!-- <img
+              :src="getImgUrl(listener)" alt="counselor"
+              class="card-img-top" style="width: 10vw;"
+            > -->
           </div>
 
-          <div class="px-4 card-body d-flex justify-content-between">
+          <div class="card-body d-flex justify-content-between">
             <!-- 이름 -->
-            <p class="mb-0 f-subtitle">{{ listener.name }}</p>
+            <p class="mb-0 f-normal">{{ listener.name }}</p>
             <!-- 평점 -->
-            <p class="mb-0 f-subtitle">{{ listener.startScore }}</p>
+            <p class="mb-0 f-normal">{{ listener.startScore }}</p>
           </div>
         </div>
       </div>

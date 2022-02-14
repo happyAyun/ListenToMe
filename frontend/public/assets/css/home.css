@@ -114,6 +114,7 @@
 .btn-more {
   width: 4vw;
   height: 4vh;
+  line-height: 4vh;
 
   border: none;
   outline: none;
@@ -135,8 +136,7 @@
 
 /* 상담사 */
 .part-counselor {
-  width: 14vw;
-  height: 35vh;
+  width: 13vw;
 
   border: none;
 
@@ -162,11 +162,13 @@
 
 /* 카테고리 */
 .part-cat {
-  width: 3.8vw;
-  height: 3.6vh;
-  line-height: 4vh;
+  /* width: 3.8vw; */
+  height: 3.5vh;
+  line-height: 3.5vh;
 
-  background: #ED9C9C;
+  padding: 0 0.5vw;
+
+  background: #95D0F1;
   border-radius: 20px;
 }
 
@@ -212,4 +214,12 @@
 #profile {
   height: 91vh;
   overflow: auto;
+}
+
+
+
+/* PADDING */
+
+.p-routing {
+  padding: 6vh 5vw;
 }

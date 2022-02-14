@@ -1,13 +1,13 @@
 <template>
-  <div id="counselors" class="col-10 overflow-auto">
+  <div id="counselors" class="col-10 p-routing overflow-auto">
     <!-- title -->
-    <div class="mb-5 pt-5 d-flex mx-5">
-      <p class="me-3 f-title">전체 상담사</p>
-      <button @click="moveToHome" class="mb-0 p-0 btn-more f-normal">back</button>
+    <div class="mb-5 d-flex justify-content-between align-items-center">
+      <p class="mb-0 f-title">전체 리스너</p>
+      <!-- <button @click="moveToHome" class="mb-0 p-0 btn-more f-normal">back</button> -->
     </div>
 
     <!-- content -->
-    <div class="row row-cols-5 g-5 mb-5 mx-4">
+    <div class="row row-cols-5 g-5 mb-5">
       <div 
         v-for="counselor in counselorList" 
         :key="counselor.id" 
@@ -17,13 +17,19 @@
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <!-- <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
-              <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;">
+              <img
+                :src="require(`@/assets/images/follower1.png`)" alt="counselor"
+                class="card-img-top" style="width: 10vw;"
+              >
+              <!-- <img
+                :src="getImgUrl(listener)" alt="counselor"
+                class="card-img-top" style="width: 10vw;"
+              > -->
             </div>
 
             <div class="card-body px-4">
               <!-- 카테고리 -->
-              <div class="d-flex mb-2">
+              <div class="d-flex mb-3">
                 <div v-if="counselor.category.length === 0">
                   <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
                 </div>
@@ -36,9 +42,9 @@
 
               <div class="d-flex justify-content-between">
                 <!-- 이름 -->
-                <p class="mb-0 f-subtitle">{{ counselor.name }}</p>
+                <p class="mb-0 f-normal">{{ counselor.name }}</p>
                 <!-- 평점 -->
-                <p class="mb-0 f-subtitle">{{ counselor.startScore }}</p>
+                <p class="mb-0 f-normal">{{ counselor.startScore }}</p>
               </div>
             </div>
           </div>
@@ -48,13 +54,13 @@
     
     <!-- pagination -->
     <ul class="d-flex justify-content-center pagination">
-      <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+      <li class="page-item mb-0" style="width: 4vw;"><p @click="setBack" class="mb-0 page-link text-center f-normal">Prev</p></li>
       <li
-        v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
+        v-for="n in this.totalPages" :key=n class="mb-0 page-item" style="width: 2vw;"
       >
-        <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+        <p @click="setPage(n)" class="mb-0 page-link text-center f-normal">{{ n }}</p>
       </li>
-      <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
+      <li class="mb-0 page-item" style="width: 4vw;"><p @click="setNext" class="mb-0 page-link text-center f-normal">Next</p></li>
     </ul>
   </div>
 </template>
