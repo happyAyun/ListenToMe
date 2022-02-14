@@ -22,6 +22,7 @@ import List from '@/views/profile/client/List.vue'
 import Profile from '@/views/profile/counselor/Profile.vue'
 import Schedule from '@/views/profile/counselor/Schedule.vue'
 import ListFromCounselor from '@/views/profile/counselor/ListFromCounselor.vue'
+import Statistics from '@/views/statistics/Statistics.vue'
 
 // counseling
 import Counseling from '@/views/counseling/Counseling.vue'
@@ -101,7 +102,11 @@ const routes = [
     name: 'ListFromCounselor',
     component: ListFromCounselor
   },
-
+  {
+    path: '/profile/statistics',
+    name: 'Statistics',
+    component: Statistics
+  },
 
   // home
   {

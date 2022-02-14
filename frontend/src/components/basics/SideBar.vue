@@ -31,7 +31,7 @@
 
           <!-- button: 정보 수정 -->
           <div class="d-flex justify-content-center mb-3">
-            <button @click="moveToUpdate" class="menu-small f-normal-bold">정보 수정</button>
+            <button @click="moveToStatistics" class="menu-small f-normal-bold">정보 수정</button>
           </div>
         </div>
       </div>
@@ -57,6 +57,10 @@
           <!-- button: 상담 내역 -->
           <div class="d-flex justify-content-center mb-3">
             <button @click="moveToList" class="menu-small f-normal-bold">상담 내역</button>
+          </div>
+          <!-- button: 통계 -->
+          <div class="d-flex justify-content-center mb-3">
+            <button @click="moveToStatistics" class="menu-small f-normal-bold">통계</button>
           </div>
         </div>
       </div>
@@ -106,6 +110,9 @@ export default {
     moveToProfile: function () {
       this.$router.push({name: 'Profile'})
         .catch(() => {})
+    },
+    moveToStatistics: function () {
+      this.$router.push({name: 'Statistics'})
     },
     moveToUpdate: function () {
       if (this.$store.state.loginState === 1){

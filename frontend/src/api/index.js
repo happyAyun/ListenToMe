@@ -32,6 +32,11 @@ export default {
     // memoSelectionFromList: '/memo-api/counseling/',
 
     // reviews
-    reviewsSelection: '/review-api/list/'
+    reviewsSelection: '/review-api/list/',
+
+    // statistics
+    getGender: '/statistics-api/gender/',
+    getAge: '/statistics-api/age/',
+    getMonth: '/statistics-api/month/',
   }
 }
