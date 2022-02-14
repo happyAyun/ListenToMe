@@ -3,45 +3,48 @@
     <!-- login 되어 있을 때 -->
     <div
       v-if="$store.state.loginState"
-      class="d-flex justify-content-between align-items-center px-4"
+      class="d-flex justify-content-between align-items-center px-5"
       :class="{'area-nav': $store.state.isNavbar, 'area-nav-top': !$store.state.isNavbar}"
     >
       <div class="d-flex align-items-center">
         <!-- image: logo -->
         <img
-          @click="moveToHome" :src="require('@/assets/images/logo_white.png')"
-          alt="logo-image" :class="{'pointer': $store.state.isSideBar}" class="me-2 img-logo"
+          @click="moveToHome" :src="require('@/assets/images/logo_white.png')" alt="logo-image"
+          class="me-3 img-logo" :class="{'pointer': $store.state.isSideBar}" 
         >
         
-        <!-- section: service name -->
-        <p @click="moveToHome" :class="{'pointer': $store.state.isSideBar}" class="mb-0 f-title">Listen to Me</p>
+        <!-- part: service name -->
+        <p @click="moveToHome" class="mb-0 f-title-bold" :class="{'pointer': $store.state.isSideBar}">Listen to Me</p>
       </div>
 
+      <!-- part: button -->
       <div v-if="$store.state.isSideBar" class="d-flex">
-        <!-- section: buttons -->
-        <button @click="Logout" class="me-2 btn-tool f-btn" style="background: #ED9C9C">로그아웃</button>
+        <button @click="Logout" class="btn-tool f-btn" style="background: #ED9C9C">로그아웃</button>
       </div>
     </div>
 
-    <!-- login 안되어 있을 때 -->
+    <!-- login "안"되어 있을 때 -->
     <div
       v-else
-      class="d-flex justify-content-between align-items-center px-4"
+      class="d-flex justify-content-between align-items-center px-5"
       :class="{'area-nav': $store.state.isNavbar, 'area-nav-top': !$store.state.isNavbar}"
     >
       <div class="d-flex align-items-center">
         <!-- image: logo -->
-        <img @click="moveToHome" :src="require('@/assets/images/logo_white.png')" alt="logo-image" class="me-2 img-logo">
+        <img
+          @click="moveToHome" :src="require('@/assets/images/logo_white.png')" alt="logo-image"
+          class="me-3 img-logo"
+        >
         
-        <!-- section: service name -->
-        <p @click="moveToHome" id="logo" class="mb-0 f-title">Listen to Me</p>
+        <!-- part: service name -->
+        <p @click="moveToHome" class="mb-0 f-title-bold">Listen to Me</p>
       </div>
 
+      <!-- part: buttons -->
       <div class="d-flex">
-        <!-- section: buttons -->
-        <button @click="moveToSignup" class="me-3 btn-tool f-btn">회원가입</button>
-        <button @click="moveToLogin" class="me-3 btn-tool f-btn">로그인</button>
-        <button @click="moveToLoginCounselor" class="me-2 btn-tool f-btn" style="width: 9vw">상담사 로그인</button>
+        <button @click="moveToSignup" class="me-3 btn-tool f-normal" style="background: #95D0F1">회원가입</button>
+        <button @click="moveToLogin" class="me-3 btn-tool f-normal" style="background: #95D0F1">로그인</button>
+        <button @click="moveToLoginCounselor" class="btn-tool f-normal" style="width: 8vw; background: #95D0F1">상담사 로그인</button>
       </div>
     </div>
   </div>

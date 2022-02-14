@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <header>
+      <!-- navigation bar -->
       <nav-bar/>
 
-      <!-- barkground -->
+      <!-- introduction with background -->
       <introduction/>
     </header>
 
     <div :class="{ 'd-flex': $store.state.isSideBar }">
       <!-- left side bar -->
-      <side-bar v-if="$store.state.isSideBar" class="col-2 area-side"></side-bar>
+      <side-bar v-if="$store.state.isSideBar" class="col-2 area-side"/>
 
       <!-- routing area -->
       <router-view/>
@@ -46,7 +47,6 @@ export default {
         document.body.classList.add('overflow-hidden')
         console.log('touch down')
       }
-      // console.log(location, innerLocation, bottomLocation)
     },
   },
 
