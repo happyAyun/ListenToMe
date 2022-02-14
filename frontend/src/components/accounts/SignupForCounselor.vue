@@ -57,11 +57,6 @@
           />
         </div>
 
-        <!-- 닉네임
-        <div class="mb-3">
-          <input v-model.trim="credentials_signup.nickname" type="text" placeholder="닉네임" class="form-control f-normal" required />
-        </div> -->
-
         <!-- 성별 -->
         <div class="mb-3">
           <select v-model="credentials_signup.gender" class="form-select f-normal">
@@ -96,7 +91,7 @@
 
 <script>
 import counselorSample from '@/assets/images/counselor.png'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'SignupForCounselor',
@@ -105,6 +100,7 @@ export default {
     return {
       counselorSample,
       profile: '',
+      photo:'',
       credentials_signup: {
         photo: '',
         email: '',
@@ -135,32 +131,22 @@ export default {
     ...mapActions([
       'SignupForCounselor',
     ]),
-
-    // photoSelect() {
-    //   console.log(this.$refs);
-    //   this.credentials_signup.photo = this.$refs.photo.files[0];
-    // },
-
     onFileChange(e) {
       console.log(e)
       const file = e.target.files[0];
       this.profile = URL.createObjectURL(file);
       this.credentials_signup.photo = file.name;
+      this.$store.state.myPhoto = file;
     },
     acceptNumber() {
       var x = this.credentials_signup.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
       this.credentials_signup.phoneNumber = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
     },
-    submitForm: function () {  
-      console.log("photo = " + this.credentials_signup.photo); 
-      console.log("email = " + this.credentials_signup.email); 
-      console.log("password = " + this.credentials_signup.password);
-      console.log("name = " + this.credentials_signup.name);
-      console.log("phoneNumber = " + this.credentials_signup.phoneNumber);
-      console.log("nickname = " + this.credentials_signup.nickname); 
-      console.log("gender = " + this.credentials_signup.gender); 
-      console.log("birth = " + this.credentials_signup.birth);
-    },
+  },
+  computed: {
+    ...mapState([
+      'myPhoto'
+    ])
   }
 }
 </script>

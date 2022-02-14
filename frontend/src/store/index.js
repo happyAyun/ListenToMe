@@ -40,6 +40,9 @@ export default new Vuex.Store({
     counselorDetail: [],
 
     counsState: '',
+
+    // 회원가입 후 사진 등록 
+    myPhoto: '',
   },
 
   getters: {
@@ -151,11 +154,14 @@ export default new Vuex.Store({
       })
     },
 
-    SignupForCounselor: function (context, credentials) {
+    SignupForCounselor: function (context, formdata) {
       axios({
         url: SERVER.URL + SERVER.ROUTES.co_signup,
         method: 'post',
-        data: credentials,
+        data: formdata,
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+        // }
       })
       .then(() => {
         router.push({name: 'LoginForCounselor'})
@@ -200,8 +206,28 @@ export default new Vuex.Store({
           data: credentials,
         })
         .then((res) => {
-          commit('SET_TOKEN', res.data['access-token'])
-          commit('SE_LOGINSTATE', 2)
+          console.log(this.state.myPhoto)
+          Promise.all([
+            commit('SET_TOKEN', res.data['access-token']),
+            commit('SE_LOGINSTATE', 2)
+          ])
+          .then(() => {
+            const formdata = new FormData();
+            formdata.append('multipartFile', this.state.myPhoto);
+            axios({
+              method: 'post',
+              url: SERVER.URL + '/counselor-api/user/image',
+              data: formdata,
+              headers: {
+                'access-token': `${this.state.authToken}`,
+                'Content-Type': 'multipart/form-data',
+              }
+            })
+            .then(() => {
+              console.log('사진등록')
+            })
+            .catch((err) => console.log(err));
+          })
           router.push('/')
           console.log(this.state.userEmail)
         })
