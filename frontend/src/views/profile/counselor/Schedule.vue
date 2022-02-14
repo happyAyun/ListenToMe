@@ -115,8 +115,13 @@
         <div class="background">
           <div class="window">
             <div class="popup">
-              <div class="modal-header">
-                <p>접수 확인</p>
+              <div class="modal-header d-flex align-items-center justify-content-center pb-2">
+                <div v-if="check">
+                  <p>접수 확인</p>
+                </div>
+                <div v-else> 
+                  <p>예약 정보 확인</p>
+                </div>
               </div>
               <div class="modal-body px-5 mx-3">
                 <p>상담 일자 : {{ modalContent[1] }}</p>
@@ -144,7 +149,7 @@
         <div class="background">
           <div class="window">
             <div class="popup">
-              <div class="modal-header">
+              <div class="modal-header d-flex align-items-center justify-content-center pb-2">
                 <p>상담 개설</p>
               </div>
               <div class="modal-body p-4 my-5">
@@ -559,7 +564,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }

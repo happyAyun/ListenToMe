@@ -2,25 +2,32 @@
   <div id="counselor-detail" class="col-10 d-flex flex-column align-items-center pt-5 overflow-auto">
     <div class="mb-4 px-4 py-3 part-profile">
       <!-- header -->
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center row">
         <!-- name -->
-        <div class="col-7 d-flex">
-          <p class="mb-0 me-4 f-title">{{ this.counselorDetail.userInfo.name }}</p>
-          <p class="mb-0 me-2 f-subtitle">{{ this.counselorDetail.userInfo.shortGreeting }}</p>
+        <div class="col-md-3 d-flex">
+          <h2 class="mb-0 me-5 mx-5 fw-bold">{{ this.counselorDetail.userInfo.name }}</h2>
         </div>
 
-        <div class="col-5 d-flex justify-content-between">
-          <!-- category -->
-          <div class="d-flex align-items-center">
-            <div v-if="this.counselorDetail.category.length === 0">
-              <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
+        <div class="col-md-7 d-flex row">
+          <div class="col-sm-12 d-flex mt-2 mb-2">
+            <div class="col-10">
+              <p class="mb-0 me-2 f-subtitle">{{ this.counselorDetail.userInfo.shortGreeting }}</p>
             </div>
-            <div v-else>
+          </div>
+          <!-- category -->
+          <div class="col-sm-11 d-flex">
+            <p class="f-subtitle mt-2 mb-0">주요 상담 분야</p>
+            <div v-if="this.counselorDetail.category.length === 0">
+              <p class="mb-0 mt-2 mx-4 text-center part-cat f-normal">미정</p>
+            </div>
+            <div v-else class="d-flex justify-content-between">
               <div v-for="(c, idx) in this.counselorDetail.category" :key="idx">
-                <p class="mb-0 me-2 text-center part-cat f-normal">{{ c.category.category }}</p>
+                <p class="mb-0 mt-1 mx-4 text-center part-cat f-normal" style="background: #FFC688;">{{ c.category.category }}</p>
               </div>
             </div>
           </div>
+        </div>
+        <div class="col-md-2 d-flex ms-4">
           <div v-if="$store.state.loginState">
             <button @click="setBookmark()" class="btn-func f-normal" style="background: #CFE7EB">북마크</button>
           </div>
@@ -55,10 +62,15 @@
           </div>
 
           <!-- review -->
-          <div class="">
+          <div class="mb-1">
             <div class="d-flex">
-              <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
-              <p @click="changeStatus" class="mb-0 text-center part-cat f-normal">더보기</p>
+              <div v-if="sumReviews === 0">
+                <p class="me-2 f-subtitle">평점 0</p>
+              </div>
+              <div v-else>
+                <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
+              </div>
+              <p @click="changeStatus" class="me-2 text-center part-cat f-normal">더보기</p>
             </div>
             <div class="p-3 sec-profile">
               <div v-for="review in reviews" :key="review.id" class="d-flex flex-column">
@@ -75,6 +87,8 @@
         </div>
       </div>
 
+      <hr class="my-1">
+      
       <div>
         <counselor-schedule :coEmail="coEmail"/>
       </div>
@@ -84,8 +98,13 @@
       <!-- review -->
       <div class="">
         <div class="d-flex">
-          <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
-          <p @click="closeStatus" class="mb-0 text-center part-cat f-normal">닫기</p>
+          <div v-if="sumReviews === 0">
+            <p class="me-2 f-subtitle">평점 0</p>
+          </div>
+          <div v-else>
+            <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
+          </div>
+          <p @click="closeStatus" class="me-2 text-center part-cat f-normal">닫기</p>
         </div>
         <div class="p-3 sec-profile">
           <div v-for="review in reviews" :key="review.id" class="d-flex flex-column">

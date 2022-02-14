@@ -420,7 +420,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }

@@ -2,30 +2,31 @@
   <div id="profile" class="col-10 d-flex flex-column align-items-center pt-5 overflow-auto">
     <div class="mb-4 px-4 py-3 part-profile">
       <!-- header -->
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center row">
         <!-- name -->
-        <div class="col-7 d-flex">
-          <!-- <p class="mb-0 me-4 f-title">{{ name }}</p>
-          <p class="mb-0 me-2 f-subtitle">{{ shortGreeting }}</p>
-          <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB">수정</p> -->
-          <p class="mb-0 me-5 f-title">{{ name }}</p>
-          <!-- <p class="mb-0 me-2 f-subtitle">{{ shortGreeting }}</p> -->
-          <div>
-            <input type="text" v-model="shortGreeting" class="form-control f-normal" required />
-          </div>
-          <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="updateShortGreeting(shortGreeting)">수정</p>
+        <div class="col-md-3 d-flex">
+          <h2 class="mb-0 me-5 mx-5 fw-bold">{{ name }}</h2>
         </div>
-
-        <div class="col-5 d-flex">
-          <div v-if="category.length === 0">
-            <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
-          </div>
-          <div v-else>
-            <div v-for="(c, idx) in category" :key="idx">
-              <p class="mb-0 me-2 text-center part-cat f-normal">{{ c.category.category }}</p>
+     
+        <div class="col-md-9 d-flex row">
+          <div class="col-sm-12 d-flex mt-2 mb-2">
+            <div class="col-10">
+              <input type="text" v-model="shortGreeting" class="form-control f-normal sec-profile rounded" required />
             </div>
+            <p class="ms-4 mb-0 text-center part-cat f-normal co1-2" style="width: 3vw; background: #CFE7EB" @click="updateShortGreeting(shortGreeting)">수정</p>
           </div>
-          <p class="mb-0 me-2 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="isModalViewed = true">수정</p>
+          <div class="col-sm-11 d-flex">
+            <p class="f-subtitle mt-2 mb-0">주요 상담 분야</p>
+            <div v-if="category.length === 0">
+              <p class="mb-0 mt-2 mx-4 text-center part-cat f-normal">미정</p>
+            </div>
+            <div v-else class="d-flex justify-content-between">
+              <div v-for="(c, idx) in category" :key="idx">
+                <p class="mb-0 mt-2 mx-4 text-center part-cat f-normal" style="background: #FFC688;">{{ c.category.category }}</p>
+              </div>
+            </div>
+            <p class="mb-0 mt-2 mx-4 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="isModalViewed = true">수정</p>
+          </div>
           <category-modal v-if="isModalViewed" @close-modal="isModalViewed = false"/>
         </div>
       </div>
@@ -66,7 +67,9 @@
           <div class="mb-5">
             <div class="d-flex">
               <p class="f-subtitle me-2">소개</p>
-              <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="updateGreeting(greeting)">수정</p>
+              <div>
+                <p class="mb-0 mb-2 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="updateGreeting(greeting)">수정</p>
+              </div>
             </div>
             <div class="sec-profile">
               <input type="text" v-model="greeting" class="form-control f-normal" required />
@@ -74,10 +77,15 @@
           </div>
 
           <!-- review -->
-          <div class="">
+          <div class="mb-1">
             <div class="d-flex">
-              <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
-              <p @click="changeStatus" class="mb-0 text-center part-cat f-normal">더보기</p>
+              <div v-if="sumReviews === 0">
+                <p class="me-2 f-subtitle">평점 0</p>
+              </div>
+              <div v-else>
+                <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
+              </div>
+              <p @click="changeStatus" class="mb-2 text-center part-cat f-normal">더보기</p>
             </div>
             <div class="p-3 sec-profile">
               <div v-for="review in reviews" :key="review.id" class="d-flex flex-column">
@@ -99,7 +107,12 @@
       <!-- review -->
       <div class="">
         <div class="d-flex">
-          <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
+          <div v-if="sumReviews === 0">
+            <p class="me-2 f-subtitle">평점 0</p>
+          </div>
+          <div v-else>
+            <p class="me-2 f-subtitle">평점 {{ sumReviews / totalReviews }}</p>
+          </div>
           <p @click="closeStatus" class="mb-0 text-center part-cat f-normal">닫기</p>
         </div>
         <div class="p-3 sec-profile">
