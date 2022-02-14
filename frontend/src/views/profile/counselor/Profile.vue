@@ -5,16 +5,28 @@
       <div class="d-flex align-items-center">
         <!-- name -->
         <div class="col-7 d-flex">
-          <p class="mb-0 me-4 f-title">{{ name }}</p>
+          <!-- <p class="mb-0 me-4 f-title">{{ name }}</p>
           <p class="mb-0 me-2 f-subtitle">{{ shortGreeting }}</p>
-          <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB">수정</p>
+          <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB">수정</p> -->
+          <p class="mb-0 me-5 f-title">{{ name }}</p>
+          <!-- <p class="mb-0 me-2 f-subtitle">{{ shortGreeting }}</p> -->
+          <div>
+            <input type="text" v-model="shortGreeting" class="form-control f-normal" required />
+          </div>
+          <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="updateShortGreeting(shortGreeting)">수정</p>
         </div>
 
         <div class="col-5 d-flex">
-          <p class="mb-0 me-2 text-center part-cat f-normal">우울</p>
-          <p class="mb-0 me-2 text-center part-cat f-normal">무기력</p>
-          <p class="mb-0 me-2 text-center part-cat f-normal">자살</p>
-          <p class="mb-0 me-2 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB">수정</p>
+          <div v-if="category.length === 0">
+            <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
+          </div>
+          <div v-else>
+            <div v-for="(c, idx) in category" :key="idx">
+              <p class="mb-0 me-2 text-center part-cat f-normal">{{ c.category.category }}</p>
+            </div>
+          </div>
+          <p class="mb-0 me-2 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="isModalViewed = true">수정</p>
+          <category-modal v-if="isModalViewed" @close-modal="isModalViewed = false"/>
         </div>
       </div>
       
@@ -23,9 +35,25 @@
       <div class="d-flex">
         <div class="col-4 px-2 d-flex flex-column justify-content-between">
           <!-- profile image -->
-          <div class="mb-5 text-center">
-            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 14vw;">
+          <p class="mb-0 me-2 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="updatePhoto()">수정</p>
+          <div class="mb-3 d-flex justify-content-center">
+            <div v-if="photo">
+              <!-- <img :src="photoURL" alt="profile-image" class="form-profile-img"> -->
+              <img :src="getImgUrl(photo)" class="card-img-top" alt="counselor" style="width: 18vw;">
+            </div>
+            <div v-else>
+              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 14vw;">
+            </div>
           </div>
+
+          <div class="mb-3">
+            <input @change="fileSelect" type="file" ref="photo" id="myFile" class="form-control f-normal">
+          </div>
+
+          <!-- <div class="mb-5 text-center">
+            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 14vw;">
+            <input type="file" name="file" ref="photo">
+          </div> -->
 
           <!-- history -->
           <div class="sec-profile">
@@ -38,10 +66,10 @@
           <div class="mb-5">
             <div class="d-flex">
               <p class="f-subtitle me-2">소개</p>
-              <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB">수정</p>
+              <p class="mb-0 text-center part-cat f-normal" style="width: 3vw; background: #CFE7EB" @click="updateGreeting(greeting)">수정</p>
             </div>
             <div class="sec-profile">
-              <p class="mb-0 p-3 f-normal">{{ greeting }}</p>
+              <input type="text" v-model="greeting" class="form-control f-normal" required />
             </div>
           </div>
 
@@ -93,11 +121,12 @@
 <script>
 import axios from 'axios'
 import SERVER from '@/api/index.js'
+import CategoryModal from '@/components/profile/CategoryModal.vue'
 
 export default {
   name: 'Profile',
   components: {
-
+    CategoryModal
   },
   data: function () {
     return {
@@ -110,6 +139,11 @@ export default {
       totalReviews: 1,
       sumReviews: 0,
       reviews: '',
+
+      photo: '',
+      photoURL: '',
+      category: [],
+      isModalViewed: false,
     }
   },
   methods: {
@@ -120,17 +154,49 @@ export default {
       this.active = false
     },
 
+    fileSelect() {
+      // console.log(e)
+      console.log(this.$refs)
+      // this.photo = e.target.files[0];
+      this.photo = this.$refs.photo.files[0];
+      console.log(this.photo);
+      this.photoURL = URL.createObjectURL(this.photo);
+      // this.credentials_signup.photo = file.name;
+    },
+    
     getCounselorData() {
       axios({
         method: 'get',
         url: SERVER.URL + `/counselor-api/user/${this.$store.state.userEmail}`,
       })
       .then((res) => {
-        console.log(res)
+        console.log(res.data)
         this.name = res.data.userInfo.name;
         this.greeting = res.data.userInfo.greeting;
         this.shortGreeting = res.data.userInfo.shortGreeting;
         this.degree = res.data.userInfo.degree;
+        this.photo = res.data.userInfo.photo;
+        this.category = res.data.category
+        console.log(this.category)
+      })
+      .catch((err) => console.log(err));
+    },
+
+    // 인사말 수정
+    updateShortGreeting() {
+      axios({
+        method: 'post',
+        url: SERVER.URL + '/counselor-api/shortgreeting',
+        headers: {
+          'Content-Type': 'application/json;',
+          'access-token': `${this.$store.state.authToken}`
+        },
+        data: {
+          shortgreeting: this.shortGreeting
+        }
+      })
+      .then(() => {
+        console.log('변경완료')
       })
       .catch((err) => console.log(err));
     },
@@ -157,7 +223,51 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+    // 소개 수정
+    updateGreeting: function () {
+      axios({
+        method: 'post',
+        url: SERVER.URL + '/counselor-api/greeting',
+        headers: {
+          'Content-Type': 'application/json;',
+          'access-token': `${this.$store.state.authToken}`
+        },
+        data: {
+          greeting: this.greeting
+        }
+      })
+      .then(() => {
+        console.log('변경완료')
+      })
+      .catch((err) => console.log(err));
+    },
+
+    // 사진 수정
+    updatePhoto() {
+      const formdata = new FormData();
+      formdata.append('multipartFile', this.photo);
+      axios({
+        method: 'post',
+        url: SERVER.URL + '/counselor-api/user/image',
+        data: formdata,
+        headers: {
+          'access-token': `${this.$store.state.authToken}`,
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+      .then(() => {
+        console.log('변경완료')
+        this.$router.push("/");
+      })
+      .catch((err) => console.log(err));
+    },
+
+    // 사진 조회
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con}`
+      return images
+    },
   },
   created() {
     this.getCounselorData()

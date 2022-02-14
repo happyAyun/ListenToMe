@@ -10,10 +10,16 @@
         </div>
 
         <div class="col-5 d-flex justify-content-between">
+          <!-- category -->
           <div class="d-flex align-items-center">
-            <p class="mb-0 me-2 text-center part-cat f-normal">우울</p>
-            <p class="mb-0 me-2 text-center part-cat f-normal">무기력</p>
-            <p class="mb-0 me-2 text-center part-cat f-normal">자살</p>
+            <div v-if="this.counselorDetail.category.length === 0">
+              <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
+            </div>
+            <div v-else>
+              <div v-for="(c, idx) in this.counselorDetail.category" :key="idx">
+                <p class="mb-0 me-2 text-center part-cat f-normal">{{ c.category.category }}</p>
+              </div>
+            </div>
           </div>
           <div v-if="$store.state.loginState">
             <button @click="setBookmark()" class="btn-func f-normal" style="background: #CFE7EB">북마크</button>

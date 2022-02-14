@@ -17,16 +17,21 @@
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;">
-              <!-- <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
+              <!-- <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
+              <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;">
             </div>
 
             <div class="card-body px-4">
               <!-- 카테고리 -->
               <div class="d-flex mb-2">
-                <!-- tempo! 레이아웃을 잡기 위한 임시 코드 -->
-                <p class="mb-0 me-2 text-center part-cat f-normal">우울</p>
-                <p class="mb-0 text-center part-cat f-normal">무기력</p>
+                <div v-if="counselor.category.length === 0">
+                  <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
+                </div>
+                <div v-else>
+                  <div v-for="(c, idx) in counselor.category" :key="idx">
+                    <p class="mb-0 me-2 text-center part-cat f-normal">{{ c }}</p>
+                  </div>
+                </div>
               </div>
 
               <div class="d-flex justify-content-between">
