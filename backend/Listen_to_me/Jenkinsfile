@@ -40,7 +40,7 @@ pipeline {
         // 현재 동작중인 컨테이너 중 <back-image-name>의 이름을 가진
         // 컨테이너를 stop 한다
          sh 'docker ps -f name=<back-image-name> -q \
-      | xargs --no-run-if-empty docker container stop'
+           | xargs --no-run-if-empty docker container stop'
         // <front-image-name>의 이름을 가진 컨테이너를 삭제한다.
          sh 'docker container ls -a -f name=<front-image-name> -q \
            | xargs -r docker container rm'
