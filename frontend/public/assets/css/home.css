@@ -192,6 +192,11 @@
   overflow: auto;
 }
 
+#statistics {
+  height: 91vh;
+  overflow: auto;
+}
+
 
 
 
