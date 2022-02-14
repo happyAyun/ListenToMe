@@ -125,7 +125,7 @@ export default {
 
       leftPoints: 10000,
 
-      memos: '',
+      memos: [],
     }
   }, 
 
