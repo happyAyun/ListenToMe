@@ -33,7 +33,8 @@
         <div class="col-4 px-2 d-flex flex-column justify-content-between">
           <!-- profile image -->
           <div class="mb-5 text-center">
-            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 14vw;">
+            <img :src="getImgUrl(this.counselorDetail.userInfo)" class="card-img-top" alt="counselor" style="width: 18vw;">
+            <!-- <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 14vw;"> -->
           </div>
 
           <!-- history -->
