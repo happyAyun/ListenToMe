@@ -26,16 +26,11 @@ public class Career {
     Career(Counselor counselor, String name){
         this.counselor = counselor;
         this.name = name;
-
     }
 
-    public void update(CareerDto careerDto){
-
+    public void update(CareerDto careerDto) {
         this.id = careerDto.getId();
         this.counselor = careerDto.getCounselor();
         this.name = careerDto.getName();
-
     }
-
-
 }

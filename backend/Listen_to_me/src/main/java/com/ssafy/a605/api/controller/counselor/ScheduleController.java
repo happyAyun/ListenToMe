@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -58,14 +59,20 @@ public class ScheduleController {
     }
 
     //3. 내담자 -> 상담 신청
-    @GetMapping("/request/{scheduleId}")
-    public ResponseEntity<String> requestCounseling(@PathVariable("scheduleId") int scheduleId, HttpServletRequest request) throws Exception {
+    @PostMapping("/request")
+    public ResponseEntity<String> requestCounseling(@RequestBody Map<String,String> param, HttpServletRequest request) throws Exception {
         HttpStatus status = HttpStatus.ACCEPTED;
         if (jwtService.isUsable(request.getHeader("access-token"))) {
+            int scheduleId = Integer.parseInt(param.get("scheduleId"));
+            String sticker = param.get("isSticker");
+            boolean isSticker = false;
+            if(sticker.equals("true")) isSticker = true;
+            else isSticker = false;
+
             if(!scheduleService.checkPoint(jwtService.getUserId())){
                 return new ResponseEntity<String>("no enough points", HttpStatus.OK);
             }
-            if(scheduleService.requestCounseling(jwtService.getUserId(), scheduleId)){
+            if(scheduleService.requestCounseling(jwtService.getUserId(), scheduleId, isSticker)){
                 return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
             }
         }

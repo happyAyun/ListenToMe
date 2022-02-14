@@ -3,28 +3,30 @@ package com.ssafy.a605.api.controller.counselor;
 
 import com.ssafy.a605.model.dto.CertificateDto;
 import com.ssafy.a605.model.dto.CounselorDto;
-import com.ssafy.a605.model.entity.Certificate;
 import com.ssafy.a605.model.entity.CounselorCategory;
+import com.ssafy.a605.model.request.counselor.CounselorInfoReq;
 import com.ssafy.a605.model.response.counselor.CounselorInfoRes;
-import com.ssafy.a605.service.CategoryService;
-import com.ssafy.a605.service.CertificateService;
-import com.ssafy.a605.service.CounselorService;
-import com.ssafy.a605.service.JwtServiceImpl;
+import com.ssafy.a605.model.response.counselor.CounselorListRes;
+import com.ssafy.a605.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,8 @@ public class CounselorController {
     public static final Logger logger = LoggerFactory.getLogger(CounselorController.class);
     private static final String SUCCESS = "success";
     private static final String FAIL = "fail";
+    @Value("${profileImg.path}")
+    private String uploadFolder;
 
     @Autowired
     private JwtServiceImpl jwtService;
@@ -50,6 +54,9 @@ public class CounselorController {
 
     @Autowired
     private CertificateService certificateService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
     @PostMapping("/login")
@@ -96,7 +103,7 @@ public class CounselorController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<String> joinUser(
+    public ResponseEntity<String> joinCounselor(
             @RequestBody @ApiParam(value = "회원 가입 정보", required = true) CounselorDto counselorDto) throws Exception {
         logger.info("joinUser - 호출");
         if (userService.joinCounselor(counselorDto)) {
@@ -105,6 +112,16 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping("/user/join")
+    public ResponseEntity<String> joinUser(@RequestBody CounselorInfoReq counselorInfoReq) throws Exception {
+        logger.info("joinUser - 호출");
+        if (userService.joinUser(counselorInfoReq)) {
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    //짧은 인삿말 수정
     @PostMapping("/shortgreeting")
     public ResponseEntity<String> setShortGreeting(@RequestBody Map<String,String> param) throws Exception {
         logger.info("shortGreeting 수정");
@@ -115,6 +132,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //인삿말 수정
     @PostMapping("/greeting")
     public ResponseEntity<String> setGreeting(@RequestBody Map<String,String> param) throws Exception {
         logger.info("greeting 수정");
@@ -125,6 +143,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //중복 아이디 체크
     @GetMapping("/{userEmail}")
     public ResponseEntity<String> checkId(
             @PathVariable("userEmail") @ApiParam(value = "중복 아이디 체크", required = true) String userEmail) throws Exception {
@@ -135,6 +154,7 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //회원 정보 수정
     @PutMapping("/user")
     public ResponseEntity<String> modifyUser(
             @RequestBody @ApiParam(value = "수정할 회원정보.", required = true) CounselorDto counselorDto) throws Exception {
@@ -145,7 +165,30 @@ public class CounselorController {
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.OK);
     }
-    //
+
+    //상담사 리스트 (별점 순)
+    @GetMapping("list/{page}")
+    public ResponseEntity<Map<String, Object>> getCounselorList(@PathVariable("page") int page) throws Exception {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<CounselorListRes> list = reviewService.getCounselorList();
+        int listSize = list.size();
+        int size = listSize/10 -1;
+        if(listSize%10 != 0) size++;
+        System.out.println(listSize);
+
+        List<CounselorListRes> result = reviewService.getPartialCounselorList(list, page);
+        resultMap.put("counselor", result);
+        resultMap.put("size", size);
+        return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+    }
+
+    //오늘의 상담사
+    @GetMapping("/today")
+    public ResponseEntity<List<CounselorListRes>> getTodayCounselorList() throws Exception {
+        return new ResponseEntity<List<CounselorListRes>>(reviewService.getTodayCounselorList(), HttpStatus.OK);
+    }
+
+    //탈퇴
     @DeleteMapping("/user/{userEmail}")
     public ResponseEntity<String> deleteUser(
             @PathVariable("userEmail") @ApiParam(value = "회원탈퇴", required = true) String userEmail) throws Exception {
@@ -156,6 +199,31 @@ public class CounselorController {
         return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
     }
 
+    //사진 등록
+    @PostMapping("/user/image")
+    public ResponseEntity<String> setImage(@RequestParam MultipartFile multipartFile) throws Exception {
+        if(userService.updateImage(multipartFile, jwtService.getUserId())){
+            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/user/image/{imageName}")
+    public ResponseEntity<Resource> getImage(@PathVariable("imageName") String imageName) throws Exception {
+        Path imagePath = Paths.get(uploadFolder + imageName);
+        System.out.println(imagePath);
+        Resource resource = new FileSystemResource(imagePath);
+        if(!resource.exists()) return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+        HttpHeaders header = new HttpHeaders();
+
+        try {
+            header.add("Content-Type", Files.probeContentType(imagePath));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+    }
+
     @GetMapping("/certificate/{userEmail}")
     public ResponseEntity<List<CertificateDto>> getCertificateInfo(
             @PathVariable("userEmail") @ApiParam(value = "자격증 조회", required = true) String userEmail) throws Exception
@@ -163,10 +231,7 @@ public class CounselorController {
       logger.info("certificate - 호출");
       List<CertificateDto>results =  userService.getCertificates(userEmail);
       if(results == null){
-
-          //return new ResponseEntity<List<CertificateDto>>(FAIL, HttpStatus.OK);
       }
-
         return new ResponseEntity<List<CertificateDto>>(results, HttpStatus.OK);
     }
 }
