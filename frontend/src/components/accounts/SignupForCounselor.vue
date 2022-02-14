@@ -91,7 +91,7 @@
 
 <script>
 import counselorSample from '@/assets/images/counselor.png'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'SignupForCounselor',
@@ -100,6 +100,7 @@ export default {
     return {
       counselorSample,
       profile: '',
+      photo:'',
       credentials_signup: {
         photo: '',
         email: '',
@@ -130,17 +131,13 @@ export default {
     ...mapActions([
       'SignupForCounselor',
     ]),
-
-    // photoSelect() {
-    //   console.log(this.$refs);
-    //   this.credentials_signup.photo = this.$refs.photo.files[0];
-    // },
-
+    
     onFileChange(e) {
       console.log(e)
       const file = e.target.files[0];
       this.profile = URL.createObjectURL(file);
       this.credentials_signup.photo = file.name;
+      this.$store.state.myPhoto = file;
     },
     acceptNumber() {
       var x = this.credentials_signup.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/);
@@ -156,6 +153,11 @@ export default {
       console.log("gender = " + this.credentials_signup.gender); 
       console.log("birth = " + this.credentials_signup.birth);
     },
+  },
+  computed: {
+    ...mapState([
+      'myPhoto'
+    ])
   }
 }
 </script>
