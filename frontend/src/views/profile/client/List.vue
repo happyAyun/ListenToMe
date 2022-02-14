@@ -31,7 +31,7 @@
           <p v-else-if="item.state === 2" class="col-2 mb-0 text-center f-normal">승인</p>
 
           <div class="d-flex justify-content-center col-2">
-            <p @click="moveToCounseling" class="mb-0 text-center btn-counseling f-normal">상담실</p>
+            <p @click="moveToCounseling(item.id)" class="mb-0 text-center btn-counseling f-normal" >상담실</p>
           </div>
         </li>
       </ul>
@@ -130,7 +130,9 @@ export default {
   }, 
 
   methods: {
-    moveToCounseling: function () {
+    moveToCounseling: function (number) {
+      this.$store.dispatch('SE_USERSESSION', number)
+      console.log(number);
       this.active = false
       this.$router.push({name: 'CounselingSetting'})
         .catch(() => {})

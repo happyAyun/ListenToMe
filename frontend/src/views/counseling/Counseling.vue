@@ -189,6 +189,7 @@ export default {
     },
 
     joinSession () {
+			console.log(this.mySessionId+" ddddd");
 			// --- Get an OpenVidu object ---
 			this.OV = new OpenVidu()
 
