@@ -19,9 +19,9 @@ pipeline {
         }
       }
        options { skipDefaultCheckout(false) }
-       steps {
-         // sh 'mvn -B -DskipTests -f <your-pom.xml-directory> clean package'
-      }
+//        steps {
+//          // sh 'mvn -B -DskipTests -f <your-pom.xml-directory> clean package'
+//       }
     }
     stage('Docker build') {
        agent any
