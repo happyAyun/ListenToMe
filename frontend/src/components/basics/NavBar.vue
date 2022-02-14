@@ -19,7 +19,7 @@
 
       <!-- part: button -->
       <div v-if="$store.state.isSideBar" class="d-flex">
-        <button @click="Logout" class="btn-tool f-btn" style="background: #ED9C9C">로그아웃</button>
+        <button @click="Logout" class="btn-tool f-normal" style="background: #ED9C9C">로그아웃</button>
       </div>
     </div>
 

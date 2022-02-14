@@ -1,10 +1,10 @@
 <template>
   <div id="login-for-client" class="col-10 d-flex justify-content-center align-items-center">
-    <div class="p-3 part-login">
+    <div class="p-5 part-login">
       <!-- header: title -->
       <header class="mb-5 text-center">
         <img :src="require('@/assets/images/logo_blue.png')" alt="logo-image" class="img-logo-login">
-        <p class="mt-2 mb-3 f-title-bold">User Login</p>
+        <p class="mt-3 f-title">User Login</p>
       </header>
 
       <section class="mb-5">
@@ -20,7 +20,7 @@
       </section>
 
       <footer class="d-flex justify-content-center">
-        <button @click.prevent="Login(login), saveCurrentUser" class="btn-ok f-btn me-3">로그인</button>
+        <button @click.prevent="Login(login), saveCurrentUser" class="btn-ok f-btn me-5">로그인</button>
         <button @click="goToSignup" class="btn-ok f-btn" style="background: #ED9C9C">회원 가입</button>
       </footer>
     </div>

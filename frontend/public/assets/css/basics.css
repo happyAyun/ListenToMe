@@ -28,10 +28,9 @@
 
 /* 회원 가입 부분 */
 .part-signup {
-  width: 50vw;
-  height: 85vh;
+  width: 40vw;
 
-  background: white;
+  background: #fff4e8;
   border-radius: 20px;
   filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
@@ -58,7 +57,7 @@
 
 /* 상담사 회원 가입 프로필 이미지 */
 .form-profile-img {
-  width: 10vw;
+  width: 7vw;
 }
 
 
@@ -69,14 +68,14 @@
 .part-login {
   width: 30vw;
 
-  background: white;
+  background: #fff4e8;
   border-radius: 20px;
   filter: drop-shadow(4px 4px 15px rgba(0, 0, 0, 0.3));
 }
 
 .img-logo-login {
-  width: 6vw;
-  height: 6vw;
+  width: 6.5vw;
+  height: 6.5vw;
 }
 
 
@@ -116,18 +115,7 @@
 
 
 
-/* margin */
-
-/* mt-nav: 네브 높이만큼 margin top 주기 */
-.mt-nav {
-  margin-top: 18vh;
-}
-
-
-
-
-
-
+/* 프로필 */
 
 /* 프로필(상담 내역) 콘텐츠 */
 .profile-content {

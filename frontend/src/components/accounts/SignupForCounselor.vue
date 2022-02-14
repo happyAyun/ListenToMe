@@ -1,7 +1,7 @@
 <template>
   <div id="signup-for-counselor" class="justify-content-between px-5">
     <div class="d-flex">
-      <div class="col-6 d-flex flex-column justify-content-between mb-4 px-4">
+      <div class="col-6 d-flex flex-column justify-content-between mb-3 px-3">
         <div>
           <!-- 프로필 사진 -->
           <div class="mb-3 d-flex justify-content-center">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="col-6 mb-4 px-4">
+      <div class="col-6 mb-3 px-3">
         <!-- 이메일 -->
         <div class="mb-3">
           <input v-model.trim="credentials_signup.email" type="email" placeholder="이메일" class="form-control f-normal" required />
@@ -57,11 +57,6 @@
           />
         </div>
 
-        <!-- 닉네임
-        <div class="mb-3">
-          <input v-model.trim="credentials_signup.nickname" type="text" placeholder="닉네임" class="form-control f-normal" required />
-        </div> -->
-
         <!-- 성별 -->
         <div class="mb-3">
           <select v-model="credentials_signup.gender" class="form-select f-normal">
@@ -74,14 +69,14 @@
 
         <!-- 생년월일 -->
         <div class="">
-          <label for="date">생년월일</label> 
-          <input v-model="credentials_signup.birth" type="date" id="date" class="form-control" required/>
+          <!-- <label for="date">생년월일</label> -->
+          <input v-model="credentials_signup.birth" type="date" id="date" class="form-control f-normal" required/>
         </div>
       </div>
     </div>
 
     <!-- 소개 -->
-    <div class="mb-5 px-4">
+    <div class="mb-5 px-3">
       <div>
         <input v-model.trim="credentials_signup.greeting" type="text" placeholder="소개" class="form-control f-normal" required />
       </div>
