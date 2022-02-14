@@ -73,13 +73,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public boolean requestCounseling(String userEmail, int scheduleId) throws Exception {
+    public boolean requestCounseling(String userEmail, int scheduleId, boolean isSticker) throws Exception {
         Client client = clientRepository.findByEmail(userEmail).orElseThrow(
                 ()->  new NullPointerException("회원정보가 존재 하지 않습니다")
         );
         Schedule schedule = scheduleRepository.findById(scheduleId);
         if(schedule.getState()!=0) return false;
         schedule.setState(1);
+        schedule.setSticker(isSticker);
         int point = client.getPoint()-1000;
         client.setPoint(point);
         schedule.setClient(client);
@@ -119,7 +120,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public ScheduleInfoRes getCounseling(int scheduleId) throws Exception {
         Schedule schedule = scheduleRepository.findById(scheduleId);
-        ScheduleInfoRes scheduleInfoRes = new ScheduleInfoRes(schedule.getId(), schedule.getClient().getEmail(), schedule.getClient().getName(), schedule.getCounselor().getEmail(), schedule.getCounselor().getName(), schedule.getDateTime(), schedule.getPoint(), schedule.getState());
+        ScheduleInfoRes scheduleInfoRes = new ScheduleInfoRes(schedule.getId(), schedule.getClient().getEmail(), schedule.getClient().getName(), schedule.getCounselor().getEmail(), schedule.getCounselor().getName(), schedule.getDateTime(), schedule.getPoint(), schedule.getState(), schedule.isSticker());
         return scheduleInfoRes;
     }
 
@@ -130,7 +131,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         );
         Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateEquals(userEmail, 2, pageRequest);
         Page<ScheduleInfoRes> pagingList = schedule.map(
-                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState(), post.isSticker()));
         return pagingList;
     }
     @Override
@@ -140,7 +141,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         );
         Page<ScheduleDto> schedule = scheduleRepository.findAllByCounselor_EmailAndStateEquals(userEmail, 3, pageRequest);
         Page<ScheduleInfoRes> pagingList = schedule.map(
-                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState(), post.isSticker()));
         return pagingList;
     }
 
@@ -148,7 +149,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Page<ScheduleInfoRes> getClientApprovedSchedule(String userEmail, Pageable pageRequest) throws Exception {
         Page<ScheduleDto> schedule = scheduleRepository.findAllByClient_EmailAndStateEquals(userEmail, 2, pageRequest);
         Page<ScheduleInfoRes> pagingList = schedule.map(
-                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState(), post.isSticker()));
         return pagingList;
     }
 
@@ -156,7 +157,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Page<ScheduleInfoRes> getClientEndedSchedule(String userEmail, Pageable pageRequest) throws Exception {
         Page<ScheduleDto> schedule = scheduleRepository.findAllByClient_EmailAndStateEquals(userEmail, 3, pageRequest);
         Page<ScheduleInfoRes> pagingList = schedule.map(
-                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState()));
+                post -> new ScheduleInfoRes(post.getId(), post.getClient().getEmail(), post.getClient().getName(), post.getCounselor().getEmail(), post.getCounselor().getName(), post.getDateTime(), post.getPoint(), post.getState(), post.isSticker()));
         return pagingList;
     }
 }

@@ -3,6 +3,7 @@ package com.ssafy.a605.api.controller.Review;
 import com.ssafy.a605.api.controller.Bookmark.BookmarkController;
 import com.ssafy.a605.model.dto.ReviewDto;
 import com.ssafy.a605.model.entity.Review;
+import com.ssafy.a605.model.response.review.ReviewRes;
 import com.ssafy.a605.service.JwtServiceImpl;
 import com.ssafy.a605.service.ReviewService;
 import org.slf4j.Logger;
@@ -34,8 +35,8 @@ public class ReviewController {
 
     // 리뷰 리스트 - 비로그인시 가능
     @GetMapping("/list/{counselor}")
-    public ResponseEntity<Page<Review>> getListReview(@PathVariable("counselor") String counselor, @PageableDefault(size=5, sort = "id") Pageable pageRequest) throws Exception{
-        return new ResponseEntity<Page<Review>>(reviewService.getListReview(counselor, pageRequest), HttpStatus.OK);
+    public ResponseEntity<Page<ReviewRes>> getListReview(@PathVariable("counselor") String counselor, @PageableDefault(size=5, sort = "id") Pageable pageRequest) throws Exception{
+        return new ResponseEntity<Page<ReviewRes>>(reviewService.getListReview(counselor, pageRequest), HttpStatus.OK);
     }
 
     // 리뷰 작성

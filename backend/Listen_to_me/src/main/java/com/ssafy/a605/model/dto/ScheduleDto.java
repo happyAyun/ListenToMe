@@ -22,4 +22,5 @@ public class ScheduleDto {
     private String topic;
     private int point;
     private int state;
+    private boolean isSticker;
 }

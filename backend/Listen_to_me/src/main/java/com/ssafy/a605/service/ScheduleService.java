@@ -19,7 +19,7 @@ public interface ScheduleService {
     public boolean checkScheduleTime(LocalDateTime dateTime, String userEmail) throws Exception;
     public List<ScheduleStateRes> getCounselorSchedule(String userEmail) throws Exception;
     public boolean checkPoint(String userEmail) throws Exception;
-    public boolean requestCounseling(String userEmail, int scheduleId) throws Exception;
+    public boolean requestCounseling(String userEmail, int scheduleId, boolean isSticker) throws Exception;
     public boolean acceptCounseling(String userEmail, int scheduleId) throws Exception;
     public boolean endCounseling(String userEmail, int scheduleId) throws Exception;
     public ScheduleInfoRes getCounseling(int scheduleId) throws Exception;
