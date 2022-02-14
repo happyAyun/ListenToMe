@@ -13,7 +13,7 @@ import UpdateForCounselor from '@/views/accounts/UpdateForCounselor.vue'
 import Home from '@/views/Home.vue'
 
 // my page  
-  // client
+// client
 import Bookmark from '@/views/profile/client/Bookmark.vue'
 import MarkedCounselors from '@/components/MarkedCounselors.vue'
 import List from '@/views/profile/client/List.vue'
@@ -21,6 +21,7 @@ import List from '@/views/profile/client/List.vue'
   // counselor
 import Profile from '@/views/profile/counselor/Profile.vue'
 import Schedule from '@/views/profile/counselor/Schedule.vue'
+import ListFromCounselor from '@/views/profile/counselor/ListFromCounselor.vue'
 
 // counseling
 import Counseling from '@/views/counseling/Counseling.vue'
@@ -95,8 +96,12 @@ const routes = [
     name: 'Schedule',
     component: Schedule
   },
-  
-  
+  {
+    path: '/my-page/list-from-counselor',
+    name: 'ListFromCounselor',
+    component: ListFromCounselor
+  },
+
 
   // home
   {

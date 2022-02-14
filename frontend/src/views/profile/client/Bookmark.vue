@@ -1,26 +1,25 @@
 <template>
   <div id="bookmark" class="col-10 p-5">
     <!-- title -->
-    <div class="mb-4 d-flex">
+    <div class="mb-5 d-flex">
       <p class="mb-0 me-4 f-title">북마크된 리스너</p>
-      <button @click="moveToMarkedCounselors" class="mb-0 p-0 btn-more f-normal">more</button>
+      <button @click="moveToMarkedCounselors()" class="mb-0 p-0 btn-more f-normal">more</button>
     </div>
 
     <!-- body -->
-    <div class="d-flex justify-content-around align-items-center mb-5">
-      <div v-for="(post, index) in posts" :key=index>
+    <div class="d-flex justify-content-around ">
+      <div v-for="(listener, index) in bookmarkedCounselors" :key=index>
         <!-- content -->
-        <div @click="moveToProfile" class="p-2 card part-counselor">
+        <div @click="LoadCounselorProfile(listener.counselor)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
-            <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
+            <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;">
+            <!-- <img :src="getImgUrl(listener)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
           </div>
 
           <div class="px-4 card-body d-flex justify-content-between">
             <!-- 이름 -->
-            <p class="mb-0 f-subtitle">{{ post.name }}</p>
-            <!-- 평점 -->
-            <p class="mb-0 f-subtitle">{{ post.score }}</p>
+            <p class="mb-0 f-subtitle">{{ listener.counselor.name }}</p>
           </div>
         </div>
       </div>
@@ -29,44 +28,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+
 export default {
   name: 'Bookmark',
-  components: {
 
-  },
   data: function () {
     return {
-      // dummy daa
-      posts: [
-        {
-          content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-      ]
+      bookmarkedCounselors: '',
     }
   },
+
   methods: {
+    ...mapActions([
+      'LoadCounselorProfile',
+    ]),
+
     moveToMarkedCounselors: function () {
       this.$router.push({name: 'MarkedCounselors'})
     },
@@ -74,10 +53,29 @@ export default {
     moveToProfile: function () {
       this.$router.push({name: 'Profile'})
     },
+
+    getBookmarkedCounselors() {
+      axios({
+        methods: 'get',
+        url: SERVER.URL + SERVER.ROUTES.bookmarkSelection,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+      .then((res) => {
+        this.bookmarkedCounselors = res.data.filter(item => {
+          if ( item.client.email == this.$store.state.userEmail ) {
+            return true
+          }
+        })
+        console.log(this.bookmarkedCounselors.slice(0, 5))
+      })
+    },
+  },
+
+  created () {
+    this.getBookmarkedCounselors()
   }
 }
 </script>
-
-<style>
-
-</style>

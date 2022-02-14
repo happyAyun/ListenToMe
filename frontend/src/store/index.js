@@ -39,29 +39,7 @@ export default new Vuex.Store({
     // 카운슬러 디테일 페이지
     counselorDetail: [],
 
-    // dummy data
-    records: [
-      {
-        title: 'memo 1',
-        content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 2',
-        content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 3',
-        content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 4',
-        content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-      {
-        title: 'memo 5',
-        content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-      },
-    ],
+    counsState: '',
   },
 
   getters: {
@@ -137,6 +115,7 @@ export default new Vuex.Store({
     // 리스너에서 클릭한 상담사 정보 관련
     LOAD_COUNSELOR_PROFILE: function (state, results) {
       state.counselorDetail = results
+      console.log(results)
     },
 
 
@@ -149,6 +128,10 @@ export default new Vuex.Store({
 
     GET_USER_EMAIL: function (state, results) {
       state.userEmail = results
+    },
+
+    CHECK_COUNSELING_STATE: function (state, counselingState) {
+      state.counsState = counselingState
     },
   },
 
@@ -232,6 +215,7 @@ export default new Vuex.Store({
       commit('REMOVE_TOKEN')
       commit('SE_LOGINSTATE', 0)
       router.push('/')
+        .catch(() => {})
     },
     ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -295,23 +279,24 @@ export default new Vuex.Store({
 
     // 리스너 각 페이지로 이동
     LoadCounselorProfile: function ({ commit }, request) {
-      if (this.state.loginState === 0) {
-        router.push({name: 'LoginForClient'})
-      }
-      else {
-        axios({
-          method: 'get',
-          url: SERVER.URL + `/counselor-api/user/${request.email}`, 
-        })
-        .then((res) => {
-          commit('LOAD_COUNSELOR_PROFILE', res.data)
-          router.push({name: 'CounselorDetail', params: {coEmail : request.email}})
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      }
+      axios({
+        method: 'get',
+        url: SERVER.URL + `/counselor-api/user/${request.email}`, 
+      })
+      .then((res) => {
+        commit('LOAD_COUNSELOR_PROFILE', res.data)
+        // console.log(res)
+        router.push({name: 'CounselorDetail', params: {coEmail : request.email}})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+
+    checkCounselingState: function ({ commit }, counselingState) {
+      commit('CHECK_COUNSELING_STATE', counselingState)
     },
   },
+
   plugins: [createPersistedState()],
 })

@@ -28,7 +28,9 @@
                     class="schedule-btn1 fw-bold">승인대기</button>
                 </div>
                 <div v-else-if="time[3] === 3">
-                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                  <button
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= firsttime, index= i, check= false, getClientInfo()" 
+                    class="schedule-btn3 fw-bold">예약완료</button>
                 </div>
                 <div v-else>
                   <button 
@@ -49,7 +51,9 @@
                     class="schedule-btn1 fw-bold">승인대기</button>
                 </div>
                 <div v-else-if="time[3] === 3">
-                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                  <button
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= secondtime, index= j, check= false, getClientInfo()" 
+                    class="schedule-btn3 fw-bold">예약완료</button>
                 </div>
                 <div v-else>
                   <button
@@ -70,7 +74,9 @@
                     class="schedule-btn1 fw-bold">승인대기</button>
                 </div>
                 <div v-else-if="time[3] === 3">
-                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                  <button 
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= thirdtime, index= s, check= false, getClientInfo()"
+                    class="schedule-btn3 fw-bold">예약완료</button>
                 </div>
                 <div v-else>
                   <button 
@@ -91,7 +97,9 @@
                     class="schedule-btn1 fw-bold">승인대기</button>
                 </div>
                 <div v-else-if="time[3] === 3">
-                  <button class="schedule-btn3 fw-bold" disabled>예약완료</button>
+                  <button 
+                    @click="modalViewed= 1, modalContent= time, scheduleId= time[0], position= fourthtime, index= k, check= false, getClientInfo()"
+                    class="schedule-btn3 fw-bold">예약완료</button>
                 </div>
                 <div v-else>
                   <button 
@@ -123,7 +131,9 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button class="modal-button px-3 py-1" style="background: rgba(86, 160, 255, 0.93);" @click="acceptConsultation">승인</button>
+                <div v-show="check">
+                  <button class="modal-button px-3 py-1" style="background: rgba(86, 160, 255, 0.93);" @click="acceptConsultation">승인</button>
+                </div>
                 <button class="modal-button px-3 py-1" style="background: rgba(255, 94, 94, 0.92);" @click="modalViewed= 0">닫기</button>
               </div>
             </div>
@@ -195,6 +205,9 @@ export default {
       // 상담 등록 시 보낼 데이터
       reserveTime: '',
       reserveDate: '',
+
+      // 승인 대기면 true 예약완료면 false
+      check: true
     }
   },
   methods: {

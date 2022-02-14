@@ -17,22 +17,28 @@
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;">  
+              <!-- <img :src="require(`@/assets/images/counselor.png`)" class="card-img-top" alt="counselor" style="width: 9vw;"> -->
+              <img :src="getImgUrl(counselor)" class="card-img-top" alt="counselor" style="width: 9vw;">
             </div>
 
             <div class="card-body px-4">
               <!-- 카테고리 -->
               <div class="d-flex mb-2">
-                <!-- tempo! 레이아웃을 잡기 위한 임시 코드 -->
-                <p class="mb-0 me-2 text-center part-cat f-normal">우울</p>
-                <p class="mb-0 text-center part-cat f-normal">무기력</p>
+                <div v-if="counselor.category.length === 0">
+                  <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
+                </div>
+                <div v-else>
+                  <div v-for="(c, idx) in counselor.category" :key="idx">
+                    <p class="mb-0 me-2 text-center part-cat f-normal">{{ c }}</p>
+                  </div>
+                </div>
               </div>
 
               <div class="d-flex justify-content-between">
                 <!-- 이름 -->
                 <p class="mb-0 f-subtitle">{{ counselor.name }}</p>
                 <!-- 평점 -->
-                <p class="mb-0 f-subtitle">5.0</p>
+                <p class="mb-0 f-subtitle">{{ counselor.startScore }}</p>
               </div>
             </div>
           </div>
@@ -41,23 +47,15 @@
     </div>
     
     <!-- pagination -->
-    <!-- <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#" onc>3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav> -->
+    <ul class="d-flex justify-content-center pagination">
+      <li class="page-item" style="width: 4vw;"><p @click="setBack" class="page-link f-normal">Prev</p></li>
+      <li
+        v-for="n in this.totalPages" :key=n class="page-item" style="width: 2vw;"
+      >
+        <p @click="setPage(n)" class="page-link f-normal">{{ n }}</p>
+      </li>
+      <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
+    </ul>
   </div>
 </template>
 
@@ -71,8 +69,10 @@ export default {
 
   data: function () {
     return {
+      currentPage: 1,
+      totalPages: 0,
+
       counselorList: [],
-      // page: 0
       counselorEmail: '',
 
       // 클릭한 상담사 기록
@@ -89,30 +89,53 @@ export default {
       this.$router.push({name: 'Home'})
     },
 
-    getCounselorList() {
+    getCounselorList(page) {
       axios({
         methods: 'get',
-        url: SERVER.URL + '/counselor-api/list/0' 
+        url: SERVER.URL + '/counselor-api/list/' + `${page}/`,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
       })
-      .then((res) => {
-        // console.log(res)
-        this.counselorList = res.data.counselor;
-        // this.imgName = res.data.counselor.photo
-      })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res.data)
+          this.totalPages = res.data.size + 1
+          console.log(this.totalPages)
+          this.counselorList = res.data.counselor
+          // this.imgName = res.data.counselor.photo
+        })
+        .catch((err) => console.log(err))
     },
+
+    setPage: function (page) {
+      this.currentPage = page
+      this.getCounselorList(this.currentPage - 1)
+    },
+    setBack: function () {
+      if (this.currentPage !== 1) {
+        this.currentPage--
+      }
+      this.getCounselorList(this.currentPage - 1)
+      console.log(this.currentPage)
+    },
+    setNext: function () {
+      if (this.currentPage !== this. totalPages) {
+        this.currentPage++
+      }
+      this.getCounselorList(this.currentPage - 1)
+      console.log(this.currentPage)
+    },
+
 
     getImgUrl(con) {
       var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
       return images
     }
   },
+
   created() {
-    this.getCounselorList()
+    this.getCounselorList(0)
   }
 }
 </script>
-
-<style>
-
-</style>

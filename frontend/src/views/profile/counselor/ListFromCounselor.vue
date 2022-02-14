@@ -87,8 +87,8 @@
         <li class="page-item" style="width: 4vw;"><p @click="setNext" class="page-link f-normal">Next</p></li>
       </ul>
 
-      <!-- Modal ALL -->
-      <div v-if="active === 1" class="p-3 part-record">
+      <!-- Modal -->
+      <div v-if="active" class="p-3 part-record">
         <div class="mb-5 d-flex justify-content-between align-items-center">
           <p class="mb-0 me-4 f-title">종료된 상담</p>
           <button @click="closeModal()" class="mb-0 p-0 btn-tool f-btn" style="background: #FFDF70">닫기</button>
@@ -107,26 +107,6 @@
             <!-- body: 내용 -->
             <p class="mb-0 py-2 f-normal">{{ memo.content }}</p>
           </div>
-        </div>
-      </div>
-
-      <!-- Modal ONE -->
-      <div v-if="active === 2" class="p-3 part-record">
-        <div class="mb-5 d-flex justify-content-between align-items-center">
-          <p class="mb-0 me-4 f-title">종료된 상담</p>
-          <button @click="closeModal()" class="mb-0 p-0 btn-tool f-btn" style="background: #FFDF70">닫기</button>
-        </div>
-        <!-- header: 제목 -->
-        <div class="mx-auto mb-3 p-3 part-record" style="width: 50vw;">
-          <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0 text-center f-subtitle">{{ memo.title }}</p>
-            <p class="mb-0 text-center f-normal">{{ memo.date }}</p>
-          </div>
-
-          <hr class="my-3">
-
-          <!-- body: 내용 -->
-          <p class="mb-0 py-2 f-normal">{{ memo.content }}</p>
         </div>
       </div>
     </div>
@@ -158,8 +138,7 @@ export default {
 
       leftPoints: 10000,
 
-      memos: '',
-      memo: ''
+      memos: ''
     }
   }, 
 
@@ -209,7 +188,7 @@ export default {
     getCounselingList: function (page) {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.counselingList + `${page}/`,
+        url: SERVER.URL + SERVER.ROUTES.counselingListCounselor + `${page}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
@@ -240,7 +219,7 @@ export default {
     getDoneList: function (page) {
       axios({
         method: 'get',
-        url: SERVER.URL + SERVER.ROUTES.doneList + `${page}/`,
+        url: SERVER.URL + SERVER.ROUTES.doneListCounselor + `${page}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
@@ -249,7 +228,7 @@ export default {
         .then(res => {
           this.doneList = res.data.content
           this.totalPagesDone = res.data.totalPages
-          this.leftPoints = 10000 - 1000 * ((this.totalPagesDone - 1) * 5 + res.data.numberOfElements)
+          this.leftPoints = 10000 + 1000 * ((this.totalPagesDone - 1) * 5 + res.data.numberOfElements)
           const items = []
           res.data.content.forEach((item) => {
             let info = {
@@ -269,19 +248,21 @@ export default {
         })
     },
 
-    getMemo: function (id) {
+    getMemo: function () {
       axios({
         method: 'get',
-        url: SERVER.URL + '/memo-api/counseling/' + `${id}`,
+        url: SERVER.URL + SERVER.ROUTES.memoSelection + `${5}/`,
         headers: {
           'Content-Type': 'application/json',
           'access-token': `${this.$store.state.authToken}`
         },
       })
         .then(res => {
-          console.log(res.data)
+          console.log(this.currentDone.id)
+          console.log(res)
         })
         .catch(err => {
+          console.log(this.currentDone.id)
           console.log(err)
         })
     },
@@ -305,7 +286,6 @@ export default {
             items.push(info)
           })
           this.memos = items
-          console.log(this.memos)
         })
         .catch(err => {
           console.log(err)
@@ -313,16 +293,17 @@ export default {
     },
 
     selectDetails: function (index) {
-      console.log(this.doneList[index].id)
-      this.getMemo(this.doneList[index].id)
-      this.active = 2
-      console.log('show details')
+      this.currentDone = this.doneList[index]
+      this.active = true
+      this.getMemo()
+      console.log(this.currentDone)
     },
+
     selectAll: function () {
       console.log(this.doneList[0].id)
+      this.active = true
       this.getMemos(this.doneList[0].id)
-      this.active = 1
-      console.log('show all')
+      console.log(this.currentDone)
     },
   },
 

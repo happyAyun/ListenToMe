@@ -20,8 +20,18 @@ export default {
     // home
     todayListeners: '/counselor-api/today/',
 
+    // bookmark
+    bookmarkCreation: `/bookmark/setlike/`,
+    bookmarkSelection: `/bookmark/likecounselor/`,
+
     // profile
     counselingList: '/schedule-api/client/approved?page=',
     doneList: '/schedule-api/client/ended?page=',
+    counselingListCounselor: '/schedule-api/counselor/approved?page=',
+    doneListCounselor: '/schedule-api/counselor/ended?page=',
+    // memoSelectionFromList: '/memo-api/counseling/',
+
+    // reviews
+    reviewsSelection: '/review-api/list/'
   }
 }

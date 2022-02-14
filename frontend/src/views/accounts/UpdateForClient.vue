@@ -9,12 +9,12 @@
       <section>
         <!-- 이메일 -->
         <div class="mb-3 px-4">
-          <input v-model.trim="credentials.email" type="email" @input.prevent="changeEmail" class="form-control f-normal" required />
+          <input v-model.trim="credentials.email" type="email" class="form-control f-normal" required />
         </div>
 
         <!-- 비밀번호 -->
         <div class="mb-3 px-4">
-          <input v-model.trim="credentials.password" type="password" class="form-control f-normal" required />
+          <input v-model.trim="credentials.password" type="password" placeholder="비밀번호" class="form-control f-normal" required />
         </div>
 
         <!-- 이름 -->
