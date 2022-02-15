@@ -78,6 +78,10 @@ export default {
         console.log(this.bookmarkedCounselors.slice(0, 5))
       })
     },
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
+      return images
+    }
   },
 
   created () {
