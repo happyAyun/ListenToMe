@@ -3,7 +3,7 @@
     <div class="background">
       <div class="window">
         <div class="popup">
-          <div class="modal-header">
+          <div class="modal-header d-flex align-items-center justify-content-center pb-2">
             <p>카테고리</p>
           </div>
           <div class="modal-body row" >

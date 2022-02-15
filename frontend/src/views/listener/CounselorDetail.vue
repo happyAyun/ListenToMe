@@ -9,8 +9,8 @@
         </div>
 
         <div class="col-md-7 d-flex row">
-          <div class="col-sm-12 d-flex mt-2 mb-2">
-            <div class="col-10">
+          <div class="col-12 d-flex mt-2 mb-2">
+            <div>
               <p class="mb-0 me-2 f-subtitle">{{ this.counselorDetail.userInfo.shortGreeting }}</p>
             </div>
           </div>
@@ -22,7 +22,7 @@
             </div>
             <div v-else class="d-flex justify-content-between">
               <div v-for="(c, idx) in this.counselorDetail.category" :key="idx">
-                <p class="mb-0 mt-1 mx-4 text-center part-cat f-normal" style="background: #FFC688;">{{ c.category.category }}</p>
+                <p class="mb-0 mt-1 mx-2 text-center part-cat f-normal" style="background: #FFC688;">{{ c.category.category }}</p>
               </div>
             </div>
           </div>

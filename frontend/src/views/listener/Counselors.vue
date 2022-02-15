@@ -32,9 +32,9 @@
                 <div v-if="counselor.category.length === 0">
                   <p class="mb-0 me-2 text-center part-cat f-normal">미정</p>
                 </div>
-                <div v-else>
+                <div v-else class="d-flex justify-content-between">
                   <div v-for="(c, idx) in counselor.category" :key="idx">
-                    <p class="mb-0 me-2 text-center part-cat f-normal" style="background: #FFC688;">{{ c }}</p>
+                    <p class="mb-0 me-1 text-center part-cat f-normal" style="background: #FFC688;">{{ c }}</p>
                   </div>
                 </div>
               </div>
