@@ -1,35 +1,34 @@
 <template>
-  <div id="marked-counselors" class="px-5">
+  <div id="marked-counselors" class="col-10 p-routing overflow-auto">
     <!-- title -->
-    <div class="mb-5 pt-5 d-flex">
-      <p class="me-3 f-title">북마크된 상담사</p>
-      <p @click="moveToBookmark" class="f-normal">back</p>
+    <div class="mb-5 d-flex justify-content-between align-items-center">
+      <p class="mb-0 f-title">전체 북마크된 리스너</p>
+      <button @click="moveToBookmark()" class="mb-0 p-0 btn-more f-normal">back</button>
     </div>
 
-    <!-- content -->
+    <!-- body -->
     <div class="row row-cols-5 g-5 mb-5">
-      <div v-for="n in 8" :key="n">
-        <div @click="moveToProfile" class="col">
+      <div 
+        v-for="listener in bookmarkedCounselors" :key="listener.counselor.id" 
+        @click="LoadCounselorProfile(listener.counselor)"
+      >
+        <div class="col">
           <div class="card part-counselor">
             <!-- image -->
             <div class="py-3 text-center">
-              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 10vw;">
+              <!-- <img
+                :src="require(`@/assets/images/follower1.png`)" alt="counselor"
+                class="card-img-top" style="width: 10vw;"
+              > -->
+              <img
+                :src="getImgUrl(listener.counselor)" alt="counselor"
+                class="card-img-top" style="width: 10vw;"
+              >
             </div>
 
-            <div class="card-body px-4">
-              <!-- 카테고리 -->
-              <div class="d-flex mb-2">
-                <!-- tempo! 레이아웃을 잡기 위한 임시 코드 -->
-                <p class="mb-0 me-2 px-2 py-1 part-cat f-normal">우울</p>
-                <p class="mb-0 part-cat px-2 py-1 f-normal">무기력</p>
-              </div>
-
-              <div class="d-flex justify-content-between">
-                <!-- 이름 -->
-                <p class="mb-0 f-subtitle">James</p>
-                <!-- 평점 -->
-                <p class="mb-0 f-subtitle">4.9</p>
-              </div>
+            <div class="card-body d-flex justify-content-center">
+              <!-- 이름 -->
+              <p class="mb-0 f-normal">{{ listener.counselor.name }}</p>
             </div>
           </div>
         </div>
@@ -39,24 +38,58 @@
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'MarkedCounselors',
-  components: {
 
-  },
   data: function () {
     return {
-      
+      bookmarkedCounselors: '',
     }
   },
+
   methods: {
+    ...mapActions([
+      'LoadCounselorProfile',
+    ]),
+
     moveToBookmark: function () {
       this.$router.push({name: 'Bookmark'})
+    },
+    moveToProfile: function () {
+      this.$router.push({name: 'Profile'})
+        .catch(() => {})
+    },
+
+    getBookmarkedCounselors() {
+      axios({
+        methods: 'get',
+        url: SERVER.URL + SERVER.ROUTES.bookmarkSelection,
+        headers: {
+          'Content-Type': 'application/json',
+          'access-token': `${this.$store.state.authToken}`
+        },
+      })
+      .then((res) => {
+        this.bookmarkedCounselors = res.data.filter(item => {
+          if ( item.client.email == this.$store.state.userEmail ) {
+            return true
+          }
+        })
+        console.log(this.bookmarkedCounselors)
+      })
+    },
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
+      return images
     }
+  },
+
+  created () {
+    this.getBookmarkedCounselors()
   }
 }
 </script>
-
-<style>
-
-</style>

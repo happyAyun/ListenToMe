@@ -1,21 +1,16 @@
 <template>
   <div id="app">
-    <!-- nav bar -->
-    <div v-if="$route.path.includes('/counselor')">
-      <header>
-        <counselor-nav-bar/>
-      </header>
-    </div>
+    <header>
+      <!-- navigation bar -->
+      <nav-bar/>
 
-    <div v-else>
-      <header>
-        <nav-bar/>
-      </header>
-    </div>
+      <!-- introduction with background -->
+      <introduction/>
+    </header>
 
     <div :class="{ 'd-flex': $store.state.isSideBar }">
       <!-- left side bar -->
-      <side-bar v-if="$store.state.isSideBar" class="col-2 area-side"></side-bar>
+      <side-bar v-if="$store.state.isSideBar" class="col-2 area-side"/>
 
       <!-- routing area -->
       <router-view/>
@@ -24,20 +19,40 @@
 </template>
 
 <script>
-import NavBar from '@/components/Client/NavBar.vue'
-import CounselorNavBar from '@/components/Counselor/CounselorNavBar.vue'
-import SideBar from '@/components/SideBar.vue'
+import NavBar from '@/components/basics/NavBar.vue'
+import SideBar from '@/components/basics/SideBar.vue'
+import Introduction from '@/components/basics/Introduction.vue'
 
 export default {
   name: 'App',
+  
   components: {
     NavBar,
-    CounselorNavBar,
     SideBar,
+    Introduction
   },
+
+  methods: {
+    checkScroll: function () {
+      let location = document.documentElement.scrollTop
+      let innerLocation = window.innerHeight
+      let bottomLocation = document.documentElement.scrollHeight
+
+      if (location <= 400) {
+        this.$store.dispatch('offNavbar')
+      } else if (location < bottomLocation - innerLocation) {
+        this.$store.dispatch('onNavbar')
+      } 
+      else if (location >= bottomLocation - innerLocation) {
+        document.body.classList.add('overflow-hidden')
+        console.log('touch down')
+      }
+    },
+  },
+
+  created () {
+    this.$store.dispatch('offNavbar')
+    window.addEventListener('scroll', this.checkScroll)
+  }
 }
 </script>
-
-<style>
-
-</style>

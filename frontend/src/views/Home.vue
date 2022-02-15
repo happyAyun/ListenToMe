@@ -1,44 +1,33 @@
 <template>
-  <div id="home" class="col-10">
-    <!-- 게시판 -->
-    <div class="mb-5 pt-5 pb-2 px-5">
-      <!-- title -->
-      <div class="mb-4 d-flex">
-        <p class="me-3 f-title">오늘의 이야기</p>
-        <p class="f-normal">more</p>
-      </div>
-
-      <!-- content -->
-      <div class="d-flex justify-content-between">
-        <div v-for="(post, index) in posts" :key=index >
-          <p class="p-3 main-content f-normal">{{ post.content }}</p>
-        </div>
-      </div>
+  <div id="home" class="col-10 p-routing">
+    <!-- title -->
+    <div class="mb-5 d-flex justify-content-between align-items-center">
+      <p class="mb-0 f-title">오늘의 리스너</p>
+      <button @click="moveToCounselors" class="mb-0 p-0 btn-more f-normal">more</button>
     </div>
 
-    <!-- 상담사 -->
-    <div class="px-5">
-      <!-- title -->
-      <div class="mb-4 d-flex">
-        <p class="me-3 f-title">오늘의 상담사</p>
-        <p @click="moveToCounselors" class="f-normal">more</p>
-      </div>
+    <!-- body -->
+    <div class="d-flex justify-content-around">
+      <div v-for="listener in todayListners" :key=listener.id>
+        <!-- content -->
+        <div @click="LoadCounselorProfile(listener)" class="p-2 card part-counselor">
+          <!-- image -->
+          <div class="py-3 text-center">
+            <!-- <img
+              :src="require(`@/assets/images/follower1.png`)" alt="counselor"
+              class="card-img-top" style="width: 10vw;"
+            > -->
+            <img
+              :src="getImgUrl(listener)" alt="counselor"
+              class="card-img-top" style="width: 10vw;"
+            >
+          </div>
 
-      <div class="d-flex justify-content-between">
-        <div v-for="(post, index) in posts" :key=index>
-          <!-- content -->
-          <div class="card part-counselor">
-            <!-- image -->
-            <div class="py-2 text-center">
-              <img :src="require('@/assets/images/counselor.png')" class="card-img-top" alt="counselor" style="width: 9vw;">
-            </div>
-
-            <div class="px-4 card-body d-flex justify-content-between">
-              <!-- 이름 -->
-              <p class="mb-0 f-subtitle">{{ post.name }}</p>
-              <!-- 평점 -->
-              <p class="mb-0 f-subtitle">{{ post.score }}</p>
-            </div>
+          <div class="card-body d-flex justify-content-between">
+            <!-- 이름 -->
+            <p class="mb-0 f-normal">{{ listener.name }}</p>
+            <!-- 평점 -->
+            <p class="mb-0 f-normal">{{ listener.startScore }}</p>
           </div>
         </div>
       </div>
@@ -47,51 +36,45 @@
 </template>
 
 <script>
+import axios from 'axios'
+import SERVER from '@/api/index.js'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Home',
-  components: {
 
-  },
   data: function () {
     return {
-      // dummy data
-      posts: [
-        {
-          content: '1 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '2 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '4 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-        {
-          content: '5 Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-          name: 'James',
-          score: 5.5,
-        },
-      ]
+      todayListners: '',
     }
   },
+
   methods: {
+    ...mapActions([
+      'LoadCounselorProfile',
+    ]),
+
     moveToCounselors: function () {
       this.$router.push({name: 'Counselors'})
+    },
+    getCounselorList() {
+      axios({
+        methods: 'get',
+        url: SERVER.URL + '/counselor-api/list/0' 
+      })
+      .then((res) => {
+        this.todayListners = res.data.counselor.slice(0, 5)
+        console.log(this.todayListners)
+      })
+    },
+    getImgUrl(con) {
+      var images = SERVER.URL + `/counselor-api/user/image/${con.photo}`
+      return images
     }
+  },
+
+  created () {
+    this.getCounselorList()
   }
 }
 </script>
-
-<style>
-
-</style>
