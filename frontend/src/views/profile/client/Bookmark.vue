@@ -13,14 +13,14 @@
         <div @click="LoadCounselorProfile(listener.counselor)" class="p-2 card part-counselor">
           <!-- image -->
           <div class="py-3 text-center">
-            <img
+            <!-- <img
               :src="require(`@/assets/images/follower1.png`)" alt="counselor"
               class="card-img-top" style="width: 10vw;"
-            >
-            <!-- <img
+            > -->
+            <img
               :src="getImgUrl(listener)" alt="counselor"
               class="card-img-top" style="width: 10vw;"
-            > -->
+            >
           </div>
 
           <div class="card-body d-flex justify-content-center">
