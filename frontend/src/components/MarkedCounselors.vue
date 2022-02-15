@@ -21,7 +21,7 @@
                 class="card-img-top" style="width: 10vw;"
               > -->
               <img
-                :src="getImgUrl(listener)" alt="counselor"
+                :src="getImgUrl(listener.counselor)" alt="counselor"
                 class="card-img-top" style="width: 10vw;"
               >
             </div>
