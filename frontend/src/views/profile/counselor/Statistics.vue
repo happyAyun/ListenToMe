@@ -5,7 +5,9 @@
       <p class="mb-0 f-title">통계 정보</p>
     </div>
 
+    <!-- body -->
     <div class="mb-3 d-flex justify-content-between">
+      <!-- 내담자의 성비 -->
       <section>
         <div class="mb-5 part-stat-square d-flex justify-content-center align-items center">
           <gender/>
@@ -13,6 +15,7 @@
         <p class="text-center f-normal">내담자의 성별 비율</p>
       </section>
 
+      <!-- 내담자의 연령별 빈도 -->
       <section>
         <div class="mb-5 part-stat-square d-flex justify-content-center align-items center">
           <age/>
@@ -20,6 +23,7 @@
         <p class="text-center f-normal">내담자의 연령별 빈도</p>
       </section>
 
+      <!-- 월별 상담수 -->
       <section>
         <div class="mb-5 part-stat-square d-flex justify-content-center align-items center">
           <month/>

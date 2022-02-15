@@ -6,7 +6,7 @@
 			'part-video-ver': $store.state.isData,
 			'position-absolute': $store.state.isSticker
 		}"
-		autoplay muted
+		autoplay
 	/>
 </template>
 
