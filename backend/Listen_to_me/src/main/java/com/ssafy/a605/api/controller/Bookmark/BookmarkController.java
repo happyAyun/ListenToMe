@@ -48,7 +48,10 @@ public class BookmarkController {
     public ResponseEntity<String> setLikeCounselor(@PathVariable("counselor") String counselor, HttpServletRequest request) throws Exception {
         if (jwtService.isUsable(request.getHeader("access-token"))) {
             boolean result = bookmarkService.setLikeCounselor(jwtService.getUserId(), counselor);
-            return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+            if(result)
+                return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+            else
+                return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
     }
