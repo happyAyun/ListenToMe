@@ -33,6 +33,11 @@ public class BookmarkServiceImpl implements BookmarkService{
         Client client = clientRepository.findByEmail(userEmail).orElseThrow(
                 ()-> new NullPointerException("회원정보가 존재하지 않습니다.")
         );
+        List<Bookmark> storedCounselor = getLikedCounselor(userEmail);
+        for(Bookmark b : storedCounselor){
+            if(b.getCounselor().getEmail().equals(counselorEmail))
+                return false;
+        }
         Bookmark bookmark = new Bookmark();
         bookmark.setCounselor(counselor);
         bookmark.setClient(client);
