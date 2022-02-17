@@ -57,8 +57,7 @@
 <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/tensorflow-F05032?style=for-the-badge&logo=TENSORFLOW&logoColor=white"> <img src="https://img.shields.io/badge/jira-0052cc?style=for-the-badge&logo=jira&logoColor=white"><img src="https://img.shields.io/badge/JENKINS-DD0031?style=for-the-badge&logo=JENKINS&logoColor=white">
 
 - Backend:  Spring boot(maven), MySQL
-  - Frontend: Vue.js, face-api.js, chart.js, Openvidu
-
+- Frontend: Vue.js, face-api.js, chart.js, Openvidu
 - DevOps: GitLab, Jenkins, Docker, JIRA, AWS
 
 <br>
