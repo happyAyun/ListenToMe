@@ -6,20 +6,6 @@
 
 ## 📌 Intro
 
-### 팀 소개
-
-👂 **공통프로젝트 6반 5팀**
-
-|  이름  | 직책 |   역할   |               세부 역할                |
-| :----: | :--: | :------: | :------------------------------------: |
-| 김유민 | 팀장 | Backend  |       스케줄링 및 REST API 개발        |
-| 노문택 | 팀원 | Frontend |       WEB-RTC, 서버&인프라 담당        |
-| 박상현 | 팀원 | Frontend | 영상인식 및 감성분석, 스티커 기능 개발 |
-| 심아윤 | 팀원 | Backend  |       WEB-RTC, 서버&인프라 담당        |
-| 이수민 | 팀원 | Frontend | 로그인 및 회원관리, 스케줄링 기능 개발 |
-
-<br>
-
 ### 서비스 배경
 
 - 코로나 블루로 인한 우울증, 무기력증 사례 증가
@@ -50,15 +36,36 @@
 
 <br>
 
+### 팀 소개
+
+👂 **공통프로젝트 6반 5팀**
+
+|  이름  | 직책 |   역할   |               세부 역할                |
+| :----: | :--: | :------: | :------------------------------------: |
+| 김유민 | 팀장 | Backend  |       스케줄링 및 REST API 개발        |
+| 노문택 | 팀원 | Frontend |       WEB-RTC, 서버&인프라 담당        |
+| 박상현 | 팀원 | Frontend | 영상인식 및 감성분석, 스티커 기능 개발 |
+| 심아윤 | 팀원 | Backend  |       WEB-RTC, 서버&인프라 담당        |
+| 이수민 | 팀원 | Frontend | 로그인 및 회원관리, 스케줄링 기능 개발 |
+
+<br>
+
 ### 기술 스택
 
- <img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springBOOT&logoColor=white"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/tensorflow-F05032?style=for-the-badge&logo=TENSORFLOW&logoColor=white"><img src="https://img.shields.io/badge/WebRTC-FCC624?style=for-the-badge&logo=WEBRTC&logoColor=black"> <img src="https://img.shields.io/badge/HIBERNATE-000000?style=for-the-badge&logo=HIBERNATE&logoColor=white"><img src="https://img.shields.io/badge/JENKINS-DD0031?style=for-the-badge&logo=JENKINS&logoColor=white">
+ <img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springBOOT&logoColor=white">  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/HIBERNATE-000000?style=for-the-badge&logo=HIBERNATE&logoColor=white"><img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
 
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white"> <img src="https://img.shields.io/badge/jira-0052cc?style=for-the-badge&logo=jira&logoColor=white">
+<img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/tensorflow-F05032?style=for-the-badge&logo=TENSORFLOW&logoColor=white"> <img src="https://img.shields.io/badge/jira-0052cc?style=for-the-badge&logo=jira&logoColor=white"><img src="https://img.shields.io/badge/JENKINS-DD0031?style=for-the-badge&logo=JENKINS&logoColor=white">
 
 - Backend:  Spring boot(maven), MySQL
-- Frontend: Vue.js
+  - Frontend: Vue.js, face-api.js, chart.js, Openvidu
+
 - DevOps: GitLab, Jenkins, Docker, JIRA, AWS
+
+<br>
+
+### 아키텍처
+
+![image-20220217222338655](README.assets/image-20220217222338655.png)
 
 <br>
 
@@ -78,67 +85,25 @@
 ```
 📦src
  ┣ 📂api
- ┃ ┗ 📜index.js
  ┣ 📂assets
  ┃ ┣ 📂images
- ┃ ┃ ┣ 📜counselor.png
- ┃ ┃ ┣ 📜follower1.png
- ┃ ┃ ┣ 📜logo_blue.png
- ┃ ┃ ┣ 📜logo_pink.png
- ┃ ┃ ┣ 📜logo_white.png
- ┃ ┃ ┣ 📜main-pbackground.jpg
- ┃ ┃ ┣ 📜start.png
- ┃ ┃ ┗ 📜start_blank.png
  ┃ ┗ 📜color-reference.png
  ┣ 📂components
  ┃ ┣ 📂accounts
- ┃ ┃ ┣ 📜SignupForClient.vue
- ┃ ┃ ┗ 📜SignupForCounselor.vue
  ┃ ┣ 📂basics
- ┃ ┃ ┣ 📜Introduction.vue
- ┃ ┃ ┣ 📜NavBar.vue
- ┃ ┃ ┗ 📜SideBar.vue.vue
  ┃ ┣ 📂Counseling
- ┃ ┃ ┣ 📜Memo.vue
- ┃ ┃ ┣ 📜OvVideo.vue
- ┃ ┃ ┣ 📜RecordItem.vue
- ┃ ┃ ┣ 📜Records.vue
- ┃ ┃ ┗ 📜SUserVideo.vue
  ┃ ┣ 📂listener
- ┃ ┃ ┣ 📜Age.vue
- ┃ ┃ ┣ 📜CounseloerSchedule.vue
- ┃ ┃ ┣ 📜Gender.vue
- ┃ ┃ ┗ 📜Month.vue
  ┃ ┣ 📂profile
- ┃ ┃ ┗ 📜CategoryModal.vue
  ┃ ┗ 📜MarkedCounselors.vue
  ┣ 📂router
- ┃ ┗ 📜index.js
  ┣ 📂store
- ┃ ┗ 📜index.js
  ┣ 📂views
  ┃ ┣ 📂accounts
- ┃ ┃ ┣ 📜LoginForClient.vue
- ┃ ┃ ┣ 📜LoginForCounselor.vue
- ┃ ┃ ┣ 📜Signup.vue
- ┃ ┃ ┗ 📜UpdateForClient.vue
- ┃ ┃ ┗ 📜UpdateForCounselor.vue
  ┃ ┣ 📂counseling
- ┃ ┃ ┣ 📜Counseling.vue
- ┃ ┃ ┣ 📜CounselingFeedback.vue
- ┃ ┃ ┗ 📜CounselingSetting.vue
  ┃ ┣ 📂listener
- ┃ ┃ ┣ 📜CounselorDetail.vue
- ┃ ┃ ┗ 📜Counselors.vue
  ┃ ┣ 📂profile
  ┃ ┃ ┣ 📂client
- ┃ ┃ ┃ ┣ 📜Bookmark.vue
- ┃ ┃ ┃ ┗ 📜List.vue
  ┃ ┃ ┣ 📂counselor
- ┃ ┃ ┃ ┣ 📜ListFromCounselor.vue
- ┃ ┃ ┃ ┣ 📜Profile.vue
- ┃ ┃ ┃ ┣ 📜Schedule.vue
- ┃ ┃ ┃ ┗ 📜Statistics.vue
  ┃ ┃ ┗ 📜RecordList.vue
  ┃ ┗ 📜Home.vue
  ┣ 📜App.vue
@@ -156,103 +121,28 @@
  ┃ ┃ ┃ ┃ ┃ ┣ 📂api
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Bookmark
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜BookmarkController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Review
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ReviewController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂client
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ClientController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂counselor
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜CategoryController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃📜CertificateController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃📜CounselorController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ScheduleController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂memo
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜MemoController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂statistics
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜StatisticsController.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ExceptionControllerAdvice.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂config
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SwaggerConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜config.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜UnAuthorizedException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜excpetion.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂interceptor
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜interceptor.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂model
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CareerDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorCategoryDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleDto.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDto.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Bookmark.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Career.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Category.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Certificate.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Client.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorCategory.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Counselor.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Memo.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Review.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Schedule.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜User.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂request
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂counselor
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CounselorInfoReq.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂response
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂client
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ClientInfoRes.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂counselor
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorInfoRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CounselorListRes.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂memo
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜MemoRes.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂review
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReviewRes.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂schedule
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleInfoRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ ┗ ┗ 📜ScheduleStateRes.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CareerRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BCounselorCategoryRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepository.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂service
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleServiceImpl.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜StatisticsService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜StatisticsServiceImpl.java
  ┃ ┃ ┃ ┃ ┃ ┗ 📜ListenToMeApplication.java
  ┃ ┗ 📂resources
  ┃ ┃ ┗ 📜application.properties
@@ -301,8 +191,4 @@ Listen + 귀👂 + ' (쉼표)
 
 ### 서비스 상세보기
 
-|       구분       |                             링크                             |
-| :--------------: | :----------------------------------------------------------: |
-| ✏ 프로젝트 기록  | [Listen to ME](https://2dend.notion.site/2dend/Listen-to-ME-ca53f20b0d19472faa2e8688e6ccc870) |
-| 📑 상세 기능 설명 | [WIKI](https://lab.ssafy.com/s06-webmobile1-sub2/S06P12A605/-/wikis/home) |
-
+📑 상세 기능 설명은 [WIKI](https://lab.ssafy.com/s06-webmobile1-sub2/S06P12A605/-/wikis/home) 에서 확인해주세요!
