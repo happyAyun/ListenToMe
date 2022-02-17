@@ -52,7 +52,7 @@
 
 ### 기술 스택
 
- <img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springBOOT&logoColor=white"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/tensorflow-F05032?style=for-the-badge&logo=TENSORFLOW&logoColor=white"><img src="https://img.shields.io/badge/WebRTC-FCC624?style=for-the-badge&logo=WEBRTC&logoColor=black"> <img src="https://img.shields.io/badge/HIBERNATE-000000?style=for-the-badge&logo=HIBERNATE&logoColor=white"><img src="https://img.shields.io/badge/JENKINS-DD0031?style=for-the-badge&logo=JENKINS&logoColor=white"><img src="https://img.shields.io/badge/CHART.js-#FF6384?style=for-the-badge&logo=CHART.js&logoColor=white">
+ <img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springBOOT&logoColor=white"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/tensorflow-F05032?style=for-the-badge&logo=TENSORFLOW&logoColor=white"><img src="https://img.shields.io/badge/WebRTC-FCC624?style=for-the-badge&logo=WEBRTC&logoColor=black"> <img src="https://img.shields.io/badge/HIBERNATE-000000?style=for-the-badge&logo=HIBERNATE&logoColor=white"><img src="https://img.shields.io/badge/JENKINS-DD0031?style=for-the-badge&logo=JENKINS&logoColor=white">
 
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white"> <img src="https://img.shields.io/badge/jira-0052cc?style=for-the-badge&logo=jira&logoColor=white">
 
@@ -170,7 +170,7 @@
 
 ### 로고 소개
 
-<img src="README.assets/ListentoME_logo.png" alt="ListentoME_logo" style="zoom: 25%;" align="left"/>
+![ListentoME_logo](README.assets/ListentoME_logo-16450785168371.png)
 
 Listen + 귀👂 + ' (쉼표)
 
@@ -178,46 +178,6 @@ Listen + 귀👂 + ' (쉼표)
 - 쉼표 : 이야기를 하기위해, 듣기위해 쉬어가다
 
 => **소중한 당신의 이야기에 늘 귀 기울이다.**
-
-<br>
-
-### 주요 기능
-
-#### 1. 스케줄링
-
-![image-20220217135157496](README.assets/image-20220217135157496.png)
-
-![image-20220217135345680](README.assets/image-20220217135345680.png)
-
-![image-20220217135457476](README.assets/image-20220217135457476.png)
-
-![image-20220217135534001](README.assets/image-20220217135534001.png)
-
-![image-20220217135628681](README.assets/image-20220217135628681.png)
-
-<br>
-
-#### 2. 감정분석
-
-![image-20220217135802706](README.assets/image-20220217135802706.png)
-
-![image-20220217135859991](README.assets/image-20220217135859991.png)
-
-<br>
-
-#### 3. 메모
-
-![image-20220217135951808](README.assets/image-20220217135951808.png)
-
-![image-20220217140026801](README.assets/image-20220217140026801.png)
-
-<br>
-
-#### 4. 통계
-
-![image-20220217140116095](README.assets/image-20220217140116095.png)
-
-![image-20220217140149501](README.assets/image-20220217140149501.png)
 
 <br>
 
