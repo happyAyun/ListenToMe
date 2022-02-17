@@ -92,35 +92,55 @@
  ┃ ┗ 📜color-reference.png
  ┣ 📂components
  ┃ ┣ 📂accounts
- ┃ ┃ ┗ 📂snsLogin
- ┃ ┃ ┃ ┣ 📜Google.vue
- ┃ ┃ ┃ ┗ 📜Kakao.vue
- ┃ ┣ 📂css
- ┃ ┃ ┗ 📂feed
- ┃ ┃ ┃ ┗ 📜feed-item.scss
- ┃ ┣ 📂feed
- ┃ ┃ ┣ 📜FeedItem.vue
- ┃ ┃ ┗ 📜FeedModal.vue
- ┃ ┣ 📜errorPage.vue
- ┃ ┣ 📜NavigationBar.vue
- ┃ ┗ 📜PageNotFound.vue
+ ┃ ┃ ┣ 📜SignupForClient.vue
+ ┃ ┃ ┗ 📜SignupForCounselor.vue
+ ┃ ┣ 📂basics
+ ┃ ┃ ┣ 📜Introduction.vue
+ ┃ ┃ ┣ 📜NavBar.vue
+ ┃ ┃ ┗ 📜SideBar.vue.vue
+ ┃ ┣ 📂Counseling
+ ┃ ┃ ┣ 📜Memo.vue
+ ┃ ┃ ┣ 📜OvVideo.vue
+ ┃ ┃ ┣ 📜RecordItem.vue
+ ┃ ┃ ┣ 📜Records.vue
+ ┃ ┃ ┗ 📜SUserVideo.vue
+ ┃ ┣ 📂listener
+ ┃ ┃ ┣ 📜Age.vue
+ ┃ ┃ ┣ 📜CounseloerSchedule.vue
+ ┃ ┃ ┣ 📜Gender.vue
+ ┃ ┃ ┗ 📜Month.vue
+ ┃ ┣ 📂profile
+ ┃ ┃ ┗ 📜CategoryModal.vue
+ ┃ ┗ 📜MarkedCounselors.vue
  ┣ 📂router
  ┃ ┗ 📜index.js
- ┣ 📂util
- ┃ ┗ 📜http-common.js
+ ┣ 📂store
+ ┃ ┗ 📜index.js
  ┣ 📂views
  ┃ ┣ 📂accounts
- ┃ ┃ ┣ 📜changePassword.vue
- ┃ ┃ ┣ 📜findPassword.vue
- ┃ ┃ ┣ 📜Login.vue
- ┃ ┃ ┗ 📜Signup.vue
- ┃ ┗ 📂feed
- ┃ ┃ ┗ 📜IndexFeed.vue
- ┣ 📂vuex
- ┃ ┣ 📜actions.js
- ┃ ┣ 📜getters.js
- ┃ ┣ 📜mutations.js
- ┃ ┗ 📜store.js
+ ┃ ┃ ┣ 📜LoginForClient.vue
+ ┃ ┃ ┣ 📜LoginForCounselor.vue
+ ┃ ┃ ┣ 📜Signup.vue
+ ┃ ┃ ┗ 📜UpdateForClient.vue
+ ┃ ┃ ┗ 📜UpdateForCounselor.vue
+ ┃ ┣ 📂counseling
+ ┃ ┃ ┣ 📜Counseling.vue
+ ┃ ┃ ┣ 📜CounselingFeedback.vue
+ ┃ ┃ ┗ 📜CounselingSetting.vue
+ ┃ ┣ 📂listener
+ ┃ ┃ ┣ 📜CounselorDetail.vue
+ ┃ ┃ ┗ 📜Counselors.vue
+ ┃ ┣ 📂profile
+ ┃ ┃ ┣ 📂client
+ ┃ ┃ ┃ ┣ 📜Bookmark.vue
+ ┃ ┃ ┃ ┗ 📜List.vue
+ ┃ ┃ ┣ 📂counselor
+ ┃ ┃ ┃ ┣ 📜ListFromCounselor.vue
+ ┃ ┃ ┃ ┣ 📜Profile.vue
+ ┃ ┃ ┃ ┣ 📜Schedule.vue
+ ┃ ┃ ┃ ┗ 📜Statistics.vue
+ ┃ ┃ ┗ 📜RecordList.vue
+ ┃ ┗ 📜Home.vue
  ┣ 📜App.vue
  ┗ 📜main.js
 ```
