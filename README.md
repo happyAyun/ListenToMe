@@ -74,6 +74,124 @@
 
 > 개발 기간 : 2022.01.10 - 2022.02.18 (총 6주)
 
+### 폴더 구조 - Frontend
+```
+📦src
+ ┣ 📂api
+ ┃ ┗ 📜UserApi.js
+ ┣ 📂assets
+ ┃ ┣ 📂css
+ ┃ ┃ ┣ 📜common.scss
+ ┃ ┃ ┣ 📜feed.scss
+ ┃ ┃ ┣ 📜feedModal.scss
+ ┃ ┃ ┣ 📜main.css
+ ┃ ┃ ┣ 📜style.scss
+ ┃ ┃ ┗ 📜user.scss
+ ┃ ┣ 📂images
+ ┃ ┃ ┣ 📂hospital
+ ┃ ┃ ┃ ┣ 📜hospital1.png
+ ┃ ┃ ┃ ┣ 📜hospital10.png
+ ┃ ┃ ┃ ┣ 📜hospital11.png
+ ┃ ┃ ┃ ┣ 📜hospital12.png
+ ┃ ┃ ┃ ┣ 📜hospital13.png
+ ┃ ┃ ┃ ┣ 📜hospital14.png
+ ┃ ┃ ┃ ┣ 📜hospital15.png
+ ┃ ┃ ┃ ┣ 📜hospital16.png
+ ┃ ┃ ┃ ┣ 📜hospital17.png
+ ┃ ┃ ┃ ┣ 📜hospital18.png
+ ┃ ┃ ┃ ┣ 📜hospital2.png
+ ┃ ┃ ┃ ┣ 📜hospital3.png
+ ┃ ┃ ┃ ┣ 📜hospital4.png
+ ┃ ┃ ┃ ┣ 📜hospital5.png
+ ┃ ┃ ┃ ┣ 📜hospital6.png
+ ┃ ┃ ┃ ┣ 📜hospital7.png
+ ┃ ┃ ┃ ┣ 📜hospital8.png
+ ┃ ┃ ┃ ┗ 📜hospital9.png
+ ┃ ┃ ┣ 📜check_b.png
+ ┃ ┃ ┣ 📜check_w.png
+ ┃ ┃ ┣ 📜feed-sample.jpg
+ ┃ ┃ ┣ 📜img-placeholder.png
+ ┃ ┃ ┣ 📜logo.png
+ ┃ ┃ ┣ 📜profile_default.png
+ ┃ ┃ ┣ 📜select-arrow.png
+ ┃ ┃ ┗ 📜welcome.png
+ ┃ ┗ 📜logo.png
+ ┣ 📂components
+ ┃ ┣ 📂accounts
+ ┃ ┃ ┗ 📂snsLogin
+ ┃ ┃ ┃ ┣ 📜Google.vue
+ ┃ ┃ ┃ ┗ 📜Kakao.vue
+ ┃ ┣ 📂css
+ ┃ ┃ ┗ 📂feed
+ ┃ ┃ ┃ ┗ 📜feed-item.scss
+ ┃ ┣ 📂feed
+ ┃ ┃ ┣ 📜FeedItem.vue
+ ┃ ┃ ┗ 📜FeedModal.vue
+ ┃ ┣ 📜errorPage.vue
+ ┃ ┣ 📜NavigationBar.vue
+ ┃ ┗ 📜PageNotFound.vue
+ ┣ 📂router
+ ┃ ┗ 📜index.js
+ ┣ 📂util
+ ┃ ┗ 📜http-common.js
+ ┣ 📂views
+ ┃ ┣ 📂accounts
+ ┃ ┃ ┣ 📜changePassword.vue
+ ┃ ┃ ┣ 📜findPassword.vue
+ ┃ ┃ ┣ 📜Login.vue
+ ┃ ┃ ┗ 📜Signup.vue
+ ┃ ┗ 📂feed
+ ┃ ┃ ┗ 📜IndexFeed.vue
+ ┣ 📂vuex
+ ┃ ┣ 📜actions.js
+ ┃ ┣ 📜getters.js
+ ┃ ┣ 📜mutations.js
+ ┃ ┗ 📜store.js
+ ┣ 📜App.vue
+ ┗ 📜main.js
+```
+
+### 폴더 구조 - Backend
+```
+📦src
+ ┣ 📂main
+ ┃ ┣ 📂java
+ ┃ ┃ ┗ 📂com
+ ┃ ┃ ┃ ┗ 📂web
+ ┃ ┃ ┃ ┃ ┗ 📂curation
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂config
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SwaggerConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂account
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜AccountController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂feed
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜FeedController.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂dao
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂user
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FeedDao.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDao.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂user
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthenticationRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChangepwdRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Feed.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FeedMapping.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Hospital.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SignupRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜User.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜BasicResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebCurationApplication.java
+ ┃ ┗ 📂resources
+ ┃ ┃ ┗ 📜application.properties
+ ┗ 📂test
+ ┃ ┗ 📂java
+ ┃ ┃ ┗ 📂com
+ ┃ ┃ ┃ ┗ 📂web
+ ┃ ┃ ┃ ┃ ┗ 📂curation
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜SkeletonTest2ApplicationTests.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebCurationApplicationTests.java
+```
+
 
 
 ### 로고 소개
