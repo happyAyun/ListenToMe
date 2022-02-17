@@ -151,28 +151,62 @@
  ┣ 📂main
  ┃ ┣ 📂java
  ┃ ┃ ┗ 📂com
- ┃ ┃ ┃ ┗ 📂web
- ┃ ┃ ┃ ┃ ┗ 📂curation
+ ┃ ┃ ┃ ┗ 📂ssafy
+ ┃ ┃ ┃ ┃ ┗ 📂a605
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Bookmark
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜BookmarkController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Review
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ReviewController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂client
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ClientController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂counselor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜CategoryController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃📜CertificateController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃📜CounselorController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ScheduleController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂memo
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜MemoController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂statistics
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜StatisticsController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ExceptionControllerAdvice.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂config
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜SwaggerConfig.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂account
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜AccountController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂feed
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜FeedController.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📂dao
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂user
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FeedDao.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDao.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SwaggerConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜config.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜UnAuthorizedException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜excpetion.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂interceptor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜interceptor.java
  ┃ ┃ ┃ ┃ ┃ ┣ 📂model
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂user
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthenticationRequest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChangepwdRequest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Feed.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FeedMapping.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Hospital.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SignupRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CareerDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorCategoryDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserDto.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Bookmark.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Career.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Category.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Certificate.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Client.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorCategory.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Counselor.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Memo.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Review.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Schedule.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜User.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂counselor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CounselorInfoReq.java
  ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜BasicResponse.java
  ┃ ┃ ┃ ┃ ┃ ┗ 📜WebCurationApplication.java
  ┃ ┗ 📂resources
