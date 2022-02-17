@@ -207,17 +207,61 @@
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂request
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂counselor
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CounselorInfoReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜BasicResponse.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜WebCurationApplication.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂client
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ClientInfoRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂counselor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorInfoRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CounselorListRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂memo
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜MemoRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂review
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReviewRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂schedule
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleInfoRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ┗ ┗ 📜ScheduleStateRes.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CareerRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BCounselorCategoryRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BookmarkServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CategoryServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CertificateServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClientServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CounselorServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜JwtServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemoServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReviewServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ScheduleServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜StatisticsService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜StatisticsServiceImpl.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜ListenToMeApplication.java
  ┃ ┗ 📂resources
  ┃ ┃ ┗ 📜application.properties
  ┗ 📂test
  ┃ ┗ 📂java
  ┃ ┃ ┗ 📂com
- ┃ ┃ ┃ ┗ 📂web
- ┃ ┃ ┃ ┃ ┗ 📂curation
- ┃ ┃ ┃ ┃ ┃ ┣ 📜SkeletonTest2ApplicationTests.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜WebCurationApplicationTests.java
+ ┃ ┃ ┃ ┗ 📂ssafy
+ ┃ ┃ ┃ ┃ ┣ 📂a605
+ ┗ ┗ ┗ ┗ ┗ ┗ 📜ListenTomeApplicationTests.java
 ```
 
 
