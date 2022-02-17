@@ -78,44 +78,18 @@
 ```
 📦src
  ┣ 📂api
- ┃ ┗ 📜UserApi.js
+ ┃ ┗ 📜index.js
  ┣ 📂assets
- ┃ ┣ 📂css
- ┃ ┃ ┣ 📜common.scss
- ┃ ┃ ┣ 📜feed.scss
- ┃ ┃ ┣ 📜feedModal.scss
- ┃ ┃ ┣ 📜main.css
- ┃ ┃ ┣ 📜style.scss
- ┃ ┃ ┗ 📜user.scss
  ┃ ┣ 📂images
- ┃ ┃ ┣ 📂hospital
- ┃ ┃ ┃ ┣ 📜hospital1.png
- ┃ ┃ ┃ ┣ 📜hospital10.png
- ┃ ┃ ┃ ┣ 📜hospital11.png
- ┃ ┃ ┃ ┣ 📜hospital12.png
- ┃ ┃ ┃ ┣ 📜hospital13.png
- ┃ ┃ ┃ ┣ 📜hospital14.png
- ┃ ┃ ┃ ┣ 📜hospital15.png
- ┃ ┃ ┃ ┣ 📜hospital16.png
- ┃ ┃ ┃ ┣ 📜hospital17.png
- ┃ ┃ ┃ ┣ 📜hospital18.png
- ┃ ┃ ┃ ┣ 📜hospital2.png
- ┃ ┃ ┃ ┣ 📜hospital3.png
- ┃ ┃ ┃ ┣ 📜hospital4.png
- ┃ ┃ ┃ ┣ 📜hospital5.png
- ┃ ┃ ┃ ┣ 📜hospital6.png
- ┃ ┃ ┃ ┣ 📜hospital7.png
- ┃ ┃ ┃ ┣ 📜hospital8.png
- ┃ ┃ ┃ ┗ 📜hospital9.png
- ┃ ┃ ┣ 📜check_b.png
- ┃ ┃ ┣ 📜check_w.png
- ┃ ┃ ┣ 📜feed-sample.jpg
- ┃ ┃ ┣ 📜img-placeholder.png
- ┃ ┃ ┣ 📜logo.png
- ┃ ┃ ┣ 📜profile_default.png
- ┃ ┃ ┣ 📜select-arrow.png
- ┃ ┃ ┗ 📜welcome.png
- ┃ ┗ 📜logo.png
+ ┃ ┃ ┣ 📜counselor.png
+ ┃ ┃ ┣ 📜follower1.png
+ ┃ ┃ ┣ 📜logo_blue.png
+ ┃ ┃ ┣ 📜logo_pink.png
+ ┃ ┃ ┣ 📜logo_white.png
+ ┃ ┃ ┣ 📜main-pbackground.jpg
+ ┃ ┃ ┣ 📜start.png
+ ┃ ┃ ┗ 📜start_blank.png
+ ┃ ┗ 📜color-reference.png
  ┣ 📂components
  ┃ ┣ 📂accounts
  ┃ ┃ ┗ 📂snsLogin
