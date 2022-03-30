@@ -1,6 +1,8 @@
 # Listen to ME
 
-> 웹 기술을 활용한 치유상담 플랫폼
+### 웹 기술을 활용한 치유상담 플랫폼
+
+![image](https://user-images.githubusercontent.com/58842550/160740428-72ecf197-43f8-4b28-ba35-5626919527c4.png)
 
 <br>
 
